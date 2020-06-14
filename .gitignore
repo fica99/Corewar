@@ -1,3 +1,8 @@
+asm
+disasm
+corewar
+visualizer
+
 # Prerequisites
 *.d
 

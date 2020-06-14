@@ -6,7 +6,7 @@
 #    By: aashara <aashara@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/14 12:47:29 by aashara           #+#    #+#              #
-#    Updated: 2020/06/14 13:11:53 by aashara          ###   ########.fr        #
+#    Updated: 2020/06/14 13:55:49 by aashara          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ DFLGS	=		-MMD -MP
 OFLGS	=		-O3
 
 # ------------  RULES  ------------------------------------------------------- #
-.PHONY: all clean
+.PHONY: all clean fclean re
 
 all: $(NAME)
 
