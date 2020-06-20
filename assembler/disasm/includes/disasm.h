@@ -52,7 +52,7 @@ t_champ	*validate_and_parse(char *fname);
 /*
  * err
  */
-void	fatal_error(char *mes);
+void	fatal_error(const char *mes);
 void	file_error(const char *fname, const char *mes);
 
 /*
