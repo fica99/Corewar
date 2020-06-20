@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 # ------------  PROJECT  ----------------------------------------------------- #
-NAME	=		../../disasm
+NAME	=		disasm
 
 # ------------  DIRECTORIES  ------------------------------------------------- #
 SRC_DIR	=		src
@@ -30,7 +30,7 @@ LOP_DIR	=		$(LIB_DIR)/libop
 LOPH_DIR	=	$(LOP_DIR)/includes
 
 # ------------  SOURCE FILES  ------------------------------------------------ #
-SRC_FLS	=		main.c
+SRC_FLS	=		main.c err.c
 
 # ------------  FILEPATHS  --------------------------------------------------- #
 SRCS	=		$(addprefix $(SRC_DIR)/, $(SRC_FLS))
@@ -38,7 +38,7 @@ OBJS	=		$(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o, $(SRCS))
 DEPS	=		$(OBJS:.o=.d)
 
 # ------------  FLAGS  ------------------------------------------------------- #
-CC		=		gcc
+CC		=		gcc -g
 RM		=		rm -rf
 CFLGS	=		-Wall -Werror -Wextra
 LFLGS	=		-L $(LFT_DIR) -lft -L $(OP_DIR) -lop
@@ -75,34 +75,35 @@ fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
-.PHONY: all clean fclean re
 
-all: $(NAME)
+#.PHONY: all clean fclean re
 
-$(LFT_DIR)/$(LFT):
-	$(MAKE) -C $(LFT_DIR)
-
-$(LOP_DIR)/$(LOP):
-	$(MAKE) -C $(LOP_DIR)
-
--include $(DEPS)
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
-	$(CC) $(CFLGS) $(DFLGS) $(OFLGS) -c -o $@ $< $(IFLGS)
-
-$(OBJ_DIR):
-	mkdir -p $(OBJ_DIR)
-
-$(NAME): $(LFT_DIR)/$(LFT) $(LOP_DIR)/$(LOP) $(OBJS)
-	$(CC) -o $(NAME) $(OBJS) $(LFLGS)
-
-$(NAME): $(OBJS)
-
-clean:
-	$(MAKE) -C $(LFT_DIR) clean
-	$(RM) $(OBJ_DIR)
-
-fclean: clean
-	$(MAKE) -C $(LFT_DIR) fclean
-	$(RM) $(NAME)
-
-re: fclean all
+#all: $(NAME)
+#
+#$(LFT_DIR)/$(LFT):
+#	$(MAKE) -C $(LFT_DIR)
+#
+#$(LOP_DIR)/$(LOP):
+#	$(MAKE) -C $(LOP_DIR)
+#
+#-include $(DEPS)
+#$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+#	$(CC) $(CFLGS) $(DFLGS) $(OFLGS) -c -o $@ $< $(IFLGS)
+#
+#$(OBJ_DIR):
+#	mkdir -p $(OBJ_DIR)
+#
+#$(NAME): $(LFT_DIR)/$(LFT) $(LOP_DIR)/$(LOP) $(OBJS)
+#	$(CC) -o $(NAME) $(OBJS) $(LFLGS)
+#
+#$(NAME): $(OBJS)
+#
+#clean:
+#	$(MAKE) -C $(LFT_DIR) clean
+#	$(RM) $(OBJ_DIR)
+#
+#fclean: clean
+#	$(MAKE) -C $(LFT_DIR) fclean
+#	$(RM) $(NAME)
+#
+#re: fclean all
