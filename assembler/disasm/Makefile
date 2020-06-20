@@ -30,7 +30,8 @@ LOP_DIR	=		$(LIB_DIR)/libop
 LOPH_DIR	=	$(LOP_DIR)/includes
 
 # ------------  SOURCE FILES  ------------------------------------------------ #
-SRC_FLS	=		main.c err.c
+SRC_FLS	=		main.c err.c convert_bytes.c free_func.c \
+				parse_champ.c util.c
 
 # ------------  FILEPATHS  --------------------------------------------------- #
 SRCS	=		$(addprefix $(SRC_DIR)/, $(SRC_FLS))
