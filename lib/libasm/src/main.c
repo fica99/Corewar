@@ -1,6 +1,6 @@
 #include "disasm.h"
 
-int validate_fname(char *fname)
+int		validate_fname(char *fname)
 {
 	char *ptr;
 
@@ -9,17 +9,17 @@ int validate_fname(char *fname)
 	return (0);
 }
 
-t_buf *read_file_cor(char *fname)
+t_buf	*read_file_cor(char *fname)
 {
-	int fd;
-	size_t buf_size;
-	t_buf *buf;
-	ssize_t tmp;
+	int		fd;
+	size_t	buf_size;
+	t_buf	*buf;
+	ssize_t	tmp;
 
 	if ((fd = open(fname, O_RDONLY)) < 0)
 	{
 		file_error(fname, strerror(errno));
-		return NULL;
+		return (NULL);
 	}
 	buf = (t_buf *)xmalloc(sizeof(t_buf));
 	buf_size = BUF_SIZE;
@@ -31,16 +31,15 @@ t_buf *read_file_cor(char *fname)
 			fatal_error(strerror(errno));
 		buf->size += tmp;
 		if ((size_t)tmp == BUF_SIZE)
-		{
-			if (!(buf->bytes = (uint8_t *)realloc(buf->bytes, buf_size += BUF_SIZE)))
+			if (!(buf->bytes = (uint8_t *)realloc(buf->bytes,
+					buf_size += BUF_SIZE)))
 				fatal_error(strerror(errno));
-		}
 	}
 	close(fd);
-	return buf;
+	return (buf);
 }
 
-t_champ *validate_and_parse(char *filename)
+t_champ	*validate_and_parse(char *filename)
 {
 	t_buf	*buf;
 	t_champ	*champ;
@@ -63,24 +62,19 @@ t_champ *validate_and_parse(char *filename)
 	return (champ);
 }
 
-void disassembly(t_champ *champ)
-{
-	(void)champ;
-}
-
-int	main(int ac, char **av)
-{
-	t_champ *champ;
-
-	if (ac < 2)
-		fatal_error("need arguments\n"
-		USAGE);
-	while (*(++av))
-	{
-		if (!(champ = validate_and_parse(*av)))
-			fatal_error("fatal error");
-		disassembly(champ);
-		free_champ(champ);
-	}
-	return 0;
-}
+//int	main(int ac, char **av)
+//{
+//	t_champ *champ;
+//
+//	if (ac < 2)
+//		fatal_error("need arguments\n"
+//		USAGE);
+//	while (*(++av))
+//	{
+//		if (!(champ = validate_and_parse(*av)))
+//			fatal_error("fatal error");
+//		disassembly(champ);
+//		free_champ(champ);
+//	}
+//	return (0);
+//}

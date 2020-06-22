@@ -44,7 +44,7 @@ typedef struct	s_op
 typedef struct			s_op_list
 {
 	t_op				operation;
-	int 				args_val[3];
+	uint32_t 			args_val[3];
 	struct s_op_list	*next;
 }						t_op_list;
 
