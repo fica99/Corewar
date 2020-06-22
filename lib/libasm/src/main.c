@@ -54,6 +54,7 @@ t_champ	*validate_and_parse(char *filename)
 	if (!buf->size || buf->size < PROG_NAME_LENGTH + COMMENT_LENGTH +
 	MAGIC_HEADER_SIZE_BYTES + EXEC_CODE_SIZE_BYTES + NULL_RANGE_BYTES * 2)
 	{
+		free_buf(buf);
 		file_error(filename, "wrong count of bytes");
 		return (NULL);
 	}
