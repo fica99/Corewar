@@ -6,7 +6,7 @@
 #    By: aashara <aashara@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/14 12:47:29 by aashara           #+#    #+#              #
-#    Updated: 2020/06/16 21:00:21 by aashara          ###   ########.fr        #
+#    Updated: 2020/06/23 15:43:22 by aashara          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ LFT_DIR	=		$(LIB_DIR)/libft
 LHS_DIR	=		$(LFT_DIR)/includes
 
 # ------------  OP     ------------------------------------------------------- #
-LOP		=		op.a
+LOP		=		libop.a
 LOP_DIR	=		$(LIB_DIR)/libop
 LOPH_DIR	=	$(LOP_DIR)/includes
 
@@ -42,7 +42,7 @@ DEPS	=		$(OBJS:.o=.d)
 CC		=		gcc -g
 RM		=		rm -rf
 CFLGS	=		-Wall -Werror -Wextra
-LFLGS	=		-L $(LFT_DIR) -lft -L $(OP_DIR) -lop
+LFLGS	=		-L $(LFT_DIR) -lft -L $(LOP_DIR) -lop
 IFLGS	=		-I $(HDR_DIR) -I $(LHS_DIR) -I $(LOPH_DIR)
 DFLGS	=		-MMD -MP
 OFLGS	=		-O3
@@ -50,30 +50,24 @@ OFLGS	=		-O3
 # ------------  RULES  ------------------------------------------------------- #
 .PHONY: all clean fclean re
 
-all: $(NAME)
 
-$(LFT_DIR)/$(LFT):
-	$(MAKE) -C $(LFT_DIR)
+all: $(NAME)
 
 -include $(DEPS)
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
-	$(CC) $(CFLGS) $(DFLGS) $(OFLGS) -c -o $@ $< $(IFLGS)
+	$(CC) $(CFLGS) $(DFLGS) -c -o $@ $< $(IFLGS)
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
-$(NAME): $(LFT_DIR)/$(LFT) $(OBJS)
-	$(CC) -o $(NAME) $(OBJS) $(LFLGS)
-
 $(NAME): $(OBJS)
 	ar rc $(NAME) $(OBJS)
 	ranlib $(NAME)
+
 clean:
-	$(MAKE) -C $(LFT_DIR) clean
 	$(RM) $(OBJ_DIR)
 
 fclean: clean
-	$(MAKE) -C $(LFT_DIR) fclean
 	$(RM) $(NAME)
 
 re: fclean all

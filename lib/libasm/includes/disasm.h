@@ -27,7 +27,7 @@ typedef enum
 
 typedef struct		s_buf
 {
-	u_int8_t 		*bytes;
+	uint8_t 		*bytes;
 	size_t			size;
 }					t_buf;
 
