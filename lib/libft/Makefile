@@ -6,7 +6,7 @@
 #    By: aashara <aashara@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/20 13:57:06 by aashara-          #+#    #+#              #
-#    Updated: 2020/06/13 18:23:09 by aashara          ###   ########.fr        #
+#    Updated: 2020/06/23 21:42:58 by aashara          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,9 +96,11 @@ DEPS	=		$(OBJS:.o=.d)
 # ------------  FLAGS  ------------------------------------------------------- #
 CC		=		gcc
 RM		=		rm -rf
-CFLGS	=		-Wall -Werror -Wextra -O3
+CFLGS	=		-Wall -Werror -Wextra
 IFLGS	=		-I $(HDR_DIR)
 DFLGS	=		-MMD -MP
+OFLGS	=		-O3
+
 
 # ------------  RULES  ------------------------------------------------------- #
 .PHONY: all clean fclean re
@@ -107,7 +109,7 @@ all: $(NAME)
 
 -include $(DEPS)
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
-	$(CC) $(CFLGS) $(DFLGS) -c -o $@ $< $(IFLGS)
+	$(CC) $(CFLGS) $(DFLGS) $(OFLGS) -c -o $@ $< $(IFLGS)
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
