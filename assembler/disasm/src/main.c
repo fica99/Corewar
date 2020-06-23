@@ -1,4 +1,4 @@
-#include "disasm.h"
+#include "libdisasm.h"
 
 void	get_out_fname(char *out_file)
 {
