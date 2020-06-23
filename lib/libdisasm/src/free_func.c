@@ -15,9 +15,9 @@ void	free_champ(t_champ *champ)
 	free(champ);
 }
 
-void	free_op_list(t_op_list *lst)
+void	free_op_list(t_op *lst)
 {
-	t_op_list *tmp;
+	t_op *tmp;
 
 	while (lst)
 	{

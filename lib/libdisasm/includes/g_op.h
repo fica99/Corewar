@@ -12,6 +12,8 @@ static t_op		g_op[16] =
 		.args_types_code = false,
 		.args_types = {T_DIR, 0, 0},
 		.t_dir_size = 4,
+		.args_val = {0, 0, 0},
+		.next = NULL,
 	},
 	{
 		.name = "ld",
@@ -20,6 +22,8 @@ static t_op		g_op[16] =
 		.args_types_code = true,
 		.args_types = {T_DIR | T_IND, T_REG, 0},
 		.t_dir_size = 4,
+		.args_val = {0, 0, 0},
+		.next = NULL,
 	},
 	{
 		.name = "st",
@@ -28,6 +32,8 @@ static t_op		g_op[16] =
 		.args_types_code = true,
 		.args_types = {T_REG, T_REG | T_IND, 0},
 		.t_dir_size = 4,
+		.args_val = {0, 0, 0},
+		.next = NULL,
 	},
 	{
 		.name = "add",
@@ -36,6 +42,8 @@ static t_op		g_op[16] =
 		.args_types_code = true,
 		.args_types = {T_REG, T_REG, T_REG},
 		.t_dir_size = 4,
+		.args_val = {0, 0, 0},
+		.next = NULL,
 	},
 	{
 		.name = "sub",
@@ -44,6 +52,8 @@ static t_op		g_op[16] =
 		.args_types_code = true,
 		.args_types = {T_REG, T_REG, T_REG},
 		.t_dir_size = 4,
+		.args_val = {0, 0, 0},
+		.next = NULL,
 	},
 	{
 		.name = "and",
@@ -52,6 +62,8 @@ static t_op		g_op[16] =
 		.args_types_code = true,
 		.args_types = {T_REG | T_DIR | T_IND, T_REG | T_DIR | T_IND, T_REG},
 		.t_dir_size = 4,
+		.args_val = {0, 0, 0},
+		.next = NULL,
 	},
 	{
 		.name = "or",
@@ -60,6 +72,8 @@ static t_op		g_op[16] =
 		.args_types_code = true,
 		.args_types = {T_REG | T_DIR | T_IND, T_REG | T_DIR | T_IND, T_REG},
 		.t_dir_size = 4,
+		.args_val = {0, 0, 0},
+		.next = NULL,
 	},
 	{
 		.name = "xor",
@@ -68,6 +82,8 @@ static t_op		g_op[16] =
 		.args_types_code = true,
 		.args_types = {T_REG | T_DIR | T_IND, T_REG | T_DIR | T_IND, T_REG},
 		.t_dir_size = 4,
+		.args_val = {0, 0, 0},
+		.next = NULL,
 	},
 	{
 		.name = "zjmp",
@@ -76,6 +92,8 @@ static t_op		g_op[16] =
 		.args_types_code = false,
 		.args_types = {T_DIR, 0, 0},
 		.t_dir_size = 2,
+		.args_val = {0, 0, 0},
+		.next = NULL,
 	},
 	{
 		.name = "ldi",
@@ -84,6 +102,8 @@ static t_op		g_op[16] =
 		.args_types_code = true,
 		.args_types = {T_REG | T_DIR | T_IND, T_REG | T_DIR, T_REG},
 		.t_dir_size = 2,
+		.args_val = {0, 0, 0},
+		.next = NULL,
 	},
 	{
 		.name = "sti",
@@ -92,6 +112,8 @@ static t_op		g_op[16] =
 		.args_types_code = true,
 		.args_types = {T_REG, T_REG | T_DIR | T_IND, T_REG | T_DIR},
 		.t_dir_size = 2,
+		.args_val = {0, 0, 0},
+		.next = NULL,
 	},
 	{
 		.name = "fork",
@@ -100,6 +122,8 @@ static t_op		g_op[16] =
 		.args_types_code = false,
 		.args_types = {T_DIR, 0, 0},
 		.t_dir_size = 2,
+		.args_val = {0, 0, 0},
+		.next = NULL,
 	},
 	{
 		.name = "lld",
@@ -108,6 +132,8 @@ static t_op		g_op[16] =
 		.args_types_code = true,
 		.args_types = {T_DIR | T_IND, T_REG, 0},
 		.t_dir_size = 4,
+		.args_val = {0, 0, 0},
+		.next = NULL,
 	},
 	{
 		.name = "lldi",
@@ -116,6 +142,8 @@ static t_op		g_op[16] =
 		.args_types_code = true,
 		.args_types = {T_REG | T_DIR | T_IND, T_REG | T_DIR, T_REG},
 		.t_dir_size = 2,
+		.args_val = {0, 0, 0},
+		.next = NULL,
 	},
 	{
 		.name = "lfork",
@@ -124,6 +152,8 @@ static t_op		g_op[16] =
 		.args_types_code = false,
 		.args_types = {T_DIR, 0, 0},
 		.t_dir_size = 2,
+		.args_val = {0, 0, 0},
+		.next = NULL,
 	},
 	{
 		.name = "aff",
@@ -132,6 +162,8 @@ static t_op		g_op[16] =
 		.args_types_code = true,
 		.args_types = {T_REG, 0, 0},
 		.t_dir_size = 4,
+		.args_val = {0, 0, 0},
+		.next = NULL,
 	}
 };
 

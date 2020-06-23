@@ -27,18 +27,18 @@ static size_t get_champ_exec_code_size(const uint8_t *bytes)
 	return to_uint32(bytes);
 }
 
-t_op_list	*op_list_new(uint8_t byte)
+t_op	*op_list_new(uint8_t byte)
 {
-	t_op_list *new;
+	t_op *new;
 
-	new = xmalloc(sizeof(t_op_list));
-	new->operation = g_op[byte - 1];
+	new = xmalloc(sizeof(t_op));
+	*new = g_op[byte - 1];
 	return (new);
 }
 
-t_op_list	*op_push_back(t_op_list **lst, uint8_t byte)
+t_op	*op_push_back(t_op **lst, uint8_t byte)
 {
-	t_op_list *tmp;
+	t_op *tmp;
 
 	if (byte > OP_COUNT)
 	{
@@ -60,20 +60,20 @@ void	set_args(t_op *op, uint8_t args_type_code)
 	op->args_types[2] = (args_type_code >> 2) & TWO_LAST_BITS;
 }
 
-const uint8_t	*get_arg_val(t_op_list *op, const uint8_t *bytes)
+const uint8_t	*get_arg_val(t_op *op, const uint8_t *bytes)
 {
 	int i;
 
 	i = 0;
-	while (i < op->operation.args_num)
+	while (i < op->args_num)
 	{
-		if (op->operation.args_types[i] == T_REG)
+		if (op->args_types[i] == T_REG)
 		{
 			op->args_val[i] = (int32_t)(*bytes);
 			bytes++;
 		}
-		else if (op->operation.args_types[i] == T_IND ||
-				 (op->operation.args_types[i] == T_DIR && op->operation.t_dir_size == 2))
+		else if (op->args_types[i] == T_IND ||
+				 (op->args_types[i] == T_DIR && op->t_dir_size == 2))
 		{
 			op->args_val[i] = convert16(*(uint16_t *)bytes);
 			bytes += 2;
@@ -88,25 +88,25 @@ const uint8_t	*get_arg_val(t_op_list *op, const uint8_t *bytes)
 	return (bytes);
 }
 
-int fill_op(t_op_list *op, const uint8_t *bytes)
+int fill_op(t_op *op, const uint8_t *bytes)
 {
 	const uint8_t *old_bytes;
 
 	old_bytes = bytes;
 	bytes++;
-	if (op->operation.args_types_code)
+	if (op->args_types_code)
 	{
-		set_args(&op->operation, *bytes);
+		set_args(op, *bytes);
 		bytes++;
 	}
 	return ((int)(get_arg_val(op, bytes) - old_bytes));
 }
 
-t_op_list *get_champ_exec_code(const uint8_t *bytes, size_t esize)
+t_op *get_champ_exec_code(const uint8_t *bytes, size_t esize)
 {
 	int 		op_size;
-	t_op_list	*ret;
-	t_op_list	*tmp;
+	t_op	*ret;
+	t_op	*tmp;
 
 	bytes += MAGIC_HEADER_SIZE_BYTES + NULL_RANGE_BYTES +
 			EXEC_CODE_SIZE_BYTES + PROG_NAME_LENGTH + COMMENT_LENGTH + NULL_RANGE_BYTES;

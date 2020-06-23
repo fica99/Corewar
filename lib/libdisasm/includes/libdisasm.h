@@ -39,14 +39,9 @@ typedef struct	s_op
 	t_bool		args_types_code;
 	uint8_t		args_types[3];
 	uint8_t		t_dir_size;
+	int32_t		args_val[3];
+	struct s_op	*next;
 }				t_op;
-
-typedef struct			s_op_list
-{
-	t_op				operation;
-	int32_t 			args_val[3];
-	struct s_op_list	*next;
-}						t_op_list;
 
 typedef struct		s_champ
 {
@@ -54,7 +49,7 @@ typedef struct		s_champ
 	char 			*name;
 	char			*comment;
 	size_t			exec_code_size;
-	t_op_list		*exec_code;
+	t_op		*exec_code;
 }					t_champ;
 
 t_champ	*validate_and_parse(char *fname);
@@ -75,14 +70,13 @@ void		*xmalloc(size_t size);
  */
 void		free_buf(t_buf *buf);
 void		free_champ(t_champ *champ);
-void		free_op_list(t_op_list *lst);
+void		free_op_list(t_op *lst);
 
 /*
  * convert_bytes
  */
 uint32_t	to_uint32(const uint8_t *mas);
 int32_t		convert16(uint16_t x);
-int32_t		convert32(uint32_t x);
 
 /*
  * parse_champ

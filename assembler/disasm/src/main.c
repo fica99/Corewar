@@ -33,21 +33,21 @@ char	op_sym(uint8_t op_type)
 	return 0;
 }
 
-void	print_op(t_op_list *op, int fd)
+void	print_op(t_op *op, int fd)
 {
 	int i;
 	t_bool first;
 
 	first = true;
 	i = 0;
-	ft_putstr_fd(op->operation.name, fd);
+	ft_putstr_fd(op->name, fd);
 	ft_putchar_fd(' ', fd);
-	while (i < op->operation.args_num)
+	while (i < op->args_num)
 	{
 		if (!first)
 			ft_putstr_fd(", ", fd);
 		first = false;
-		ft_putchar_fd(op_sym(op->operation.args_types[i]), fd);
+		ft_putchar_fd(op_sym(op->args_types[i]), fd);
 		ft_putnbr_fd((int)op->args_val[i], fd);
 		i++;
 	}
@@ -57,7 +57,7 @@ void	print_champ(const char *fname, t_champ *ch)
 {
 	char out_file[ft_strlen(fname)];
 	int fd;
-	t_op_list *op;
+	t_op *op;
 
 	ft_memcpy(out_file, fname, ft_strlen(fname));
 	get_out_fname(out_file);
