@@ -1,21 +1,21 @@
 #include "disasm.h"
 #include "g_op.h"
 
-static unsigned char	*get_champ_name(const uint8_t *bytes)
+static char	*get_champ_name(const uint8_t *bytes)
 {
-	unsigned char *ret;
+	char *ret;
 
-	ret = (unsigned char *)xmalloc(PROG_NAME_LENGTH + 1);
+	ret = (char *)xmalloc(PROG_NAME_LENGTH + 1);
 	ft_memcpy(ret, bytes + MAGIC_HEADER_SIZE_BYTES, PROG_NAME_LENGTH);
 	return (ret);
 }
 
-static unsigned char *get_champ_comment(const uint8_t *bytes)
+static char *get_champ_comment(const uint8_t *bytes)
 {
-	unsigned char *ret;
+	char *ret;
 
 	bytes += MAGIC_HEADER_SIZE_BYTES + NULL_RANGE_BYTES + EXEC_CODE_SIZE_BYTES + PROG_NAME_LENGTH;
-	ret = (unsigned char *)xmalloc(COMMENT_LENGTH + 1);
+	ret = (char *)xmalloc(COMMENT_LENGTH + 1);
 	ft_memcpy(ret, bytes, COMMENT_LENGTH);
 	return (ret);
 }

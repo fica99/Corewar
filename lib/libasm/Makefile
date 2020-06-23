@@ -35,7 +35,7 @@ SRC_FLS	=		main.c err.c convert_bytes.c free_func.c \
 
 # ------------  FILEPATHS  --------------------------------------------------- #
 SRCS	=		$(addprefix $(SRC_DIR)/, $(SRC_FLS))
-OBJS	=		$(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o, $(SRCS))
+OBJS	=		$(OBJ_DIR)/*.o#$(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o, $(SRCS)) $(OBJ_DIR)/*.o
 DEPS	=		$(OBJS:.o=.d)
 
 # ------------  FLAGS  ------------------------------------------------------- #
@@ -61,6 +61,7 @@ $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
 $(NAME): $(OBJS)
+	ar --output $(OBJ_DIR) -x $(LFT_DIR)/libft.a
 	ar rc $(NAME) $(OBJS)
 	ranlib $(NAME)
 

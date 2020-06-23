@@ -9,7 +9,7 @@
 #include "op.h"
 #include "libft.h"
 
-#define USAGE "usage: disasm [file.cor]"
+#define DISASM_USAGE "usage: disasm [file.cor]"
 #define BUF_SIZE 4096
 #define NULL_RANGE_BYTES 4
 #define EXEC_CODE_SIZE_BYTES 4
@@ -51,8 +51,8 @@ typedef struct			s_op_list
 typedef struct		s_champ
 {
 	unsigned		id;
-	unsigned char 	*name;
-	unsigned char	*comment;
+	char 			*name;
+	char			*comment;
 	size_t			exec_code_size;
 	t_op_list		*exec_code;
 }					t_champ;
