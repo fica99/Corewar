@@ -1,4 +1,4 @@
-#include "disasm.h"
+#include "libdisasm.h"
 
 int		validate_fname(char *fname)
 {

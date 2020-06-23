@@ -1,4 +1,4 @@
-#include "disasm.h"
+#include "libdisasm.h"
 
 void	free_buf(t_buf *buf)
 {

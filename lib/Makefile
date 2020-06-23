@@ -6,30 +6,37 @@
 #    By: aashara <aashara@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/03 11:46:19 by olegmulko         #+#    #+#              #
-#    Updated: 2020/06/23 20:42:52 by aashara          ###   ########.fr        #
+#    Updated: 2020/06/23 22:21:27 by aashara          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 libft := libft
 
-libasm := libasm
+libop := libop
 
-.PHONY: all clean fclean $(libft) $(libasm)
+libdisasm := libdisasm
 
-all: $(libft) $(libasm)
+.PHONY: all clean fclean $(libft) $(libop) $(libdisasm)
+
+all: $(libft) $(libop) $(libdisasm)
 
 $(libft):
 	@$(MAKE) --no-print-directory -C $(libft)
 
-$(libasm):
-	@$(MAKE) --no-print-directory -C $(libasm)
+$(libop):
+	@$(MAKE) --no-print-directory -C $(libop)
+
+$(libdisasm):
+	@$(MAKE) --no-print-directory -C $(libdisasm)
 
 clean:
 	@$(MAKE) clean --no-print-directory -C  $(libft)
-	@$(MAKE) clean --no-print-directory -C  $(libasm)
+	@$(MAKE) clean --no-print-directory -C  $(libop)
+	@$(MAKE) clean --no-print-directory -C  $(libdisasm)
 
 fclean:
 	@$(MAKE) fclean --no-print-directory -C  $(libft)
-	@$(MAKE) fclean --no-print-directory -C  $(libasm)
+	@$(MAKE) fclean --no-print-directory -C  $(libop)
+	@$(MAKE) fclean --no-print-directory -C  $(libdisasm)
 
 re: fclean all

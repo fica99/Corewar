@@ -1,4 +1,4 @@
-#include "disasm.h"
+#include "libdisasm.h"
 
 static int		is_big_endian(void)
 {

@@ -1,5 +1,5 @@
-#ifndef __DISASM_H__
-#define __DISASM_H__
+#ifndef LIBDISASM_H
+#define LIBDISASM_H
 
 #include <fcntl.h>
 #include <errno.h>

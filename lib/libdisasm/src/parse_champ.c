@@ -1,4 +1,4 @@
-#include "disasm.h"
+#include "libdisasm.h"
 #include "g_op.h"
 
 static char	*get_champ_name(const uint8_t *bytes)

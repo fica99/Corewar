@@ -1,4 +1,4 @@
-#include "disasm.h"
+#include "libdisasm.h"
 
 void	file_error(const char *fname, const char *mes)
 {

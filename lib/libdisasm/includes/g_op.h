@@ -1,7 +1,7 @@
 #ifndef G_OP_H
 # define G_OP_H
 
-# include "disasm.h"
+# include "libdisasm.h"
 
 static t_op		g_op[16] =
 {
