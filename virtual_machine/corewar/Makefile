@@ -6,7 +6,7 @@
 #    By: aashara <aashara@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/14 12:47:29 by aashara           #+#    #+#              #
-#    Updated: 2020/06/16 21:00:33 by aashara          ###   ########.fr        #
+#    Updated: 2020/06/23 20:57:43 by aashara          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,11 +24,6 @@ LFT		=		libft.a
 LFT_DIR	=		$(LIB_DIR)/libft
 LHS_DIR	=		$(LFT_DIR)/includes
 
-# ------------  OP     ------------------------------------------------------- #
-LOP		=		op.a
-LOP_DIR	=		$(LIB_DIR)/libop
-LOPH_DIR	=	$(LOP_DIR)/includes
-
 # ------------  SOURCE FILES  ------------------------------------------------ #
 SRC_FLS	=		main.c
 
@@ -41,8 +36,8 @@ DEPS	=		$(OBJS:.o=.d)
 CC		=		gcc
 RM		=		rm -rf
 CFLGS	=		-Wall -Werror -Wextra
-LFLGS	=		-L $(LFT_DIR) -lft -L $(OP_DIR) -lop
-IFLGS	=		-I $(HDR_DIR) -I $(LHS_DIR) -I $(LOPH_DIR)
+LFLGS	=		-L $(LFT_DIR) -lft
+IFLGS	=		-I $(HDR_DIR) -I $(LHS_DIR)
 DFLGS	=		-MMD -MP
 OFLGS	=		-O3
 
@@ -54,9 +49,6 @@ all: $(NAME)
 $(LFT_DIR)/$(LFT):
 	$(MAKE) -C $(LFT_DIR)
 
-$(LOP_DIR)/$(LOP):
-	$(MAKE) -C $(LOP_DIR)
-
 -include $(DEPS)
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	$(CC) $(CFLGS) $(DFLGS) $(OFLGS) -c -o $@ $< $(IFLGS)
@@ -64,7 +56,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
-$(NAME): $(LFT_DIR)/$(LFT) $(LOP_DIR)/$(LOP) $(OBJS)
+$(NAME): $(LFT_DIR)/$(LFT) $(OBJS)
 	$(CC) -o $(NAME) $(OBJS) $(LFLGS)
 
 $(NAME): $(OBJS)

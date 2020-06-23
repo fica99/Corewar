@@ -69,18 +69,18 @@ const uint8_t	*get_arg_val(t_op_list *op, const uint8_t *bytes)
 	{
 		if (op->operation.args_types[i] == T_REG)
 		{
-			op->args_val[i] = *bytes;
+			op->args_val[i] = (int32_t)(*bytes);
 			bytes++;
 		}
 		else if (op->operation.args_types[i] == T_IND ||
 				 (op->operation.args_types[i] == T_DIR && op->operation.t_dir_size == 2))
 		{
-			op->args_val[i] = convert(*(uint16_t *)bytes);
+			op->args_val[i] = convert16(*(uint16_t *)bytes);
 			bytes += 2;
 		}
 		else
 		{
-			op->args_val[i] = to_uint32(bytes);
+			op->args_val[i] = convert32(to_uint32(bytes));
 			bytes += 4;
 		}
 		i++;
@@ -111,12 +111,8 @@ t_op_list *get_champ_exec_code(const uint8_t *bytes, size_t esize)
 	bytes += MAGIC_HEADER_SIZE_BYTES + NULL_RANGE_BYTES +
 			EXEC_CODE_SIZE_BYTES + PROG_NAME_LENGTH + COMMENT_LENGTH + NULL_RANGE_BYTES;
 	ret = NULL;
-	int i = 0;
 	while (esize > 0)
 	{
-		i++;
-		if (i == 5)
-			i++;
 		if (!(tmp = op_push_back(&ret, *bytes)))
 		{
 			free_op_list(ret);

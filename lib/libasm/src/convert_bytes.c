@@ -12,11 +12,30 @@ static uint32_t	swap_bytes(uint32_t x)
 	return (x);
 }
 
-uint32_t		convert(uint32_t x)
+int32_t		convert32(uint32_t x)
+{
+//	if (!is_big_endian())
+//		swap_bytes(x);
+	if (x & 2147483648)
+	{
+//		x = ~x;
+//		x++;
+		x--;
+		x++;
+	}
+	return ((int32_t)x);
+}
+
+int32_t		convert16(uint16_t x)
 {
 	if (!is_big_endian())
-		return (swap_bytes(x));
-	return (x);
+		x = (x & 0x00FF) << 8 | (x & 0xFF00) >> 8;
+	if (x & 32768)
+	{
+		x = ~x;
+		x++;
+	}
+	return (-(int32_t)x);
 }
 
 uint32_t		to_uint32(const uint8_t *mas)

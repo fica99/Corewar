@@ -44,7 +44,7 @@ typedef struct	s_op
 typedef struct			s_op_list
 {
 	t_op				operation;
-	uint32_t 			args_val[3];
+	int32_t 			args_val[3];
 	struct s_op_list	*next;
 }						t_op_list;
 
@@ -81,7 +81,8 @@ void		free_op_list(t_op_list *lst);
  * convert_bytes
  */
 uint32_t	to_uint32(const uint8_t *mas);
-uint32_t	convert(uint32_t x);
+int32_t		convert16(uint16_t x);
+int32_t		convert32(uint32_t x);
 
 /*
  * parse_champ
