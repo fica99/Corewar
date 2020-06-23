@@ -80,7 +80,7 @@ const uint8_t	*get_arg_val(t_op_list *op, const uint8_t *bytes)
 		}
 		else
 		{
-			op->args_val[i] = convert32(to_uint32(bytes));
+			op->args_val[i] = to_uint32(bytes);
 			bytes += 4;
 		}
 		i++;

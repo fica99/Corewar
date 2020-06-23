@@ -12,20 +12,6 @@ static uint32_t	swap_bytes(uint32_t x)
 	return (x);
 }
 
-int32_t		convert32(uint32_t x)
-{
-//	if (!is_big_endian())
-//		swap_bytes(x);
-	if (x & 2147483648)
-	{
-//		x = ~x;
-//		x++;
-		x--;
-		x++;
-	}
-	return ((int32_t)x);
-}
-
 int32_t		convert16(uint16_t x)
 {
 	if (!is_big_endian())
