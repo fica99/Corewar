@@ -48,4 +48,12 @@ unsigned char	*serialize_char(unsigned char *buffer, char value);
 unsigned char	*serialize_cell(unsigned char *buffer, t_cell value);
 unsigned char	*serialize_player(unsigned char *buffer, t_player value);
 unsigned char	*serialize_arena(unsigned char *buffer, t_arena value);
+/*
+**	deserialize.c
+*/
+int				deserialize_int(unsigned char *buffer, size_t *i);
+char			deserialize_char(unsigned char *buffer, size_t *i);
+t_cell			deserialize_cell(unsigned char *buffer, size_t *i);
+t_player		deserialize_player(unsigned char *buffer, size_t *i);
+t_arena			deserialize_arena(unsigned char *buffer, size_t *i);
 #endif

@@ -6,7 +6,7 @@
 /*   By: aashara <aashara@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 00:25:57 by aashara           #+#    #+#             */
-/*   Updated: 2020/06/25 00:54:48 by aashara          ###   ########.fr       */
+/*   Updated: 2020/06/25 01:09:16 by aashara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ unsigned char	*serialize_int(unsigned char *buffer, int value)
 	buffer[1] = value >> 16;
 	buffer[2] = value >> 8;
 	buffer[3] = value;
-	return buffer + 4;
+	return (buffer + 4);
 }
 
 unsigned char	*serialize_char(unsigned char *buffer, char value)
 {
 	buffer[0] = value;
-	return buffer + 1;
+	return (buffer + 1);
 }
 
 unsigned char	*serialize_cell(unsigned char *buffer, t_cell value)
@@ -32,7 +32,7 @@ unsigned char	*serialize_cell(unsigned char *buffer, t_cell value)
 	buffer = serialize_char(buffer, (char)value.code);
 	buffer = serialize_char(buffer, (char)value.player_id);
 	buffer = serialize_char(buffer, (char)value.is_carriage);
-	return buffer;
+	return (buffer);
 }
 
 unsigned char	*serialize_player(unsigned char *buffer, t_player value)
@@ -47,7 +47,7 @@ unsigned char	*serialize_player(unsigned char *buffer, t_player value)
 	}
 	buffer = serialize_int(buffer, value.last_live);
 	buffer = serialize_int(buffer, value.lives_in_cur_period);
-	return buffer;
+	return (buffer);
 }
 
 unsigned char	*serialize_arena(unsigned char *buffer, t_arena value)
@@ -69,5 +69,5 @@ unsigned char	*serialize_arena(unsigned char *buffer, t_arena value)
 		buffer = serialize_cell(buffer, value.arena[i]);
 		++i;
 	}
-	return buffer;
+	return (buffer);
 }
