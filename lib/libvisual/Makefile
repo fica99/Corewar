@@ -6,7 +6,7 @@
 #    By: aashara <aashara@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/20 13:57:06 by aashara-          #+#    #+#              #
-#    Updated: 2020/06/23 21:56:36 by aashara          ###   ########.fr        #
+#    Updated: 2020/06/25 00:29:03 by aashara          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ LOP_HS_DIR	=	$(LOP_DIR)/includes
 
 
 # ------------  SOURCE FILES  ------------------------------------------------ #
-SRC_FLS	=
+SRC_FLS	=		serialize.c\
 
 # ------------  FILEPATHS  --------------------------------------------------- #
 SRCS	=		$(addprefix $(SRC_DIR)/, $(SRC_FLS))
@@ -60,7 +60,7 @@ $(LOP_DIR)/$(LOP):
 
 -include $(DEPS)
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
-	$(CC) $(CFLGS) $(DFLGS) $(OFLGS)-c -o $@ $< $(IFLGS)
+	$(CC) $(CFLGS) $(DFLGS) $(OFLGS) -c -o $@ $< $(IFLGS)
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
