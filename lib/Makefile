@@ -16,9 +16,11 @@ libop := libop
 
 libdisasm := libdisasm
 
-.PHONY: all clean fclean $(libft) $(libop) $(libdisasm)
+libvisual := libvisual
 
-all: $(libft) $(libop) $(libdisasm)
+.PHONY: all clean fclean $(libft) $(libop) $(libvisual) $(libdisasm)
+
+all: $(libft) $(libop) $(libvisual) $(libdisasm)
 
 $(libft):
 	@$(MAKE) --no-print-directory -C $(libft)
@@ -29,13 +31,18 @@ $(libop):
 $(libdisasm):
 	@$(MAKE) --no-print-directory -C $(libdisasm)
 
+$(libvisual):
+	@$(MAKE) --no-print-directory -C $(libvisual)
+
 clean:
 	@$(MAKE) clean --no-print-directory -C  $(libft)
+	@$(MAKE) clean --no-print-directory -C  $(libvisual)
 	@$(MAKE) clean --no-print-directory -C  $(libop)
 	@$(MAKE) clean --no-print-directory -C  $(libdisasm)
 
 fclean:
 	@$(MAKE) fclean --no-print-directory -C  $(libft)
+	@$(MAKE) fclean --no-print-directory -C  $(libvisual)
 	@$(MAKE) fclean --no-print-directory -C  $(libop)
 	@$(MAKE) fclean --no-print-directory -C  $(libdisasm)
 
