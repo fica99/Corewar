@@ -1,20 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isupper.c                                       :+:      :+:    :+:   */
+/*   free_func.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/16 13:26:23 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/06/25 20:48:25 by aashara-         ###   ########.fr       */
+/*   Created: 2020/06/25 20:53:43 by aashara-          #+#    #+#             */
+/*   Updated: 2020/06/25 20:53:44 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libdisasm.h"
 
-int	ft_isupper(char c)
+void	free_buf(t_buf *buf)
 {
-	if (c >= 'A' && c <= 'Z')
-		return (1);
-	return (0);
+	free(buf->bytes);
+	free(buf);
+}
+
+void	free_op_list(t_op *lst)
+{
+	t_op *tmp;
+
+	while (lst)
+	{
+		tmp = lst;
+		lst = lst->next;
+		free(tmp);
+	}
+}
+
+void	free_champ(t_champ *champ)
+{
+	free(champ->name);
+	free(champ->comment);
+	if (champ->exec_code)
+		free_op_list(champ->exec_code);
+	free(champ);
 }

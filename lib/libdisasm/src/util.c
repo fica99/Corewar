@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isupper.c                                       :+:      :+:    :+:   */
+/*   util.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/16 13:26:23 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/06/25 20:48:25 by aashara-         ###   ########.fr       */
+/*   Created: 2020/06/25 20:53:32 by aashara-          #+#    #+#             */
+/*   Updated: 2020/06/25 20:53:33 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libdisasm.h"
 
-int	ft_isupper(char c)
+void	*xmalloc(size_t size)
 {
-	if (c >= 'A' && c <= 'Z')
-		return (1);
-	return (0);
+	void *ptr;
+
+	if (!(ptr = ft_memalloc(size)))
+		fatal_error(strerror(errno));
+	return (ptr);
 }
