@@ -35,7 +35,7 @@ LDISASM_DIR	=		$(LIB_DIR)/libdisasm
 LDISASM_HS_DIR	=		$(LDISASM_DIR)/includes
 
 # ------------  SOURCE FILES  ------------------------------------------------ #
-SRC_FLS	=		main.c
+SRC_FLS	=		main.c print_op.c
 
 # ------------  FILEPATHS  --------------------------------------------------- #
 SRCS	=		$(addprefix $(SRC_DIR)/, $(SRC_FLS))
@@ -49,7 +49,7 @@ CFLGS	=		-Wall -Werror -Wextra
 LFLGS	=		-L $(LOP_DIR) -lop -L $(LDISASM_DIR) -ldisasm -L $(LFT_DIR) -lft 
 IFLGS	=		-I $(HDR_DIR) -I $(LHS_DIR) -I $(LOP_HS_DIR) -I $(LDISASM_HS_DIR)
 DFLGS	=		-MMD -MP
-OFLGS	=		-O3
+OFLGS	=		-O3 -g
 
 # ------------  RULES  ------------------------------------------------------- #
 .PHONY: all clean fclean re

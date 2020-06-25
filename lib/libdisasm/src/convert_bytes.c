@@ -12,7 +12,7 @@ static uint32_t	swap_bytes(uint32_t x)
 	return (x);
 }
 
-int32_t		convert16(uint16_t x)
+int32_t			convert16(uint16_t x)
 {
 	if (!is_big_endian())
 		x = (x & 0x00FF) << 8 | (x & 0xFF00) >> 8;

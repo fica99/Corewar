@@ -32,7 +32,7 @@ LOP_HS_DIR	=	$(LOP_DIR)/includes
 
 # ------------  SOURCE FILES  ------------------------------------------------ #
 SRC_FLS	=		main.c err.c convert_bytes.c free_func.c \
-				parse_champ.c util.c
+				parse_champ.c util.c op_push_back.c fill_op.c
 
 # ------------  FILEPATHS  --------------------------------------------------- #
 SRCS	=		$(addprefix $(SRC_DIR)/, $(SRC_FLS))

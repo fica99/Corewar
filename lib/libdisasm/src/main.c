@@ -17,23 +17,21 @@ t_buf	*read_file_cor(char *fname)
 	ssize_t	tmp;
 
 	if ((fd = open(fname, O_RDONLY)) < 0)
-	{
-		file_error(fname, strerror(errno));
-		return (NULL);
-	}
+		return (file_error(fname, strerror(errno)));
 	buf = (t_buf *)xmalloc(sizeof(t_buf));
 	buf_size = BUF_SIZE;
 	if (!(buf->bytes = (uint8_t *)malloc(buf_size)))
 		fatal_error(strerror(errno));
-	while ((tmp = read(fd, buf->bytes, BUF_SIZE)))
+	while ((tmp = read(fd, buf->bytes + buf->size, BUF_SIZE)))
 	{
 		if (tmp < 0)
 			fatal_error(strerror(errno));
 		buf->size += tmp;
-		if ((size_t)tmp == BUF_SIZE)
-			if (!(buf->bytes = (uint8_t *)realloc(buf->bytes,
-					buf_size += BUF_SIZE)))
-				fatal_error(strerror(errno));
+		if ((size_t)tmp != BUF_SIZE)
+			break ;
+		if (!(buf->bytes = (uint8_t *)realloc(buf->bytes,
+				buf_size += BUF_SIZE)))
+			fatal_error(strerror(errno));
 	}
 	close(fd);
 	return (buf);
@@ -62,20 +60,3 @@ t_champ	*validate_and_parse(char *filename)
 	free_buf(buf);
 	return (champ);
 }
-
-//int	main(int ac, char **av)
-//{
-//	t_champ *champ;
-//
-//	if (ac < 2)
-//		fatal_error("need arguments\n"
-//		USAGE);
-//	while (*(++av))
-//	{
-//		if (!(champ = validate_and_parse(*av)))
-//			fatal_error("fatal error");
-//		disassembly(champ);
-//		free_champ(champ);
-//	}
-//	return (0);
-//}
