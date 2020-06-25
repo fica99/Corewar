@@ -1,14 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   visual.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
+/*   Updated: 2020/06/25 20:31:08 by aashara-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef VISUAL_H
-#define VISUAL_H
+# define VISUAL_H
 
-#include <stdint.h>
-#include <stdio.h>
-#include "op.h"
+# include <stdint.h>
+# include <stdio.h>
+# include "op.h"
 
-typedef enum
+typedef enum		e_bool
 {
-					False = 0,
-					True = 1
+	False = 0,
+	True = 1,
 }					t_bool;
 
 typedef struct		s_cell
@@ -39,21 +51,20 @@ typedef struct		s_arena
 
 }					t_arena;
 
-
 /*
 **	serialize.c
 */
-unsigned char	*serialize_int(unsigned char *buffer, int value);
-unsigned char	*serialize_char(unsigned char *buffer, char value);
-unsigned char	*serialize_cell(unsigned char *buffer, t_cell value);
-unsigned char	*serialize_player(unsigned char *buffer, t_player value);
-unsigned char	*serialize_arena(unsigned char *buffer, t_arena value);
+unsigned char		*serialize_int(unsigned char *buffer, int value);
+unsigned char		*serialize_char(unsigned char *buffer, char value);
+unsigned char		*serialize_cell(unsigned char *buffer, t_cell value);
+unsigned char		*serialize_player(unsigned char *buffer, t_player value);
+unsigned char		*serialize_arena(unsigned char *buffer, t_arena value);
 /*
 **	deserialize.c
 */
-int				deserialize_int(unsigned char *buffer, size_t *i);
-char			deserialize_char(unsigned char *buffer, size_t *i);
-t_cell			deserialize_cell(unsigned char *buffer, size_t *i);
-t_player		deserialize_player(unsigned char *buffer, size_t *i);
-t_arena			deserialize_arena(unsigned char *buffer, size_t *i);
+int					deserialize_int(unsigned char *buffer, size_t *i);
+char				deserialize_char(unsigned char *buffer, size_t *i);
+t_cell				deserialize_cell(unsigned char *buffer, size_t *i);
+t_player			deserialize_player(unsigned char *buffer, size_t *i);
+t_arena				deserialize_arena(unsigned char *buffer, size_t *i);
 #endif

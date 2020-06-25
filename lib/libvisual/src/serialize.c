@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   serialize.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aashara <aashara@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 00:25:57 by aashara           #+#    #+#             */
-/*   Updated: 2020/06/25 01:09:16 by aashara          ###   ########.fr       */
+/*   Updated: 2020/06/25 20:26:44 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ unsigned char	*serialize_player(unsigned char *buffer, t_player value)
 
 	buffer = serialize_char(buffer, (char)value.id);
 	i = 0;
-	while (i < PROG_NAME_LENGTH) {
+	while (i < PROG_NAME_LENGTH)
+	{
 		buffer = serialize_char(buffer, value.name[i]);
 		++i;
 	}
@@ -60,12 +61,14 @@ unsigned char	*serialize_arena(unsigned char *buffer, t_arena value)
 	buffer = serialize_int(buffer, value.nbr_live);
 	buffer = serialize_int(buffer, value.max_checks);
 	i = 0;
-	while (i < MAX_PLAYERS) {
+	while (i < MAX_PLAYERS)
+	{
 		buffer = serialize_player(buffer, value.players[i]);
 		++i;
 	}
 	i = 0;
-	while (i < MEM_SIZE) {
+	while (i < MEM_SIZE)
+	{
 		buffer = serialize_cell(buffer, value.arena[i]);
 		++i;
 	}

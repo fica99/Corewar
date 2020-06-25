@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   deserialize.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aashara <aashara@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 00:58:05 by aashara           #+#    #+#             */
-/*   Updated: 2020/06/25 01:26:33 by aashara          ###   ########.fr       */
+/*   Updated: 2020/06/25 20:26:37 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int			deserialize_int(unsigned char *buffer, size_t *i)
 
 char		deserialize_char(unsigned char *buffer, size_t *i)
 {
-	return buffer[(*i)++];
+	return (buffer[(*i)++]);
 }
 
 t_cell		deserialize_cell(unsigned char *buffer, size_t *i)
@@ -46,7 +46,8 @@ t_player	deserialize_player(unsigned char *buffer, size_t *i)
 
 	player.id = (uint8_t)deserialize_char(buffer, i);
 	j = 0;
-	while (j < PROG_NAME_LENGTH) {
+	while (j < PROG_NAME_LENGTH)
+	{
 		player.name[j] = deserialize_char(buffer, i);
 		++j;
 	}
@@ -66,13 +67,15 @@ t_arena		deserialize_arena(unsigned char *buffer, size_t *i)
 	arena.nbr_live = deserialize_int(buffer, i);
 	arena.max_checks = deserialize_int(buffer, i);
 	j = 0;
-	while (j < MAX_PLAYERS) {
-		arena.players[j]= deserialize_player(buffer, i);
+	while (j < MAX_PLAYERS)
+	{
+		arena.players[j] = deserialize_player(buffer, i);
 		++j;
 	}
 	j = 0;
-	while (j < MEM_SIZE) {
-		arena.arena[j]= deserialize_cell(buffer, i);
+	while (j < MEM_SIZE)
+	{
+		arena.arena[j] = deserialize_cell(buffer, i);
 		++j;
 	}
 	return (arena);
