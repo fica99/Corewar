@@ -5,27 +5,33 @@
 #                                                     +:+ +:+         +:+      #
 #    By: aashara <aashara@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/06/14 12:47:29 by aashara           #+#    #+#              #
-#    Updated: 2020/06/23 21:38:00 by aashara          ###   ########.fr        #
+#    Created: 2018/11/20 13:57:06 by aashara-          #+#    #+#              #
+#    Updated: 2020/06/25 00:57:58 by aashara          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# ------------  PROJECT  ----------------------------------------------------- #
-NAME	=		../../asm
+NAME	=		libvisual.a
 
 # ------------  DIRECTORIES  ------------------------------------------------- #
 SRC_DIR	=		src
 HDR_DIR	=		includes
 OBJ_DIR	=		obj
-LIB_DIR =		../../lib
+LIB_DIR =		..
 
 # ------------  LIBFT  ------------------------------------------------------- #
 LFT		=		libft.a
 LFT_DIR	=		$(LIB_DIR)/libft
 LHS_DIR	=		$(LFT_DIR)/includes
 
+# ------------  LIBOP  ------------------------------------------------------- #
+LOP		=		libop.a
+LOP_DIR	=		$(LIB_DIR)/libop
+LOP_HS_DIR	=	$(LOP_DIR)/includes
+
+
 # ------------  SOURCE FILES  ------------------------------------------------ #
-SRC_FLS	=		main.c
+SRC_FLS	=		serialize.c\
+				deserialize.c\
 
 # ------------  FILEPATHS  --------------------------------------------------- #
 SRCS	=		$(addprefix $(SRC_DIR)/, $(SRC_FLS))
@@ -36,10 +42,11 @@ DEPS	=		$(OBJS:.o=.d)
 CC		=		gcc
 RM		=		rm -rf
 CFLGS	=		-Wall -Werror -Wextra
-LFLGS	=		-L $(LFT_DIR) -lft
-IFLGS	=		-I $(HDR_DIR) -I $(LHS_DIR)
+LFLGS	=		-L $(LFT_DIR) -lft -L $(LOP_DIR) -lop
+IFLGS	=		-I $(HDR_DIR) -I $(LHS_DIR) -I $(LOP_HS_DIR)
 DFLGS	=		-MMD -MP
 OFLGS	=		-O3
+
 
 # ------------  RULES  ------------------------------------------------------- #
 .PHONY: all clean fclean re
@@ -49,6 +56,9 @@ all: $(NAME)
 $(LFT_DIR)/$(LFT):
 	$(MAKE) -C $(LFT_DIR)
 
+$(LOP_DIR)/$(LOP):
+	$(MAKE) -C $(LOP_DIR)
+
 -include $(DEPS)
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	$(CC) $(CFLGS) $(DFLGS) $(OFLGS) -c -o $@ $< $(IFLGS)
@@ -56,17 +66,18 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
-$(NAME): $(LFT_DIR)/$(LFT) $(OBJS)
-	$(CC) -o $(NAME) $(OBJS) $(LFLGS)
-
-$(NAME): $(OBJS)
+$(NAME): $(LFT_DIR)/$(LFT) $(LOP_DIR)/$(LOP) $(OBJS)
+	ar rc $(NAME) $(OBJS)
+	ranlib $(NAME)
 
 clean:
-	$(MAKE) -C $(LFT_DIR) clean
+	$(MAKE) clean -C $(LFT_DIR)
+	$(MAKE) clean -C $(LOP_DIR)
 	$(RM) $(OBJ_DIR)
 
 fclean: clean
-	$(MAKE) -C $(LFT_DIR) fclean
+	$(MAKE) fclean -C $(LFT_DIR)
+	$(MAKE) fclean -C $(LOP_DIR)
 	$(RM) $(NAME)
 
 re: fclean all

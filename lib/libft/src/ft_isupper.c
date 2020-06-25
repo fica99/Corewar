@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 13:26:23 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/02/16 13:44:23 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/06/25 20:19:10 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_isupper(char c)
+int	ft_isupper(char c)
 {
-    if (c >= 'A' && c <= 'Z')
-        return (1);
-    return (0);
+	if (c >= 'A' && c <= 'Z')
+		return (1);
+	return (0);
 }
