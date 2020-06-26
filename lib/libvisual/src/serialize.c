@@ -6,7 +6,7 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 00:25:57 by aashara           #+#    #+#             */
-/*   Updated: 2020/06/26 16:08:48 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/06/27 00:56:54 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ static unsigned char	*serialize_char(unsigned char *buffer, char value)
 	return (buffer + 1);
 }
 
-static unsigned char	*serialize_cell(unsigned char *buffer, const t_cell *value)
+static unsigned char	*serialize_cell(unsigned char *buffer,
+														const t_cell *value)
 {
 	buffer = serialize_char(buffer, (char)value->code);
 	buffer = serialize_char(buffer, (char)value->player_id);
@@ -35,7 +36,8 @@ static unsigned char	*serialize_cell(unsigned char *buffer, const t_cell *value)
 	return (buffer);
 }
 
-static unsigned char	*serialize_player(unsigned char *buffer, const t_player *value)
+static unsigned char	*serialize_player(unsigned char *buffer,
+													const t_player *value)
 {
 	size_t	i;
 
@@ -51,7 +53,8 @@ static unsigned char	*serialize_player(unsigned char *buffer, const t_player *va
 	return (buffer);
 }
 
-unsigned char			*serialize_arena(unsigned char *buffer, const t_arena *value)
+unsigned char			*serialize_arena(unsigned char *buffer,
+													const t_arena *value)
 {
 	size_t	i;
 

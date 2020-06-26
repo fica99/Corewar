@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sendData.c                                         :+:      :+:    :+:   */
+/*   send_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 15:15:23 by aashara-          #+#    #+#             */
-/*   Updated: 2020/06/26 23:55:34 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/06/27 00:59:25 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,17 @@ static int		sendall(int s, char *buf, int len, int flags)
 	int	n;
 
 	total = 0;
-	while(total < len)
+	while (total < len)
 	{
 		n = send(s, buf + total, len - total, flags);
-		if(n == -1)
-			break;
+		if (n == -1)
+			break ;
 		total += n;
 	}
 	return (n == -1 ? -1 : total);
 }
 
-void			sendArena(const t_arena *arena)
+void			send_arena(const t_arena *arena)
 {
 	unsigned char		buffer[ARENA_SIZE + 1];
 	int					listenfd;
@@ -45,7 +45,7 @@ void			sendArena(const t_arena *arena)
 		error_message("Socket() failed");
 	srvr_name.sun_family = AF_UNIX;
 	ft_strcpy(srvr_name.sun_path, SERVER_PATH);
-	if(connect(listenfd, (struct sockaddr*)&srvr_name, sizeof(srvr_name)) < 0)
+	if (connect(listenfd, (struct sockaddr*)&srvr_name, sizeof(srvr_name)) < 0)
 		error_message("Connect() failed");
 	if (sendall(listenfd, (char*)buffer, sizeof(buffer), 0) < 0)
 		error_message("Send() failed");
@@ -53,7 +53,7 @@ void			sendArena(const t_arena *arena)
 		error_message("Close() failed");
 }
 
-t_arena			receiveArena(int listenfd)
+t_arena			receive_arena(int listenfd)
 {
 	int				connfd;
 	size_t			i;

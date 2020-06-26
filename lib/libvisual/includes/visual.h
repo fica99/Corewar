@@ -6,7 +6,7 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/06/26 23:37:09 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/06/27 00:59:35 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include "libft.h"
 
 # define SERVER_PATH "/tmp/server.soc"
-# define ARENA_SIZE 5 * 4 + MAX_PLAYERS * (1 + PROG_NAME_LENGTH + 2 * 4) + MEM_SIZE * 3
+# define ARENA_SIZE 12856
 
 typedef enum		e_bool
 {
@@ -64,7 +64,8 @@ typedef struct		s_arena
 /*
 **	serialize.c
 */
-unsigned char		*serialize_arena(unsigned char *buffer, const t_arena *value);
+unsigned char		*serialize_arena(unsigned char *buffer,
+												const t_arena *value);
 /*
 **	deserialize.c
 */
@@ -73,6 +74,6 @@ t_arena				deserialize_arena(unsigned char *buffer, size_t *i);
 **	sendData.c
 */
 void				error_message(const char *msg);
-void				sendArena(const t_arena *arena);
-t_arena				receiveArena(int listenfd);
+void				send_arena(const t_arena *arena);
+t_arena				receive_arena(int listenfd);
 #endif
