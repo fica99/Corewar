@@ -6,7 +6,7 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/06/25 20:31:08 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/06/26 23:37:09 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,17 @@
 
 # include <stdint.h>
 # include <stdio.h>
+# include <stdlib.h>
+# include <sys/types.h>
+# include <sys/socket.h>
+# include <sys/un.h>
+# include <errno.h>
+# include <unistd.h>
 # include "op.h"
+# include "libft.h"
+
+# define SERVER_PATH "/tmp/server.soc"
+# define ARENA_SIZE 5 * 4 + MAX_PLAYERS * (1 + PROG_NAME_LENGTH + 2 * 4) + MEM_SIZE * 3
 
 typedef enum		e_bool
 {
@@ -54,17 +64,15 @@ typedef struct		s_arena
 /*
 **	serialize.c
 */
-unsigned char		*serialize_int(unsigned char *buffer, int value);
-unsigned char		*serialize_char(unsigned char *buffer, char value);
-unsigned char		*serialize_cell(unsigned char *buffer, t_cell value);
-unsigned char		*serialize_player(unsigned char *buffer, t_player value);
-unsigned char		*serialize_arena(unsigned char *buffer, t_arena value);
+unsigned char		*serialize_arena(unsigned char *buffer, const t_arena *value);
 /*
 **	deserialize.c
 */
-int					deserialize_int(unsigned char *buffer, size_t *i);
-char				deserialize_char(unsigned char *buffer, size_t *i);
-t_cell				deserialize_cell(unsigned char *buffer, size_t *i);
-t_player			deserialize_player(unsigned char *buffer, size_t *i);
 t_arena				deserialize_arena(unsigned char *buffer, size_t *i);
+/*
+**	sendData.c
+*/
+void				error_message(const char *msg);
+void				sendArena(const t_arena *arena);
+t_arena				receiveArena(int listenfd);
 #endif
