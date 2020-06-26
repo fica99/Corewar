@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aashara <aashara@student.42.fr>            +#+  +:+       +#+         #
+#    By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/14 12:47:29 by aashara           #+#    #+#              #
-#    Updated: 2020/06/23 22:15:14 by aashara          ###   ########.fr        #
+#    Updated: 2020/06/26 21:35:11 by aashara-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,18 @@ LFT		=		libft.a
 LFT_DIR	=		$(LIB_DIR)/libft
 LHS_DIR	=		$(LFT_DIR)/includes
 
+# ------------  LIBOP  ------------------------------------------------------- #
+LOP			=		libop.a
+LOP_DIR		=		$(LIB_DIR)/libop
+LOP_HS_DIR	=		$(LOP_DIR)/includes
+
+
+# ------------  LIBVISUAL  ------------------------------------------------------- #
+LVIS		=		libvisual.a
+LVIS_DIR	=		$(LIB_DIR)/libvisual
+LVIS_HS_DIR	=		$(LVIS_DIR)/includes
+
+
 # ------------  SOURCE FILES  ------------------------------------------------ #
 SRC_FLS	=		main.c
 
@@ -36,8 +48,8 @@ DEPS	=		$(OBJS:.o=.d)
 CC		=		gcc
 RM		=		rm -rf
 CFLGS	=		-Wall -Werror -Wextra
-LFLGS	=		-L $(LFT_DIR) -lft
-IFLGS	=		-I $(HDR_DIR) -I $(LHS_DIR)
+LFLGS	=		-L $(LVIS_DIR) -lvisual -L $(LOP_DIR) -lop -L $(LFT_DIR) -lft 
+IFLGS	=		-I $(HDR_DIR) -I $(LHS_DIR) -I $(LOP_HS_DIR) -I $(LVIS_HS_DIR)
 DFLGS	=		-MMD -MP
 OFLGS	=		-O3
 
@@ -49,6 +61,12 @@ all: $(NAME)
 $(LFT_DIR)/$(LFT):
 	$(MAKE) -C $(LFT_DIR)
 
+$(LOP_DIR)/$(LOP):
+	$(MAKE) -C $(LOP_DIR)
+
+$(LVIS_DIR)/$(LVIS):
+	$(MAKE) -C $(LVIS_DIR)
+
 -include $(DEPS)
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	$(CC) $(CFLGS) $(DFLGS) $(OFLGS) -c -o $@ $< $(IFLGS)
@@ -56,17 +74,21 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
-$(NAME): $(LFT_DIR)/$(LFT) $(OBJS)
+$(NAME): $(LFT_DIR)/$(LFT) $(LVIS_DIR)/$(LVIS) $(LOP_DIR)/$(LOP) $(OBJS)
 	$(CC) -o $(NAME) $(OBJS) $(LFLGS)
 
 $(NAME): $(OBJS)
 
 clean:
 	$(MAKE) -C $(LFT_DIR) clean
+	$(MAKE) -C $(LOP_DIR) clean
+	$(MAKE) -C $(LVIS_DIR) clean
 	$(RM) $(OBJ_DIR)
 
 fclean: clean
 	$(MAKE) -C $(LFT_DIR) fclean
+	$(MAKE) -C $(LOP_DIR) fclean
+	$(MAKE) -C $(LVIS_DIR) fclean
 	$(RM) $(NAME)
 
 re: fclean all

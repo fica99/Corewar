@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/25 00:58:05 by aashara           #+#    #+#             */
-/*   Updated: 2020/06/25 20:26:37 by aashara-         ###   ########.fr       */
+/*   Created: 2020/06/26 20:37:07 by aashara-          #+#    #+#             */
+/*   Updated: 2020/06/26 20:38:11 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "visual.h"
 
-int			deserialize_int(unsigned char *buffer, size_t *i)
+static int			deserialize_int(unsigned char *buffer, size_t *i)
 {
 	int	value;
 
@@ -24,12 +24,12 @@ int			deserialize_int(unsigned char *buffer, size_t *i)
 	return (value);
 }
 
-char		deserialize_char(unsigned char *buffer, size_t *i)
+static char			deserialize_char(unsigned char *buffer, size_t *i)
 {
 	return (buffer[(*i)++]);
 }
 
-t_cell		deserialize_cell(unsigned char *buffer, size_t *i)
+static t_cell		deserialize_cell(unsigned char *buffer, size_t *i)
 {
 	t_cell	cell;
 
@@ -39,7 +39,7 @@ t_cell		deserialize_cell(unsigned char *buffer, size_t *i)
 	return (cell);
 }
 
-t_player	deserialize_player(unsigned char *buffer, size_t *i)
+static t_player		deserialize_player(unsigned char *buffer, size_t *i)
 {
 	t_player	player;
 	size_t		j;
@@ -56,7 +56,7 @@ t_player	deserialize_player(unsigned char *buffer, size_t *i)
 	return (player);
 }
 
-t_arena		deserialize_arena(unsigned char *buffer, size_t *i)
+t_arena				deserialize_arena(unsigned char *buffer, size_t *i)
 {
 	t_arena	arena;
 	size_t	j;
