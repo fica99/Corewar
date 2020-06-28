@@ -6,11 +6,11 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 00:25:57 by aashara           #+#    #+#             */
-/*   Updated: 2020/06/27 00:56:54 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/06/27 15:52:57 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "visual.h"
+#include "libsocket.h"
 
 static unsigned char	*serialize_int(unsigned char *buffer, int value)
 {
