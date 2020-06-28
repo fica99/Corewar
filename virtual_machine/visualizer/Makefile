@@ -6,7 +6,7 @@
 #    By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/14 12:47:29 by aashara           #+#    #+#              #
-#    Updated: 2020/06/28 19:38:57 by aashara-         ###   ########.fr        #
+#    Updated: 2020/06/28 19:50:37 by aashara-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,7 @@ DEPS	=		$(OBJS:.o=.d)
 CC		=		g++
 RM		=		rm -rf
 CFLGS	=		-Wall -Werror -Wextra -std=c++1z
-LFLGS	=		-L $(LOP_DIR) -lop -L $(LSOC_DIR) -lsocket -L $(LFT_DIR) -lft -L $(LDRAW_DIR) -ldraw -lSDL2 -lSDL_ttf
+LFLGS	=		-L $(LOP_DIR) -lop -L $(LSOC_DIR) -lsocket -L $(LFT_DIR) -lft -L $(LDRAW_DIR) -ldraw -lncurses
 IFLGS	=		-I $(LOP_HS_DIR) -I $(LSOC_HS_DIR) -I $(LHS_DIR) -I $(LDRAW_HS_DIR) -I $(HDR_DIR)
 DFLGS	=		-MMD -MP
 OFLGS	=		-O3

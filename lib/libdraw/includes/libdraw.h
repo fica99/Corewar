@@ -6,19 +6,21 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/28 16:58:44 by aashara-          #+#    #+#             */
-/*   Updated: 2020/06/28 19:29:23 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/06/28 22:08:35 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-# include <SDL2/SDL.h>
-# include <SDL2/SDL_ttf.h>
 # include <iostream>
 # include <cstdint>
+# include <ncurses.h>
+
 extern "C" {
 # include "libsocket.h"
 }
+
+# define KEY_ESC 27
 class Drawer {
 public:
 	Drawer();
@@ -27,8 +29,6 @@ public:
 	void			drawArena(t_arena &arena);
 private:
 	const uint16_t	WINDOW_WIDTH = 640;
-	const uint16_t	WINDOW_HEIGHT = 480;
-	SDL_Window		*_window;
-	SDL_Renderer	*_ren;
-	TTF_Font		*_font;
+	const uint16_t	WINDOW_HEIGHT = 640;
+	WINDOW			*_win;
 };
