@@ -6,11 +6,11 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 15:15:23 by aashara-          #+#    #+#             */
-/*   Updated: 2020/06/27 00:59:25 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/07/04 20:20:49 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "visual.h"
+#include "libsocket.h"
 
 void			error_message(const char *msg)
 {
@@ -18,51 +18,57 @@ void			error_message(const char *msg)
 	exit(EXIT_FAILURE);
 }
 
-static int		sendall(int s, char *buf, int len, int flags)
+int				connect_to_server(void)
 {
-	int	total;
-	int	n;
-
-	total = 0;
-	while (total < len)
-	{
-		n = send(s, buf + total, len - total, flags);
-		if (n == -1)
-			break ;
-		total += n;
-	}
-	return (n == -1 ? -1 : total);
-}
-
-void			send_arena(const t_arena *arena)
-{
-	unsigned char		buffer[ARENA_SIZE + 1];
 	int					listenfd;
 	struct sockaddr_un	srvr_name;
 
-	serialize_arena(buffer, arena);
 	if ((listenfd = socket(AF_UNIX, SOCK_STREAM, 0)) < 0)
-		error_message("Socket() failed");
+		error_message("Error - socket() failed");
 	srvr_name.sun_family = AF_UNIX;
 	ft_strcpy(srvr_name.sun_path, SERVER_PATH);
 	if (connect(listenfd, (struct sockaddr*)&srvr_name, sizeof(srvr_name)) < 0)
-		error_message("Connect() failed");
-	if (sendall(listenfd, (char*)buffer, sizeof(buffer), 0) < 0)
-		error_message("Send() failed");
-	if (close(listenfd) < 0)
-		error_message("Close() failed");
+		error_message("Error - connect() failed");
+	return (listenfd);
 }
 
-t_arena			receive_arena(int listenfd)
+void			disconnect_from_server(int listenfd)
 {
-	int				connfd;
-	size_t			i;
-	unsigned char	buffer[ARENA_SIZE + 1];
+	if (close(listenfd) < 0)
+		error_message("Error - close() failed");
+}
 
-	connfd = accept(listenfd, (struct sockaddr*)NULL, NULL);
-	if (recv(connfd, buffer, sizeof(buffer), 0) < 0)
-		error_message("Recv() failed");
-	close(connfd);
+
+void			send_arena(const t_arena *arena, int listenfd)
+{
+	unsigned char	buffer[ARENA_SIZE];
+	int				total;
+	int				n;
+
+	serialize_arena(buffer, arena);
+	total = 0;
+	while (total < ARENA_SIZE)
+	{
+		n = send(listenfd, buffer + total, ARENA_SIZE - total, 0);
+		if (n == -1)
+			error_message("Error - send() failed");
+		total += n;
+	}
+}
+
+int				receive_arena(t_arena *arena, int connfd)
+{
+	size_t			i;
+	unsigned char	buffer[ARENA_SIZE];
+	int				res;
+
+	if ((res = recv(connfd, buffer, ARENA_SIZE, 0)) <= 0)
+	{
+		if (res == 0)
+			return (-1);
+		error_message("Error - recv() failed");
+	}
 	i = 0;
-	return (deserialize_arena(buffer, &i));
+	*arena = deserialize_arena(buffer, &i);
+	return (0);
 }

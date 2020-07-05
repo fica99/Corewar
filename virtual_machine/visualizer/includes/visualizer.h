@@ -6,7 +6,9 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <iostream>
+# include <string>
+# include "libdraw.h"
 extern "C" {
-	# include "op.h"
-	# include "visual.h"
+# include "libsocket.h"
 }
+

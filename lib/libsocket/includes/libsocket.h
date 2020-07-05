@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   visual.h                                           :+:      :+:    :+:   */
+/*   libsocket.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/06/27 00:59:35 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/06/28 18:29:27 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VISUAL_H
-# define VISUAL_H
+#ifndef LIBSOCKET_H
+# define LIBSOCKET_H
 
 # include <stdint.h>
 # include <stdio.h>
@@ -74,6 +74,8 @@ t_arena				deserialize_arena(unsigned char *buffer, size_t *i);
 **	sendData.c
 */
 void				error_message(const char *msg);
-void				send_arena(const t_arena *arena);
-t_arena				receive_arena(int listenfd);
+int					connect_to_server(void);
+void				disconnect_from_server(int listenfd);
+void				send_arena(const t_arena *arena, int listenfd);
+int					receive_arena(t_arena *arena, int connfd);
 #endif

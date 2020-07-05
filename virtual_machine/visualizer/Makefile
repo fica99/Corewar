@@ -6,7 +6,7 @@
 #    By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/14 12:47:29 by aashara           #+#    #+#              #
-#    Updated: 2020/06/26 21:29:21 by aashara-         ###   ########.fr        #
+#    Updated: 2020/06/28 19:50:37 by aashara-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,10 +24,15 @@ LOP		=		libop.a
 LOP_DIR	=		$(LIB_DIR)/libop
 LOP_HS_DIR	=	$(LOP_DIR)/includes
 
-# ------------  LIBVISUAL  ------------------------------------------------------- #
-LVIS		=	libvisual.a
-LVIS_DIR	=	$(LIB_DIR)/libvisual
-LVIS_HS_DIR	=	$(LVIS_DIR)/includes
+# ------------  LIBSOCKET  ------------------------------------------------------- #
+LSOC		=	libsocket.a
+LSOC_DIR	=	$(LIB_DIR)/libsocket
+LSOC_HS_DIR	=	$(LSOC_DIR)/includes
+
+# ------------  LIBDRAW  ------------------------------------------------------- #
+LDRAW		=	libdraw.a
+LDRAW_DIR	=	$(LIB_DIR)/libdraw
+LDRAW_HS_DIR	=	$(LDRAW_DIR)/includes
 
 # ------------  LIBFT  ------------------------------------------------------- #
 LFT		=		libft.a
@@ -47,8 +52,8 @@ DEPS	=		$(OBJS:.o=.d)
 CC		=		g++
 RM		=		rm -rf
 CFLGS	=		-Wall -Werror -Wextra -std=c++1z
-LFLGS	=		-L $(LOP_DIR) -lop -L $(LVIS_DIR) -lvisual -L $(LFT_DIR) -lft
-IFLGS	=		-I $(LOP_HS_DIR) -I $(LVIS_HS_DIR) -I $(LHS_DIR) -I $(HDR_DIR)
+LFLGS	=		-L $(LOP_DIR) -lop -L $(LSOC_DIR) -lsocket -L $(LFT_DIR) -lft -L $(LDRAW_DIR) -ldraw -lncurses
+IFLGS	=		-I $(LOP_HS_DIR) -I $(LSOC_HS_DIR) -I $(LHS_DIR) -I $(LDRAW_HS_DIR) -I $(HDR_DIR)
 DFLGS	=		-MMD -MP
 OFLGS	=		-O3
 
@@ -63,8 +68,11 @@ $(LOP_DIR)/$(LOP):
 $(LFT_DIR)/$(LFT):
 	$(MAKE) -C $(LFT_DIR)
 
-$(LVIS_DIR)/$(LVIS):
-	$(MAKE) -C $(LVIS_DIR)
+$(LSOC_DIR)/$(LSOC):
+	$(MAKE) -C $(LSOC_DIR)
+
+$(LDRAW_DIR)/$(LDRAW):
+	$(MAKE) -C $(LDRAW_DIR)
 
 -include $(DEPS)
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | $(OBJ_DIR)
@@ -73,7 +81,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | $(OBJ_DIR)
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
-$(NAME): $(LOP_DIR)/$(LOP) $(LFT_DIR)/$(LFT) $(LVIS_DIR)/$(LVIS) $(OBJS)
+$(NAME): $(LOP_DIR)/$(LOP) $(LFT_DIR)/$(LFT) $(LSOC_DIR)/$(LSOC) $(LDRAW_DIR)/$(LDRAW) $(OBJS)
 	$(CC) -o $(NAME) $(OBJS) $(LFLGS)
 
 $(NAME): $(OBJS)
@@ -81,13 +89,15 @@ $(NAME): $(OBJS)
 clean:
 	$(MAKE) -C $(LOP_DIR) clean
 	$(MAKE) -C $(LFT_DIR) clean
-	$(MAKE) -C $(LVIS_DIR) clean
+	$(MAKE) -C $(LSOC_DIR) clean
+	$(MAKE) -C $(LDRAW_DIR) clean
 	$(RM) $(OBJ_DIR)
 
 fclean: clean
 	$(MAKE) -C $(LFT_DIR) fclean
-	$(MAKE) -C $(LVIS_DIR) fclean
+	$(MAKE) -C $(LSOC_DIR) fclean
 	$(MAKE) -C $(LOP_DIR) fclean
+	$(MAKE) -C $(LDRAW_DIR) fclean
 	$(RM) $(NAME)
 
 re: fclean all
