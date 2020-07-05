@@ -6,7 +6,7 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 15:15:23 by aashara-          #+#    #+#             */
-/*   Updated: 2020/06/27 19:03:34 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/07/04 20:20:49 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,18 @@ int				connect_to_server(void)
 	struct sockaddr_un	srvr_name;
 
 	if ((listenfd = socket(AF_UNIX, SOCK_STREAM, 0)) < 0)
-		error_message("Socket() failed");
+		error_message("Error - socket() failed");
 	srvr_name.sun_family = AF_UNIX;
 	ft_strcpy(srvr_name.sun_path, SERVER_PATH);
 	if (connect(listenfd, (struct sockaddr*)&srvr_name, sizeof(srvr_name)) < 0)
-		error_message("Connect() failed");
+		error_message("Error - connect() failed");
 	return (listenfd);
 }
 
 void			disconnect_from_server(int listenfd)
 {
 	if (close(listenfd) < 0)
-		error_message("Close() failed");
+		error_message("Error - close() failed");
 }
 
 
@@ -51,7 +51,7 @@ void			send_arena(const t_arena *arena, int listenfd)
 	{
 		n = send(listenfd, buffer + total, ARENA_SIZE - total, 0);
 		if (n == -1)
-			error_message("Send() failed");
+			error_message("Error - send() failed");
 		total += n;
 	}
 }
@@ -66,7 +66,7 @@ int				receive_arena(t_arena *arena, int connfd)
 	{
 		if (res == 0)
 			return (-1);
-		error_message("Recv() failed");
+		error_message("Error - recv() failed");
 	}
 	i = 0;
 	*arena = deserialize_arena(buffer, &i);
