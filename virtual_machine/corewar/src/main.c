@@ -6,7 +6,7 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 21:41:56 by aashara-          #+#    #+#             */
-/*   Updated: 2020/07/05 02:01:06 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/07/05 14:11:02 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,14 @@ int	main(void)
 		arena.players[3].lives_in_cur_period = rand() % 1000;
 		ft_strcpy(arena.players[3].name, "Zorg");
 		for (size_t j = 0; j < MEM_SIZE; ++j) {
+			arena.arena[j].is_carriage = (t_bool)(rand() % 2);
 			arena.arena[j].code = rand() % 256;
 			arena.arena[j].player_id = rand() % (MAX_PLAYERS + 1);
 		}
 
 		send_arena(&arena, listenfd);
 		++i;
+		sleep(1);
 	}
 	disconnect_from_server(listenfd);
 	return (0);

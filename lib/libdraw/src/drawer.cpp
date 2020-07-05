@@ -6,7 +6,7 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/28 17:06:42 by aashara-          #+#    #+#             */
-/*   Updated: 2020/07/05 13:32:27 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/07/05 14:45:22 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,16 @@ Drawer::Drawer(void) {
 }
 
 void	Drawer::initColor(void) {
-	init_pair(EMPTY_CEIL, COLOR_BLACK, COLOR_BLACK);
+	init_pair(EMPTY_CEIL, COLOR_WHITE, COLOR_BLACK);
 	init_pair(RED_PLAYER, COLOR_RED, COLOR_BLACK);
 	init_pair(BLUE_PLAYER, COLOR_BLUE, COLOR_BLACK);
 	init_pair(GREEN_PLAYER, COLOR_GREEN, COLOR_BLACK);
 	init_pair(YELLOW_PLAYER, COLOR_YELLOW, COLOR_BLACK);
+	init_pair(EMPTY_CARRIAGE, COLOR_BLACK, COLOR_WHITE);
+	init_pair(RED_CARRIAGE, COLOR_BLACK, COLOR_RED);
+	init_pair(BLUE_CARRIAGE, COLOR_BLACK, COLOR_BLUE);
+	init_pair(GREEN_CARRIAGE, COLOR_BLACK, COLOR_GREEN);
+	init_pair(YELLOW_CARRIAGE, COLOR_BLACK, COLOR_YELLOW);
 }
 
 Drawer::~Drawer(void) {
@@ -80,7 +85,9 @@ void	Drawer::drawMap(t_arena &arena) {
 	while (i < side) {
 		j = 0;
 		while (j < side) {
-			if (arena.arena[(i * side) + j].code)
+			if (arena.arena[(i * side) + j].is_carriage)
+				wattrset(_map, COLOR_PAIR(arena.arena[(i * side) + j].player_id + MAX_PLAYERS + 1));
+			else
 				wattrset(_map, COLOR_PAIR(arena.arena[(i * side) + j].player_id));
 			mvwprintw(_map, i + 1, 3 * j + 1, "%02x", arena.arena[(i * side) + j].code);
 			wattrset(_map, A_NORMAL);

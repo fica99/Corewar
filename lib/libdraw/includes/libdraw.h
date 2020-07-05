@@ -6,7 +6,7 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/28 16:58:44 by aashara-          #+#    #+#             */
-/*   Updated: 2020/07/05 13:33:37 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/07/05 14:45:25 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,12 @@ extern "C" {
 # define BLUE_PLAYER 2
 # define GREEN_PLAYER 3
 # define YELLOW_PLAYER 4
+# define EMPTY_CARRIAGE 5
+# define RED_CARRIAGE 6
+# define BLUE_CARRIAGE 7
+# define GREEN_CARRIAGE 8
+# define YELLOW_CARRIAGE 9
+
 
 class Drawer {
 public:
