@@ -6,7 +6,7 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/28 17:06:42 by aashara-          #+#    #+#             */
-/*   Updated: 2020/07/05 16:44:23 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/07/05 22:01:20 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,21 @@ void	Drawer::drawMap(t_arena &arena) {
 	wrefresh(_map);
 }
 
+void	Drawer::drawProgressBar(t_arena &arena, size_t i) {
+	double	num_of_spaces = arena.players[i].lives_in_cur_period / LEN_PER_SPACE;
+	int	num = static_cast<int>(num_of_spaces);
+
+	wattrset(_info, COLOR_PAIR(A_NORMAL));
+	if (num > LEN_OF_PROGRESS_BAR)
+		num = LEN_OF_PROGRESS_BAR;
+	wmove(_info, i * 5 + 9, 0);
+	wclrtoeol(_info);
+	box(_info, 0, 0);
+	wattrset(_info, COLOR_PAIR(arena.players[i].id + MAX_PLAYERS + 1));
+	for (int j = 0; j < num; ++j)
+		mvwprintw(_info, i * 5 + 9, 6 + j, "\'");
+}
+
 void	Drawer::drawInfo(t_arena &arena) {
 	mvwprintw(_info, 2, INFO_WIDTH / 2 - 2, "INFO");
 	mvwprintw(_info, 4, 4, "Cycle : %7d", arena.cycle);
@@ -130,9 +145,10 @@ void	Drawer::drawInfo(t_arena &arena) {
 	while (i < MAX_PLAYERS) {
 		if (arena.players[i].id) {
 			wattrset(_info, COLOR_PAIR(arena.players[i].id));
-			mvwprintw(_info, i * 4 + 6, 4, "Player - %3d : %s", arena.players[i].id, arena.players[i].name);
-			mvwprintw(_info, i * 4 + 7, 6, "Last live - %20d", arena.players[i].last_live);
-			mvwprintw(_info, i * 4 + 8, 6, "Lives in current period - %6d", arena.players[i].lives_in_cur_period);
+			mvwprintw(_info, i * 5 + 6, 4, "Player - %3d : %s", arena.players[i].id, arena.players[i].name);
+			mvwprintw(_info, i * 5 + 7, 6, "Last live - %20d", arena.players[i].last_live);
+			mvwprintw(_info, i * 5 + 8, 6, "Lives in current period - %6d", arena.players[i].lives_in_cur_period);
+			drawProgressBar(arena, i);
 			wattrset(_info, COLOR_PAIR(A_NORMAL));
 		}
 		++i;

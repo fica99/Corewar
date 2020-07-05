@@ -6,7 +6,7 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/28 16:58:44 by aashara-          #+#    #+#             */
-/*   Updated: 2020/07/05 16:30:37 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/07/05 22:01:53 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,13 @@ public:
 private:
 	const uint16_t	ARENA_WIDTH = 64 * 3 + 1;
 	const uint16_t	ARENA_HEIGHT = 64 * 1 + 2;
-	const uint16_t	INFO_WIDTH = 44;
-	const uint16_t	INFO_HEIGHT = 8 + 4 * MAX_PLAYERS;
+	const uint16_t	INFO_WIDTH = 47;
+	const uint16_t	INFO_HEIGHT = 8 + 5 * MAX_PLAYERS;
 	const uint16_t	PARAMS_WIDTH = INFO_WIDTH;
 	const uint16_t	PARAMS_HEIGHT = 13;
 	const uint16_t	HELP_WIDTH = INFO_WIDTH;
+	const uint16_t	LEN_OF_PROGRESS_BAR = 32;
+	const uint16_t	LEN_PER_SPACE = 10;
 	const uint16_t	HELP_HEIGHT = ARENA_HEIGHT - INFO_HEIGHT - PARAMS_HEIGHT;
 	WINDOW			*_map;
 	WINDOW			*_info;
@@ -58,6 +60,7 @@ private:
 	void			drawMap(t_arena &arena);
 	void			drawHelp(void);
 	void			drawWinner(t_arena &arena);
+	void			drawProgressBar(t_arena &arena, size_t i);
 	void			error_print(const char *msg);
 	void			initColor(void);
 	void			initWindows(void);

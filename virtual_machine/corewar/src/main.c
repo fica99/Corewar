@@ -6,7 +6,7 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 21:41:56 by aashara-          #+#    #+#             */
-/*   Updated: 2020/07/05 16:44:46 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/07/05 21:56:13 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	main(void)
 		arena.players[2].lives_in_cur_period = rand() % 1000;
 		ft_strcpy(arena.players[2].name, "Superman");
 		arena.players[3].last_live = rand() % 100000;
-		arena.players[3].lives_in_cur_period = rand() % 1000;
+		arena.players[3].lives_in_cur_period = rand() % 500;
 		ft_strcpy(arena.players[3].name, "Zorg");
 		for (size_t j = 0; j < MEM_SIZE / 8; ++j) {
 			arena.arena[j].is_carriage = (t_bool)(rand() % 2);
