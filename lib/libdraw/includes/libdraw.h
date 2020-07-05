@@ -6,7 +6,7 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/28 16:58:44 by aashara-          #+#    #+#             */
-/*   Updated: 2020/07/05 14:45:25 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/07/05 16:30:37 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ private:
 	void			drawParams(t_arena &arena);
 	void			drawMap(t_arena &arena);
 	void			drawHelp(void);
+	void			drawWinner(t_arena &arena);
 	void			error_print(const char *msg);
 	void			initColor(void);
+	void			initWindows(void);
 };

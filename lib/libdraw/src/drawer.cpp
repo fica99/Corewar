@@ -6,7 +6,7 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/28 17:06:42 by aashara-          #+#    #+#             */
-/*   Updated: 2020/07/05 14:45:22 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/07/05 16:44:23 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@ Drawer::Drawer(void) {
 	nodelay(stdscr, TRUE);
 	keypad(stdscr, TRUE);
 	curs_set(0);
-	if (has_colors() == false)
-		error_print("Error - has_colors() failed");
-	if (start_color() != OK)
-		error_print("Error - has_colors() failed");
+	initColor();
+	initWindows();
+}
+
+void	Drawer::initWindows(void) {
 	_map = newwin(ARENA_HEIGHT, ARENA_WIDTH, 0, 0);
 	_info = newwin(INFO_HEIGHT, INFO_WIDTH, 0, ARENA_WIDTH);
 	_params = newwin(PARAMS_HEIGHT, PARAMS_WIDTH, INFO_HEIGHT, ARENA_WIDTH);
 	_help = newwin(HELP_HEIGHT, HELP_WIDTH, INFO_HEIGHT + PARAMS_HEIGHT, ARENA_WIDTH);
-	initColor();
 	refresh();
 	box(_map, 0, 0);
 	box(_info, 0, 0);
@@ -42,6 +42,10 @@ Drawer::Drawer(void) {
 }
 
 void	Drawer::initColor(void) {
+	if (has_colors() == false)
+		error_print("Error - has_colors() failed");
+	if (start_color() != OK)
+		error_print("Error - has_colors() failed");
 	init_pair(EMPTY_CEIL, COLOR_WHITE, COLOR_BLACK);
 	init_pair(RED_PLAYER, COLOR_RED, COLOR_BLACK);
 	init_pair(BLUE_PLAYER, COLOR_BLUE, COLOR_BLACK);
@@ -59,6 +63,7 @@ Drawer::~Drawer(void) {
 	delwin(_info);
 	delwin(_params);
 	delwin(_help);
+	clear();
 	endwin();
 }
 
@@ -70,11 +75,31 @@ bool	Drawer::isRunning(void) const {
 }
 
 void	Drawer::drawArena(t_arena &arena) {
-	drawMap(arena);
+	drawWinner(arena);
 	drawInfo(arena);
 	drawParams(arena);
 	drawHelp();
+	drawMap(arena);
 }
+
+void	Drawer::drawWinner(t_arena &arena) {
+	if (arena.winner_id) {
+		size_t	i = 0;
+
+		while (i < MAX_PLAYERS) {
+			if (arena.winner_id == arena.players[i].id)
+				break ;
+			++i;
+		}
+		if (i == MAX_PLAYERS)
+			return ;
+		attrset(COLOR_PAIR(arena.winner_id));
+		mvprintw(ARENA_HEIGHT + 2, ARENA_WIDTH / 2, "%s (Player - %d) has won!!!", arena.players[i].name, arena.winner_id);
+		attrset(A_NORMAL);
+		refresh();
+	}
+}
+
 
 void	Drawer::drawMap(t_arena &arena) {
 	size_t	i;

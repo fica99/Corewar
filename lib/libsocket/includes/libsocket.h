@@ -6,7 +6,7 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/06/28 18:29:27 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/07/05 15:22:35 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct		s_arena
 	int				cycle_delta;
 	int				nbr_live;
 	int				max_checks;
+	uint8_t			winner_id;
 	t_player		players[MAX_PLAYERS];
 	t_cell			arena[MEM_SIZE];
 

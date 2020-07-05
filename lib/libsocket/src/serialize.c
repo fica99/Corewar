@@ -6,7 +6,7 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 00:25:57 by aashara           #+#    #+#             */
-/*   Updated: 2020/06/27 15:52:57 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/07/05 16:06:08 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ unsigned char			*serialize_arena(unsigned char *buffer,
 	buffer = serialize_int(buffer, value->cycle_delta);
 	buffer = serialize_int(buffer, value->nbr_live);
 	buffer = serialize_int(buffer, value->max_checks);
+	buffer = serialize_char(buffer, value->winner_id);
 	i = 0;
 	while (i < MAX_PLAYERS)
 	{
