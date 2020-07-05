@@ -6,7 +6,7 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 20:37:07 by aashara-          #+#    #+#             */
-/*   Updated: 2020/06/27 15:52:44 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/07/05 16:06:00 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ t_arena				deserialize_arena(unsigned char *buffer, size_t *i)
 	arena.cycle_delta = deserialize_int(buffer, i);
 	arena.nbr_live = deserialize_int(buffer, i);
 	arena.max_checks = deserialize_int(buffer, i);
+	arena.winner_id = deserialize_char(buffer, i);
 	j = 0;
 	while (j < MAX_PLAYERS)
 	{
