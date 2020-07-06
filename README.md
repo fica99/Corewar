@@ -85,7 +85,7 @@ This is an example of a simple player, a normal player has around 150 lines of a
 
 This complies to binary which is later represented in hexadecimal. The above program looks like this when it’s compiled:
 ```
-0000000 00 ea 83 f3 7a 6f 72 6b 00 00 00 00 00 00 00 00
+    0000000 00 ea 83 f3 7a 6f 72 6b 00 00 00 00 00 00 00 00
     0000010 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
     *
     0000080 00 00 00 00 00 00 00 00 00 00 00 17 49 27 4d 20
