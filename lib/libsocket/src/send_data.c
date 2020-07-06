@@ -6,7 +6,7 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 15:15:23 by aashara-          #+#    #+#             */
-/*   Updated: 2020/07/04 20:20:49 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/07/06 09:37:17 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void			disconnect_from_server(int listenfd)
 	if (close(listenfd) < 0)
 		error_message("Error - close() failed");
 }
-
 
 void			send_arena(const t_arena *arena, int listenfd)
 {

@@ -6,13 +6,12 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2020/06/28 18:29:24 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/07/06 09:36:56 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OP_H
 # define OP_H
-
 
 /*
 ** Toutes les tailles sont en octets.
@@ -67,6 +66,5 @@ typedef struct			s_header
 	unsigned int		prog_size;
 	char				comment[COMMENT_LENGTH + 1];
 }						t_header;
-
 
 #endif
