@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 15:42:59 by aashara-          #+#    #+#             */
-/*   Updated: 2020/06/26 19:42:11 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/07/08 21:41:32 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,13 @@ typedef struct	s_list
 	size_t			content_size;
 	struct s_list	*next;
 }				t_list;
+
+typedef struct	s_string
+{
+	char	*str;
+	int		size;
+	int		m_size;
+}				t_string;
 
 void			*ft_realloc(void *buf, size_t old, size_t new_size);
 size_t			ft_strlen(const char *str);
@@ -93,4 +100,5 @@ int				ft_min(int a, int b);
 int				ft_max(int a, int b);
 int				ft_pathcmp(char *p1, char *p2);
 char			*ft_pathjoin(char *s1, char *s2);
+t_string		*ft_newstrs(int m_size);
 #endif
