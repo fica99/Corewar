@@ -6,7 +6,7 @@
 /*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 15:42:59 by aashara-          #+#    #+#             */
-/*   Updated: 2020/07/08 22:44:40 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/07/08 23:19:54 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ typedef struct	s_list
 typedef struct	s_string
 {
 	char	*str;
-	int		size;
-	int		m_size;
+	size_t	size;
+	size_t	m_size;
 }				t_string;
 
 void			*ft_realloc(void *buf, size_t old, size_t new_size);
@@ -101,6 +101,7 @@ int				ft_min(int a, int b);
 int				ft_max(int a, int b);
 int				ft_pathcmp(char *p1, char *p2);
 char			*ft_pathjoin(char *s1, char *s2);
-t_string		*ft_newstrs(int m_size);
+t_string		*ft_newstrs(size_t m_size);
 void			ft_delstrs(t_string **s_str);
+t_string		*ft_strmulsub(char *template, int m_size, ...);
 #endif
