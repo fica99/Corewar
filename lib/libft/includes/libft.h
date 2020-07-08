@@ -6,7 +6,7 @@
 /*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 15:42:59 by aashara-          #+#    #+#             */
-/*   Updated: 2020/07/08 21:41:32 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/07/08 22:44:40 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <string.h>
+# include <stdarg.h>
 
 # define FT_LLONG_MAX 9223372036854775807
 # define FT_ULLONG_MAX 18446744073709551615ULL
@@ -101,4 +102,5 @@ int				ft_max(int a, int b);
 int				ft_pathcmp(char *p1, char *p2);
 char			*ft_pathjoin(char *s1, char *s2);
 t_string		*ft_newstrs(int m_size);
+void			ft_delstrs(t_string **s_str);
 #endif
