@@ -6,7 +6,7 @@
 /*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 15:42:59 by aashara-          #+#    #+#             */
-/*   Updated: 2020/07/08 23:19:54 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/07/09 09:41:40 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,5 @@ int				ft_pathcmp(char *p1, char *p2);
 char			*ft_pathjoin(char *s1, char *s2);
 t_string		*ft_newstrs(size_t m_size);
 void			ft_delstrs(t_string **s_str);
-t_string		*ft_strmulsub(char *template, int m_size, ...);
+t_string		*ft_strmulsub(char *template, size_t m_size, ...);
 #endif
