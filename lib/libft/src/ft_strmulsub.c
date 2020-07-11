@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmulsub.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 21:44:28 by olegmulko         #+#    #+#             */
-/*   Updated: 2020/07/09 10:52:35 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/07/11 15:15:45 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static t_string	*ft_sub_in_template(t_string *s_str, char *str)
 	if (!str)
 		return (s_str);
 	i = 0;
-	while(str[i])
+	while (str[i])
 	{
 		if (!ft_check_size(s_str))
 			return (NULL);
@@ -65,9 +65,9 @@ static t_string	*ft_sub_in_template(t_string *s_str, char *str)
 	return (s_str);
 }
 
-t_string		*ft_strmulsub(char *template, size_t m_size, ...)
+t_string		*ft_strmulsub(char *temp, size_t m_size, ...)
 {
-	va_list 	sub;
+	va_list		sub;
 	int			i;
 	t_string	*s_str;
 
@@ -75,19 +75,19 @@ t_string		*ft_strmulsub(char *template, size_t m_size, ...)
 		return (NULL);
 	va_start(sub, m_size);
 	i = -1;
-	while (template[++i])
+	while (temp[++i])
 	{
 		if (!ft_check_size(s_str))
 			return (NULL);
-		if (ft_check_esc(s_str, template, &i))
+		if (ft_check_esc(s_str, temp, &i))
 			continue;
-		if (template[i] == '?')
+		if (temp[i] == '?')
 		{
 			if (!(s_str = ft_sub_in_template(s_str, va_arg(sub, char*))))
 				return (NULL);
 			continue;
 		}
-		s_str->str[s_str->size++] = template[i];
+		s_str->str[s_str->size++] = temp[i];
 	}
 	s_str->str[s_str->size] = '\0';
 	va_end(sub);
