@@ -6,7 +6,7 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 15:42:59 by aashara-          #+#    #+#             */
-/*   Updated: 2020/06/26 19:42:11 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/07/11 15:16:05 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <string.h>
+# include <stdarg.h>
 
 # define FT_LLONG_MAX 9223372036854775807
 # define FT_ULLONG_MAX 18446744073709551615ULL
@@ -26,6 +27,13 @@ typedef struct	s_list
 	size_t			content_size;
 	struct s_list	*next;
 }				t_list;
+
+typedef struct	s_string
+{
+	char	*str;
+	size_t	size;
+	size_t	m_size;
+}				t_string;
 
 void			*ft_realloc(void *buf, size_t old, size_t new_size);
 size_t			ft_strlen(const char *str);
@@ -93,4 +101,7 @@ int				ft_min(int a, int b);
 int				ft_max(int a, int b);
 int				ft_pathcmp(char *p1, char *p2);
 char			*ft_pathjoin(char *s1, char *s2);
+t_string		*ft_newstrs(size_t m_size);
+void			ft_delstrs(t_string **s_str);
+t_string		*ft_strmulsub(char *temp, size_t m_size, ...);
 #endif

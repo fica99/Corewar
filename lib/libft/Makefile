@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aashara <aashara@student.42.fr>            +#+  +:+       +#+         #
+#    By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/20 13:57:06 by aashara-          #+#    #+#              #
-#    Updated: 2020/06/23 22:13:45 by aashara          ###   ########.fr        #
+#    Updated: 2020/07/11 15:14:44 by aashara-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -86,7 +86,10 @@ SRC_FLS	=		ft_strlen.c\
 				ft_min.c\
 				ft_max.c\
 				ft_pathjoin.c\
-				ft_pathcmp.c
+				ft_pathcmp.c\
+				ft_newstrs.c\
+				ft_strmulsub.c\
+				ft_delstrs.c
 
 # ------------  FILEPATHS  --------------------------------------------------- #
 SRCS	=		$(addprefix $(SRC_DIR)/, $(SRC_FLS))
