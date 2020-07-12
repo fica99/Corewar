@@ -1,18 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm.h                                              :+:      :+:    :+:   */
+/*   libasm.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/06 09:37:42 by aashara-          #+#    #+#             */
-/*   Updated: 2020/07/12 11:12:51 by olegmulko        ###   ########.fr       */
+/*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
+/*   Updated: 2020/07/12 11:03:57 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ASM_H
-# define ASM_H
+#ifndef LIBASM_H
+# define LIBASM_H
 
-void	check_inprms(int ac, char **av);
+# include <stdint.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <sys/types.h>
+# include <errno.h>
+# include <unistd.h>
+# include "op.h"
+# include "libft.h"
+
+# define ERR_INPUT_PARAMS "Error: the program accepts only one parameter as input (the full path to the file)"
+# define ERR_FILE_EXT "Error: the file must have the extension .c"
+
+void	asm_print_error(char *msg);
 
 #endif

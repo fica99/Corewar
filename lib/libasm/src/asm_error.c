@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm.h                                              :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/06 09:37:42 by aashara-          #+#    #+#             */
-/*   Updated: 2020/07/12 11:12:51 by olegmulko        ###   ########.fr       */
+/*   Created: 2020/07/11 16:18:44 by olegmulko         #+#    #+#             */
+/*   Updated: 2020/07/12 10:52:21 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ASM_H
-# define ASM_H
+#include "libasm.h"
 
-void	check_inprms(int ac, char **av);
-
-#endif
+void	asm_print_error(char *msg)
+{
+	ft_putstr_fd(msg, STDERR_FILENO);
+	exit(1);
+}
