@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_error.c                                        :+:      :+:    :+:   */
+/*   asm_strfile.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/11 16:18:44 by olegmulko         #+#    #+#             */
-/*   Updated: 2020/07/12 15:10:49 by olegmulko        ###   ########.fr       */
+/*   Created: 2020/07/12 11:34:50 by olegmulko         #+#    #+#             */
+/*   Updated: 2020/07/12 15:11:23 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libasm.h"
 
-void	asm_prog_error(char *msg)
+static int	asm_get_fd(char *file_path)
 {
-	ft_putstr_fd(msg, STDERR_FILENO);
-	exit(1);
+	int		fd;
+
+	fd = open(file_path, O_RDONLY);
+	if (fd == -1)
+		asm_sys_error();
+	return (fd);
 }
 
-void	asm_sys_error(void)
+t_string	*asm_strfile(char *file_path)
 {
-	t_string	*s_str;
-	char 		*error;
+	int		fd;
 
-	error = strerror(errno);
-	s_str = ft_strmulsub("Error: ?", 100, error);
-	ft_putstr_fd(s_str->str, STDERR_FILENO);
-	exit(1);
+	fd = asm_get_fd(file_path);
+	ft_putnbr(fd);
+	return (NULL);
 }
