@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/27 01:00:23 by aashara-          #+#    #+#             */
-/*   Updated: 2020/06/27 01:00:25 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/07/12 11:14:50 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libasm.h"
 #include "asm.h"
 
-int	main(void)
+int	main(int ac, char **av)
 {
+	check_inprms(ac, av);
 	return (0);
 }
