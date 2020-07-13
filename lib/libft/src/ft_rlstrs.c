@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_error.c                                        :+:      :+:    :+:   */
+/*   ft_rlstrs.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/11 16:18:44 by olegmulko         #+#    #+#             */
-/*   Updated: 2020/07/13 21:44:46 by olegmulko        ###   ########.fr       */
+/*   Created: 2020/07/13 16:41:48 by olegmulko         #+#    #+#             */
+/*   Updated: 2020/07/13 16:44:09 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libasm.h"
+#include "libft.h"
 
-void	asm_prog_error(char *msg)
+int			ft_strs_realoc(t_string *s_str)
 {
-	ft_putendl_fd(msg, STDERR_FILENO);
-	exit(1);
-}
+	char	*newstr;
 
-void	asm_sys_error(void)
-{
-	t_string	*s_str;
-	char		*error;
-
-	error = strerror(errno);
-	s_str = ft_strmulsub("Error: ?", 100, error);
-	ft_putendl_fd(s_str->str, STDERR_FILENO);
-	exit(1);
+	if (!(newstr = (char*)malloc(sizeof(char) * (s_str->m_size * 2 + 1))))
+	{
+		ft_delstrs(&s_str);
+		return (0);
+	}
+	ft_memcpy(newstr, s_str->str, s_str->size + 1);
+	free(s_str->str);
+	s_str->str = newstr;
+	s_str->m_size *= 2;
+	return (1);
 }

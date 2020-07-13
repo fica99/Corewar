@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 15:42:59 by aashara-          #+#    #+#             */
-/*   Updated: 2020/07/11 15:16:05 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/07/13 16:48:21 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,6 @@ int				ft_pathcmp(char *p1, char *p2);
 char			*ft_pathjoin(char *s1, char *s2);
 t_string		*ft_newstrs(size_t m_size);
 void			ft_delstrs(t_string **s_str);
+int				ft_strs_realoc(t_string *s_str);
 t_string		*ft_strmulsub(char *temp, size_t m_size, ...);
 #endif

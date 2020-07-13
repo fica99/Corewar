@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   asm.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 09:37:42 by aashara-          #+#    #+#             */
-/*   Updated: 2020/07/12 11:12:51 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/07/13 12:02:40 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ASM_H
 # define ASM_H
+
+# include "libasm.h"
 
 void	check_inprms(int ac, char **av);
 
