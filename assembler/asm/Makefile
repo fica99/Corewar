@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+         #
+#    By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/12 10:32:14 by olegmulko         #+#    #+#              #
-#    Updated: 2020/07/12 14:24:03 by olegmulko        ###   ########.fr        #
+#    Updated: 2020/07/13 12:04:44 by aashara-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ DEPS	=		$(OBJS:.o=.d)
 CC		=		gcc
 RM		=		rm -rf
 CFLGS	=		-Wall -Werror -Wextra
-LFLGS	=		-L $(LFT_DIR) -lft -L $(LOP_DIR) -lop -L $(LASM_DIR) -lasm
+LFLGS	=		-L $(LOP_DIR) -lop -L $(LASM_DIR) -lasm -L $(LFT_DIR) -lft 
 IFLGS	=		-I $(HDR_DIR) -I $(LHS_DIR) -I $(LOP_HS_DIR) -I $(LASM_HS_DIR)
 DFLGS	=		-MMD -MP
 OFLGS	=		-O3

@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/27 01:00:23 by aashara-          #+#    #+#             */
-/*   Updated: 2020/07/12 11:14:50 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/07/13 12:02:48 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libasm.h"
 #include "asm.h"
 
 int	main(int ac, char **av)

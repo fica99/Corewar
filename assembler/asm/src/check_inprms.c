@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   check_inprms.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 10:47:02 by olegmulko         #+#    #+#             */
-/*   Updated: 2020/07/13 11:22:19 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/07/13 12:02:55 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libasm.h"
+#include "asm.h"
 
 static int	check_ext_file(char *file_name)
 {
