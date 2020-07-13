@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_strfile.c                                      :+:      :+:    :+:   */
+/*   ft_rlstrs.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/12 11:34:50 by olegmulko         #+#    #+#             */
-/*   Updated: 2020/07/12 15:11:23 by olegmulko        ###   ########.fr       */
+/*   Created: 2020/07/13 16:41:48 by olegmulko         #+#    #+#             */
+/*   Updated: 2020/07/13 16:44:09 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libasm.h"
+#include "libft.h"
 
-static int	asm_get_fd(char *file_path)
+int			ft_strs_realoc(t_string *s_str)
 {
-	int		fd;
+	char	*newstr;
 
-	fd = open(file_path, O_RDONLY);
-	if (fd == -1)
-		asm_sys_error();
-	return (fd);
-}
-
-t_string	*asm_strfile(char *file_path)
-{
-	int		fd;
-
-	fd = asm_get_fd(file_path);
-	ft_putnbr(fd);
-	return (NULL);
+	if (!(newstr = (char*)malloc(sizeof(char) * (s_str->m_size * 2 + 1))))
+	{
+		ft_delstrs(&s_str);
+		return (0);
+	}
+	ft_memcpy(newstr, s_str->str, s_str->size + 1);
+	free(s_str->str);
+	s_str->str = newstr;
+	s_str->m_size *= 2;
+	return (1);
 }

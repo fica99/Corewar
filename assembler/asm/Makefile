@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+         #
+#    By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/12 10:32:14 by olegmulko         #+#    #+#              #
-#    Updated: 2020/07/13 12:04:44 by aashara-         ###   ########.fr        #
+#    Updated: 2020/07/13 17:36:57 by olegmulko        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,11 +47,10 @@ DEPS	=		$(OBJS:.o=.d)
 CC		=		gcc
 RM		=		rm -rf
 CFLGS	=		-Wall -Werror -Wextra
-LFLGS	=		-L $(LOP_DIR) -lop -L $(LASM_DIR) -lasm -L $(LFT_DIR) -lft 
+LFLGS	=		-L $(LOP_DIR) -lop -L $(LASM_DIR) -lasm -L $(LFT_DIR) -lft
 IFLGS	=		-I $(HDR_DIR) -I $(LHS_DIR) -I $(LOP_HS_DIR) -I $(LASM_HS_DIR)
 DFLGS	=		-MMD -MP
-OFLGS	=		-O3
-DBGFLGS	=		-g -O0
+OFLGS	=		-O0
 
 # ------------  RULES  ------------------------------------------------------- #
 .PHONY: all clean fclean re
@@ -69,13 +68,13 @@ $(LASM_DIR)/$(LASM):
 
 -include $(DEPS)
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
-	$(CC) $(CFLGS) $(DFLGS) $(DBGFLGS) -c -o $@ $< $(IFLGS)
+	$(CC) $(CFLGS) $(DFLGS) $(OFLGS) -c -o $@ $< $(IFLGS)
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
 $(NAME): $(LFT_DIR)/$(LFT) $(LOP_DIR)/$(LOP) $(LASM_DIR)/$(LASM) $(OBJS)
-	$(CC) $(DBGFLGS) -o $(NAME) $(OBJS) $(LFLGS)
+	$(CC) -g -o $(NAME) $(OBJS) $(LFLGS)
 
 $(NAME): $(OBJS)
 

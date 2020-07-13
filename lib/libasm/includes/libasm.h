@@ -6,7 +6,7 @@
 /*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/07/12 15:10:26 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/07/13 21:42:46 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,13 @@
 # include "op.h"
 # include "libft.h"
 
+# define READ_BUF_SIZE 5
+# define STR_MALOC_SIZE 1
 # define ERR_INPUT_PARAMS "Error: the program accepts only one parameter as input (the full path to the file)"
 # define ERR_FILE_EXT "Error: the file must have the extension .c"
 
 void		asm_prog_error(char *msg);
 void		asm_sys_error(void);
-t_string	*asm_strfile(char *file_path);
+t_string	*asm_file_to_str(char *file_path);
 
 #endif
