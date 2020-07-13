@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libasm.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/07/13 21:42:46 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/07/14 00:09:17 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@
 
 # define READ_BUF_SIZE 5
 # define STR_MALOC_SIZE 1
-# define ERR_INPUT_PARAMS "Error: the program accepts only one parameter as input (the full path to the file)"
+# define ERR_INPUT_PARAMS_FIRST "Error: the program accepts only one "
+# define ERR_INPUT_PARAMS_SEC "parameter as input (the full path to the file)"
+# define ERR_INPUT_PARAMS ERR_INPUT_PARAMS_FIRST ERR_INPUT_PARAMS_SEC
 # define ERR_FILE_EXT "Error: the file must have the extension .c"
 
 void		asm_prog_error(char *msg);
