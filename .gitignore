@@ -1,7 +1,7 @@
-./asm
-./disasm
-./corewar
-./visualizer
+/asm
+/disasm
+/corewar
+/visualizer
 
 # Prerequisites
 *.d
