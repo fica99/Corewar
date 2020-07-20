@@ -6,13 +6,13 @@
 /*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 11:34:50 by olegmulko         #+#    #+#             */
-/*   Updated: 2020/07/20 09:58:39 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/07/20 16:03:35 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libasm.h"
 
-static int		asm_get_fd(char *file_path)
+static int			asm_get_fd(char *file_path)
 {
 	int			fd;
 
@@ -22,7 +22,8 @@ static int		asm_get_fd(char *file_path)
 	return (fd);
 }
 
-static void		asm_copy_buf_to_str(t_asm_string *asm_str, char *buf, size_t rb)
+static void			asm_copy_buf_to_str(t_asm_string *asm_str,
+	char *buf, size_t rb)
 {
 	size_t		delta_size;
 	char		*str_pos;
@@ -41,7 +42,7 @@ static void		asm_copy_buf_to_str(t_asm_string *asm_str, char *buf, size_t rb)
 static t_asm_string	*asm_read_file(int fd, char *buf)
 {
 	t_asm_string	*asm_str;
-	int			rb;
+	int				rb;
 
 	asm_str = asm_new_str(STR_MALOC_SIZE);
 	while ((rb = read(fd, buf, READ_BUF_SIZE)))

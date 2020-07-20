@@ -6,7 +6,7 @@
 /*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/07/20 15:43:04 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/07/20 16:03:04 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 # define ERR_LEX_TMP "line ?: position ?, Error: ?"
 # define ERR_LEX "lexical analysis"
 
-typedef struct		s_asm_string
+typedef struct	s_asm_string
 {
 	char	*str;
 	size_t	size;
@@ -42,22 +42,22 @@ typedef struct		s_asm_string
 	size_t	line_num;
 	size_t	char_num;
 	size_t	index;
-}					t_asm_string;
+}				t_asm_string;
 
-typedef enum		e_asm_tkn_type
+typedef enum	e_asm_tkn_type
 {
 	TT_EOF,
 	TT_NEWLINE,
 	TT_STRING,
 	TT_COMMENT,
-}					t_asm_tkn_type;
+}				t_asm_tkn_type;
 
-typedef struct		s_asm_token
+typedef struct	s_asm_token
 {
 	void				*data;
 	t_asm_tkn_type		type;
 	struct s_asm_token	*next;
-}					t_asm_token;
+}				t_asm_token;
 
 void			asm_sys_error(void);
 void			asm_prog_error(char *msg);
@@ -67,7 +67,7 @@ void			asm_str_realoc(t_asm_string *asm_str);
 t_asm_token		*asm_new_token(t_asm_tkn_type type);
 t_asm_string	*asm_file_to_str(char *file_path);
 t_asm_token		*asm_get_token(t_asm_string *asm_str);
-t_asm_token 	*asm_proc_comments(t_asm_string *asm_str);
+t_asm_token		*asm_proc_comments(t_asm_string *asm_str);
 char			*asm_ltoa(long long num);
 
 #endif

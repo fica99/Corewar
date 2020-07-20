@@ -6,7 +6,7 @@
 /*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 09:30:41 by olegmulko         #+#    #+#             */
-/*   Updated: 2020/07/20 15:42:02 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/07/20 15:59:20 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	asm_check_sep(t_asm_string *asm_str)
 
 t_asm_token	*asm_get_token(t_asm_string *asm_str)
 {
-	while(asm_str->str[asm_str->index])
+	while (asm_str->str[asm_str->index])
 	{
 		if (asm_check_sep(asm_str))
 			continue ;

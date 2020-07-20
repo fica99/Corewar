@@ -6,7 +6,7 @@
 /*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 16:18:21 by olegmulko         #+#    #+#             */
-/*   Updated: 2020/07/20 15:40:47 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/07/20 16:00:03 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static char		*asm_comment_to_str(t_asm_string *asm_str)
 	return (comment);
 }
 
-t_asm_token 	*asm_proc_comments(t_asm_string *asm_str)
+t_asm_token		*asm_proc_comments(t_asm_string *asm_str)
 {
 	char		*comment;
 	t_asm_token	*token;
