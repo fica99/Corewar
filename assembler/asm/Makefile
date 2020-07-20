@@ -6,7 +6,7 @@
 #    By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/12 10:32:14 by olegmulko         #+#    #+#              #
-#    Updated: 2020/07/13 17:36:57 by olegmulko        ###   ########.fr        #
+#    Updated: 2020/07/20 12:39:48 by olegmulko        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,13 +68,13 @@ $(LASM_DIR)/$(LASM):
 
 -include $(DEPS)
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
-	$(CC) $(CFLGS) $(DFLGS) $(OFLGS) -c -o $@ $< $(IFLGS)
+	$(CC) -g -O0 $(CFLGS) $(DFLGS) $(OFLGS) -c -o $@ $< $(IFLGS)
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
 $(NAME): $(LFT_DIR)/$(LFT) $(LOP_DIR)/$(LOP) $(LASM_DIR)/$(LASM) $(OBJS)
-	$(CC) -g -o $(NAME) $(OBJS) $(LFLGS)
+	$(CC) -g -O0 -o $(NAME) $(OBJS) $(LFLGS)
 
 $(NAME): $(OBJS)
 
