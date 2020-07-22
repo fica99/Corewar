@@ -6,7 +6,7 @@
 /*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/07/20 16:03:04 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/07/22 15:47:34 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,6 @@ t_asm_string	*asm_file_to_str(char *file_path);
 t_asm_token		*asm_get_token(t_asm_string *asm_str);
 t_asm_token		*asm_proc_comments(t_asm_string *asm_str);
 char			*asm_ltoa(long long num);
+t_asm_token		*asm_get_chain_tokens(t_asm_string *asm_str);
 
 #endif

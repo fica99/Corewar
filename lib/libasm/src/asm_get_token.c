@@ -6,7 +6,7 @@
 /*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 09:30:41 by olegmulko         #+#    #+#             */
-/*   Updated: 2020/07/20 15:59:20 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/07/22 15:37:03 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,5 @@ t_asm_token	*asm_get_token(t_asm_string *asm_str)
 		else
 			asm_lex_error(asm_str, ERR_LEX);
 	}
-	return (NULL);
+	return (asm_new_token(TT_EOF));
 }

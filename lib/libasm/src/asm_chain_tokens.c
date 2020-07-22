@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   asm_chain_tokens.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/27 01:00:23 by aashara-          #+#    #+#             */
-/*   Updated: 2020/07/22 15:51:23 by olegmulko        ###   ########.fr       */
+/*   Created: 2020/07/22 15:38:31 by olegmulko         #+#    #+#             */
+/*   Updated: 2020/07/22 15:50:43 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
+#include "libasm.h"
 
-int	main(int ac, char **av)
+t_asm_token		*asm_get_chain_tokens(t_asm_string *asm_str)
 {
-	t_asm_string	*asm_str;
-	t_asm_token		*tokens;
+	t_asm_token	*head;
+	t_asm_token	*next;
 
-	check_inprms(ac, av);
-	asm_str = asm_file_to_str(av[1]);
-	tokens = asm_get_chain_tokens(asm_str);
-	if (tokens->next == TT_EOF)
-		asm_prog_error("the file is empty");
-	ft_putendl_fd(asm_str->str, STDOUT_FILENO);
-	return (0);
+	head = asm_get_token(asm_str);
+	if (head->type == TT_EOF)
+		return (head);
+	next = head;
+	while (next->type != TT_EOF)
+	{
+		next->next = asm_get_token(asm_str);
+		next = next->next;
+	}
+	return (head);
 }
