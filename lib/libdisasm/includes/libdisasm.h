@@ -6,7 +6,7 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:53:52 by aashara-          #+#    #+#             */
-/*   Updated: 2020/06/25 20:53:53 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/07/23 17:34:14 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <errno.h>
 # include <stdio.h>
 # include <stdint.h>
-# include <endian.h>
 # include "op.h"
 # include "libft.h"
 

@@ -6,7 +6,7 @@
 #    By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/14 12:47:29 by aashara           #+#    #+#              #
-#    Updated: 2020/06/27 15:57:44 by aashara-         ###   ########.fr        #
+#    Updated: 2020/07/23 17:39:21 by aashara-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,6 @@ LFT_DIR	=		$(LIB_DIR)/libft
 LHS_DIR	=		$(LFT_DIR)/includes
 
 # ------------  LIBOP  ------------------------------------------------------- #
-LOP			=		libop.a
 LOP_DIR		=		$(LIB_DIR)/libop
 LOP_HS_DIR	=		$(LOP_DIR)/includes
 
@@ -48,7 +47,7 @@ DEPS	=		$(OBJS:.o=.d)
 CC		=		gcc
 RM		=		rm -rf
 CFLGS	=		-Wall -Werror -Wextra
-LFLGS	=		-L $(LSOC_DIR) -lsocket -L $(LOP_DIR) -lop -L $(LFT_DIR) -lft
+LFLGS	=		-L $(LSOC_DIR) -lsocket -L $(LFT_DIR) -lft
 IFLGS	=		-I $(HDR_DIR) -I $(LHS_DIR) -I $(LOP_HS_DIR) -I $(LSOC_HS_DIR)
 DFLGS	=		-MMD -MP
 OFLGS	=		-O3
@@ -61,9 +60,6 @@ all: $(NAME)
 $(LFT_DIR)/$(LFT):
 	$(MAKE) -C $(LFT_DIR)
 
-$(LOP_DIR)/$(LOP):
-	$(MAKE) -C $(LOP_DIR)
-
 $(LSOC_DIR)/$(LSOC):
 	$(MAKE) -C $(LSOC_DIR)
 
@@ -74,21 +70,20 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
-$(NAME): $(LFT_DIR)/$(LFT) $(LSOC_DIR)/$(LSOC) $(LOP_DIR)/$(LOP) $(OBJS)
+$(NAME): $(LFT_DIR)/$(LFT) $(LSOC_DIR)/$(LSOC) $(OBJS)
 	$(CC) -o $(NAME) $(OBJS) $(LFLGS)
 
 $(NAME): $(OBJS)
 
 clean:
 	$(MAKE) -C $(LFT_DIR) clean
-	$(MAKE) -C $(LOP_DIR) clean
 	$(MAKE) -C $(LSOC_DIR) clean
 	$(RM) $(OBJ_DIR)
 
-fclean: clean
+fclean:
 	$(MAKE) -C $(LFT_DIR) fclean
-	$(MAKE) -C $(LOP_DIR) fclean
 	$(MAKE) -C $(LSOC_DIR) fclean
+	$(RM) $(OBJ_DIR)
 	$(RM) $(NAME)
 
 re: fclean all

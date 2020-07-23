@@ -6,7 +6,7 @@
 #    By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/14 12:47:29 by aashara           #+#    #+#              #
-#    Updated: 2020/06/28 19:50:37 by aashara-         ###   ########.fr        #
+#    Updated: 2020/07/23 17:40:11 by aashara-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,6 @@ OBJ_DIR	=		obj
 LIB_DIR =		../../lib
 
 # ------------  LIBOP  ------------------------------------------------------- #
-LOP		=		libop.a
 LOP_DIR	=		$(LIB_DIR)/libop
 LOP_HS_DIR	=	$(LOP_DIR)/includes
 
@@ -52,7 +51,7 @@ DEPS	=		$(OBJS:.o=.d)
 CC		=		g++
 RM		=		rm -rf
 CFLGS	=		-Wall -Werror -Wextra -std=c++1z
-LFLGS	=		-L $(LOP_DIR) -lop -L $(LSOC_DIR) -lsocket -L $(LFT_DIR) -lft -L $(LDRAW_DIR) -ldraw -lncurses
+LFLGS	=		-L $(LSOC_DIR) -lsocket -L $(LFT_DIR) -lft -L $(LDRAW_DIR) -ldraw -lncurses
 IFLGS	=		-I $(LOP_HS_DIR) -I $(LSOC_HS_DIR) -I $(LHS_DIR) -I $(LDRAW_HS_DIR) -I $(HDR_DIR)
 DFLGS	=		-MMD -MP
 OFLGS	=		-O3
@@ -61,9 +60,6 @@ OFLGS	=		-O3
 .PHONY: all clean fclean re
 
 all: $(NAME)
-
-$(LOP_DIR)/$(LOP):
-	$(MAKE) -C $(LOP_DIR)
 
 $(LFT_DIR)/$(LFT):
 	$(MAKE) -C $(LFT_DIR)
@@ -81,23 +77,22 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | $(OBJ_DIR)
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
-$(NAME): $(LOP_DIR)/$(LOP) $(LFT_DIR)/$(LFT) $(LSOC_DIR)/$(LSOC) $(LDRAW_DIR)/$(LDRAW) $(OBJS)
+$(NAME): $(LFT_DIR)/$(LFT) $(LSOC_DIR)/$(LSOC) $(LDRAW_DIR)/$(LDRAW) $(OBJS)
 	$(CC) -o $(NAME) $(OBJS) $(LFLGS)
 
 $(NAME): $(OBJS)
 
 clean:
-	$(MAKE) -C $(LOP_DIR) clean
 	$(MAKE) -C $(LFT_DIR) clean
 	$(MAKE) -C $(LSOC_DIR) clean
 	$(MAKE) -C $(LDRAW_DIR) clean
 	$(RM) $(OBJ_DIR)
 
-fclean: clean
+fclean:
 	$(MAKE) -C $(LFT_DIR) fclean
 	$(MAKE) -C $(LSOC_DIR) fclean
-	$(MAKE) -C $(LOP_DIR) fclean
 	$(MAKE) -C $(LDRAW_DIR) fclean
+	$(RM) $(OBJ_DIR)
 	$(RM) $(NAME)
 
 re: fclean all

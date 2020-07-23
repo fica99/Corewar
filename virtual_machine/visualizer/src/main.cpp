@@ -6,7 +6,7 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/28 16:25:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/06/29 00:29:49 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/07/23 17:43:11 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ static int		initListenFD(void) {
 		error_message("socket() failed");
 	srvr_name.sun_family = AF_UNIX;
 	strncpy(srvr_name.sun_path, SERVER_PATH, sizeof(srvr_name.sun_path) - 1);
-	if (bind(listenfd, (struct sockaddr*)&srvr_name, SUN_LEN(&srvr_name)) < 0)
-		error_message("bind() failed");
+	bind(listenfd, (struct sockaddr*)&srvr_name, SUN_LEN(&srvr_name));
 	if (listen(listenfd, 10) < 0)
 		error_message("Listen() failed");
 	return listenfd;
