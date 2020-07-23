@@ -6,7 +6,7 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 15:15:23 by aashara-          #+#    #+#             */
-/*   Updated: 2020/07/23 19:26:49 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/07/23 23:17:00 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void			send_arena(const t_arena *arena, int listenfd)
 	size_t			arena_size;
 
 	arena_size = sizeof(t_arena);
-	ft_bzero((void*)buffer, arena_size);
 	serialize_arena(buffer, arena);
 	total = 0;
 	while (total < arena_size)
@@ -61,14 +60,22 @@ void			send_arena(const t_arena *arena, int listenfd)
 int				receive_arena(t_arena *arena, int connfd)
 {
 	size_t			i;
-	unsigned char	buffer[sizeof(t_arena)];
+	unsigned char	buffer[sizeof(t_arena) + 1];
+	unsigned char	tmp[sizeof(t_arena) + 1];
 	int				res;
+	size_t			total;
 
-	if ((res = recv(connfd, buffer, sizeof(t_arena), 0)) <= 0)
+	total = 0;
+	while (total < sizeof(t_arena))
 	{
-		if (res == 0)
-			return (-1);
-		error_message("Error - recv() failed");
+		if ((res = recv(connfd, tmp, sizeof(t_arena), 0)) <= 0)
+		{
+			if (res == 0)
+				return (-1);
+			error_message("Error - recv() failed");
+		}
+		ft_memcpy((void*)buffer + total, (void*)tmp, res);
+		total += res;
 	}
 	i = 0;
 	*arena = deserialize_arena(buffer, &i);
