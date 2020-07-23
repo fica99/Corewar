@@ -6,7 +6,7 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 15:15:23 by aashara-          #+#    #+#             */
-/*   Updated: 2020/07/06 09:37:17 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/07/23 19:26:49 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,18 @@ void			disconnect_from_server(int listenfd)
 
 void			send_arena(const t_arena *arena, int listenfd)
 {
-	unsigned char	buffer[ARENA_SIZE];
-	int				total;
+	unsigned char	buffer[sizeof(t_arena)];
+	size_t			total;
 	int				n;
+	size_t			arena_size;
 
+	arena_size = sizeof(t_arena);
+	ft_bzero((void*)buffer, arena_size);
 	serialize_arena(buffer, arena);
 	total = 0;
-	while (total < ARENA_SIZE)
+	while (total < arena_size)
 	{
-		n = send(listenfd, buffer + total, ARENA_SIZE - total, 0);
+		n = send(listenfd, buffer + total, arena_size - total, 0);
 		if (n == -1)
 			error_message("Error - send() failed");
 		total += n;
@@ -58,10 +61,10 @@ void			send_arena(const t_arena *arena, int listenfd)
 int				receive_arena(t_arena *arena, int connfd)
 {
 	size_t			i;
-	unsigned char	buffer[ARENA_SIZE];
+	unsigned char	buffer[sizeof(t_arena)];
 	int				res;
 
-	if ((res = recv(connfd, buffer, ARENA_SIZE, 0)) <= 0)
+	if ((res = recv(connfd, buffer, sizeof(t_arena), 0)) <= 0)
 	{
 		if (res == 0)
 			return (-1);

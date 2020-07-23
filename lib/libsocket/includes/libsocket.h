@@ -6,7 +6,7 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/07/23 18:15:58 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/07/23 19:01:04 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 # include "libft.h"
 
 # define SERVER_PATH "/tmp/server.soc"
-# define ARENA_SIZE 12856
 
 typedef enum		e_bool
 {

@@ -6,7 +6,7 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/28 17:06:42 by aashara-          #+#    #+#             */
-/*   Updated: 2020/07/23 18:11:29 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/07/23 18:48:58 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	Drawer::drawArena(t_arena &arena) {
 	drawInfo(arena);
 	drawParams(arena);
 	drawHelp();
-	// drawMap(arena);
+	drawMap(arena);
 }
 
 void	Drawer::drawWinner(t_arena &arena) {
