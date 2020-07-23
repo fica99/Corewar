@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_proc_comments.c                                :+:      :+:    :+:   */
+/*   asm_token_comment.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 16:18:21 by olegmulko         #+#    #+#             */
-/*   Updated: 2020/07/20 16:00:03 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/07/23 11:25:47 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static char		*asm_comment_to_str(t_asm_string *asm_str)
 	return (comment);
 }
 
-t_asm_token		*asm_proc_comments(t_asm_string *asm_str)
+t_asm_token		*asm_token_comment(t_asm_string *asm_str)
 {
 	char		*comment;
 	t_asm_token	*token;
@@ -47,5 +47,6 @@ t_asm_token		*asm_proc_comments(t_asm_string *asm_str)
 	comment = asm_comment_to_str(asm_str);
 	token = asm_new_token(TT_COMMENT);
 	token->data = (void*)comment;
+	token->size = ft_strlen(comment);
 	return (token);
 }
