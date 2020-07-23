@@ -6,7 +6,7 @@
 #    By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/20 13:57:06 by aashara-          #+#    #+#              #
-#    Updated: 2020/07/23 17:32:32 by aashara-         ###   ########.fr        #
+#    Updated: 2020/07/23 18:21:41 by aashara-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,9 +78,10 @@ clean:
 	$(MAKE) clean -C $(LSOC_DIR)
 	$(RM) $(OBJ_DIR)
 
-fclean: clean
+fclean:
 	$(MAKE) clean -C $(LFT_DIR)
 	$(MAKE) fclean -C $(LSOC_DIR)
+	$(RM) $(OBJ_DIR)
 	$(RM) $(NAME)
 
 re: fclean all

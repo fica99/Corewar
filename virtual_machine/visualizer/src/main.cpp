@@ -6,13 +6,11 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/28 16:25:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/07/23 17:43:11 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/07/23 17:52:16 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "visualizer.h"
-
-using namespace	std;
 
 static int		initListenFD(void) {
 	int					listenfd;
@@ -23,11 +21,14 @@ static int		initListenFD(void) {
 		error_message("socket() failed");
 	srvr_name.sun_family = AF_UNIX;
 	strncpy(srvr_name.sun_path, SERVER_PATH, sizeof(srvr_name.sun_path) - 1);
-	bind(listenfd, (struct sockaddr*)&srvr_name, SUN_LEN(&srvr_name));
+	if (bind(listenfd, (struct sockaddr*)&srvr_name, SUN_LEN(&srvr_name)) < 0)
+		error_message("bind() failed");
 	if (listen(listenfd, 10) < 0)
 		error_message("Listen() failed");
 	return listenfd;
 }
+
+using namespace	std;
 
 static void		drawingArena(int connfd) {
 	Drawer		draw;
