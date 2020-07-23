@@ -6,7 +6,7 @@
 /*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/07/23 09:15:33 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/07/23 11:19:03 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef enum	e_asm_tkn_type
 	TT_NEWLINE,
 	TT_STRING,
 	TT_COMMENT,
+	TT_CHAMP_NAME,
 }				t_asm_tkn_type;
 
 typedef struct	s_asm_token
@@ -69,10 +70,12 @@ void			asm_str_realoc(t_asm_string *asm_str);
 t_asm_token		*asm_new_token(t_asm_tkn_type type);
 t_asm_string	*asm_file_to_str(char *file_path);
 t_asm_token		*asm_get_token(t_asm_string *asm_str);
-t_asm_token		*asm_proc_comments(t_asm_string *asm_str);
+t_asm_token		*asm_token_comment(t_asm_string *asm_str);
 char			*asm_ltoa(long long num);
 t_asm_token		*asm_get_chain_tokens(t_asm_string *asm_str);
 t_asm_token		*asm_token_nl(t_asm_string *asm_str);
 t_asm_token		*asm_token_str(t_asm_string *asm_str);
+int				asm_check_champ_name(t_asm_string *asm_str);
+t_asm_token		*asm_token_champ_name(t_asm_string *asm_str);
 
 #endif
