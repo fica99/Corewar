@@ -6,7 +6,7 @@
 /*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 09:30:41 by olegmulko         #+#    #+#             */
-/*   Updated: 2020/07/22 15:59:28 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/07/23 09:14:55 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ t_asm_token	*asm_get_token(t_asm_string *asm_str)
 		else if (asm_str->str[asm_str->index] == COMMENT_CHAR
 			|| asm_str->str[asm_str->index] == ALT_COMMENT_CHAR)
 			return (asm_proc_comments(asm_str));
+		else if (asm_str->str[asm_str->index] == '"')
+			return (asm_token_str(asm_str));
 		else
 			asm_lex_error(asm_str, ERR_LEX);
 	}

@@ -6,7 +6,7 @@
 /*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/07/22 15:58:55 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/07/23 09:15:33 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # define ERR_FILE_EXT "Error: the file must have the extension .c"
 # define ERR_LEX_TMP "line ?: position ?, Error: ?"
 # define ERR_LEX "lexical analysis"
+# define ERR_STR_CLOSE "the line is not closed"
 
 typedef struct	s_asm_string
 {
@@ -56,6 +57,7 @@ typedef struct	s_asm_token
 {
 	void				*data;
 	t_asm_tkn_type		type;
+	size_t				size;
 	struct s_asm_token	*next;
 }				t_asm_token;
 
@@ -71,5 +73,6 @@ t_asm_token		*asm_proc_comments(t_asm_string *asm_str);
 char			*asm_ltoa(long long num);
 t_asm_token		*asm_get_chain_tokens(t_asm_string *asm_str);
 t_asm_token		*asm_token_nl(t_asm_string *asm_str);
+t_asm_token		*asm_token_str(t_asm_string *asm_str);
 
 #endif
