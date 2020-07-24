@@ -6,7 +6,7 @@
 #    By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/12 10:32:40 by olegmulko         #+#    #+#              #
-#    Updated: 2020/07/23 11:16:52 by olegmulko        ###   ########.fr        #
+#    Updated: 2020/07/24 09:29:08 by olegmulko        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,9 @@ SRC_FLS	=		asm_error.c\
 				asm_chain_tokens.c\
 				asm_token_nl.c\
 				asm_token_str.c\
-				asm_token_chn.c
+				asm_token_chn.c\
+				asm_token_chcom.c\
+				asm_token_sep.c
 
 # ------------  FILEPATHS  --------------------------------------------------- #
 SRCS	=		$(addprefix $(SRC_DIR)/, $(SRC_FLS))
