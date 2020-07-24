@@ -6,7 +6,7 @@
 /*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/07/23 11:19:03 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/07/24 09:28:21 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,12 @@ typedef struct	s_asm_string
 typedef enum	e_asm_tkn_type
 {
 	TT_EOF,
+	TT_SEP,
 	TT_NEWLINE,
 	TT_STRING,
 	TT_COMMENT,
 	TT_CHAMP_NAME,
+	TT_CHAMP_COMMENT,
 }				t_asm_tkn_type;
 
 typedef struct	s_asm_token
@@ -77,5 +79,9 @@ t_asm_token		*asm_token_nl(t_asm_string *asm_str);
 t_asm_token		*asm_token_str(t_asm_string *asm_str);
 int				asm_check_champ_name(t_asm_string *asm_str);
 t_asm_token		*asm_token_champ_name(t_asm_string *asm_str);
+int				asm_check_champ_comment(t_asm_string *asm_str);
+t_asm_token		*asm_token_champ_comment (t_asm_string *asm_str);
+int				asm_check_sep(t_asm_string *asm_str);
+t_asm_token		*asm_token_sep (t_asm_string *asm_str);
 
 #endif
