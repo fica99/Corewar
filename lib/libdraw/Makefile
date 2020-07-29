@@ -6,7 +6,11 @@
 #    By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/20 13:57:06 by aashara-          #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2020/07/29 14:06:09 by aashara-         ###   ########.fr        #
+=======
+#    Updated: 2020/07/29 11:40:54 by aashara-         ###   ########.fr        #
+>>>>>>> 7258e35956f359763d361aae02ea9ce04069b8b0
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +52,7 @@ CFLGS	=		-Wall -Werror -Wextra -std=c++1z
 LFLGS	=		-L $(LFT_DIR) -lft -L $(LSOC_DIR) -lsocket -lncurses
 IFLGS	=		-I $(HDR_DIR) -I $(LHS_DIR) -I $(LSOC_HS_DIR) -I $(LOP_HS_DIR)
 DFLGS	=		-MMD -MP
-OFLGS	=		-O3
+OFLGS	=		-O0 -g
 
 
 # ------------  RULES  ------------------------------------------------------- #

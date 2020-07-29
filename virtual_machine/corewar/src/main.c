@@ -6,7 +6,11 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 21:41:56 by aashara-          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2020/07/29 14:08:49 by aashara-         ###   ########.fr       */
+=======
+/*   Updated: 2020/07/29 13:50:58 by aashara-         ###   ########.fr       */
+>>>>>>> 7258e35956f359763d361aae02ea9ce04069b8b0
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +33,11 @@ int	main(void)
 	arena.players[1].id = 2;
 	arena.players[2].id = 3;
 	arena.players[3].id = 4;
+<<<<<<< HEAD
 	while (i < 100) {
+=======
+	while (i < 1000) {
+>>>>>>> 7258e35956f359763d361aae02ea9ce04069b8b0
 		arena.cycle = i;
 		arena.players[0].last_live = rand()  % 100000;
 		arena.players[0].lives_in_cur_period = rand() % 1000;
