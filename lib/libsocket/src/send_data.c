@@ -6,7 +6,7 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 15:15:23 by aashara-          #+#    #+#             */
-/*   Updated: 2020/07/23 23:17:00 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/07/29 12:57:24 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,31 +53,37 @@ void			send_arena(const t_arena *arena, int listenfd)
 		n = send(listenfd, buffer + total, arena_size - total, 0);
 		if (n == -1)
 			error_message("Error - send() failed");
-		total += n;
+		total += (size_t)n;
 	}
+	if (arena_size != total)
+		error_message("Error - incorrect size of sended data");
 }
 
 int				receive_arena(t_arena *arena, int connfd)
 {
 	size_t			i;
-	unsigned char	buffer[sizeof(t_arena) + 1];
-	unsigned char	tmp[sizeof(t_arena) + 1];
+	unsigned char	buffer[sizeof(t_arena)];
 	int				res;
+	size_t			arena_size;
 	size_t			total;
 
 	total = 0;
-	while (total < sizeof(t_arena))
+	arena_size = sizeof(t_arena);
+	while (total < arena_size)
 	{
-		if ((res = recv(connfd, tmp, sizeof(t_arena), 0)) <= 0)
+		if ((res = recv(connfd, buffer + total, arena_size - total, 0)) <= 0)
 		{
 			if (res == 0)
 				return (-1);
 			error_message("Error - recv() failed");
 		}
-		ft_memcpy((void*)buffer + total, (void*)tmp, res);
-		total += res;
+		total += (size_t)res;
 	}
+	if (total != arena_size)
+		error_message("Error - incorrect size of received data");
 	i = 0;
 	*arena = deserialize_arena(buffer, &i);
+	if (i != arena_size)
+		error_message("Error - incorrect deserialization");
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 00:25:57 by aashara           #+#    #+#             */
-/*   Updated: 2020/07/23 19:13:54 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/07/29 13:44:30 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ static unsigned char	*serialize_char(unsigned char *buffer, char value)
 static unsigned char	*serialize_cell(unsigned char *buffer,
 														const t_cell *value)
 {
+	buffer = serialize_int(buffer, (int)value->is_carriage);
 	buffer = serialize_char(buffer, (char)value->code);
 	buffer = serialize_char(buffer, (char)value->player_id);
-	buffer = serialize_char(buffer, (char)value->is_carriage);
-	return (buffer);
+	return (buffer + 2);
 }
 
 static unsigned char	*serialize_player(unsigned char *buffer,
@@ -41,16 +41,16 @@ static unsigned char	*serialize_player(unsigned char *buffer,
 {
 	size_t	i;
 
-	buffer = serialize_char(buffer, (char)value->id);
+	buffer = serialize_int(buffer, value->last_live);
+	buffer = serialize_int(buffer, value->lives_in_cur_period);
 	i = 0;
 	while (i < PROG_NAME_LENGTH)
 	{
 		buffer = serialize_char(buffer, value->name[i]);
 		++i;
 	}
-	buffer = serialize_int(buffer, value->last_live);
-	buffer = serialize_int(buffer, value->lives_in_cur_period);
-	return (buffer);
+	buffer = serialize_char(buffer, (char)value->id);
+	return (buffer + 3);
 }
 
 unsigned char			*serialize_arena(unsigned char *buffer,
@@ -58,12 +58,6 @@ unsigned char			*serialize_arena(unsigned char *buffer,
 {
 	size_t	i;
 
-	buffer = serialize_int(buffer, value->cycle);
-	buffer = serialize_int(buffer, value->cycle_to_die);
-	buffer = serialize_int(buffer, value->cycle_delta);
-	buffer = serialize_int(buffer, value->nbr_live);
-	buffer = serialize_int(buffer, value->max_checks);
-	buffer = serialize_char(buffer, value->winner_id);
 	i = 0;
 	while (i < MAX_PLAYERS)
 	{
@@ -76,5 +70,11 @@ unsigned char			*serialize_arena(unsigned char *buffer,
 		buffer = serialize_cell(buffer, &value->arena[i]);
 		++i;
 	}
-	return (buffer);
+	buffer = serialize_int(buffer, value->cycle);
+	buffer = serialize_int(buffer, value->cycle_to_die);
+	buffer = serialize_int(buffer, value->cycle_delta);
+	buffer = serialize_int(buffer, value->nbr_live);
+	buffer = serialize_int(buffer, value->max_checks);
+	buffer = serialize_char(buffer, (char)value->winner_id);
+	return (buffer + 3);
 }
