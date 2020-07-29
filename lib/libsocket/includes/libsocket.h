@@ -6,7 +6,7 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/07/23 19:01:04 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/07/29 13:12:39 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,31 +34,29 @@ typedef enum		e_bool
 
 typedef struct		s_cell
 {
+	t_bool			is_carriage;
 	uint8_t			code;
 	uint8_t			player_id;
-	t_bool			is_carriage;
 }					t_cell;
 
 typedef struct		s_player
 {
-	uint8_t			id;
-	char			name[PROG_NAME_LENGTH];
 	int				last_live;
 	int				lives_in_cur_period;
-
+	char			name[PROG_NAME_LENGTH];
+	uint8_t			id;
 }					t_player;
 
 typedef struct		s_arena
 {
+	t_player		players[MAX_PLAYERS];
+	t_cell			arena[MEM_SIZE];
 	int				cycle;
 	int				cycle_to_die;
 	int				cycle_delta;
 	int				nbr_live;
 	int				max_checks;
 	uint8_t			winner_id;
-	t_player		players[MAX_PLAYERS];
-	t_cell			arena[MEM_SIZE];
-
 }					t_arena;
 
 /*

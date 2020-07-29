@@ -6,7 +6,7 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/28 16:25:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/07/23 23:34:07 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/07/29 13:34:21 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,15 @@ static int		initListenFD(void) {
 using namespace	std;
 
 static void		drawingArena(int connfd) {
-	// Drawer		draw;
+	Drawer		draw;
 	t_arena		arena;
 
 	while (true) {
-		// if (!draw.isRunning())
-		// 	break;
+		if (!draw.isRunning())
+		 	break;
 		if (receive_arena(&arena, connfd) < 0)
 			continue ;
-		// draw.drawArena(arena);
+		draw.drawArena(arena);
 	}
 }
 

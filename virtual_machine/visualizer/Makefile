@@ -6,7 +6,7 @@
 #    By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/14 12:47:29 by aashara           #+#    #+#              #
-#    Updated: 2020/07/23 23:37:43 by aashara-         ###   ########.fr        #
+#    Updated: 2020/07/29 11:25:44 by aashara-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,7 @@ CFLGS	=		-Wall -Werror -Wextra -std=c++1z
 LFLGS	=		-L $(LSOC_DIR) -lsocket -L $(LFT_DIR) -lft -L $(LDRAW_DIR) -ldraw -lncurses
 IFLGS	=		-I $(LOP_HS_DIR) -I $(LSOC_HS_DIR) -I $(LHS_DIR) -I $(LDRAW_HS_DIR) -I $(HDR_DIR)
 DFLGS	=		-MMD -MP
-OFLGS	=		-O3
+OFLGS	=		-O0 -g
 
 # ------------  RULES  ------------------------------------------------------- #
 .PHONY: all clean fclean re

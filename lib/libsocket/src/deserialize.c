@@ -6,7 +6,7 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 20:37:07 by aashara-          #+#    #+#             */
-/*   Updated: 2020/07/05 16:06:00 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/07/29 13:47:49 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,10 @@ static t_cell		deserialize_cell(unsigned char *buffer, size_t *i)
 {
 	t_cell	cell;
 
+	cell.is_carriage = (t_bool)deserialize_int(buffer, i);
 	cell.code = (uint8_t)deserialize_char(buffer, i);
 	cell.player_id = (uint8_t)deserialize_char(buffer, i);
-	cell.is_carriage = (uint8_t)deserialize_char(buffer, i);
+	(*i) += 2;
 	return (cell);
 }
 
@@ -44,15 +45,16 @@ static t_player		deserialize_player(unsigned char *buffer, size_t *i)
 	t_player	player;
 	size_t		j;
 
-	player.id = (uint8_t)deserialize_char(buffer, i);
+	player.last_live = deserialize_int(buffer, i);
+	player.lives_in_cur_period = deserialize_int(buffer, i);
 	j = 0;
 	while (j < PROG_NAME_LENGTH)
 	{
 		player.name[j] = deserialize_char(buffer, i);
 		++j;
 	}
-	player.last_live = deserialize_int(buffer, i);
-	player.lives_in_cur_period = deserialize_int(buffer, i);
+	player.id = (uint8_t)deserialize_char(buffer, i);
+	(*i) += 3;
 	return (player);
 }
 
@@ -61,12 +63,6 @@ t_arena				deserialize_arena(unsigned char *buffer, size_t *i)
 	t_arena	arena;
 	size_t	j;
 
-	arena.cycle = deserialize_int(buffer, i);
-	arena.cycle_to_die = deserialize_int(buffer, i);
-	arena.cycle_delta = deserialize_int(buffer, i);
-	arena.nbr_live = deserialize_int(buffer, i);
-	arena.max_checks = deserialize_int(buffer, i);
-	arena.winner_id = deserialize_char(buffer, i);
 	j = 0;
 	while (j < MAX_PLAYERS)
 	{
@@ -79,5 +75,12 @@ t_arena				deserialize_arena(unsigned char *buffer, size_t *i)
 		arena.arena[j] = deserialize_cell(buffer, i);
 		++j;
 	}
+	arena.cycle = deserialize_int(buffer, i);
+	arena.cycle_to_die = deserialize_int(buffer, i);
+	arena.cycle_delta = deserialize_int(buffer, i);
+	arena.nbr_live = deserialize_int(buffer, i);
+	arena.max_checks = deserialize_int(buffer, i);
+	arena.winner_id = (uint8_t)deserialize_char(buffer, i);
+	(*i) += 3;
 	return (arena);
 }

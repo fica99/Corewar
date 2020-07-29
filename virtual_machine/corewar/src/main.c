@@ -6,7 +6,7 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 21:41:56 by aashara-          #+#    #+#             */
-/*   Updated: 2020/07/23 23:36:26 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/07/29 13:50:58 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	main(void)
 
 	listenfd = connect_to_server();
 	i = 0;
+	ft_bzero((void*)&arena, sizeof(t_arena));
 	arena.cycle_delta = rand() % 1000;
 	arena.cycle_to_die = rand() % 10000;
 	arena.max_checks = rand() % 1000;
@@ -28,7 +29,7 @@ int	main(void)
 	arena.players[1].id = 2;
 	arena.players[2].id = 3;
 	arena.players[3].id = 4;
-	while (i < 10000) {
+	while (i < 1000) {
 		arena.cycle = i;
 		arena.players[0].last_live = rand()  % 100000;
 		arena.players[0].lives_in_cur_period = rand() % 1000;
