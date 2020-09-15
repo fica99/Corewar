@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+         #
+#    By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/12 10:32:14 by olegmulko         #+#    #+#              #
-#    Updated: 2020/07/20 12:39:48 by olegmulko        ###   ########.fr        #
+#    Updated: 2020/09/15 20:32:32 by ggrimes          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ DEPS	=		$(OBJS:.o=.d)
 CC		=		gcc
 RM		=		rm -rf
 CFLGS	=		-Wall -Werror -Wextra
-LFLGS	=		-L $(LOP_DIR) -lop -L $(LASM_DIR) -lasm -L $(LFT_DIR) -lft
+LFLGS	=		-L $(LASM_DIR) -lasm -L $(LFT_DIR) -lft
 IFLGS	=		-I $(HDR_DIR) -I $(LHS_DIR) -I $(LOP_HS_DIR) -I $(LASM_HS_DIR)
 DFLGS	=		-MMD -MP
 OFLGS	=		-O0
@@ -60,9 +60,6 @@ all: $(NAME)
 $(LFT_DIR)/$(LFT):
 	$(MAKE) -C $(LFT_DIR)
 
-$(LOP_DIR)/$(LOP):
-	$(MAKE) -C $(LOP_DIR)
-
 $(LASM_DIR)/$(LASM):
 	$(MAKE) -C $(LASM_DIR)
 
@@ -73,20 +70,18 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
-$(NAME): $(LFT_DIR)/$(LFT) $(LOP_DIR)/$(LOP) $(LASM_DIR)/$(LASM) $(OBJS)
+$(NAME): $(LFT_DIR)/$(LFT) $(LASM_DIR)/$(LASM) $(OBJS)
 	$(CC) -g -O0 -o $(NAME) $(OBJS) $(LFLGS)
 
 $(NAME): $(OBJS)
 
 clean:
 	$(MAKE) -C $(LFT_DIR) clean
-	$(MAKE) -C $(LOP_DIR) clean
 	$(MAKE) -C $(LASM_DIR) clean
 	$(RM) $(OBJ_DIR)
 
 fclean: clean
 	$(MAKE) -C $(LFT_DIR) fclean
-	$(MAKE) -C $(LOP_DIR) fclean
 	$(MAKE) -C $(LASM_DIR) fclean
 	$(RM) $(NAME)
 

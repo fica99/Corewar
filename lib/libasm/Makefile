@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+         #
+#    By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/12 10:32:40 by olegmulko         #+#    #+#              #
-#    Updated: 2020/07/24 09:29:08 by olegmulko        ###   ########.fr        #
+#    Updated: 2020/09/15 20:29:30 by ggrimes          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,8 @@ SRC_FLS	=		asm_error.c\
 				asm_token_str.c\
 				asm_token_chn.c\
 				asm_token_chcom.c\
-				asm_token_sep.c
+				asm_token_sep.c\
+				asm_token_label.c
 
 # ------------  FILEPATHS  --------------------------------------------------- #
 SRCS	=		$(addprefix $(SRC_DIR)/, $(SRC_FLS))
@@ -54,7 +55,7 @@ DEPS	=		$(OBJS:.o=.d)
 CC		=		gcc
 RM		=		rm -rf
 CFLGS	=		-Wall -Werror -Wextra
-LFLGS	=		-L $(LFT_DIR) -lft -L $(LOP_DIR) -lop
+LFLGS	=		-L $(LFT_DIR) -lft
 IFLGS	=		-I $(HDR_DIR) -I $(LHS_DIR) -I $(LOP_HS_DIR)
 DFLGS	=		-MMD -MP
 OFLGS	=		-O0
@@ -68,9 +69,6 @@ all: $(NAME)
 $(LFT_DIR)/$(LFT):
 	$(MAKE) -C $(LFT_DIR)
 
-$(LOP_DIR)/$(LOP):
-	$(MAKE) -C $(LOP_DIR)
-
 -include $(DEPS)
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	$(CC) -g -O0 $(CFLGS) $(DFLGS) $(OFLGS) -c -o $@ $< $(IFLGS)
@@ -78,18 +76,16 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
-$(NAME): $(LFT_DIR)/$(LFT) $(LOP_DIR)/$(LOP) $(OBJS)
+$(NAME): $(LFT_DIR)/$(LFT) $(OBJS)
 	ar rc $(NAME) $(OBJS)
 	ranlib $(NAME)
 
 clean:
 	$(MAKE) clean -C $(LFT_DIR)
-	$(MAKE) clean -C $(LOP_DIR)
 	$(RM) $(OBJ_DIR)
 
 fclean: clean
 	$(MAKE) fclean -C $(LFT_DIR)
-	$(MAKE) fclean -C $(LOP_DIR)
 	$(RM) $(NAME)
 
 re: fclean all

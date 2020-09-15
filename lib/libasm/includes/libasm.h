@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libasm.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/07/24 09:28:21 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/09/15 20:00:29 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef enum	e_asm_tkn_type
 	TT_COMMENT,
 	TT_CHAMP_NAME,
 	TT_CHAMP_COMMENT,
+	TT_LABEL,
 }				t_asm_tkn_type;
 
 typedef struct	s_asm_token
@@ -83,5 +84,9 @@ int				asm_check_champ_comment(t_asm_string *asm_str);
 t_asm_token		*asm_token_champ_comment (t_asm_string *asm_str);
 int				asm_check_sep(t_asm_string *asm_str);
 t_asm_token		*asm_token_sep (t_asm_string *asm_str);
-
+/*
+** asm_token_label.c
+*/
+int				asm_check_label(t_asm_string *asm_str);
+t_asm_token		*asm_token_label(t_asm_string *asm_str);
 #endif
