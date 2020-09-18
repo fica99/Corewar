@@ -6,7 +6,7 @@
 /*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 21:33:34 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/09/18 15:18:03 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/09/18 16:30:27 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,21 +38,27 @@ int				asm_check_arg_reg(t_asm_string *asm_str)
 	return (1);
 }
 
+size_t			*asm_get_number(t_asm_string *asm_str)
+{
+	size_t		*number;
+	int			n_width;
+
+	n_width = asm_is_number(asm_str);
+	if (!(number = (size_t *)malloc(sizeof(size_t))))
+		asm_sys_error();
+	*number = (size_t)ft_atoi(asm_str->str + asm_str->index);
+	asm_str->index += (size_t)n_width;
+	asm_str->char_num += (size_t)n_width;
+	return (number);
+}
+
 t_asm_token		*asm_token_arg_reg(t_asm_string *asm_str)
 {
 	t_asm_token	*token;
-	int			n_width;
-	size_t		*number;
 
-	if (!(number = (size_t *)malloc(sizeof(size_t))))
-		asm_sys_error();
 	asm_str->index++;
 	asm_str->char_num++;
-	n_width = asm_is_number(asm_str);
-	*number = (size_t)ft_atoi(asm_str->str + asm_str->index);
 	token = asm_new_token(TT_ARG_REG);
-	token->data = (void*)number;
-	asm_str->index += (size_t)n_width;
-	asm_str->char_num += (size_t)n_width;
+	token->data = (void*)asm_get_number(asm_str);
 	return (token);
 }

@@ -6,7 +6,7 @@
 /*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 16:14:01 by olegmulko         #+#    #+#             */
-/*   Updated: 2020/07/23 09:17:25 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/09/18 15:40:20 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_asm_token	*asm_new_token(t_asm_tkn_type type)
 	new_token->data = NULL;
 	new_token->next = NULL;
 	new_token->type = type;
+	new_token->type_conv = TC_STR;
 	new_token->size = 0;
 	return (new_token);
 }

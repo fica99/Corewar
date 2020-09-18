@@ -6,7 +6,7 @@
 /*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 09:30:41 by olegmulko         #+#    #+#             */
-/*   Updated: 2020/09/18 15:27:33 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/09/18 16:58:32 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ t_asm_token	*asm_get_token(t_asm_string *asm_str)
 			return (asm_token_champ_name(asm_str));
 		else if (asm_check_champ_comment(asm_str))
 			return (asm_token_champ_comment(asm_str));
-		else if (asm_check_label(asm_str))
+		else if (asm_is_label(asm_str->str, asm_str->index, 1))
 			return (asm_token_label(asm_str));
 		else if (asm_check_arg_reg(asm_str))
 			return (asm_token_arg_reg(asm_str));
-		//else if (asm_check_arg_dir(asm_str))
-		//	return (asm_token_arg_dir(asm_str));
+		else if (asm_check_arg_dir(asm_str))
+			return (asm_token_arg_dir(asm_str));
 		//else if (asm_check_arg_ind(asm_str))
 		//	return (asm_token_arg_ind(asm_str));
 		else
