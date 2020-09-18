@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libasm.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
+/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/09/15 21:44:19 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/09/18 15:27:55 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,22 +91,23 @@ t_asm_token		*asm_token_sep (t_asm_string *asm_str);
 /*
 ** asm_token_label.c
 */
+int				asm_is_label(t_asm_string *asm_str);
 int				asm_check_label(t_asm_string *asm_str);
 t_asm_token		*asm_token_label(t_asm_string *asm_str);
 /*
-** asm_token_opers_args.c
-*/
-int				asm_check_opers_args(t_asm_string *asm_str);
-/*
 ** asm_token_arg_reg.c
 */
+int				asm_is_number(t_asm_string *asm_str);
 int				asm_check_arg_reg(t_asm_string *asm_str);
+t_asm_token		*asm_token_arg_reg(t_asm_string *asm_str);
 /*
 ** asm_token_arg_dir.c
 */
-int				asm_check_arg_dir(t_asm_string *asm_str);
+//int				asm_check_arg_dir(t_asm_string *asm_str);
+//t_asm_token		*asm_token_arg_dir(t_asm_string *asm_str);
 /*
-** asm_token_arg_dir.c
+** asm_token_arg_ind.c
 */
-int				asm_check_arg_ind(t_asm_string *asm_str);
+//int				asm_check_arg_ind(t_asm_string *asm_str);
+//t_asm_token		*asm_token_arg_ind(t_asm_string *asm_str);
 #endif

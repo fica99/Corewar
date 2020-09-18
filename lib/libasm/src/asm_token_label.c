@@ -3,14 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   asm_token_label.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
+/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 19:35:08 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/09/15 21:09:38 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/09/18 14:26:01 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libasm.h"
+
+int				asm_is_label(t_asm_string *asm_str)
+{
+	size_t		i;
+
+	i = asm_str->index;
+	if (asm_str->str[i++] != LABEL_CHAR)
+		return (0);
+	while (ft_strchr(LABEL_CHARS, asm_str->str[i]))
+		i++;
+	return (1);
+}
 
 int				asm_check_label(t_asm_string *asm_str)
 {
