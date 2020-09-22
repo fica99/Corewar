@@ -3,21 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   asm_token_arg_reg.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 21:33:34 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/09/18 16:30:27 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/09/22 20:16:06 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libasm.h"
 
-int				asm_is_number(t_asm_string *asm_str)
+int				asm_is_number(t_asm_string *asm_str, size_t i)
 {
-	size_t		i;
 	int			n_width;
 
-	i = asm_str->index;
 	if (!ft_isdigit(asm_str->str[i++]))
 		return (0);
 	n_width = 1;
@@ -43,7 +41,7 @@ size_t			*asm_get_number(t_asm_string *asm_str)
 	size_t		*number;
 	int			n_width;
 
-	n_width = asm_is_number(asm_str);
+	n_width = asm_is_number(asm_str, asm_str->index);
 	if (!(number = (size_t *)malloc(sizeof(size_t))))
 		asm_sys_error();
 	*number = (size_t)ft_atoi(asm_str->str + asm_str->index);

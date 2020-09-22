@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   asm_token_label.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 19:35:08 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/09/18 17:02:33 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/09/22 20:22:54 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libasm.h"
 
-int				asm_is_label(char* str, size_t i, int mod)
+int				asm_is_label(char *str, size_t i, int mod)
 {
 	if (mod == -1)
 	{
@@ -33,14 +33,16 @@ int				asm_is_label(char* str, size_t i, int mod)
 	return (1);
 }
 
-char			*asm_get_label_str(t_asm_string *asm_str)
+char			*asm_get_label_str(t_asm_string *asm_str, char mod)
 {
 	size_t		i;
 	char		*label;
 	size_t		delta;
 
+	if (mod == -1)
+		asm_str->index++;
 	i = asm_str->index;
-	while (asm_str->str[i] != LABEL_CHAR)
+	while (ft_strchr(LABEL_CHARS, asm_str->str[i]))
 	{
 		i++;
 		continue ;
@@ -48,8 +50,9 @@ char			*asm_get_label_str(t_asm_string *asm_str)
 	delta = i - asm_str->index;
 	label = ft_strnew(delta);
 	ft_memcpy(label, asm_str->str + asm_str->index, delta);
-	asm_str->index = i + 1;
-	asm_str->char_num += i + 1;
+	i += (mod == 1) ? 1 : 0;
+	asm_str->index += i;
+	asm_str->char_num += i;
 	return (label);
 }
 
@@ -58,6 +61,6 @@ t_asm_token		*asm_token_label(t_asm_string *asm_str)
 	t_asm_token	*token;
 
 	token = asm_new_token(TT_LABEL);
-	token->data = (void *)(asm_get_label_str(asm_str));
+	token->data = (void *)(asm_get_label_str(asm_str, 1));
 	return (token);
 }

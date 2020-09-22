@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+         #
+#    By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/12 10:32:40 by olegmulko         #+#    #+#              #
-#    Updated: 2020/09/18 16:06:49 by olegmulko        ###   ########.fr        #
+#    Updated: 2020/09/22 19:17:54 by ggrimes          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ SRC_FLS	=		asm_error.c\
 				asm_token_label.c\
 				asm_token_arg_reg.c\
 				asm_token_arg_dir.c\
-				#asm_token_arg_ind.c
+				asm_token_arg_ind.c
 
 
 # ------------  FILEPATHS  --------------------------------------------------- #

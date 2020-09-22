@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm_token_arg_dir.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 21:32:26 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/09/18 17:00:14 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/09/22 20:17:22 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int				asm_check_arg_dir(t_asm_string *asm_str)
 	if (asm_str->str[i++] != DIRECT_CHAR)
 		return (0);
 	return (asm_is_label(asm_str->str, i, -1)
-		|| asm_is_number(asm_str));
+		|| asm_is_number(asm_str, i));
 }
 
 t_asm_token		*asm_token_arg_dir(t_asm_string *asm_str)
@@ -32,7 +32,7 @@ t_asm_token		*asm_token_arg_dir(t_asm_string *asm_str)
 	token = asm_new_token(TT_ARG_DIR);
 	if (asm_str->str[asm_str->index] == LABEL_CHAR)
 	{
-		token->data = (void *)asm_get_label_str(asm_str);
+		token->data = (void *)asm_get_label_str(asm_str, -1);
 		token->type_conv = TC_STR;
 	}
 	else
