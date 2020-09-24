@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/09/24 21:17:10 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/09/24 22:20:08 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef enum	e_asm_tkn_type
 	TT_ARG_REG,
 	TT_ARG_DIR,
 	TT_ARG_IND,
+	TT_OPER,
 
 }				t_asm_tkn_type;
 
@@ -142,5 +143,7 @@ t_hash			**asm_get_opers_hash();
 ** asm_lex_opers.c
 */
 int				asm_is_oper(t_asm_string *asm_str,
+									t_hash **opers_hash);
+t_asm_token		*asm_token_oper(t_asm_string *asm_str,
 									t_hash **opers_hash);
 #endif
