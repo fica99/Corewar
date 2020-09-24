@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/09/24 20:18:36 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/09/24 21:17:10 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,18 @@ t_asm_string	*asm_new_str(size_t m_size);
 void			asm_str_realoc(t_asm_string *asm_str);
 t_asm_token		*asm_new_token(t_asm_tkn_type type);
 t_asm_string	*asm_file_to_str(char *file_path);
-t_asm_token		*asm_get_token(t_asm_string *asm_str);
+/*
+** asm_get_token.c
+*/
+t_asm_token		*asm_get_token(t_asm_string *asm_str,
+									t_hash **opers_hash);
 t_asm_token		*asm_token_comment(t_asm_string *asm_str);
 char			*asm_ltoa(long long num);
-t_asm_token		*asm_get_chain_tokens(t_asm_string *asm_str);
+/*
+** asm_chain_tokens.c
+*/
+t_asm_token		*asm_get_chain_tokens(t_asm_string *asm_str,
+										t_hash **opers_hash);
 t_asm_token		*asm_token_nl(t_asm_string *asm_str);
 t_asm_token		*asm_token_str(t_asm_string *asm_str);
 int				asm_check_champ_name(t_asm_string *asm_str);
@@ -130,4 +138,9 @@ t_asm_token		*asm_token_arg_ind(t_asm_string *asm_str);
 ** asm_opers_hash.c
 */
 t_hash			**asm_get_opers_hash();
+/*
+** asm_lex_opers.c
+*/
+int				asm_is_oper(t_asm_string *asm_str,
+									t_hash **opers_hash);
 #endif

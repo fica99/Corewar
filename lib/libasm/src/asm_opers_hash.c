@@ -6,11 +6,11 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 19:49:56 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/09/24 20:24:11 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/09/24 21:25:22 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "libasm.h"
+#include "libasm.h"
 
 static t_asm_oper	*asm_init_oper(char *name, void (*f)(void))
 {
@@ -18,15 +18,15 @@ static t_asm_oper	*asm_init_oper(char *name, void (*f)(void))
 
 	if (!(oper = (t_asm_oper *)malloc(sizeof(t_asm_oper))))
 		asm_sys_error();
-	if (!(oper->name	= ft_strdup(name)))
+	if (!(oper->name = ft_strdup(name)))
 		asm_sys_error();
 	oper->f = f;
 	return (oper);
 }
 
-static t_hash	**asm_get_opers_hash_next(t_hash **opers_hash)
+static t_hash		**asm_get_opers_hash_next(t_hash **opers_hash)
 {
-	t_asm_oper	*oper;
+	t_asm_oper		*oper;
 
 	oper = NULL;
 	push_hash(opers_hash, "zjmp", (void *)oper, OPERS_SIZE);
@@ -47,10 +47,10 @@ static t_hash	**asm_get_opers_hash_next(t_hash **opers_hash)
 	return (opers_hash);
 }
 
-t_hash			**asm_get_opers_hash()
+t_hash				**asm_get_opers_hash(void)
 {
-	t_hash		**opers_hash;
-	t_asm_oper	*oper;
+	t_hash			**opers_hash;
+	t_asm_oper		*oper;
 
 	oper = NULL;
 	if (!(opers_hash = init_hash_table(OPERS_SIZE)))

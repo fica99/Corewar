@@ -6,7 +6,7 @@
 #    By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/12 10:32:40 by olegmulko         #+#    #+#              #
-#    Updated: 2020/09/24 20:04:29 by ggrimes          ###   ########.fr        #
+#    Updated: 2020/09/24 21:20:24 by ggrimes          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,8 @@ SRC_FLS	=		asm_error.c\
 				asm_token_arg_reg.c\
 				asm_token_arg_dir.c\
 				asm_token_arg_ind.c\
-				asm_opers_hash.c
+				asm_opers_hash.c\
+				asm_lex_opers.c
 
 
 # ------------  FILEPATHS  --------------------------------------------------- #
