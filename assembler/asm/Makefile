@@ -6,7 +6,7 @@
 #    By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/12 10:32:14 by olegmulko         #+#    #+#              #
-#    Updated: 2020/09/15 20:32:32 by ggrimes          ###   ########.fr        #
+#    Updated: 2020/09/24 19:44:20 by ggrimes          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,11 @@ LASM		=	libasm.a
 LASM_DIR	=	$(LIB_DIR)/libasm
 LASM_HS_DIR	=	$(LASM_DIR)/includes
 
+# ------------  LIBHASH  ------------------------------------------------------- #
+LHASH		=	libhash.a
+LHASH_DIR	=	$(LIB_DIR)/libhash
+LHASH_HS_DIR	=	$(LHASH_DIR)/includes
+
 # ------------  SOURCE FILES  ------------------------------------------------ #
 SRC_FLS	=		main.c \
 				check_inprms.c
@@ -47,8 +52,8 @@ DEPS	=		$(OBJS:.o=.d)
 CC		=		gcc
 RM		=		rm -rf
 CFLGS	=		-Wall -Werror -Wextra
-LFLGS	=		-L $(LASM_DIR) -lasm -L $(LFT_DIR) -lft
-IFLGS	=		-I $(HDR_DIR) -I $(LHS_DIR) -I $(LOP_HS_DIR) -I $(LASM_HS_DIR)
+LFLGS	=		-L $(LASM_DIR) -lasm -L $(LFT_DIR) -lft -L $(LHASH_DIR) -lhash
+IFLGS	=		-I $(HDR_DIR) -I $(LHS_DIR) -I $(LOP_HS_DIR) -I $(LASM_HS_DIR) -I $(LHASH_HS_DIR)
 DFLGS	=		-MMD -MP
 OFLGS	=		-O0
 
@@ -63,6 +68,9 @@ $(LFT_DIR)/$(LFT):
 $(LASM_DIR)/$(LASM):
 	$(MAKE) -C $(LASM_DIR)
 
+$(LHASH_DIR)/$(LHASH):
+	$(MAKE) -C $(LHASH_DIR)
+
 -include $(DEPS)
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	$(CC) -g -O0 $(CFLGS) $(DFLGS) $(OFLGS) -c -o $@ $< $(IFLGS)
@@ -70,7 +78,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
-$(NAME): $(LFT_DIR)/$(LFT) $(LASM_DIR)/$(LASM) $(OBJS)
+$(NAME): $(LFT_DIR)/$(LFT) $(LASM_DIR)/$(LASM) $(LHASH_DIR)/$(LHASH) $(OBJS)
 	$(CC) -g -O0 -o $(NAME) $(OBJS) $(LFLGS)
 
 $(NAME): $(OBJS)
@@ -78,11 +86,13 @@ $(NAME): $(OBJS)
 clean:
 	$(MAKE) -C $(LFT_DIR) clean
 	$(MAKE) -C $(LASM_DIR) clean
+	$(MAKE) -C $(LHASH_DIR) clean
 	$(RM) $(OBJ_DIR)
 
 fclean: clean
 	$(MAKE) -C $(LFT_DIR) fclean
 	$(MAKE) -C $(LASM_DIR) fclean
+	$(MAKE) -C $(LHASH_DIR) fclean
 	$(RM) $(NAME)
 
 re: fclean all

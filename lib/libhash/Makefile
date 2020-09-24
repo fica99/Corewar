@@ -3,57 +3,33 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+         #
+#    By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/07/12 10:32:40 by olegmulko         #+#    #+#              #
-#    Updated: 2020/09/24 20:04:29 by ggrimes          ###   ########.fr        #
+#    Created: 2019/09/17 13:54:22 by aashara-          #+#    #+#              #
+#    Updated: 2020/02/04 19:53:51 by aashara-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	=		libasm.a
+# ------------  PROJECT  ----------------------------------------------------- #
+NAME	=		libhash.a
 
 # ------------  DIRECTORIES  ------------------------------------------------- #
-SRC_DIR	=		src
+SRC_DIR	=		srcs
 HDR_DIR	=		includes
-OBJ_DIR	=		obj
-LIB_DIR =		..
+OBJ_DIR	=		objs
 
 # ------------  LIBFT  ------------------------------------------------------- #
-LFT		=		libft.a
-LFT_DIR	=		$(LIB_DIR)/libft
+LFT_DIR	=		../libft
 LHS_DIR	=		$(LFT_DIR)/includes
 
-# ------------  LIBOP  ------------------------------------------------------- #
-LOP		=		libop.a
-LOP_DIR	=		$(LIB_DIR)/libop
-LOP_HS_DIR	=	$(LOP_DIR)/includes
-
-# ------------  LIBHASH  ------------------------------------------------------- #
-LHASH		=	libhash.a
-LHASH_DIR	=	$(LIB_DIR)/libhash
-LHASH_HS_DIR	=	$(LHASH_DIR)/includes
-
 # ------------  SOURCE FILES  ------------------------------------------------ #
-SRC_FLS	=		asm_error.c\
-				asm_filetostr.c\
-				asm_new_str.c\
-				asm_str_realoc.c\
-				asm_token.c\
-				asm_get_token.c\
-				asm_token_comment.c\
-				asm_ltoa.c\
-				asm_chain_tokens.c\
-				asm_token_nl.c\
-				asm_token_str.c\
-				asm_token_chn.c\
-				asm_token_chcom.c\
-				asm_token_sep.c\
-				asm_token_label.c\
-				asm_token_arg_reg.c\
-				asm_token_arg_dir.c\
-				asm_token_arg_ind.c\
-				asm_opers_hash.c
-
+SRC_FLS	=		free_hash_table.c\
+				init_hash_table.c\
+				init_hash.c\
+				hash_index.c\
+				djb2_hash_function.c\
+				push_hash.c\
+				get_hash_data.c\
 
 # ------------  FILEPATHS  --------------------------------------------------- #
 SRCS	=		$(addprefix $(SRC_DIR)/, $(SRC_FLS))
@@ -64,42 +40,29 @@ DEPS	=		$(OBJS:.o=.d)
 CC		=		gcc
 RM		=		rm -rf
 CFLGS	=		-Wall -Werror -Wextra
-LFLGS	=		-L $(LFT_DIR) -lft -L $(LHASH_DIR) -lhash
-IFLGS	=		-I $(HDR_DIR) -I $(LHS_DIR) -I $(LOP_HS_DIR) -I $(LHASH_HS_DIR)
+IFLGS	=		-I $(HDR_DIR) -I $(LHS_DIR)
 DFLGS	=		-MMD -MP
-OFLGS	=		-O0
-
 
 # ------------  RULES  ------------------------------------------------------- #
 .PHONY: all clean fclean re
 
 all: $(NAME)
 
-$(LFT_DIR)/$(LFT):
-	$(MAKE) -C $(LFT_DIR)
-
-$(LHASH_DIR)/$(LHASH):
-	$(MAKE) -C $(LHASH_DIR)
-
 -include $(DEPS)
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
-	$(CC) -g -O0 $(CFLGS) $(DFLGS) $(OFLGS) -c -o $@ $< $(IFLGS)
+	$(CC) $(CFLGS) $(DFLGS) -c -o $@ $< $(IFLGS)
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
-$(NAME): $(LFT_DIR)/$(LFT) $(LHASH_DIR)/$(LHASH) $(OBJS)
+$(NAME): $(OBJS)
 	ar rc $(NAME) $(OBJS)
 	ranlib $(NAME)
 
 clean:
-	$(MAKE) clean -C $(LFT_DIR)
-	$(MAKE) clean -C $(LHASH_DIR)
 	$(RM) $(OBJ_DIR)
 
 fclean: clean
-	$(MAKE) fclean -C $(LFT_DIR)
-	$(MAKE) fclean -C $(LHASH_DIR)
 	$(RM) $(NAME)
 
 re: fclean all

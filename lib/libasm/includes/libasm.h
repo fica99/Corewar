@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/09/22 20:23:16 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/09/24 20:18:36 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,11 @@
 # include <string.h>
 # include "op.h"
 # include "libft.h"
+# include "libhash.h"
 
 # define READ_BUF_SIZE 5
 # define STR_MALOC_SIZE 1
+# define OPERS_SIZE 16
 # define ALT_COMMENT_CHAR ';'
 # define ERR_INPUT_PARAMS_FIRST "Error: the program accepts only one "
 # define ERR_INPUT_PARAMS_SEC "parameter as input (the full path to the file)"
@@ -76,6 +78,12 @@ typedef struct	s_asm_token
 	struct s_asm_token	*next;
 }				t_asm_token;
 
+typedef struct	s_asm_oper
+{
+	char		*name;
+	void		(*f)(void);
+}				t_asm_oper;
+
 void			asm_sys_error(void);
 void			asm_prog_error(char *msg);
 void			asm_lex_error(t_asm_string *asm_str, char *msg);
@@ -118,4 +126,8 @@ t_asm_token		*asm_token_arg_dir(t_asm_string *asm_str);
 */
 int				asm_check_arg_ind(t_asm_string *asm_str);
 t_asm_token		*asm_token_arg_ind(t_asm_string *asm_str);
+/*
+** asm_opers_hash.c
+*/
+t_hash			**asm_get_opers_hash();
 #endif
