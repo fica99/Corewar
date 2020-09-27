@@ -6,13 +6,14 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 09:30:41 by olegmulko         #+#    #+#             */
-/*   Updated: 2020/09/22 20:22:04 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/09/24 21:22:50 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libasm.h"
 
-static t_asm_token	*asm_get_token_next(t_asm_string *asm_str)
+static t_asm_token	*asm_get_token_next(t_asm_string *asm_str,
+											t_hash **opers_hash)
 {
 	if (asm_is_label(asm_str->str, asm_str->index, 1))
 		return (asm_token_label(asm_str));
@@ -22,12 +23,15 @@ static t_asm_token	*asm_get_token_next(t_asm_string *asm_str)
 		return (asm_token_arg_dir(asm_str));
 	else if (asm_check_arg_ind(asm_str))
 		return (asm_token_arg_ind(asm_str));
+	else if (asm_is_oper(asm_str, opers_hash))
+		return (NULL);
 	else
 		asm_lex_error(asm_str, ERR_LEX);
 	return (NULL);
 }
 
-t_asm_token			*asm_get_token(t_asm_string *asm_str)
+t_asm_token			*asm_get_token(t_asm_string *asm_str,
+										t_hash **opers_hash)
 {
 	while (asm_str->str[asm_str->index])
 	{
@@ -45,7 +49,7 @@ t_asm_token			*asm_get_token(t_asm_string *asm_str)
 		else if (asm_check_champ_comment(asm_str))
 			return (asm_token_champ_comment(asm_str));
 		else
-			asm_get_token_next(asm_str);
+			asm_get_token_next(asm_str, opers_hash);
 	}
 	return (asm_new_token(TT_EOF));
 }

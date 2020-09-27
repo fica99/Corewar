@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/09/22 20:23:16 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/09/24 22:20:08 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,11 @@
 # include <string.h>
 # include "op.h"
 # include "libft.h"
+# include "libhash.h"
 
 # define READ_BUF_SIZE 5
 # define STR_MALOC_SIZE 1
+# define OPERS_SIZE 16
 # define ALT_COMMENT_CHAR ';'
 # define ERR_INPUT_PARAMS_FIRST "Error: the program accepts only one "
 # define ERR_INPUT_PARAMS_SEC "parameter as input (the full path to the file)"
@@ -58,6 +60,7 @@ typedef enum	e_asm_tkn_type
 	TT_ARG_REG,
 	TT_ARG_DIR,
 	TT_ARG_IND,
+	TT_OPER,
 
 }				t_asm_tkn_type;
 
@@ -76,6 +79,12 @@ typedef struct	s_asm_token
 	struct s_asm_token	*next;
 }				t_asm_token;
 
+typedef struct	s_asm_oper
+{
+	char		*name;
+	void		(*f)(void);
+}				t_asm_oper;
+
 void			asm_sys_error(void);
 void			asm_prog_error(char *msg);
 void			asm_lex_error(t_asm_string *asm_str, char *msg);
@@ -83,10 +92,18 @@ t_asm_string	*asm_new_str(size_t m_size);
 void			asm_str_realoc(t_asm_string *asm_str);
 t_asm_token		*asm_new_token(t_asm_tkn_type type);
 t_asm_string	*asm_file_to_str(char *file_path);
-t_asm_token		*asm_get_token(t_asm_string *asm_str);
+/*
+** asm_get_token.c
+*/
+t_asm_token		*asm_get_token(t_asm_string *asm_str,
+									t_hash **opers_hash);
 t_asm_token		*asm_token_comment(t_asm_string *asm_str);
 char			*asm_ltoa(long long num);
-t_asm_token		*asm_get_chain_tokens(t_asm_string *asm_str);
+/*
+** asm_chain_tokens.c
+*/
+t_asm_token		*asm_get_chain_tokens(t_asm_string *asm_str,
+										t_hash **opers_hash);
 t_asm_token		*asm_token_nl(t_asm_string *asm_str);
 t_asm_token		*asm_token_str(t_asm_string *asm_str);
 int				asm_check_champ_name(t_asm_string *asm_str);
@@ -118,4 +135,15 @@ t_asm_token		*asm_token_arg_dir(t_asm_string *asm_str);
 */
 int				asm_check_arg_ind(t_asm_string *asm_str);
 t_asm_token		*asm_token_arg_ind(t_asm_string *asm_str);
+/*
+** asm_opers_hash.c
+*/
+t_hash			**asm_get_opers_hash();
+/*
+** asm_lex_opers.c
+*/
+int				asm_is_oper(t_asm_string *asm_str,
+									t_hash **opers_hash);
+t_asm_token		*asm_token_oper(t_asm_string *asm_str,
+									t_hash **opers_hash);
 #endif
