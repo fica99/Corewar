@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/09/29 20:28:19 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/09/29 21:27:57 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,12 +111,15 @@ char			*asm_ltoa(long long num);
 t_asm_token		*asm_get_chain_tokens(t_asm_string *asm_str,
 										t_hash **opers_hash);
 t_asm_token		*asm_token_nl(t_asm_string *asm_str);
-t_asm_token		*asm_token_str(t_asm_string *asm_str);
+/*
+** asm_lex_token_str.c
+*/
+t_asm_token		*asm_lex_token_str(t_asm_string *asm_str);
 /*
 ** asm_lex_token_chn.c
 */
 int				asm_lex_is_champ_name(t_asm_string *asm_str);
-t_asm_token		*asm_token_champ_name(t_asm_string *asm_str);
+t_asm_token		*asm_lex_token_champ_name(t_asm_string *asm_str);
 int				asm_check_champ_comment(t_asm_string *asm_str);
 t_asm_token		*asm_token_champ_comment (t_asm_string *asm_str);
 int				asm_check_sep(t_asm_string *asm_str);

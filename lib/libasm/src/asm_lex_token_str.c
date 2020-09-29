@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_token_str.c                                    :+:      :+:    :+:   */
+/*   asm_lex_token_str.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/22 16:10:27 by olegmulko         #+#    #+#             */
-/*   Updated: 2020/09/29 20:58:17 by ggrimes          ###   ########.fr       */
+/*   Created: 2020/09/29 21:21:15 by ggrimes           #+#    #+#             */
+/*   Updated: 2020/09/29 21:24:47 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libasm.h"
 
-static void		asm_check_end_str(t_asm_string *asm_str)
+static void		asm_lex_check_end_str(t_asm_string *asm_str)
 {
 	if (asm_str->str[asm_str->index] == '"')
 	{
@@ -21,7 +21,7 @@ static void		asm_check_end_str(t_asm_string *asm_str)
 	}
 }
 
-static size_t	asm_check_str_size(t_asm_string *asm_str)
+static size_t	asm_lex_check_str_size(t_asm_string *asm_str)
 {
 	size_t		size;
 
@@ -48,7 +48,7 @@ static size_t	asm_check_str_size(t_asm_string *asm_str)
 	return (0);
 }
 
-t_asm_token		*asm_token_str(t_asm_string *asm_str)
+t_asm_token		*asm_lex_token_str(t_asm_string *asm_str)
 {
 	size_t		size;
 	char		*str;
@@ -56,7 +56,7 @@ t_asm_token		*asm_token_str(t_asm_string *asm_str)
 	size_t		offset;
 
 	offset = asm_str->index;
-	size = asm_check_str_size(asm_str);
+	size = asm_lex_check_str_size(asm_str);
 	if (!(str = ft_strnew(size)))
 		asm_sys_error();
 	ft_memcpy(str, asm_str->str + offset, size);
@@ -64,6 +64,6 @@ t_asm_token		*asm_token_str(t_asm_string *asm_str)
 	token->data = (void*)str;
 	token->size = size;
 	ft_memdel((void**)&str);
-	asm_check_end_str(asm_str);
+	asm_lex_check_end_str(asm_str);
 	return (token);
 }

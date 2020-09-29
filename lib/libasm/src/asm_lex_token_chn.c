@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 20:21:21 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/09/29 20:58:17 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/09/29 21:26:45 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int					asm_lex_is_champ_name(t_asm_string *asm_str)
 	return (0);
 }
 
-t_asm_token			*asm_token_champ_name(t_asm_string *asm_str)
+t_asm_token			*asm_lex_token_champ_name(t_asm_string *asm_str)
 {
 	t_asm_token		*token;
 	static size_t	size;
