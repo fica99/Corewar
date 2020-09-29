@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 20:17:11 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/09/29 21:28:09 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/09/29 21:36:22 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ t_asm_token			*asm_lex_get_token(t_asm_string *asm_str,
 {
 	while (asm_str->str[asm_str->index])
 	{
-		if (asm_check_sep(asm_str))
-			return (asm_token_sep(asm_str));
+		if (asm_lex_is_sep(asm_str))
+			return (asm_lex_token_sep(asm_str));
 		else if (asm_str->str[asm_str->index] == '\n')
 			return (asm_token_nl(asm_str));
 		else if (asm_str->str[asm_str->index] == COMMENT_CHAR

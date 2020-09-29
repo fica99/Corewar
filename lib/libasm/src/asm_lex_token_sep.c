@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_token_sep.c                                    :+:      :+:    :+:   */
+/*   asm_lex_token_sep.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/24 09:23:54 by olegmulko         #+#    #+#             */
-/*   Updated: 2020/09/29 20:58:25 by ggrimes          ###   ########.fr       */
+/*   Created: 2020/09/29 21:34:15 by ggrimes           #+#    #+#             */
+/*   Updated: 2020/09/29 21:34:40 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libasm.h"
 
-int				asm_check_sep(t_asm_string *asm_str)
+int				asm_lex_is_sep(t_asm_string *asm_str)
 {
 	if (asm_str->str[asm_str->index] == ' '
 		|| asm_str->str[asm_str->index] == '\t')
@@ -20,7 +20,7 @@ int				asm_check_sep(t_asm_string *asm_str)
 	return (0);
 }
 
-t_asm_token		*asm_token_sep(t_asm_string *asm_str)
+t_asm_token		*asm_lex_token_sep(t_asm_string *asm_str)
 {
 	t_asm_token	*token;
 
