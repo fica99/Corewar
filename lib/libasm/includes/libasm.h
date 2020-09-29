@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/09/29 21:44:01 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/09/29 21:49:40 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,10 @@ t_asm_string	*asm_file_to_str(char *file_path);
 */
 t_asm_token		*asm_lex_get_token(t_asm_string *asm_str,
 									t_hash **opers_hash);
-t_asm_token		*asm_token_comment(t_asm_string *asm_str);
+/*
+** asm_lex_token_comment.c
+*/
+t_asm_token		*asm_lex_token_comment(t_asm_string *asm_str);
 /*
 ** asm_ltoa.c
 */
