@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_token_label.c                                  :+:      :+:    :+:   */
+/*   asm_lex_token_label.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/15 19:35:08 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/09/22 20:22:54 by ggrimes          ###   ########.fr       */
+/*   Created: 2020/09/29 21:43:12 by ggrimes           #+#    #+#             */
+/*   Updated: 2020/09/29 21:43:39 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libasm.h"
 
-int				asm_is_label(char *str, size_t i, int mod)
+int				asm_lex_is_label(char *str, size_t i, int mod)
 {
 	if (mod == -1)
 	{
@@ -33,7 +33,7 @@ int				asm_is_label(char *str, size_t i, int mod)
 	return (1);
 }
 
-char			*asm_get_label_str(t_asm_string *asm_str, char mod)
+char			*asm_lex_get_label_str(t_asm_string *asm_str, char mod)
 {
 	size_t		i;
 	char		*label;
@@ -56,11 +56,11 @@ char			*asm_get_label_str(t_asm_string *asm_str, char mod)
 	return (label);
 }
 
-t_asm_token		*asm_token_label(t_asm_string *asm_str)
+t_asm_token		*asm_lex_token_label(t_asm_string *asm_str)
 {
 	t_asm_token	*token;
 
-	token = asm_new_token(TT_LABEL);
-	token->data = (void *)(asm_get_label_str(asm_str, 1));
+	token = asm_lex_new_token(TT_LABEL);
+	token->data = (void *)(asm_lex_get_label_str(asm_str, 1));
 	return (token);
 }

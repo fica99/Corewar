@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_token_arg_reg.c                                :+:      :+:    :+:   */
+/*   asm_lex_token_arg_reg.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/15 21:33:34 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/09/22 20:16:06 by ggrimes          ###   ########.fr       */
+/*   Created: 2020/09/29 21:57:39 by ggrimes           #+#    #+#             */
+/*   Updated: 2020/09/29 22:00:05 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libasm.h"
 
-int				asm_is_number(t_asm_string *asm_str, size_t i)
+int				asm_lex_is_number(t_asm_string *asm_str, size_t i)
 {
 	int			n_width;
 
@@ -24,7 +24,7 @@ int				asm_is_number(t_asm_string *asm_str, size_t i)
 	return (n_width);
 }
 
-int				asm_check_arg_reg(t_asm_string *asm_str)
+int				asm_lex_is_arg_reg(t_asm_string *asm_str)
 {
 	size_t		i;
 
@@ -36,12 +36,12 @@ int				asm_check_arg_reg(t_asm_string *asm_str)
 	return (1);
 }
 
-size_t			*asm_get_number(t_asm_string *asm_str)
+size_t			*asm_lex_get_number(t_asm_string *asm_str)
 {
 	size_t		*number;
 	int			n_width;
 
-	n_width = asm_is_number(asm_str, asm_str->index);
+	n_width = asm_lex_is_number(asm_str, asm_str->index);
 	if (!(number = (size_t *)malloc(sizeof(size_t))))
 		asm_sys_error();
 	*number = (size_t)ft_atoi(asm_str->str + asm_str->index);
@@ -50,13 +50,13 @@ size_t			*asm_get_number(t_asm_string *asm_str)
 	return (number);
 }
 
-t_asm_token		*asm_token_arg_reg(t_asm_string *asm_str)
+t_asm_token		*asm_lex_token_arg_reg(t_asm_string *asm_str)
 {
 	t_asm_token	*token;
 
 	asm_str->index++;
 	asm_str->char_num++;
-	token = asm_new_token(TT_ARG_REG);
-	token->data = (void*)asm_get_number(asm_str);
+	token = asm_lex_new_token(TT_ARG_REG);
+	token->data = (void*)asm_lex_get_number(asm_str);
 	return (token);
 }

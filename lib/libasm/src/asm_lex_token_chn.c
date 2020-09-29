@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_token_chcom.c                                  :+:      :+:    :+:   */
+/*   asm_lex_token_chn.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/24 09:19:31 by olegmulko         #+#    #+#             */
-/*   Updated: 2020/07/24 09:35:47 by olegmulko        ###   ########.fr       */
+/*   Created: 2020/09/29 20:21:21 by ggrimes           #+#    #+#             */
+/*   Updated: 2020/09/29 21:26:45 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libasm.h"
 
-int					asm_check_champ_comment(t_asm_string *asm_str)
+int					asm_lex_is_champ_name(t_asm_string *asm_str)
 {
-	static char		*champ_name = COMMENT_CMD_STRING;
+	static char		*champ_name = NAME_CMD_STRING;
 	static size_t	size;
 
 	if (!size)
@@ -24,14 +24,14 @@ int					asm_check_champ_comment(t_asm_string *asm_str)
 	return (0);
 }
 
-t_asm_token			*asm_token_champ_comment(t_asm_string *asm_str)
+t_asm_token			*asm_lex_token_champ_name(t_asm_string *asm_str)
 {
 	t_asm_token		*token;
 	static size_t	size;
 
 	if (!size)
-		size = ft_strlen(COMMENT_CMD_STRING);
-	token = asm_new_token(TT_CHAMP_COMMENT);
+		size = ft_strlen(NAME_CMD_STRING);
+	token = asm_lex_new_token(TT_CHAMP_NAME);
 	asm_str->index += size;
 	asm_str->char_num += size;
 	return (token);

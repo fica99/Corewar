@@ -6,7 +6,7 @@
 #    By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/12 10:32:40 by olegmulko         #+#    #+#              #
-#    Updated: 2020/09/29 19:32:53 by ggrimes          ###   ########.fr        #
+#    Updated: 2020/09/29 22:07:39 by ggrimes          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,22 +38,22 @@ SRC_FLS	=		asm_error.c\
 				asm_filetostr.c\
 				asm_new_str.c\
 				asm_str_realoc.c\
-				asm_token.c\
-				asm_get_token.c\
-				asm_token_comment.c\
+				asm_lex_token.c\
+				asm_lex_get_token.c\
+				asm_lex_token_comment.c\
 				asm_ltoa.c\
-				asm_chain_tokens.c\
-				asm_token_nl.c\
-				asm_token_str.c\
-				asm_token_chn.c\
-				asm_token_chcom.c\
-				asm_token_sep.c\
-				asm_token_label.c\
-				asm_token_arg_reg.c\
-				asm_token_arg_dir.c\
-				asm_token_arg_ind.c\
+				asm_lex_chain_tokens.c\
+				asm_lex_token_nl.c\
+				asm_lex_token_str.c\
+				asm_lex_token_chn.c\
+				asm_lex_token_chcom.c\
+				asm_lex_token_sep.c\
+				asm_lex_token_label.c\
+				asm_lex_token_arg_reg.c\
+				asm_lex_token_arg_dir.c\
+				asm_lex_token_arg_ind.c\
 				asm_opers_hash.c\
-				asm_lex_opers.c
+				asm_lex_opers.c\
 				asm_lex_arg_sep.c\
 
 

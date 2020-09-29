@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/09/29 19:43:48 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/09/29 22:07:12 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,57 +85,92 @@ typedef struct	s_asm_oper
 	char		*name;
 	void		(*f)(void);
 }				t_asm_oper;
-
+/*
+** asm_error.c
+*/
 void			asm_sys_error(void);
 void			asm_prog_error(char *msg);
 void			asm_lex_error(t_asm_string *asm_str, char *msg);
+/*
+** asm_new_str.c
+*/
 t_asm_string	*asm_new_str(size_t m_size);
+/*
+** asm_strs_realoc.c
+*/
 void			asm_str_realoc(t_asm_string *asm_str);
-t_asm_token		*asm_new_token(t_asm_tkn_type type);
+/*
+** asm_lex_token.c
+*/
+t_asm_token		*asm_lex_new_token(t_asm_tkn_type type);
+/*
+** asm_filetostr.c
+*/
 t_asm_string	*asm_file_to_str(char *file_path);
 /*
-** asm_get_token.c
+** asm_lex_get_token.c
 */
-t_asm_token		*asm_get_token(t_asm_string *asm_str,
+t_asm_token		*asm_lex_get_token(t_asm_string *asm_str,
 									t_hash **opers_hash);
-t_asm_token		*asm_token_comment(t_asm_string *asm_str);
+/*
+** asm_lex_token_comment.c
+*/
+t_asm_token		*asm_lex_token_comment(t_asm_string *asm_str);
+/*
+** asm_ltoa.c
+*/
 char			*asm_ltoa(long long num);
 /*
-** asm_chain_tokens.c
+** asm_lex_get_chain_tokens.c
 */
-t_asm_token		*asm_get_chain_tokens(t_asm_string *asm_str,
+t_asm_token		*asm_lex_get_chain_tokens(t_asm_string *asm_str,
 										t_hash **opers_hash);
-t_asm_token		*asm_token_nl(t_asm_string *asm_str);
-t_asm_token		*asm_token_str(t_asm_string *asm_str);
-int				asm_check_champ_name(t_asm_string *asm_str);
-t_asm_token		*asm_token_champ_name(t_asm_string *asm_str);
-int				asm_check_champ_comment(t_asm_string *asm_str);
-t_asm_token		*asm_token_champ_comment (t_asm_string *asm_str);
-int				asm_check_sep(t_asm_string *asm_str);
-t_asm_token		*asm_token_sep (t_asm_string *asm_str);
 /*
-** asm_token_label.c
+** asm_lex_token_nl.c
 */
-int				asm_is_label(char *str, size_t i, int mod);
-char			*asm_get_label_str(t_asm_string *asm_str, char mod);
-t_asm_token		*asm_token_label(t_asm_string *asm_str);
+t_asm_token		*asm_lex_token_nl(t_asm_string *asm_str);
 /*
-** asm_token_arg_reg.c
+** asm_lex_token_str.c
 */
-int				asm_is_number(t_asm_string *asm_str, size_t i);
-int				asm_check_arg_reg(t_asm_string *asm_str);
-size_t			*asm_get_number(t_asm_string *asm_str);
-t_asm_token		*asm_token_arg_reg(t_asm_string *asm_str);
+t_asm_token		*asm_lex_token_str(t_asm_string *asm_str);
 /*
-** asm_token_arg_dir.c
+** asm_lex_token_chn.c
 */
-int				asm_check_arg_dir(t_asm_string *asm_str);
-t_asm_token		*asm_token_arg_dir(t_asm_string *asm_str);
+int				asm_lex_is_champ_name(t_asm_string *asm_str);
+t_asm_token		*asm_lex_token_champ_name(t_asm_string *asm_str);
 /*
-** asm_token_arg_ind.c
+** asm_lex_token_chcom.c
 */
-int				asm_check_arg_ind(t_asm_string *asm_str);
-t_asm_token		*asm_token_arg_ind(t_asm_string *asm_str);
+int				asm_lex_is_champ_comment(t_asm_string *asm_str);
+t_asm_token		*asm_lex_token_champ_comment (t_asm_string *asm_str);
+/*
+** asm_lex_token_sep.c
+*/
+int				asm_lex_is_sep(t_asm_string *asm_str);
+t_asm_token		*asm_lex_token_sep (t_asm_string *asm_str);
+/*
+** asm_lex_token_label.c
+*/
+int				asm_lex_is_label(char *str, size_t i, int mod);
+char			*asm_lex_get_label_str(t_asm_string *asm_str, char mod);
+t_asm_token		*asm_lex_token_label(t_asm_string *asm_str);
+/*
+** asm_lex_token_arg_reg.c
+*/
+int				asm_lex_is_number(t_asm_string *asm_str, size_t i);
+int				asm_lex_is_arg_reg(t_asm_string *asm_str);
+size_t			*asm_lex_get_number(t_asm_string *asm_str);
+t_asm_token		*asm_lex_token_arg_reg(t_asm_string *asm_str);
+/*
+** asm_lex_token_arg_dir.c
+*/
+int				asm_lex_is_arg_dir(t_asm_string *asm_str);
+t_asm_token		*asm_lex_token_arg_dir(t_asm_string *asm_str);
+/*
+** asm_lex_token_arg_ind.c
+*/
+int				asm_lex_is_arg_ind(t_asm_string *asm_str);
+t_asm_token		*asm_lex_token_arg_ind(t_asm_string *asm_str);
 /*
 ** asm_opers_hash.c
 */
