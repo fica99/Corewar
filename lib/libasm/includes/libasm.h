@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/09/29 21:58:42 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/09/29 22:03:36 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,10 +167,10 @@ t_asm_token		*asm_lex_token_arg_reg(t_asm_string *asm_str);
 int				asm_check_arg_dir(t_asm_string *asm_str);
 t_asm_token		*asm_token_arg_dir(t_asm_string *asm_str);
 /*
-** asm_token_arg_ind.c
+** asm_lex_token_arg_ind.c
 */
-int				asm_check_arg_ind(t_asm_string *asm_str);
-t_asm_token		*asm_token_arg_ind(t_asm_string *asm_str);
+int				asm_lex_is_arg_ind(t_asm_string *asm_str);
+t_asm_token		*asm_lex_token_arg_ind(t_asm_string *asm_str);
 /*
 ** asm_opers_hash.c
 */

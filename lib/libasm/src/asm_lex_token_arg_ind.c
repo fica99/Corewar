@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_token_arg_ind.c                                :+:      :+:    :+:   */
+/*   asm_lex_token_arg_ind.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/15 21:41:44 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/09/29 22:01:30 by ggrimes          ###   ########.fr       */
+/*   Created: 2020/09/29 22:02:57 by ggrimes           #+#    #+#             */
+/*   Updated: 2020/09/29 22:03:11 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libasm.h"
 
-int				asm_check_arg_ind(t_asm_string *asm_str)
+int				asm_lex_is_arg_ind(t_asm_string *asm_str)
 {
 	if (asm_lex_is_number(asm_str, asm_str->index)
 		|| asm_lex_is_label(asm_str->str, asm_str->index, -1))
@@ -20,7 +20,7 @@ int				asm_check_arg_ind(t_asm_string *asm_str)
 	return (0);
 }
 
-t_asm_token		*asm_token_arg_ind(t_asm_string *asm_str)
+t_asm_token		*asm_lex_token_arg_ind(t_asm_string *asm_str)
 {
 	t_asm_token	*token;
 
