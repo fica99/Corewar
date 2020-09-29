@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_token_chn.c                                    :+:      :+:    :+:   */
+/*   asm_lex_token_chn.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/23 11:07:14 by olegmulko         #+#    #+#             */
-/*   Updated: 2020/07/23 11:21:56 by olegmulko        ###   ########.fr       */
+/*   Created: 2020/09/29 20:21:21 by ggrimes           #+#    #+#             */
+/*   Updated: 2020/09/29 20:21:36 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libasm.h"
 
-int					asm_check_champ_name(t_asm_string *asm_str)
+int					asm_lex_is_champ_name(t_asm_string *asm_str)
 {
 	static char		*champ_name = NAME_CMD_STRING;
 	static size_t	size;
