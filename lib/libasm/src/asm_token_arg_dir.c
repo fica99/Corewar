@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 21:32:26 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/09/29 21:45:44 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/09/29 22:01:31 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int				asm_check_arg_dir(t_asm_string *asm_str)
 	if (asm_str->str[i++] != DIRECT_CHAR)
 		return (0);
 	return (asm_lex_is_label(asm_str->str, i, -1)
-		|| asm_is_number(asm_str, i));
+		|| asm_lex_is_number(asm_str, i));
 }
 
 t_asm_token		*asm_token_arg_dir(t_asm_string *asm_str)
@@ -37,7 +37,7 @@ t_asm_token		*asm_token_arg_dir(t_asm_string *asm_str)
 	}
 	else
 	{
-		token->data = (void *)asm_get_number(asm_str);
+		token->data = (void *)asm_lex_get_number(asm_str);
 		token->type_conv = TC_SIZE_T;
 	}
 	return (token);
