@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_token_arg_dir.c                                :+:      :+:    :+:   */
+/*   asm_lex_token_arg_dir.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/15 21:32:26 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/09/29 22:01:31 by ggrimes          ###   ########.fr       */
+/*   Created: 2020/09/29 22:06:33 by ggrimes           #+#    #+#             */
+/*   Updated: 2020/09/29 22:06:45 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libasm.h"
 
-int				asm_check_arg_dir(t_asm_string *asm_str)
+int				asm_lex_is_arg_dir(t_asm_string *asm_str)
 {
 	size_t		i;
 
@@ -23,7 +23,7 @@ int				asm_check_arg_dir(t_asm_string *asm_str)
 		|| asm_lex_is_number(asm_str, i));
 }
 
-t_asm_token		*asm_token_arg_dir(t_asm_string *asm_str)
+t_asm_token		*asm_lex_token_arg_dir(t_asm_string *asm_str)
 {
 	t_asm_token	*token;
 
