@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 09:30:41 by olegmulko         #+#    #+#             */
-/*   Updated: 2020/09/24 21:22:50 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/09/29 19:27:04 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ static t_asm_token	*asm_get_token_next(t_asm_string *asm_str,
 		return (asm_token_arg_dir(asm_str));
 	else if (asm_check_arg_ind(asm_str))
 		return (asm_token_arg_ind(asm_str));
+	else if (asm_lex_check_arg_sep(asm_str))
+		return (asm_lex_token_arg_sep(asm_str));
 	else if (asm_is_oper(asm_str, opers_hash))
 		return (NULL);
 	else
