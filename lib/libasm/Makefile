@@ -6,7 +6,7 @@
 #    By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/12 10:32:40 by olegmulko         #+#    #+#              #
-#    Updated: 2020/09/29 21:34:26 by ggrimes          ###   ########.fr        #
+#    Updated: 2020/09/29 21:38:11 by ggrimes          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ SRC_FLS	=		asm_error.c\
 				asm_token_comment.c\
 				asm_ltoa.c\
 				asm_chain_tokens.c\
-				asm_token_nl.c\
+				asm_lex_token_nl.c\
 				asm_lex_token_str.c\
 				asm_lex_token_chn.c\
 				asm_token_chcom.c\
