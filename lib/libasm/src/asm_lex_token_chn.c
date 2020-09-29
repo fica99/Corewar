@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 20:21:21 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/09/29 20:21:36 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/09/29 20:58:17 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_asm_token			*asm_token_champ_name(t_asm_string *asm_str)
 
 	if (!size)
 		size = ft_strlen(NAME_CMD_STRING);
-	token = asm_new_token(TT_CHAMP_NAME);
+	token = asm_lex_new_token(TT_CHAMP_NAME);
 	asm_str->index += size;
 	asm_str->char_num += size;
 	return (token);

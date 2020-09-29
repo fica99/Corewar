@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 19:35:08 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/09/22 20:22:54 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/09/29 20:58:17 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ t_asm_token		*asm_token_label(t_asm_string *asm_str)
 {
 	t_asm_token	*token;
 
-	token = asm_new_token(TT_LABEL);
+	token = asm_lex_new_token(TT_LABEL);
 	token->data = (void *)(asm_get_label_str(asm_str, 1));
 	return (token);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm_token_chcom.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 09:19:31 by olegmulko         #+#    #+#             */
-/*   Updated: 2020/07/24 09:35:47 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/09/29 20:58:17 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_asm_token			*asm_token_champ_comment(t_asm_string *asm_str)
 
 	if (!size)
 		size = ft_strlen(COMMENT_CMD_STRING);
-	token = asm_new_token(TT_CHAMP_COMMENT);
+	token = asm_lex_new_token(TT_CHAMP_COMMENT);
 	asm_str->index += size;
 	asm_str->char_num += size;
 	return (token);

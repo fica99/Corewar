@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aashara <aashara@student.42.fr>            +#+  +:+       +#+         #
+#    By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/14 12:47:29 by aashara           #+#    #+#              #
-#    Updated: 2020/06/23 22:30:34 by aashara          ###   ########.fr        #
+#    Updated: 2020/09/29 20:51:44 by ggrimes          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,12 +72,10 @@ $(NAME): $(LFT_DIR)/$(LFT) $(LOP_DIR)/$(LOP) $(OBJS)
 
 clean:
 	$(MAKE) clean -C $(LFT_DIR)
-	$(MAKE) clean -C $(LOP_DIR)
 	$(RM) $(OBJ_DIR)
 
 fclean: clean
 	$(MAKE) fclean -C $(LFT_DIR)
-	$(MAKE) fclean -C $(LOP_DIR)
 	$(RM) $(NAME)
 
 re: fclean all

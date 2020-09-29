@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_token.c                                        :+:      :+:    :+:   */
+/*   asm_lex_token.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/16 16:14:01 by olegmulko         #+#    #+#             */
-/*   Updated: 2020/09/18 15:40:20 by olegmulko        ###   ########.fr       */
+/*   Created: 2020/09/29 20:27:18 by ggrimes           #+#    #+#             */
+/*   Updated: 2020/09/29 20:27:44 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libasm.h"
 
-t_asm_token	*asm_new_token(t_asm_tkn_type type)
+t_asm_token	*asm_lex_new_token(t_asm_tkn_type type)
 {
 	t_asm_token	*new_token;
 

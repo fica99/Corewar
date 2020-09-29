@@ -6,7 +6,7 @@
 #    By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/12 10:32:40 by olegmulko         #+#    #+#              #
-#    Updated: 2020/09/29 20:24:14 by ggrimes          ###   ########.fr        #
+#    Updated: 2020/09/29 20:56:50 by ggrimes          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ SRC_FLS	=		asm_error.c\
 				asm_filetostr.c\
 				asm_new_str.c\
 				asm_str_realoc.c\
-				asm_token.c\
+				asm_lex_token.c\
 				asm_lex_get_token.c\
 				asm_token_comment.c\
 				asm_ltoa.c\
@@ -53,7 +53,7 @@ SRC_FLS	=		asm_error.c\
 				asm_token_arg_dir.c\
 				asm_token_arg_ind.c\
 				asm_opers_hash.c\
-				asm_lex_opers.c
+				asm_lex_opers.c\
 				asm_lex_arg_sep.c\
 
 

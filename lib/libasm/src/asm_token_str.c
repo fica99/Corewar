@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm_token_str.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/22 16:10:27 by olegmulko         #+#    #+#             */
-/*   Updated: 2020/07/23 10:59:50 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/09/29 20:58:17 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ t_asm_token		*asm_token_str(t_asm_string *asm_str)
 	if (!(str = ft_strnew(size)))
 		asm_sys_error();
 	ft_memcpy(str, asm_str->str + offset, size);
-	token = asm_new_token(TT_STRING);
+	token = asm_lex_new_token(TT_STRING);
 	token->data = (void*)str;
 	token->size = size;
 	ft_memdel((void**)&str);

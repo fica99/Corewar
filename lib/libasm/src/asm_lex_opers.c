@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 20:57:47 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/09/24 22:19:16 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/09/29 20:58:17 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_asm_token		*asm_token_oper(t_asm_string *asm_str, t_hash **opers_hash)
 	size_t		size;
 	char		*name;
 
-	token = asm_new_token(TT_OPER);
+	token = asm_lex_new_token(TT_OPER);
 	i = asm_str->index;
 	while (asm_is_low(asm_str->str[i]))
 		i++;
