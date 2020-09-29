@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/09/29 21:41:24 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/09/29 21:44:01 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,11 +143,11 @@ t_asm_token		*asm_token_champ_comment (t_asm_string *asm_str);
 int				asm_lex_is_sep(t_asm_string *asm_str);
 t_asm_token		*asm_lex_token_sep (t_asm_string *asm_str);
 /*
-** asm_token_label.c
+** asm_lex_token_label.c
 */
-int				asm_is_label(char *str, size_t i, int mod);
-char			*asm_get_label_str(t_asm_string *asm_str, char mod);
-t_asm_token		*asm_token_label(t_asm_string *asm_str);
+int				asm_lex_is_label(char *str, size_t i, int mod);
+char			*asm_lex_get_label_str(t_asm_string *asm_str, char mod);
+t_asm_token		*asm_lex_token_label(t_asm_string *asm_str);
 /*
 ** asm_token_arg_reg.c
 */
