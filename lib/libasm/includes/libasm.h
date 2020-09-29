@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/09/29 19:43:48 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/09/29 20:14:47 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,9 @@ typedef struct	s_asm_oper
 	char		*name;
 	void		(*f)(void);
 }				t_asm_oper;
-
+/*
+** asm_error.c
+*/
 void			asm_sys_error(void);
 void			asm_prog_error(char *msg);
 void			asm_lex_error(t_asm_string *asm_str, char *msg);
@@ -101,7 +103,7 @@ t_asm_token		*asm_get_token(t_asm_string *asm_str,
 t_asm_token		*asm_token_comment(t_asm_string *asm_str);
 char			*asm_ltoa(long long num);
 /*
-** asm_chain_tokens.c
+** asm_get_chain_tokens.c
 */
 t_asm_token		*asm_get_chain_tokens(t_asm_string *asm_str,
 										t_hash **opers_hash);
