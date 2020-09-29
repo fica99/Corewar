@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/09/29 20:14:47 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/09/29 20:18:44 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,9 +96,9 @@ void			asm_str_realoc(t_asm_string *asm_str);
 t_asm_token		*asm_new_token(t_asm_tkn_type type);
 t_asm_string	*asm_file_to_str(char *file_path);
 /*
-** asm_get_token.c
+** asm_lex_get_token.c
 */
-t_asm_token		*asm_get_token(t_asm_string *asm_str,
+t_asm_token		*asm_lex_get_token(t_asm_string *asm_str,
 									t_hash **opers_hash);
 t_asm_token		*asm_token_comment(t_asm_string *asm_str);
 char			*asm_ltoa(long long num);

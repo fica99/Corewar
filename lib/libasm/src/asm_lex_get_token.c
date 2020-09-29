@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_get_token.c                                    :+:      :+:    :+:   */
+/*   asm_lex_get_token.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/20 09:30:41 by olegmulko         #+#    #+#             */
-/*   Updated: 2020/09/29 19:27:04 by ggrimes          ###   ########.fr       */
+/*   Created: 2020/09/29 20:17:11 by ggrimes           #+#    #+#             */
+/*   Updated: 2020/09/29 20:17:23 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libasm.h"
 
-static t_asm_token	*asm_get_token_next(t_asm_string *asm_str,
+static t_asm_token	*asm_lex_get_token_next(t_asm_string *asm_str,
 											t_hash **opers_hash)
 {
 	if (asm_is_label(asm_str->str, asm_str->index, 1))
@@ -32,7 +32,7 @@ static t_asm_token	*asm_get_token_next(t_asm_string *asm_str,
 	return (NULL);
 }
 
-t_asm_token			*asm_get_token(t_asm_string *asm_str,
+t_asm_token			*asm_lex_get_token(t_asm_string *asm_str,
 										t_hash **opers_hash)
 {
 	while (asm_str->str[asm_str->index])
