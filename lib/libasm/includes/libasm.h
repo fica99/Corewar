@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/09/29 21:27:57 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/09/29 21:32:25 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,12 +91,21 @@ typedef struct	s_asm_oper
 void			asm_sys_error(void);
 void			asm_prog_error(char *msg);
 void			asm_lex_error(t_asm_string *asm_str, char *msg);
+/*
+** asm_new_str.c
+*/
 t_asm_string	*asm_new_str(size_t m_size);
+/*
+** asm_strs_realoc.c
+*/
 void			asm_str_realoc(t_asm_string *asm_str);
 /*
 ** asm_lex_token.c
 */
 t_asm_token		*asm_lex_new_token(t_asm_tkn_type type);
+/*
+** asm_filetostr.c
+*/
 t_asm_string	*asm_file_to_str(char *file_path);
 /*
 ** asm_lex_get_token.c
@@ -104,6 +113,9 @@ t_asm_string	*asm_file_to_str(char *file_path);
 t_asm_token		*asm_lex_get_token(t_asm_string *asm_str,
 									t_hash **opers_hash);
 t_asm_token		*asm_token_comment(t_asm_string *asm_str);
+/*
+** asm_ltoa.c
+*/
 char			*asm_ltoa(long long num);
 /*
 ** asm_get_chain_tokens.c
