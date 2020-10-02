@@ -6,7 +6,7 @@
 /*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/02 16:02:11 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/10/02 16:23:41 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 # define ERR_LEX_TMP "line ?: position ?, Error: ?"
 # define ERR_LEX "lexical analysis"
 # define ERR_STR_CLOSE "the line is not closed"
+# define ERR_BIN_DATA_ADD_SIZE "number of bytes to write cannot exceed 4"
 
 typedef struct	s_asm_string
 {
@@ -94,6 +95,7 @@ typedef struct	s_asm_bin_data
 	size_t		m_size;
 	size_t		size;
 	void		(*check_size)(struct s_asm_bin_data *);
+	void		(*add)(struct s_asm_bin_data *, int, size_t);
 }				t_asm_bin_data;
 
 /*
