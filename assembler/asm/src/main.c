@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/27 01:00:23 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/06 20:30:03 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/10/06 21:18:19 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	main(int ac, char **av)
 	t_asm_token		*tokens;
 	t_hash			**opers_hash;
 	t_asm_bin_data	*bin_data;
+	t_asm_file		*file;
 
 	check_inprms(ac, av);
 	asm_str = asm_file_to_str(av[1]);
@@ -27,5 +28,6 @@ int	main(int ac, char **av)
 		asm_prog_error("the file is empty");
 	bin_data = asm_init_bin_data(BIN_DATA_SIZE);
 	bin_data->add(bin_data, COREWAR_EXEC_MAGIC, 8);
+	file = asm_file_init("./result.cor");
 	return (0);
 }

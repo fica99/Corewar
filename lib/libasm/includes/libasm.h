@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/06 20:24:31 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/10/06 21:16:24 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@
 # define ERR_LEX "lexical analysis"
 # define ERR_STR_CLOSE "the line is not closed"
 # define ERR_BIN_DATA_ADD_SIZE "number of bytes to write cannot exceed 4"
+# define ERR_FILE_NAME_NULL "the file name specified in the constructor is NULL"
 
 typedef struct	s_asm_string
 {
@@ -99,6 +100,11 @@ typedef struct	s_asm_bin_data
 	void		(*check_size)(struct s_asm_bin_data *);
 	void		(*add)(struct s_asm_bin_data *, int, int);
 }				t_asm_bin_data;
+
+typedef struct	s_asm_file
+{
+	char		*name;
+}				t_asm_file;
 
 /*
 ** asm_error.c
@@ -206,4 +212,8 @@ t_asm_token		*asm_lex_token_arg_sep(t_asm_string *asm_str);
 ** asm_bin_data.c
 */
 t_asm_bin_data	*asm_init_bin_data(size_t size);
+/*
+** asm_file.c
+*/
+t_asm_file		*asm_file_init(char *name);
 #endif
