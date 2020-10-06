@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/06 21:16:24 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/10/06 21:28:51 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ typedef struct	s_asm_bin_data
 typedef struct	s_asm_file
 {
 	char		*name;
+	int			fd;
+	void		(*open)(struct s_asm_file *, int);
 }				t_asm_file;
 
 /*

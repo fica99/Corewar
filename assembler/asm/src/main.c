@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/27 01:00:23 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/06 21:18:19 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/10/06 21:30:06 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ int	main(int ac, char **av)
 	bin_data = asm_init_bin_data(BIN_DATA_SIZE);
 	bin_data->add(bin_data, COREWAR_EXEC_MAGIC, 8);
 	file = asm_file_init("./result.cor");
+	file->open(file, O_CREAT | O_TRUNC | O_WRONLY);
 	return (0);
 }
