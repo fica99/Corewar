@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/27 01:00:23 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/06 21:51:06 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/10/06 23:08:45 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	main(int ac, char **av)
 		asm_prog_error("the file is empty");
 	bin_data = asm_init_bin_data(BIN_DATA_SIZE);
 	bin_data->add(bin_data, COREWAR_EXEC_MAGIC, 8);
+	asm_parser(tokens, bin_data);
 	file = asm_file_init("./result.cor");
 	file->open(file, O_CREAT | O_TRUNC | O_WRONLY, S_IREAD | S_IWRITE);
 	file->write_bin_data(file, bin_data);
