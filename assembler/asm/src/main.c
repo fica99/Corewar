@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/27 01:00:23 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/02 16:29:41 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/10/06 21:51:06 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	main(int ac, char **av)
 	t_asm_token		*tokens;
 	t_hash			**opers_hash;
 	t_asm_bin_data	*bin_data;
+	t_asm_file		*file;
 
 	check_inprms(ac, av);
 	asm_str = asm_file_to_str(av[1]);
@@ -26,6 +27,9 @@ int	main(int ac, char **av)
 	if (tokens->next == TT_EOF)
 		asm_prog_error("the file is empty");
 	bin_data = asm_init_bin_data(BIN_DATA_SIZE);
-	bin_data->add(bin_data, COREWAR_EXEC_MAGIC, 4);
+	bin_data->add(bin_data, COREWAR_EXEC_MAGIC, 8);
+	file = asm_file_init("./result.cor");
+	file->open(file, O_CREAT | O_TRUNC | O_WRONLY, S_IREAD | S_IWRITE);
+	file->write_bin_data(file, bin_data);
 	return (0);
 }

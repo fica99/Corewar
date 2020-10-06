@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+         #
+#    By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/12 10:32:40 by olegmulko         #+#    #+#              #
-#    Updated: 2020/10/02 14:53:28 by olegmulko        ###   ########.fr        #
+#    Updated: 2020/10/06 21:18:43 by ggrimes          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,6 +56,7 @@ SRC_FLS	=		asm_error.c\
 				asm_lex_opers.c\
 				asm_lex_arg_sep.c\
 				asm_bin_data.c\
+				asm_file.c\
 
 
 # ------------  FILEPATHS  --------------------------------------------------- #

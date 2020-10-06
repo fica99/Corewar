@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libasm.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/02 16:23:41 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/10/06 21:47:03 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # define OPERS_SIZE 16
 # define DEFAULT_BIN_DATA_SIZE 4096
 # define BIN_DATA_SIZE 4096
+# define BIN_DATA_MASK 0b00001111
 # define ALT_COMMENT_CHAR ';'
 # define ERR_INPUT_PARAMS_FIRST "Error: the program accepts only one "
 # define ERR_INPUT_PARAMS_SEC "parameter as input (the full path to the file)"
@@ -39,6 +40,7 @@
 # define ERR_LEX "lexical analysis"
 # define ERR_STR_CLOSE "the line is not closed"
 # define ERR_BIN_DATA_ADD_SIZE "number of bytes to write cannot exceed 4"
+# define ERR_FILE_NAME_NULL "the file name specified in the constructor is NULL"
 
 typedef struct	s_asm_string
 {
@@ -94,9 +96,18 @@ typedef struct	s_asm_bin_data
 	char		*data;
 	size_t		m_size;
 	size_t		size;
+	char		part;
 	void		(*check_size)(struct s_asm_bin_data *);
-	void		(*add)(struct s_asm_bin_data *, int, size_t);
+	void		(*add)(struct s_asm_bin_data *, int, int);
 }				t_asm_bin_data;
+
+typedef struct	s_asm_file
+{
+	char		*name;
+	int			fd;
+	void		(*open)(struct s_asm_file *, int, int);
+	void		(*write_bin_data)(struct s_asm_file *, t_asm_bin_data *);
+}				t_asm_file;
 
 /*
 ** asm_error.c
@@ -204,4 +215,8 @@ t_asm_token		*asm_lex_token_arg_sep(t_asm_string *asm_str);
 ** asm_bin_data.c
 */
 t_asm_bin_data	*asm_init_bin_data(size_t size);
+/*
+** asm_file.c
+*/
+t_asm_file		*asm_file_init(char *name);
 #endif
