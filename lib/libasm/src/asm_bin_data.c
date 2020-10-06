@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm_bin_data.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 14:45:09 by olegmulko         #+#    #+#             */
-/*   Updated: 2020/10/02 16:27:08 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/10/06 20:24:48 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,37 @@ static void		asm_check_bin_data_size(t_asm_bin_data *bin_data)
 		asm_bin_data_realoc(bin_data);
 }
 
-static void		asm_add_bin_data(t_asm_bin_data *bin_data, int data, size_t size)
+static void		asm_pack_in_bytes(t_asm_bin_data *bin_data, char byte)
 {
-	size_t		i;
-	char		byte;
-
-	if (size > 4)
-		asm_prog_error(ERR_BIN_DATA_ADD_SIZE);
-	i = 0;
-	while (i < size)
+	if (bin_data->part == 1)
 	{
-		byte = data << 8 * i;
+		byte <<= 4;
 		bin_data->check_size(bin_data);
 		bin_data->data[bin_data->size] = byte;
+		bin_data->part = 2;
+	}
+	else
+	{
+		bin_data->data[bin_data->size] |= byte;
+		bin_data->part = 1;
 		bin_data->size++;
-		i++;
+	}
+}
+
+static void		asm_add_bin_data(t_asm_bin_data *bin_data, int data, int size)
+{
+	char		byte;
+
+	if (size > 8 || size < 0)
+		asm_prog_error(ERR_BIN_DATA_ADD_SIZE);
+	size--;
+	while (size >= 0)
+	{
+		byte = 0;
+		byte = data >> 4 * size;
+		byte &= BIN_DATA_MASK;
+		asm_pack_in_bytes(bin_data, byte);
+		size--;
 	}
 }
 
@@ -63,6 +79,7 @@ t_asm_bin_data	*asm_init_bin_data(size_t size)
 	bin_data->data = data;
 	bin_data->m_size = size;
 	bin_data->size = 0;
+	bin_data->part = 1;
 	bin_data->check_size = &asm_check_bin_data_size;
 	bin_data->add = &asm_add_bin_data;
 	return (bin_data);

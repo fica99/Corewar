@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/27 01:00:23 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/02 16:29:41 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/10/06 20:30:03 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ int	main(int ac, char **av)
 	if (tokens->next == TT_EOF)
 		asm_prog_error("the file is empty");
 	bin_data = asm_init_bin_data(BIN_DATA_SIZE);
-	bin_data->add(bin_data, COREWAR_EXEC_MAGIC, 4);
+	bin_data->add(bin_data, COREWAR_EXEC_MAGIC, 8);
 	return (0);
 }

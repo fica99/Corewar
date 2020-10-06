@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libasm.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/02 16:23:41 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/10/06 20:24:31 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # define OPERS_SIZE 16
 # define DEFAULT_BIN_DATA_SIZE 4096
 # define BIN_DATA_SIZE 4096
+# define BIN_DATA_MASK 0b00001111
 # define ALT_COMMENT_CHAR ';'
 # define ERR_INPUT_PARAMS_FIRST "Error: the program accepts only one "
 # define ERR_INPUT_PARAMS_SEC "parameter as input (the full path to the file)"
@@ -94,8 +95,9 @@ typedef struct	s_asm_bin_data
 	char		*data;
 	size_t		m_size;
 	size_t		size;
+	char		part;
 	void		(*check_size)(struct s_asm_bin_data *);
-	void		(*add)(struct s_asm_bin_data *, int, size_t);
+	void		(*add)(struct s_asm_bin_data *, int, int);
 }				t_asm_bin_data;
 
 /*
