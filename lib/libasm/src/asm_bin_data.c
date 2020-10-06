@@ -6,7 +6,7 @@
 /*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 14:45:09 by olegmulko         #+#    #+#             */
-/*   Updated: 2020/10/02 16:03:21 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/10/02 16:27:08 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,24 @@ static void		asm_check_bin_data_size(t_asm_bin_data *bin_data)
 		asm_bin_data_realoc(bin_data);
 }
 
+static void		asm_add_bin_data(t_asm_bin_data *bin_data, int data, size_t size)
+{
+	size_t		i;
+	char		byte;
+
+	if (size > 4)
+		asm_prog_error(ERR_BIN_DATA_ADD_SIZE);
+	i = 0;
+	while (i < size)
+	{
+		byte = data << 8 * i;
+		bin_data->check_size(bin_data);
+		bin_data->data[bin_data->size] = byte;
+		bin_data->size++;
+		i++;
+	}
+}
+
 t_asm_bin_data	*asm_init_bin_data(size_t size)
 {
 	t_asm_bin_data	*bin_data;
@@ -46,5 +64,6 @@ t_asm_bin_data	*asm_init_bin_data(size_t size)
 	bin_data->m_size = size;
 	bin_data->size = 0;
 	bin_data->check_size = &asm_check_bin_data_size;
+	bin_data->add = &asm_add_bin_data;
 	return (bin_data);
 }
