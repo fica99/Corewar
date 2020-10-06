@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 21:21:15 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/09/29 21:24:47 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/10/06 23:07:49 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ t_asm_token		*asm_lex_token_str(t_asm_string *asm_str)
 	t_asm_token	*token;
 	size_t		offset;
 
-	offset = asm_str->index;
+	offset = asm_str->index + 1;
 	size = asm_lex_check_str_size(asm_str);
 	if (!(str = ft_strnew(size)))
 		asm_sys_error();

@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/06 21:47:03 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/10/06 23:29:35 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@
 # define ERR_STR_CLOSE "the line is not closed"
 # define ERR_BIN_DATA_ADD_SIZE "number of bytes to write cannot exceed 4"
 # define ERR_FILE_NAME_NULL "the file name specified in the constructor is NULL"
+# define ERR_CHAMP_NAME_LEN "the champion name too big"
 
 typedef struct	s_asm_string
 {
@@ -219,4 +220,19 @@ t_asm_bin_data	*asm_init_bin_data(size_t size);
 ** asm_file.c
 */
 t_asm_file		*asm_file_init(char *name);
+/*
+** asm_parser.c
+*/
+void			asm_parser(t_asm_token *token,
+	t_asm_bin_data *bin_data);
+/*
+** asm_pars_chn.c
+*/
+void			asm_pars_champ_name(t_asm_token *token,
+	t_asm_bin_data *bin_data);
+/*
+** asm_pars_sep.c
+*/
+void			asm_check_sep(t_asm_token **token);
+void			asm_check_nl(t_asm_token **token);
 #endif
