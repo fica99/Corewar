@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libasm.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
+/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/06 23:29:35 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/10/08 20:39:43 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@
 # define ERR_BIN_DATA_ADD_SIZE "number of bytes to write cannot exceed 4"
 # define ERR_FILE_NAME_NULL "the file name specified in the constructor is NULL"
 # define ERR_CHAMP_NAME_LEN "the champion name too big"
+# define ERR_PARS_CHAMP_NAME_TOKEN "the token type is not champion name"
+# define ERR_PARS_CHAMP_COMMENT_TOKEN "the token type is not champion comment"
+# define ERR_CHAMP_COMMENT_LEN "the champion comment too big"
 
 typedef struct	s_asm_string
 {
@@ -233,6 +236,22 @@ void			asm_pars_champ_name(t_asm_token *token,
 /*
 ** asm_pars_sep.c
 */
-void			asm_check_sep(t_asm_token **token);
+int				asm_check_sep(t_asm_token **token);
 void			asm_check_nl(t_asm_token **token);
+int				asm_check_nl_in_loop(t_asm_token **token);
+/*
+** asm_pars_exec_code.c
+*/
+void			asm_exec_code(t_asm_token *token,
+	t_asm_bin_data *bin_data);
+/*
+** asm_pars.ch_com.c
+*/
+void			asm_pars_champ_comment(t_asm_token *token,
+	t_asm_bin_data *bin_data);
+/*
+** asm_support_func.c
+*/
+void			asm_add_null_in_bd(t_asm_bin_data *bin_data,
+	int bytes);
 #endif
