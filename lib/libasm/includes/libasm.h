@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/10 17:57:36 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/10/10 18:46:55 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,13 @@ typedef struct	s_asm_file
 	void		(*open)(struct s_asm_file *, int, int);
 	void		(*write_bin_data)(struct s_asm_file *, t_asm_bin_data *);
 }				t_asm_file;
+
+typedef struct	s_asm_pars_prms
+{
+	t_asm_token		*token;
+	t_asm_bin_data	*bin_data;
+	int				exec_code_size;
+}				t_asm_pars_prms;
 
 /*
 ** asm_error.c
@@ -229,8 +236,9 @@ t_asm_file		*asm_file_init(char *name);
 /*
 ** asm_parser.c
 */
-void			asm_parser(t_asm_token *token,
+t_asm_pars_prms	*asm_init_pars_prms(t_asm_token *token,
 	t_asm_bin_data *bin_data);
+void			asm_parser(t_asm_pars_prms *prms);
 /*
 ** asm_pars_chn.c
 */
