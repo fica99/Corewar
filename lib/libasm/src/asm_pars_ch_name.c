@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_pars.ch_com.c                                  :+:      :+:    :+:   */
+/*   asm_pars_ch_name.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/08 19:46:20 by olegmulko         #+#    #+#             */
-/*   Updated: 2020/10/10 21:17:52 by ggrimes          ###   ########.fr       */
+/*   Created: 2020/10/10 20:35:03 by ggrimes           #+#    #+#             */
+/*   Updated: 2020/10/10 21:15:38 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libasm.h"
 
-static void	asm_add_chc_to_bd(t_asm_bin_data *bin_data,
+static void	asm_add_chn_to_bd(t_asm_bin_data *bin_data,
 	char *name)
 {
 	size_t	i;
@@ -20,18 +20,18 @@ static void	asm_add_chc_to_bd(t_asm_bin_data *bin_data,
 	i = 0;
 	while (name[i])
 		bin_data->add(bin_data, (int)name[i++], 2);
-	while (i < COMMENT_LENGTH)
+	while (i < PROG_NAME_LENGTH)
 	{
 		bin_data->add(bin_data, 0, 2);
 		i++;
 	}
 }
 
-int		asm_pars_champ_comment(t_asm_token **token,
+int			asm_pars_champ_name(t_asm_token **token,
 	t_asm_bin_data *bin_data, t_asm_pars_prms *prms)
 {
-	char	*comment;
-	size_t	size;
+	char		*name;
+	size_t		size;
 
 	(void)prms;
 	(*token) = (*token)->next;
@@ -39,10 +39,10 @@ int		asm_pars_champ_comment(t_asm_token **token,
 		;
 	if ((*token)->type != TT_STRING)
 		return (0);
-	comment = (char *)(*token)->data;
-	if ((size = ft_strlen(comment)) > COMMENT_LENGTH)
+	name = (char *)(*token)->data;
+	if ((size = ft_strlen(name)) > PROG_NAME_LENGTH)
 		return (0);
-	asm_add_chc_to_bd(bin_data, comment);
+	asm_add_chn_to_bd(bin_data, name);
 	(*token) = (*token)->next;
 	while (asm_skip_token(token, TT_SEP))
 		;

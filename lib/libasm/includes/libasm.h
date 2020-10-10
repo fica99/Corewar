@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/10 18:46:55 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/10/10 21:08:13 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,9 +115,7 @@ typedef struct	s_asm_file
 
 typedef struct	s_asm_pars_prms
 {
-	t_asm_token		*token;
-	t_asm_bin_data	*bin_data;
-	int				exec_code_size;
+	int			exec_code_size;
 }				t_asm_pars_prms;
 
 /*
@@ -236,30 +234,31 @@ t_asm_file		*asm_file_init(char *name);
 /*
 ** asm_parser.c
 */
-t_asm_pars_prms	*asm_init_pars_prms(t_asm_token *token,
-	t_asm_bin_data *bin_data);
-void			asm_parser(t_asm_pars_prms *prms);
+t_asm_pars_prms	*asm_init_pars_prms(void);
+int				asm_skip_token(t_asm_token **token,
+	t_asm_tkn_type type);
+int				asm_parser(t_asm_token *token,
+	t_asm_bin_data *bin_data, t_asm_pars_prms *prms);
 /*
-** asm_pars_chn.c
+** asm_pars_ch_name.c
 */
-void			asm_pars_champ_name(t_asm_token *token,
-	t_asm_bin_data *bin_data);
+int			asm_pars_champ_name(t_asm_token **token,
+	t_asm_bin_data *bin_data, t_asm_pars_prms *prms);
 /*
 ** asm_pars_sep.c
 */
-int				asm_check_sep(t_asm_token **token);
-void			asm_check_nl(t_asm_token **token);
-int				asm_check_nl_in_loop(t_asm_token **token);
+int	asm_check_nl(t_asm_token **token,
+	t_asm_pars_prms *prms);
 /*
 ** asm_pars_exec_code.c
 */
-void			asm_exec_code(t_asm_token *token,
-	t_asm_bin_data *bin_data);
+int	asm_exec_code(t_asm_token **token,
+	t_asm_bin_data *bin_data, t_asm_pars_prms *prms);
 /*
 ** asm_pars.ch_com.c
 */
-void			asm_pars_champ_comment(t_asm_token *token,
-	t_asm_bin_data *bin_data);
+int		asm_pars_champ_comment(t_asm_token **token,
+	t_asm_bin_data *bin_data, t_asm_pars_prms *prms);
 /*
 ** asm_support_func.c
 */

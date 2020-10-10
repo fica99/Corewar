@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+         #
+#    By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/12 10:32:40 by olegmulko         #+#    #+#              #
-#    Updated: 2020/10/08 20:23:48 by olegmulko        ###   ########.fr        #
+#    Updated: 2020/10/10 20:35:16 by ggrimes          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,7 @@ SRC_FLS	=		asm_error.c\
 				asm_bin_data.c\
 				asm_file.c\
 				asm_parser.c\
-				asm_pars_chn.c\
+				asm_pars_ch_name.c\
 				asm_pars_sep.c\
 				asm_pars_exec_code.c\
 				asm_pars.ch_com.c\

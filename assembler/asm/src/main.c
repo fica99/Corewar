@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/27 01:00:23 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/10 18:48:25 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/10/10 21:12:27 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int	main(int ac, char **av)
 		asm_prog_error("the file is empty");
 	tokens = asm_lex_del_all_com_tokens(tokens);
 	bin_data = asm_init_bin_data(BIN_DATA_SIZE);
-	prms = asm_init_pars_prms(tokens, bin_data);
-	asm_parser(prms);
+	prms = asm_init_pars_prms();
+	asm_parser(tokens, bin_data, prms);
 	file = asm_file_init("./result.cor");
 	file->open(file, O_CREAT | O_TRUNC | O_WRONLY, S_IREAD | S_IWRITE);
 	file->write_bin_data(file, bin_data);
