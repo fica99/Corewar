@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libasm.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/08 20:39:43 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/10/10 17:05:38 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ typedef struct	s_asm_token
 {
 	void				*data;
 	t_asm_tkn_type		type;
-	size_t				size;
 	t_asm_type_conv		type_conv;
 	struct s_asm_token	*next;
 }				t_asm_token;
@@ -131,6 +130,7 @@ void			asm_str_realoc(t_asm_string *asm_str);
 ** asm_lex_token.c
 */
 t_asm_token		*asm_lex_new_token(t_asm_tkn_type type);
+void			asm_lex_del_token(t_asm_token **token);
 /*
 ** asm_filetostr.c
 */

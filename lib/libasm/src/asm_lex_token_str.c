@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 21:21:15 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/10/06 23:07:49 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/10/10 17:02:09 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ t_asm_token		*asm_lex_token_str(t_asm_string *asm_str)
 	ft_memcpy(str, asm_str->str + offset, size);
 	token = asm_lex_new_token(TT_STRING);
 	token->data = (void*)str;
-	token->size = size;
 	ft_memdel((void**)&str);
 	asm_lex_check_end_str(asm_str);
 	return (token);
