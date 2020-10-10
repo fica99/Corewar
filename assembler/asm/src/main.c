@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/27 01:00:23 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/06 23:08:45 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/10/10 17:24:47 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	main(int ac, char **av)
 	tokens = asm_lex_get_chain_tokens(asm_str, opers_hash);
 	if (tokens->next == TT_EOF)
 		asm_prog_error("the file is empty");
+	tokens = asm_lex_del_all_com_tokens(tokens);
 	bin_data = asm_init_bin_data(BIN_DATA_SIZE);
 	bin_data->add(bin_data, COREWAR_EXEC_MAGIC, 8);
 	asm_parser(tokens, bin_data);

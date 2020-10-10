@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/10 17:05:38 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/10/10 17:57:36 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@
 # define ERR_PARS_CHAMP_NAME_TOKEN "the token type is not champion name"
 # define ERR_PARS_CHAMP_COMMENT_TOKEN "the token type is not champion comment"
 # define ERR_CHAMP_COMMENT_LEN "the champion comment too big"
+# define ERR_NULL_POINTER "NULL pointer passed"
 
 typedef struct	s_asm_string
 {
@@ -144,6 +145,8 @@ t_asm_token		*asm_lex_get_token(t_asm_string *asm_str,
 ** asm_lex_token_comment.c
 */
 t_asm_token		*asm_lex_token_comment(t_asm_string *asm_str);
+t_asm_token		*asm_lex_del_com_token(t_asm_token *token);
+t_asm_token		*asm_lex_del_all_com_tokens(t_asm_token *token);
 /*
 ** asm_ltoa.c
 */
