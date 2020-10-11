@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/11 19:25:37 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/10/11 19:58:01 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -285,4 +285,5 @@ int				asm_parser_error(t_asm_token *token,
 */
 int				asm_pars_opers(t_asm_token **token,
 	t_asm_bin_data *bin_data, t_asm_pars_prms *prms);
+int				asm_direct_code_additional(int code);
 #endif
