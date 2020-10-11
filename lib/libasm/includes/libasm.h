@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/11 16:01:10 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/10/11 19:25:37 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -280,4 +280,9 @@ void			asm_add_null_in_bd(t_asm_bin_data *bin_data,
 */
 int				asm_parser_error(t_asm_token *token,
 	t_asm_tkn_type type, t_asm_pars_prms *prms, size_t num_error);
+/*
+** asm_pars_opers.c
+*/
+int				asm_pars_opers(t_asm_token **token,
+	t_asm_bin_data *bin_data, t_asm_pars_prms *prms);
 #endif

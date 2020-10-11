@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 22:15:14 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/10/11 16:00:48 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/10/11 19:25:06 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_asm_pars_prms	*asm_init_pars_prms(void)
 	if (!(prms = (t_asm_pars_prms *)malloc(
 		sizeof(t_asm_pars_prms))))
 		asm_sys_error();
-	prms->exec_code_size = 0;
+	prms->exec_code_size = 23;
 	prms->line_num = 1;
 	prms->char_num = 1;
 	prms->error = NULL;
