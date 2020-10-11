@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/11 14:15:41 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/10/11 16:01:10 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,12 @@
 # define ERR_BIN_DATA_ADD_SIZE "number of bytes to write cannot exceed 4"
 # define ERR_FILE_NAME_NULL "the file name specified in the constructor is NULL"
 # define ERR_CHAMP_NAME_LEN "the champion name too big"
-# define ERR_PARS_CHAMP_NAME_TOKEN "the token type is not champion name"
-# define ERR_PARS_CHAMP_COMMENT_TOKEN "the token type is not champion comment"
 # define ERR_CHAMP_COMMENT_LEN "the champion comment too big"
 # define ERR_NULL_POINTER "NULL pointer passed"
+# define ERR_REP_CHAMP_NAME "the repeated name of the champion is used"
+# define ERR_REP_CHAMP_COMMENT "the champion's repeated comment is used"
+# define ERR_PARSER "incorrect parsing order"
+# define ERR_NL "missing line break"
 
 typedef struct	s_asm_string
 {
@@ -86,6 +88,8 @@ typedef struct	s_asm_token
 	void				*data;
 	t_asm_tkn_type		type;
 	t_asm_type_conv		type_conv;
+	size_t				line_num;
+	size_t				char_num;
 	struct s_asm_token	*next;
 }				t_asm_token;
 
@@ -240,6 +244,8 @@ t_asm_file		*asm_file_init(char *name);
 ** asm_parser.c
 */
 t_asm_pars_prms	*asm_init_pars_prms(void);
+void			asm_fill_prms_from_token(t_asm_token *token,
+	t_asm_pars_prms *prms, char *error);
 int				asm_skip_token(t_asm_token **token,
 	t_asm_tkn_type type);
 int				asm_parser(t_asm_token *token,
@@ -269,4 +275,9 @@ int				asm_pars_champ_comment(t_asm_token **token,
 */
 void			asm_add_null_in_bd(t_asm_bin_data *bin_data,
 	int bytes);
+/*
+** asm_pars_error.c
+*/
+int				asm_parser_error(t_asm_token *token,
+	t_asm_tkn_type type, t_asm_pars_prms *prms, size_t num_error);
 #endif
