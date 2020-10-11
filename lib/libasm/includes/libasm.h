@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/11 13:08:12 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/10/11 14:15:41 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # define ERR_INPUT_PARAMS_SEC "parameter as input (the full path to the file)"
 # define ERR_INPUT_PARAMS ERR_INPUT_PARAMS_FIRST ERR_INPUT_PARAMS_SEC
 # define ERR_FILE_EXT "Error: the file must have the extension .c"
-# define ERR_LEX_TMP "line ?: position ?, Error: ?"
+# define ERR_TMP "line ?: position ?, Error: ?"
 # define ERR_LEX "lexical analysis"
 # define ERR_STR_CLOSE "the line is not closed"
 # define ERR_BIN_DATA_ADD_SIZE "number of bytes to write cannot exceed 4"
@@ -117,6 +117,9 @@ typedef struct	s_asm_file
 typedef struct	s_asm_pars_prms
 {
 	int			exec_code_size;
+	char		*error;
+	size_t		line_num;
+	size_t		char_num;
 }				t_asm_pars_prms;
 
 /*
@@ -125,6 +128,7 @@ typedef struct	s_asm_pars_prms
 void			asm_sys_error(void);
 void			asm_prog_error(char *msg);
 void			asm_lex_error(t_asm_string *asm_str, char *msg);
+void			asm_pars_error(t_asm_pars_prms	*prms);
 /*
 ** asm_new_str.c
 */
