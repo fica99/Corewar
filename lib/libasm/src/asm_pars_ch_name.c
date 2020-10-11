@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_pars_chn.c                                     :+:      :+:    :+:   */
+/*   asm_pars_ch_name.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/06 22:22:18 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/10/06 23:27:08 by ggrimes          ###   ########.fr       */
+/*   Created: 2020/10/10 20:35:03 by ggrimes           #+#    #+#             */
+/*   Updated: 2020/10/11 15:59:39 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static void	asm_add_chn_to_bd(t_asm_bin_data *bin_data,
 	size_t	i;
 
 	i = 0;
+	bin_data->index = 4;
+	bin_data->part = 1;
 	while (name[i])
 		bin_data->add(bin_data, (int)name[i++], 2);
 	while (i < PROG_NAME_LENGTH)
@@ -27,20 +29,27 @@ static void	asm_add_chn_to_bd(t_asm_bin_data *bin_data,
 	}
 }
 
-void		asm_pars_champ_name(t_asm_token *token,
-	t_asm_bin_data *bin_data)
+int			asm_pars_champ_name(t_asm_token **token,
+	t_asm_bin_data *bin_data, t_asm_pars_prms *prms)
 {
-	char	*name;
-	size_t	size;
+	char		*name;
+	size_t		size;
 
-	asm_check_sep(&token);
-	if (token->type != TT_STRING)
-		asm_prog_error("parser error");
-	name = (char *)token->data;
+	(void)prms;
+	(*token) = (*token)->next;
+	while (asm_skip_token(token, TT_SEP))
+		;
+	if ((*token)->type != TT_STRING)
+		return (asm_parser_error(*token, 0, prms, 0));
+	name = (char *)(*token)->data;
 	if ((size = ft_strlen(name)) > PROG_NAME_LENGTH)
-		asm_prog_error(ERR_CHAMP_NAME_LEN);
+		return (asm_parser_error(*token, TT_CHAMP_NAME, prms, 2));
 	asm_add_chn_to_bd(bin_data, name);
-	token = token->next;
-	asm_check_sep(&token);
-	asm_check_nl(&token);
+	asm_add_null_in_bd(bin_data, 4);
+	(*token) = (*token)->next;
+	while (asm_skip_token(token, TT_SEP))
+		;
+	if (!asm_check_nl(token, prms))
+		return (asm_parser_error(*token, TT_NEWLINE, prms, 0));
+	return (1);
 }

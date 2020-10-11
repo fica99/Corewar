@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/06 23:29:35 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/10/11 16:01:10 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,18 @@
 # define ERR_INPUT_PARAMS_SEC "parameter as input (the full path to the file)"
 # define ERR_INPUT_PARAMS ERR_INPUT_PARAMS_FIRST ERR_INPUT_PARAMS_SEC
 # define ERR_FILE_EXT "Error: the file must have the extension .c"
-# define ERR_LEX_TMP "line ?: position ?, Error: ?"
+# define ERR_TMP "line ?: position ?, Error: ?"
 # define ERR_LEX "lexical analysis"
 # define ERR_STR_CLOSE "the line is not closed"
 # define ERR_BIN_DATA_ADD_SIZE "number of bytes to write cannot exceed 4"
 # define ERR_FILE_NAME_NULL "the file name specified in the constructor is NULL"
 # define ERR_CHAMP_NAME_LEN "the champion name too big"
+# define ERR_CHAMP_COMMENT_LEN "the champion comment too big"
+# define ERR_NULL_POINTER "NULL pointer passed"
+# define ERR_REP_CHAMP_NAME "the repeated name of the champion is used"
+# define ERR_REP_CHAMP_COMMENT "the champion's repeated comment is used"
+# define ERR_PARSER "incorrect parsing order"
+# define ERR_NL "missing line break"
 
 typedef struct	s_asm_string
 {
@@ -81,8 +87,9 @@ typedef struct	s_asm_token
 {
 	void				*data;
 	t_asm_tkn_type		type;
-	size_t				size;
 	t_asm_type_conv		type_conv;
+	size_t				line_num;
+	size_t				char_num;
 	struct s_asm_token	*next;
 }				t_asm_token;
 
@@ -95,6 +102,7 @@ typedef struct	s_asm_oper
 typedef struct	s_asm_bin_data
 {
 	char		*data;
+	size_t		index;
 	size_t		m_size;
 	size_t		size;
 	char		part;
@@ -110,12 +118,21 @@ typedef struct	s_asm_file
 	void		(*write_bin_data)(struct s_asm_file *, t_asm_bin_data *);
 }				t_asm_file;
 
+typedef struct	s_asm_pars_prms
+{
+	int			exec_code_size;
+	char		*error;
+	size_t		line_num;
+	size_t		char_num;
+}				t_asm_pars_prms;
+
 /*
 ** asm_error.c
 */
 void			asm_sys_error(void);
 void			asm_prog_error(char *msg);
 void			asm_lex_error(t_asm_string *asm_str, char *msg);
+void			asm_pars_error(t_asm_pars_prms	*prms);
 /*
 ** asm_new_str.c
 */
@@ -128,6 +145,7 @@ void			asm_str_realoc(t_asm_string *asm_str);
 ** asm_lex_token.c
 */
 t_asm_token		*asm_lex_new_token(t_asm_tkn_type type);
+void			asm_lex_del_token(t_asm_token **token);
 /*
 ** asm_filetostr.c
 */
@@ -141,6 +159,8 @@ t_asm_token		*asm_lex_get_token(t_asm_string *asm_str,
 ** asm_lex_token_comment.c
 */
 t_asm_token		*asm_lex_token_comment(t_asm_string *asm_str);
+t_asm_token		*asm_lex_del_com_token(t_asm_token *token);
+t_asm_token		*asm_lex_del_all_com_tokens(t_asm_token *token);
 /*
 ** asm_ltoa.c
 */
@@ -223,16 +243,41 @@ t_asm_file		*asm_file_init(char *name);
 /*
 ** asm_parser.c
 */
-void			asm_parser(t_asm_token *token,
-	t_asm_bin_data *bin_data);
+t_asm_pars_prms	*asm_init_pars_prms(void);
+void			asm_fill_prms_from_token(t_asm_token *token,
+	t_asm_pars_prms *prms, char *error);
+int				asm_skip_token(t_asm_token **token,
+	t_asm_tkn_type type);
+int				asm_parser(t_asm_token *token,
+	t_asm_bin_data *bin_data, t_asm_pars_prms *prms);
 /*
-** asm_pars_chn.c
+** asm_pars_ch_name.c
 */
-void			asm_pars_champ_name(t_asm_token *token,
-	t_asm_bin_data *bin_data);
+int				asm_pars_champ_name(t_asm_token **token,
+	t_asm_bin_data *bin_data, t_asm_pars_prms *prms);
 /*
 ** asm_pars_sep.c
 */
-void			asm_check_sep(t_asm_token **token);
-void			asm_check_nl(t_asm_token **token);
+int				asm_check_nl(t_asm_token **token,
+	t_asm_pars_prms *prms);
+/*
+** asm_pars_exec_code.c
+*/
+int				asm_exec_code(t_asm_token **token,
+	t_asm_bin_data *bin_data, t_asm_pars_prms *prms);
+/*
+** asm_pars.ch_com.c
+*/
+int				asm_pars_champ_comment(t_asm_token **token,
+	t_asm_bin_data *bin_data, t_asm_pars_prms *prms);
+/*
+** asm_support_func.c
+*/
+void			asm_add_null_in_bd(t_asm_bin_data *bin_data,
+	int bytes);
+/*
+** asm_pars_error.c
+*/
+int				asm_parser_error(t_asm_token *token,
+	t_asm_tkn_type type, t_asm_pars_prms *prms, size_t num_error);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm_error.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/11 16:18:44 by olegmulko         #+#    #+#             */
-/*   Updated: 2020/07/20 15:41:28 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/10/11 16:01:45 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,24 @@ void	asm_lex_error(t_asm_string *asm_str, char *msg)
 		asm_sys_error();
 	if (!(char_num = asm_ltoa((long long)asm_str->char_num)))
 		asm_sys_error();
-	if (!(s_str = ft_strmulsub(ERR_LEX_TMP, STR_MALOC_SIZE,
+	if (!(s_str = ft_strmulsub(ERR_TMP, STR_MALOC_SIZE,
 		line_num, char_num, msg)))
+		asm_sys_error();
+	asm_prog_error(s_str->str);
+}
+
+void	asm_pars_error(t_asm_pars_prms *prms)
+{
+	t_string	*s_str;
+	char		*line_num;
+	char		*char_num;
+
+	if (!(line_num = asm_ltoa((long long)prms->line_num)))
+		asm_sys_error();
+	if (!(char_num = asm_ltoa((long long)prms->char_num)))
+		asm_sys_error();
+	if (!(s_str = ft_strmulsub(ERR_TMP, STR_MALOC_SIZE,
+		line_num, char_num, prms->error)))
 		asm_sys_error();
 	asm_prog_error(s_str->str);
 }

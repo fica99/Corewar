@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_pars_sep.c                                     :+:      :+:    :+:   */
+/*   asm_support_func.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
+/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/06 23:11:52 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/10/10 21:23:10 by ggrimes          ###   ########.fr       */
+/*   Created: 2020/10/08 20:21:14 by olegmulko         #+#    #+#             */
+/*   Updated: 2020/10/08 20:25:37 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libasm.h"
 
-int	asm_check_nl(t_asm_token **token,
-	t_asm_pars_prms *prms)
+void	asm_add_null_in_bd(t_asm_bin_data *bin_data, int bytes)
 {
-	(void)prms;
-	if ((*token)->type != TT_NEWLINE)
-		return (0);
-	(*token) = (*token)->next;
-	return (1);
+	bin_data->add(bin_data, 0, 2 * bytes);
 }

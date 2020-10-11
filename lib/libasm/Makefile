@@ -6,7 +6,7 @@
 #    By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/12 10:32:40 by olegmulko         #+#    #+#              #
-#    Updated: 2020/10/06 23:13:12 by ggrimes          ###   ########.fr        #
+#    Updated: 2020/10/11 15:21:09 by ggrimes          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,9 +58,12 @@ SRC_FLS	=		asm_error.c\
 				asm_bin_data.c\
 				asm_file.c\
 				asm_parser.c\
-				asm_pars_chn.c\
+				asm_pars_ch_name.c\
 				asm_pars_sep.c\
-
+				asm_pars_exec_code.c\
+				asm_pars_ch_com.c\
+				asm_support_func.c\
+				asm_pars_error.c\
 
 # ------------  FILEPATHS  --------------------------------------------------- #
 SRCS	=		$(addprefix $(SRC_DIR)/, $(SRC_FLS))
