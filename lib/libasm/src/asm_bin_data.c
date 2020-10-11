@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 14:45:09 by olegmulko         #+#    #+#             */
-/*   Updated: 2020/10/06 20:24:48 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/10/11 13:11:23 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,14 @@ static void		asm_pack_in_bytes(t_asm_bin_data *bin_data, char byte)
 	{
 		byte <<= 4;
 		bin_data->check_size(bin_data);
-		bin_data->data[bin_data->size] = byte;
+		bin_data->data[bin_data->index] = byte;
 		bin_data->part = 2;
 	}
 	else
 	{
-		bin_data->data[bin_data->size] |= byte;
+		bin_data->data[bin_data->index] |= byte;
 		bin_data->part = 1;
+		bin_data->index++;
 		bin_data->size++;
 	}
 }
@@ -77,6 +78,7 @@ t_asm_bin_data	*asm_init_bin_data(size_t size)
 	if (!(data = (char *)malloc(sizeof(char *) * size)))
 		asm_sys_error();
 	bin_data->data = data;
+	bin_data->index = 0;
 	bin_data->m_size = size;
 	bin_data->size = 0;
 	bin_data->part = 1;

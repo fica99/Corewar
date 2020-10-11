@@ -6,7 +6,7 @@
 #    By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/12 10:32:40 by olegmulko         #+#    #+#              #
-#    Updated: 2020/10/10 20:35:16 by ggrimes          ###   ########.fr        #
+#    Updated: 2020/10/11 13:02:57 by ggrimes          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,7 @@ SRC_FLS	=		asm_error.c\
 				asm_pars_ch_name.c\
 				asm_pars_sep.c\
 				asm_pars_exec_code.c\
-				asm_pars.ch_com.c\
+				asm_pars_ch_com.c\
 				asm_support_func.c\
 
 # ------------  FILEPATHS  --------------------------------------------------- #

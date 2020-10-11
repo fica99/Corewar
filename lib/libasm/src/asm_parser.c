@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 22:15:14 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/10/10 21:18:10 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/10/11 13:34:17 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,12 @@ int				asm_parser(t_asm_token *token,
 		if (asm_skip_token(&token, TT_SEP)
 			|| asm_skip_token(&token, TT_NEWLINE))
 			continue ;
-		else if (token->type == TT_CHAMP_NAME)
+		else if (token->type == TT_CHAMP_NAME && !parsed_name)
 			parsed_name = asm_pars_champ_name(&token, bin_data, prms);
-		else if (token->type == TT_CHAMP_COMMENT)
+		else if (token->type == TT_CHAMP_COMMENT && !parsed_comment)
 			parsed_comment = asm_pars_champ_comment(&token, bin_data, prms);
 		else
 			return (0);
 	}
-	asm_add_null_in_bd(bin_data, 4);
 	return (asm_exec_code(&token, bin_data, prms));
 }

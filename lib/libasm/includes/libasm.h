@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/10 21:08:13 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/10/11 13:08:12 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ typedef struct	s_asm_oper
 typedef struct	s_asm_bin_data
 {
 	char		*data;
+	size_t		index;
 	size_t		m_size;
 	size_t		size;
 	char		part;
@@ -242,22 +243,22 @@ int				asm_parser(t_asm_token *token,
 /*
 ** asm_pars_ch_name.c
 */
-int			asm_pars_champ_name(t_asm_token **token,
+int				asm_pars_champ_name(t_asm_token **token,
 	t_asm_bin_data *bin_data, t_asm_pars_prms *prms);
 /*
 ** asm_pars_sep.c
 */
-int	asm_check_nl(t_asm_token **token,
+int				asm_check_nl(t_asm_token **token,
 	t_asm_pars_prms *prms);
 /*
 ** asm_pars_exec_code.c
 */
-int	asm_exec_code(t_asm_token **token,
+int				asm_exec_code(t_asm_token **token,
 	t_asm_bin_data *bin_data, t_asm_pars_prms *prms);
 /*
 ** asm_pars.ch_com.c
 */
-int		asm_pars_champ_comment(t_asm_token **token,
+int				asm_pars_champ_comment(t_asm_token **token,
 	t_asm_bin_data *bin_data, t_asm_pars_prms *prms);
 /*
 ** asm_support_func.c

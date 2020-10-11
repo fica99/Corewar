@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_pars.ch_com.c                                  :+:      :+:    :+:   */
+/*   asm_pars_ch_com.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/08 19:46:20 by olegmulko         #+#    #+#             */
-/*   Updated: 2020/10/10 21:17:52 by ggrimes          ###   ########.fr       */
+/*   Created: 2020/10/11 13:03:06 by ggrimes           #+#    #+#             */
+/*   Updated: 2020/10/11 13:26:19 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static void	asm_add_chc_to_bd(t_asm_bin_data *bin_data,
 	size_t	i;
 
 	i = 0;
+	bin_data->index = 4 + PROG_NAME_LENGTH + 8;
+	bin_data->part = 1;
 	while (name[i])
 		bin_data->add(bin_data, (int)name[i++], 2);
 	while (i < COMMENT_LENGTH)
@@ -27,7 +29,7 @@ static void	asm_add_chc_to_bd(t_asm_bin_data *bin_data,
 	}
 }
 
-int		asm_pars_champ_comment(t_asm_token **token,
+int			asm_pars_champ_comment(t_asm_token **token,
 	t_asm_bin_data *bin_data, t_asm_pars_prms *prms)
 {
 	char	*comment;
