@@ -6,7 +6,7 @@
 /*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/13 21:05:04 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/10/13 21:34:06 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,7 @@ typedef struct	s_asm_labels
 	t_asm_label	*labels;
 	size_t		size;
 	size_t		m_size;
+	size_t		(*is_contain)(struct s_asm_labels *, char *);
 }				t_asm_labels;
 
 /*
@@ -311,4 +312,6 @@ int				asm_pars_label(t_asm_token **token,
 ** asm_obj_label.c
 */
 t_asm_labels	*asm_init_labels(size_t size);
+size_t			asm_labels_is_contain(t_asm_labels *labels, char *name);
+
 #endif
