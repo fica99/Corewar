@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libasm.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
+/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/11 19:58:01 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/10/13 21:05:04 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <errno.h>
 # include <unistd.h>
 # include <string.h>
+# include <sys/stat.h>
 # include "op.h"
 # include "libft.h"
 # include "libhash.h"
@@ -32,6 +33,7 @@
 # define BIN_DATA_SIZE 4096
 # define BIN_DATA_MASK 0b00001111
 # define ALT_COMMENT_CHAR ';'
+# define LABELS_SIZE 10
 # define ERR_INPUT_PARAMS_FIRST "Error: the program accepts only one "
 # define ERR_INPUT_PARAMS_SEC "parameter as input (the full path to the file)"
 # define ERR_INPUT_PARAMS ERR_INPUT_PARAMS_FIRST ERR_INPUT_PARAMS_SEC
@@ -122,9 +124,23 @@ typedef struct	s_asm_pars_prms
 {
 	int			exec_code_size;
 	char		*error;
+	char		*labels;
 	size_t		line_num;
 	size_t		char_num;
 }				t_asm_pars_prms;
+
+typedef struct	s_asm_label
+{
+	char		*name;
+	size_t		count;
+}				t_asm_label;
+
+typedef struct	s_asm_labels
+{
+	t_asm_label	*labels;
+	size_t		size;
+	size_t		m_size;
+}				t_asm_labels;
 
 /*
 ** asm_error.c
@@ -286,4 +302,13 @@ int				asm_parser_error(t_asm_token *token,
 int				asm_pars_opers(t_asm_token **token,
 	t_asm_bin_data *bin_data, t_asm_pars_prms *prms);
 int				asm_direct_code_additional(int code);
+/*
+** asm_pars_labels.c
+*/
+int				asm_pars_label(t_asm_token **token,
+	t_asm_bin_data *bin_data, t_asm_pars_prms *prms);
+/*
+** asm_obj_label.c
+*/
+t_asm_labels	*asm_init_labels(size_t size);
 #endif
