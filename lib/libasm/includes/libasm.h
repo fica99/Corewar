@@ -6,7 +6,7 @@
 /*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/13 21:55:41 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/10/13 22:01:58 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,7 @@ typedef struct	s_asm_labels
 	size_t		(*is_contain)(struct s_asm_labels *, char *);
 	int			(*add)(struct s_asm_labels *, char *);
 	void		(*clear)(struct s_asm_labels *);
+	void		(*inc)(struct s_asm_labels *);
 }				t_asm_labels;
 
 /*
@@ -317,5 +318,6 @@ t_asm_labels	*asm_init_labels(size_t size);
 size_t			asm_labels_is_contain(t_asm_labels *labels, char *name);
 int				asm_labels_add(t_asm_labels *labels, char *name);
 void			asm_labels_clear(t_asm_labels *labels);
+void			asm_labels_count_inc(t_asm_labels *labels);
 
 #endif
