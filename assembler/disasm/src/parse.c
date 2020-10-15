@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:53:17 by aashara-          #+#    #+#             */
-/*   Updated: 2020/06/25 20:53:18 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/10/15 16:39:51 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libdisasm.h"
+#include "disasm.h"
 
-int		validate_fname(char *fname)
+static int		validate_fname(char *fname)
 {
 	char *ptr;
 
@@ -21,7 +21,7 @@ int		validate_fname(char *fname)
 	return (0);
 }
 
-t_buf	*read_file_cor(char *fname)
+static t_buf	*read_file_cor(char *fname)
 {
 	int		fd;
 	size_t	buf_size;
@@ -49,7 +49,7 @@ t_buf	*read_file_cor(char *fname)
 	return (buf);
 }
 
-t_champ	*validate_and_parse(char *filename)
+t_champ			*validate_and_parse(char *filename)
 {
 	t_buf	*buf;
 	t_champ	*champ;

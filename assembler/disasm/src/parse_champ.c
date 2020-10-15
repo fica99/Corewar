@@ -6,11 +6,11 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:52:58 by aashara-          #+#    #+#             */
-/*   Updated: 2020/06/25 20:52:59 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/10/15 16:33:41 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libdisasm.h"
+#include "disasm.h"
 
 static char		*get_champ_name(const uint8_t *bytes)
 {
@@ -38,7 +38,7 @@ static size_t	get_champ_exec_code_size(const uint8_t *bytes)
 	return (to_uint32(bytes));
 }
 
-t_op			*get_champ_exec_code(const uint8_t *bytes, size_t esize)
+static t_op		*get_champ_exec_code(const uint8_t *bytes, size_t esize)
 {
 	int		op_size;
 	t_op	*ret;

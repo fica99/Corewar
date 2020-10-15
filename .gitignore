@@ -1,7 +1,11 @@
-/asm
-/disasm
-/corewar
-/visualizer
+.vscode/
+**/.DS_Store
+*.vscode
+
+asm
+disasm
+corewar
+visualizer
 
 # Prerequisites
 *.d

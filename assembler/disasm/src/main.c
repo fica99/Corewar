@@ -6,14 +6,13 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:59:01 by aashara-          #+#    #+#             */
-/*   Updated: 2020/06/25 20:59:02 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/10/15 16:31:33 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libdisasm.h"
 #include "disasm.h"
 
-void	get_out_fname(char *out_file)
+static void	get_out_fname(char *out_file)
 {
 	char *ptr;
 
@@ -22,7 +21,7 @@ void	get_out_fname(char *out_file)
 	ft_memset(ptr, 0, ft_strlen(ptr));
 }
 
-void	print_champ_comment(t_champ *ch, int fd)
+static void	print_champ_comment(t_champ *ch, int fd)
 {
 	ft_putstr_fd(COMMENT_CMD_STRING, fd);
 	ft_putchar_fd(' ', fd);
@@ -32,7 +31,7 @@ void	print_champ_comment(t_champ *ch, int fd)
 	ft_putstr_fd("\n\n", fd);
 }
 
-void	print_champ_name(t_champ *ch, int fd)
+static void	print_champ_name(t_champ *ch, int fd)
 {
 	ft_putstr_fd(NAME_CMD_STRING, fd);
 	ft_putchar_fd(' ', fd);
@@ -42,7 +41,7 @@ void	print_champ_name(t_champ *ch, int fd)
 	ft_putchar_fd('\n', fd);
 }
 
-void	print_champ(const char *fname, t_champ *ch)
+static void	print_champ(const char *fname, t_champ *ch)
 {
 	char	out_file[ft_strlen(fname)];
 	int		fd;
@@ -66,7 +65,7 @@ void	print_champ(const char *fname, t_champ *ch)
 	}
 }
 
-int		main(int ac, char **av)
+int			main(int ac, char **av)
 {
 	t_champ *champ;
 

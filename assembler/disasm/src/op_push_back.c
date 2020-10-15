@@ -6,13 +6,14 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:53:47 by aashara-          #+#    #+#             */
-/*   Updated: 2020/06/25 20:53:48 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/10/15 16:32:50 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "disasm.h"
 #include "g_op.h"
 
-t_op	*op_list_new(uint8_t byte)
+static t_op	*op_list_new(uint8_t byte)
 {
 	t_op *new;
 
@@ -21,7 +22,7 @@ t_op	*op_list_new(uint8_t byte)
 	return (new);
 }
 
-t_op	*op_push_back(t_op **lst, uint8_t byte)
+t_op		*op_push_back(t_op **lst, uint8_t byte)
 {
 	t_op *tmp;
 

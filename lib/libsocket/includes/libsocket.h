@@ -6,7 +6,7 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/07/29 13:12:39 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/10/15 16:49:44 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,6 @@
 # include "libft.h"
 
 # define SERVER_PATH "/tmp/server.soc"
-
-typedef enum		e_bool
-{
-	False = 0,
-	True = 1,
-}					t_bool;
 
 typedef struct		s_cell
 {

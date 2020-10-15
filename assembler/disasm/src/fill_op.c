@@ -6,20 +6,20 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:53:24 by aashara-          #+#    #+#             */
-/*   Updated: 2020/06/25 20:53:25 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/10/15 16:29:21 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libdisasm.h"
+#include "disasm.h"
 
-void			set_args(t_op *op, uint8_t args_type_code)
+static void				set_args(t_op *op, uint8_t args_type_code)
 {
 	op->args_types[0] = (args_type_code >> 6) & TWO_LAST_BITS;
 	op->args_types[1] = (args_type_code >> 4) & TWO_LAST_BITS;
 	op->args_types[2] = (args_type_code >> 2) & TWO_LAST_BITS;
 }
 
-const uint8_t	*get_arg_val(t_op *op, const uint8_t *bytes)
+static const uint8_t	*get_arg_val(t_op *op, const uint8_t *bytes)
 {
 	int i;
 
@@ -47,7 +47,7 @@ const uint8_t	*get_arg_val(t_op *op, const uint8_t *bytes)
 	return (bytes);
 }
 
-int				fill_op(t_op *op, const uint8_t *bytes)
+int							fill_op(t_op *op, const uint8_t *bytes)
 {
 	const uint8_t *old_bytes;
 
