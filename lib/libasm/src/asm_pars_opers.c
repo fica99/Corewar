@@ -6,7 +6,7 @@
 /*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 19:12:00 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/10/13 20:33:14 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/10/15 21:55:21 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,6 @@ int	asm_direct_code_additional(int code)
 int	asm_pars_opers(t_asm_token **token,
 	t_asm_bin_data *bin_data, t_asm_pars_prms *prms)
 {
-	(void)bin_data;
-	(void)prms;
-
 	while (1)
 	{
 		if (asm_skip_token(token, TT_SEP)

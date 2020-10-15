@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm_lex_get_token.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
+/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 20:17:11 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/09/29 22:07:31 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/10/15 20:21:02 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ t_asm_token			*asm_lex_get_token(t_asm_string *asm_str,
 		else if (asm_lex_is_champ_comment(asm_str))
 			return (asm_lex_token_champ_comment(asm_str));
 		else
-			asm_lex_get_token_next(asm_str, opers_hash);
+			return (asm_lex_get_token_next(asm_str, opers_hash));
 	}
 	return (asm_lex_new_token(TT_EOF));
 }

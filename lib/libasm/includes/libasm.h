@@ -6,7 +6,7 @@
 /*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/15 20:04:04 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/10/15 20:12:42 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,15 +120,6 @@ typedef struct	s_asm_file
 	void		(*write_bin_data)(struct s_asm_file *, t_asm_bin_data *);
 }				t_asm_file;
 
-typedef struct	s_asm_pars_prms
-{
-	int				exec_code_size;
-	char			*error;
-	t_asm_labels	*labels;
-	size_t			line_num;
-	size_t			char_num;
-}				t_asm_pars_prms;
-
 typedef struct	s_asm_label
 {
 	char		*name;
@@ -145,6 +136,15 @@ typedef struct	s_asm_labels
 	void		(*clear)(struct s_asm_labels *);
 	void		(*inc)(struct s_asm_labels *);
 }				t_asm_labels;
+
+typedef struct	s_asm_pars_prms
+{
+	int				exec_code_size;
+	char			*error;
+	t_asm_labels	*labels;
+	size_t			line_num;
+	size_t			char_num;
+}				t_asm_pars_prms;
 
 /*
 ** asm_error.c
