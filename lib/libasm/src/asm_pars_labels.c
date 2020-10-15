@@ -6,7 +6,7 @@
 /*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 20:30:18 by olegmulko         #+#    #+#             */
-/*   Updated: 2020/10/13 21:12:56 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/10/15 20:09:15 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,22 @@
 int		asm_pars_label(t_asm_token **token,
 	t_asm_bin_data *bin_data, t_asm_pars_prms *prms)
 {
-	(void)token;
 	(void)bin_data;
-	(void)prms;
-	t_asm_labels	*labels;
+	static t_asm_labels	*labels;
 
-	labels = asm_init_labels(LABELS_SIZE);
-	(void)labels;
+	if (labels == NULL)
+		labels = asm_init_labels(LABELS_SIZE);
+	prms->labels = labels;
+	while (1)
+	{
+		if (asm_skip_token(token, TT_SEP)
+			|| asm_skip_token(token, TT_NEWLINE))
+			continue ;
+		else if ((*token)->type == TT_LABEL)
+			labels->add(labels, (char *)(*token)->data);
+		else
+			break ;
+	}
+	labels->clear(labels);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/13 22:01:58 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/10/15 20:04:04 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,11 +122,11 @@ typedef struct	s_asm_file
 
 typedef struct	s_asm_pars_prms
 {
-	int			exec_code_size;
-	char		*error;
-	char		*labels;
-	size_t		line_num;
-	size_t		char_num;
+	int				exec_code_size;
+	char			*error;
+	t_asm_labels	*labels;
+	size_t			line_num;
+	size_t			char_num;
 }				t_asm_pars_prms;
 
 typedef struct	s_asm_label
