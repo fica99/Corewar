@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   connect.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aashara <aashara@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/16 22:31:54 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/16 23:22:48 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/10/17 23:05:49 by aashara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,11 @@ static int	get_socket_fd(struct addrinfo *serv_info)
 		}
 		p = p->ai_next;
 	}
+	if (!p)
+	{
+		perror("Connection to server");
+		exit(1);
+	}
 	return (socket_fd);
 }
 
@@ -42,15 +47,16 @@ int	connect_2_server(const char *host_name)
 
 	if (!host_name)
 		return (-1);
-	ft_bzero((void*)&hints, sizeof(struct addrinfo));
+	bzero((void*)&hints, sizeof(struct addrinfo));
 	hints.ai_family = AF_UNSPEC;
 	hints.ai_socktype = SOCK_STREAM;
 	status = getaddrinfo(host_name, PORT, &hints, &serv_info);
 	if (status == -1)
 	{
-		fprintf(STDERR_FILENO, "Getaddrinfo error: %s\n", gai_strerror(status));//add ft_fprintf
+		fprintf(stderr, "Getaddrinfo error: %s\n", gai_strerror(status));
 		exit(1);
 	}
 	socket_fd = get_socket_fd(serv_info);
 	freeaddrinfo(serv_info);
+	return (socket_fd);
 }

@@ -7,8 +7,8 @@
 # include <stdlib.h>
 # include <iostream>
 # include <string>
+# include "op.h"
 # include "libdraw.h"
 extern "C" {
 # include "libsocket.h"
 }
-
