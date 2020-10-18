@@ -6,11 +6,11 @@
 /*   By: aashara <aashara@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/16 22:31:54 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/17 23:05:49 by aashara          ###   ########.fr       */
+/*   Updated: 2020/10/18 19:07:38 by aashara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libsocket.h"
+#include "socket.h"
 
 static int	get_socket_fd(struct addrinfo *serv_info)
 {
