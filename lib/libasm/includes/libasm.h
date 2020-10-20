@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/20 20:00:24 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/10/20 20:45:44 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,9 @@ typedef struct	s_asm_labels
 
 typedef struct	s_asm_pars_prms
 {
+	t_hash			**opers_hash;
 	int				exec_code_size;
+	int				args_mask;
 	char			*error;
 	t_asm_labels	*labels;
 	size_t			line_num;
@@ -320,6 +322,10 @@ int				asm_parser_error(t_asm_token *token,
 int				asm_pars_opers(t_asm_token **token,
 	t_asm_bin_data *bin_data, t_asm_pars_prms *prms);
 int				asm_direct_code_additional(int code);
+int				asm_pars_oper(t_asm_token **token,
+	t_asm_bin_data *bin_data, t_asm_pars_prms *prms);
+int 			asm_pars_arg(t_asm_token **token,
+	t_asm_bin_data *bin_data, t_asm_pars_prms *prms);
 /*
 ** asm_pars_labels.c
 */
