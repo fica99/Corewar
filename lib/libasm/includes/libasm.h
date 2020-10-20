@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libasm.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/15 20:12:42 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/10/20 20:00:24 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,19 @@
 # define BIN_DATA_MASK 0b00001111
 # define ALT_COMMENT_CHAR ';'
 # define LABELS_SIZE 10
+# define ARG_1_ALL 0b1000000111
+# define ARG_1_REG 0b1000000100
+# define ARG_1_DIR 0b1000000010
+# define ARF_1_IND 0b1000000001
+# define ARG_2_ALL 0b1000111000
+# define ARG_2_REG 0b1000100000
+# define ARG_2_DIR 0b1000010000
+# define ARF_2_IND 0b1000001000
+# define ARG_3_ALL 0b1111000000
+# define ARG_3_REG 0b1100000000
+# define ARG_3_DIR 0b1010000000
+# define ARF_3_IND 0b1001000000
+# define ARG_TYPE 0b1000000000
 # define ERR_INPUT_PARAMS_FIRST "Error: the program accepts only one "
 # define ERR_INPUT_PARAMS_SEC "parameter as input (the full path to the file)"
 # define ERR_INPUT_PARAMS ERR_INPUT_PARAMS_FIRST ERR_INPUT_PARAMS_SEC
@@ -98,7 +111,8 @@ typedef struct	s_asm_token
 typedef struct	s_asm_oper
 {
 	char		*name;
-	void		(*f)(void);
+	char		code;
+	int			args_mask;
 }				t_asm_oper;
 
 typedef struct	s_asm_bin_data
