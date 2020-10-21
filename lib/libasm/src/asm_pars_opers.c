@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 19:12:00 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/10/21 22:40:24 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/10/21 22:50:03 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,33 +84,6 @@ int		asm_pars_arg(t_asm_token **token,
 			return (asm_parser_error(*token, TT_NEWLINE, prms, 0));
 		return (1);
 	}
-	return (asm_pars_arg(token, bin_data, prms, ++arg_index));
-}
-
-int		asm_pars_is_reg(t_asm_token **token,
-	t_asm_pars_prms *prms, char arg_index)
-{
-	if (arg_index % 2 != 0
-		&& ((prms->args_mask >> prms->mask_offset++) & ARG_1_REG)
-		&& (*token)->type == TT_ARG_REG)
-		return (1);
-	return (0);
-}
-
-int		asm_pars_reg(t_asm_token **token, t_asm_bin_data *bin_data,
-	t_asm_pars_prms *prms, char arg_index)
-{
-	int	*data;
-	t_asm_labels	*labels;
-
-	data = (int *)(*token)->data;
-	if (data > REG_NUMBER)
-		return (asm_parser_error(*token, (*token)->type, prms, 0));
-	bin_data->add(bin_data, *data, 2 * REG_SIZE);
-	prms->exec_code_size += REG_SIZE;
-	labels = prms->labels;
-	labels->inc(labels, REG_SIZE);
-	(*token) = (*token)->next;
 	return (asm_pars_arg(token, bin_data, prms, ++arg_index));
 }
 
