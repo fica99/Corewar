@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 19:12:00 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/10/21 21:38:26 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/10/21 22:40:24 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int		asm_pars_oper(t_asm_token **token,
 	labels = prms->labels;
 	labels->inc(labels, 1);
 	prms->args_mask = oper->args_mask;
-	prms->args_size = 3;
+	prms->mask_offset = 0;
 	(*token) = (*token)->next;
 	return (asm_pars_arg(token, bin_data, prms, 1));
 }
@@ -64,18 +64,17 @@ int		asm_pars_oper(t_asm_token **token,
 int		asm_pars_arg(t_asm_token **token,
 	t_asm_bin_data *bin_data, t_asm_pars_prms *prms, char arg_index)
 {
-	char	offset;
-
 	if (arg_index <= 0)
 		return (asm_parser_error(*token, (*token)->type, prms, 0));
 	while (asm_skip_token(token, TT_SEP))
 		;
-	offset = arg_index - 1;
-	if (((prms->args_mask >> offset) & ARG_1_REG) && (*token)->type == TT_ARG_REG)
-		asm_pars_reg(token, bin_data, prms);
-	else if (((prms->args_mask >> offset) & ARG_1_DIR) && (*token)->type == TT_ARG_DIR)
+	if (arg_index % 2 == 0 && (*token)->type == TT_ARG_SEP)
+		asm_pars_args_sep(token);
+	else if (asm_pars_is_reg(token, prms, arg_index))
+		return (asm_pars_reg(token, bin_data, prms, arg_index));
+	else if (asm_pars_is_dir(token, prms, arg_index))
 		asm_pars_dir(token, bin_data, prms);
-	else if (((prms->args_mask >> offset) & ARF_1_IND) && (*token)->type == TT_ARG_IND)
+	else if (asm_pars_is_ind(token, prms, arg_index))
 		asm_pars_ind(token, bin_data, prms);
 	else
 	{
@@ -88,17 +87,55 @@ int		asm_pars_arg(t_asm_token **token,
 	return (asm_pars_arg(token, bin_data, prms, ++arg_index));
 }
 
-void	asm_pars_reg(t_asm_token **token,
-	t_asm_bin_data *bin_data, t_asm_pars_prms *prms)
+int		asm_pars_is_reg(t_asm_token **token,
+	t_asm_pars_prms *prms, char arg_index)
+{
+	if (arg_index % 2 != 0
+		&& ((prms->args_mask >> prms->mask_offset++) & ARG_1_REG)
+		&& (*token)->type == TT_ARG_REG)
+		return (1);
+	return (0);
+}
+
+int		asm_pars_reg(t_asm_token **token, t_asm_bin_data *bin_data,
+	t_asm_pars_prms *prms, char arg_index)
 {
 	int	*data;
 	t_asm_labels	*labels;
 
 	data = (int *)(*token)->data;
+	if (data > REG_NUMBER)
+		return (asm_parser_error(*token, (*token)->type, prms, 0));
 	bin_data->add(bin_data, *data, 2 * REG_SIZE);
 	prms->exec_code_size += REG_SIZE;
 	labels = prms->labels;
 	labels->inc(labels, REG_SIZE);
+	(*token) = (*token)->next;
+	return (asm_pars_arg(token, bin_data, prms, ++arg_index));
+}
+
+int		asm_pars_is_dir(t_asm_token **token,
+	t_asm_pars_prms *prms, char arg_index)
+{
+	if (arg_index % 2 != 0
+		&& ((prms->args_mask >> prms->mask_offset++) & ARG_1_DIR)
+		&& (*token)->type == TT_ARG_DIR)
+		return (1);
+	return (0);
+}
+
+int		asm_pars_is_ind(t_asm_token **token,
+	t_asm_pars_prms *prms, char arg_index)
+{
+	if (arg_index % 2 != 0
+		&& ((prms->args_mask >> prms->mask_offset++) & ARF_1_IND)
+		&& (*token)->type == TT_ARG_IND)
+		return (1);
+	return (0);
+}
+
+void	asm_pars_args_sep(t_asm_token **token)
+{
 	(*token) = (*token)->next;
 }
 
@@ -107,8 +144,6 @@ void	asm_pars_dir(t_asm_token **token,
 {
 	(void)bin_data;
 	(void)prms;
-	while (asm_skip_token(token, TT_SEP))
-		;
 	(*token) = (*token)->next;
 	return ;
 }
@@ -118,8 +153,6 @@ void	asm_pars_ind(t_asm_token **token,
 {
 	(void)bin_data;
 	(void)prms;
-	while (asm_skip_token(token, TT_SEP))
-		;
 	(*token) = (*token)->next;
 	return ;
 }
