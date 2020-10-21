@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/21 22:48:36 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/10/21 22:54:48 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -327,13 +327,10 @@ int				asm_pars_oper(t_asm_token **token,
 	t_asm_bin_data *bin_data, t_asm_pars_prms *prms);
 int 			asm_pars_arg(t_asm_token **token,
 	t_asm_bin_data *bin_data, t_asm_pars_prms *prms, char arg_index);
-void			asm_pars_dir(t_asm_token **token,
-	t_asm_bin_data *bin_data, t_asm_pars_prms *prms);
 void			asm_pars_ind(t_asm_token **token,
 	t_asm_bin_data *bin_data, t_asm_pars_prms *prms);
 void			asm_pars_args_sep(t_asm_token **token);
-int				asm_pars_is_dir(t_asm_token **token,
-	t_asm_pars_prms *prms, char arg_index);
+
 int				asm_pars_is_ind(t_asm_token **token,
 	t_asm_pars_prms *prms, char arg_index);
 /*
@@ -356,4 +353,11 @@ int				asm_pars_is_reg(t_asm_token **token,
 	t_asm_pars_prms *prms, char arg_index);
 int				asm_pars_reg(t_asm_token **token, t_asm_bin_data *bin_data,
 	t_asm_pars_prms *prms, char arg_index);
+/*
+** asm_pars_dir.c
+*/
+int				asm_pars_is_dir(t_asm_token **token,
+	t_asm_pars_prms *prms, char arg_index);
+int				asm_pars_dir(t_asm_token **token,
+	t_asm_bin_data *bin_data, t_asm_pars_prms *prms);
 #endif

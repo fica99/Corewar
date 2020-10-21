@@ -6,7 +6,7 @@
 #    By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/12 10:32:40 by olegmulko         #+#    #+#              #
-#    Updated: 2020/10/21 22:48:56 by ggrimes          ###   ########.fr        #
+#    Updated: 2020/10/21 22:55:06 by ggrimes          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,6 +68,7 @@ SRC_FLS	=		asm_error.c\
 				asm_pars_labels.c\
 				asm_obj_label.c\
 				asm_pars_reg.c\
+				asm_pars_dir.c\
 
 # ------------  FILEPATHS  --------------------------------------------------- #
 SRCS	=		$(addprefix $(SRC_DIR)/, $(SRC_FLS))
