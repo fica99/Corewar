@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 19:12:00 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/10/20 21:10:45 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/10/21 21:38:26 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@ int		asm_direct_code_additional(int code)
 int		asm_pars_opers(t_asm_token **token,
 	t_asm_bin_data *bin_data, t_asm_pars_prms *prms)
 {
+	static t_asm_labels	*labels;
+
+	if (labels == NULL)
+		labels = asm_init_labels(LABELS_SIZE);
+	prms->labels = labels;
 	while (1)
 	{
 		if (asm_skip_token(token, TT_SEP)
@@ -30,7 +35,7 @@ int		asm_pars_opers(t_asm_token **token,
 		else if ((*token)->type == TT_LABEL)
 			return (asm_pars_label(token, bin_data, prms));
 		else if ((*token)->type == TT_OPER)
-			return (-1);
+			return (asm_pars_oper(token, bin_data, prms));
 		else if ((*token)->type == TT_EOF)
 			break ;
 		else
@@ -42,13 +47,14 @@ int		asm_pars_opers(t_asm_token **token,
 int		asm_pars_oper(t_asm_token **token,
 	t_asm_bin_data *bin_data, t_asm_pars_prms *prms)
 {
-	t_asm_oper	*oper;
-	char		*oper_name;
+	t_asm_oper		*oper;
+	t_asm_labels	*labels;
 
-	oper_name = (char *)(*token)->data;
-	oper = (t_asm_oper *)get_hash_data(prms->opers_hash, oper_name, OPERS_SIZE);
+	oper = (t_asm_oper *)(*token)->data;
 	bin_data->add(bin_data, (int)oper->code, 2);
 	prms->exec_code_size += 1;
+	labels = prms->labels;
+	labels->inc(labels, 1);
 	prms->args_mask = oper->args_mask;
 	prms->args_size = 3;
 	(*token) = (*token)->next;
@@ -58,7 +64,6 @@ int		asm_pars_oper(t_asm_token **token,
 int		asm_pars_arg(t_asm_token **token,
 	t_asm_bin_data *bin_data, t_asm_pars_prms *prms, char arg_index)
 {
-	(void)bin_data;
 	char	offset;
 
 	if (arg_index <= 0)
@@ -66,11 +71,11 @@ int		asm_pars_arg(t_asm_token **token,
 	while (asm_skip_token(token, TT_SEP))
 		;
 	offset = arg_index - 1;
-	if ((prms->args_mask >> offset) & ARG_1_REG)
+	if (((prms->args_mask >> offset) & ARG_1_REG) && (*token)->type == TT_ARG_REG)
 		asm_pars_reg(token, bin_data, prms);
-	else if (((prms->args_mask >> offset) & ARG_1_DIR))
+	else if (((prms->args_mask >> offset) & ARG_1_DIR) && (*token)->type == TT_ARG_DIR)
 		asm_pars_dir(token, bin_data, prms);
-	else if (((prms->args_mask >> offset) & ARF_1_IND))
+	else if (((prms->args_mask >> offset) & ARF_1_IND) && (*token)->type == TT_ARG_IND)
 		asm_pars_ind(token, bin_data, prms);
 	else
 	{
@@ -86,12 +91,15 @@ int		asm_pars_arg(t_asm_token **token,
 void	asm_pars_reg(t_asm_token **token,
 	t_asm_bin_data *bin_data, t_asm_pars_prms *prms)
 {
-	(void)bin_data;
-	(void)prms;
-	while (asm_skip_token(token, TT_SEP))
-		;
+	int	*data;
+	t_asm_labels	*labels;
+
+	data = (int *)(*token)->data;
+	bin_data->add(bin_data, *data, 2 * REG_SIZE);
+	prms->exec_code_size += REG_SIZE;
+	labels = prms->labels;
+	labels->inc(labels, REG_SIZE);
 	(*token) = (*token)->next;
-	return ;
 }
 
 void	asm_pars_dir(t_asm_token **token,

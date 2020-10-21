@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 22:15:14 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/10/13 20:29:55 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/10/21 21:07:45 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_asm_pars_prms	*asm_init_pars_prms(void)
 	if (!(prms = (t_asm_pars_prms *)malloc(
 		sizeof(t_asm_pars_prms))))
 		asm_sys_error();
-	prms->exec_code_size = 23;
+	prms->exec_code_size = 0;
 	prms->labels = NULL;
 	prms->line_num = 1;
 	prms->char_num = 1;
