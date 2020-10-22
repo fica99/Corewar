@@ -6,7 +6,7 @@
 /*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/22 22:30:56 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/10/22 23:20:06 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ typedef struct	s_asm_file
 typedef struct	s_asm_label
 {
 	char		*name;
-	size_t		count;
+	int			count;
 }				t_asm_label;
 
 typedef struct	s_asm_labels
@@ -146,7 +146,7 @@ typedef struct	s_asm_labels
 	size_t		size;
 	size_t		m_size;
 	int			(*is_contain)(struct s_asm_labels *, char *);
-	int			(*add)(struct s_asm_labels *, char *);
+	int			(*add)(struct s_asm_labels *, char *, int);
 	void		(*clear)(struct s_asm_labels *);
 	void		(*inc)(struct s_asm_labels *, size_t);
 }				t_asm_labels;
@@ -332,14 +332,14 @@ int				asm_pars_args_sep(t_asm_token **token,
 /*
 ** asm_pars_labels.c
 */
-int				asm_pars_label(t_asm_token **token,
-	t_asm_bin_data *bin_data, t_asm_pars_prms *prms);
+void		asm_pars_label(t_asm_token **token,
+	t_asm_pars_prms *prms);
 /*
 ** asm_obj_label.c
 */
 t_asm_labels	*asm_init_labels(size_t size);
 int				asm_labels_is_contain(t_asm_labels *labels, char *name);
-int				asm_labels_add(t_asm_labels *labels, char *name);
+int				asm_labels_add(t_asm_labels *labels, char *name, int count);
 void			asm_labels_clear(t_asm_labels *labels);
 void			asm_labels_count_inc(t_asm_labels *labels, size_t inc);
 /*
