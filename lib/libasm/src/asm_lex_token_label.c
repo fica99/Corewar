@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm_lex_token_label.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
+/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 21:43:12 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/09/29 21:43:39 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/10/15 20:41:48 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ char			*asm_lex_get_label_str(t_asm_string *asm_str, char mod)
 	delta = i - asm_str->index;
 	label = ft_strnew(delta);
 	ft_memcpy(label, asm_str->str + asm_str->index, delta);
-	i += (mod == 1) ? 1 : 0;
-	asm_str->index += i;
-	asm_str->char_num += i;
+	delta += (mod == 1) ? 1 : 0;
+	asm_str->index += delta;
+	asm_str->char_num += delta;
 	return (label);
 }
 

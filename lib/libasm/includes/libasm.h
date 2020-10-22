@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libasm.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
+/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/11 16:01:10 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/10/22 22:30:56 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <errno.h>
 # include <unistd.h>
 # include <string.h>
+# include <sys/stat.h>
 # include "op.h"
 # include "libft.h"
 # include "libhash.h"
@@ -32,6 +33,20 @@
 # define BIN_DATA_SIZE 4096
 # define BIN_DATA_MASK 0b00001111
 # define ALT_COMMENT_CHAR ';'
+# define LABELS_SIZE 10
+# define ARG_1_ALL 0b1000000111
+# define ARG_1_REG 0b1000000100
+# define ARG_1_DIR 0b1000000010
+# define ARF_1_IND 0b1000000001
+# define ARG_2_ALL 0b1000111000
+# define ARG_2_REG 0b1000100000
+# define ARG_2_DIR 0b1000010000
+# define ARF_2_IND 0b1000001000
+# define ARG_3_ALL 0b1111000000
+# define ARG_3_REG 0b1100000000
+# define ARG_3_DIR 0b1010000000
+# define ARF_3_IND 0b1001000000
+# define ARG_TYPE 0b1000000000
 # define ERR_INPUT_PARAMS_FIRST "Error: the program accepts only one "
 # define ERR_INPUT_PARAMS_SEC "parameter as input (the full path to the file)"
 # define ERR_INPUT_PARAMS ERR_INPUT_PARAMS_FIRST ERR_INPUT_PARAMS_SEC
@@ -96,7 +111,8 @@ typedef struct	s_asm_token
 typedef struct	s_asm_oper
 {
 	char		*name;
-	void		(*f)(void);
+	char		code;
+	int			args_mask;
 }				t_asm_oper;
 
 typedef struct	s_asm_bin_data
@@ -118,12 +134,33 @@ typedef struct	s_asm_file
 	void		(*write_bin_data)(struct s_asm_file *, t_asm_bin_data *);
 }				t_asm_file;
 
+typedef struct	s_asm_label
+{
+	char		*name;
+	size_t		count;
+}				t_asm_label;
+
+typedef struct	s_asm_labels
+{
+	t_asm_label	*labels;
+	size_t		size;
+	size_t		m_size;
+	int			(*is_contain)(struct s_asm_labels *, char *);
+	int			(*add)(struct s_asm_labels *, char *);
+	void		(*clear)(struct s_asm_labels *);
+	void		(*inc)(struct s_asm_labels *, size_t);
+}				t_asm_labels;
+
 typedef struct	s_asm_pars_prms
 {
-	int			exec_code_size;
-	char		*error;
-	size_t		line_num;
-	size_t		char_num;
+	t_hash			**opers_hash;
+	int				exec_code_size;
+	int				args_mask;
+	char			mask_offset;
+	char			*error;
+	t_asm_labels	*labels;
+	size_t			line_num;
+	size_t			char_num;
 }				t_asm_pars_prms;
 
 /*
@@ -280,4 +317,50 @@ void			asm_add_null_in_bd(t_asm_bin_data *bin_data,
 */
 int				asm_parser_error(t_asm_token *token,
 	t_asm_tkn_type type, t_asm_pars_prms *prms, size_t num_error);
+/*
+** asm_pars_opers.c
+*/
+int				asm_pars_opers(t_asm_token **token,
+	t_asm_bin_data *bin_data, t_asm_pars_prms *prms);
+int				asm_direct_code_additional(int code);
+int				asm_pars_oper(t_asm_token **token,
+	t_asm_bin_data *bin_data, t_asm_pars_prms *prms);
+int 			asm_pars_arg(t_asm_token **token,
+	t_asm_bin_data *bin_data, t_asm_pars_prms *prms, char arg_index);
+int				asm_pars_args_sep(t_asm_token **token,
+	t_asm_bin_data *bin_data, t_asm_pars_prms *prms, char arg_index);
+/*
+** asm_pars_labels.c
+*/
+int				asm_pars_label(t_asm_token **token,
+	t_asm_bin_data *bin_data, t_asm_pars_prms *prms);
+/*
+** asm_obj_label.c
+*/
+t_asm_labels	*asm_init_labels(size_t size);
+int				asm_labels_is_contain(t_asm_labels *labels, char *name);
+int				asm_labels_add(t_asm_labels *labels, char *name);
+void			asm_labels_clear(t_asm_labels *labels);
+void			asm_labels_count_inc(t_asm_labels *labels, size_t inc);
+/*
+** asm_pars_reg.c
+*/
+int				asm_pars_is_reg(t_asm_token **token,
+	t_asm_pars_prms *prms, char arg_index);
+int				asm_pars_reg(t_asm_token **token, t_asm_bin_data *bin_data,
+	t_asm_pars_prms *prms, char arg_index);
+/*
+** asm_pars_dir.c
+*/
+int				asm_pars_is_dir(t_asm_token **token,
+	t_asm_pars_prms *prms, char arg_index);
+int				asm_pars_dir(t_asm_token **token, t_asm_bin_data *bin_data,
+	t_asm_pars_prms *prms, char arg_index);
+/*
+** asm_pars_ind.c
+*/
+int				asm_pars_is_ind(t_asm_token **token,
+	t_asm_pars_prms *prms, char arg_index);
+int				asm_pars_ind(t_asm_token **token,
+	t_asm_bin_data *bin_data, t_asm_pars_prms *prms, char arg_index);
 #endif
