@@ -6,7 +6,7 @@
 /*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 19:12:00 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/10/22 21:19:43 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/10/22 21:37:13 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int		asm_pars_arg(t_asm_token **token,
 	while (asm_skip_token(token, TT_SEP))
 		;
 	if (arg_index % 2 == 0 && (*token)->type == TT_ARG_SEP)
-		asm_pars_args_sep(token);
+		return (asm_pars_args_sep(token, bin_data, prms, arg_index));
 	else if (asm_pars_is_reg(token, prms, arg_index))
 		return (asm_pars_reg(token, bin_data, prms, arg_index));
 	else if (asm_pars_is_dir(token, prms, arg_index))
@@ -84,10 +84,17 @@ int		asm_pars_arg(t_asm_token **token,
 			return (asm_parser_error(*token, TT_NEWLINE, prms, 0));
 		return (1);
 	}
-	return (asm_pars_arg(token, bin_data, prms, ++arg_index));
 }
 
-void	asm_pars_args_sep(t_asm_token **token)
+int		asm_pars_args_sep(t_asm_token **token,
+	t_asm_bin_data *bin_data, t_asm_pars_prms *prms, char arg_index)
 {
 	(*token) = (*token)->next;
+	while (asm_skip_token(token, TT_SEP))
+		;
+	if ((*token)->type != TT_ARG_REG
+		&& (*token)->type != TT_ARG_DIR
+		&& (*token)->type != TT_ARG_IND)
+		return (asm_parser_error(*token, (*token)->type, prms, 0));
+	return (asm_pars_arg(token, bin_data, prms, ++arg_index));
 }

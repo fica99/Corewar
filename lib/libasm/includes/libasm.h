@@ -6,7 +6,7 @@
 /*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/22 21:20:17 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/10/22 21:35:00 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -327,7 +327,8 @@ int				asm_pars_oper(t_asm_token **token,
 	t_asm_bin_data *bin_data, t_asm_pars_prms *prms);
 int 			asm_pars_arg(t_asm_token **token,
 	t_asm_bin_data *bin_data, t_asm_pars_prms *prms, char arg_index);
-void			asm_pars_args_sep(t_asm_token **token);
+int				asm_pars_args_sep(t_asm_token **token,
+	t_asm_bin_data *bin_data, t_asm_pars_prms *prms, char arg_index);
 /*
 ** asm_pars_labels.c
 */
