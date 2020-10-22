@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm_obj_label.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
+/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 20:36:27 by olegmulko         #+#    #+#             */
-/*   Updated: 2020/10/21 21:32:22 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/10/22 21:56:18 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_asm_labels	*asm_init_labels(size_t size)
 	return (labels);
 }
 
-size_t			asm_labels_is_contain(t_asm_labels *labels, char *name)
+int				asm_labels_is_contain(t_asm_labels *labels, char *name)
 {
 	size_t		i;
 	t_asm_label	obj_label;
@@ -61,7 +61,7 @@ size_t			asm_labels_is_contain(t_asm_labels *labels, char *name)
 	{
 		obj_label = labels->labels[i];
 		if (!ft_strcmp(obj_label.name, name))
-			return (obj_label.count);
+			return ((int)obj_label.count);
 		i++;
 	}
 	return (0);

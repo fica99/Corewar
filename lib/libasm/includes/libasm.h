@@ -6,7 +6,7 @@
 /*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/22 21:35:00 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/10/22 21:56:16 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ typedef struct	s_asm_labels
 	t_asm_label	*labels;
 	size_t		size;
 	size_t		m_size;
-	size_t		(*is_contain)(struct s_asm_labels *, char *);
+	int			(*is_contain)(struct s_asm_labels *, char *);
 	int			(*add)(struct s_asm_labels *, char *);
 	void		(*clear)(struct s_asm_labels *);
 	void		(*inc)(struct s_asm_labels *, size_t);
@@ -338,7 +338,7 @@ int				asm_pars_label(t_asm_token **token,
 ** asm_obj_label.c
 */
 t_asm_labels	*asm_init_labels(size_t size);
-size_t			asm_labels_is_contain(t_asm_labels *labels, char *name);
+int				asm_labels_is_contain(t_asm_labels *labels, char *name);
 int				asm_labels_add(t_asm_labels *labels, char *name);
 void			asm_labels_clear(t_asm_labels *labels);
 void			asm_labels_count_inc(t_asm_labels *labels, size_t inc);
@@ -354,8 +354,8 @@ int				asm_pars_reg(t_asm_token **token, t_asm_bin_data *bin_data,
 */
 int				asm_pars_is_dir(t_asm_token **token,
 	t_asm_pars_prms *prms, char arg_index);
-int				asm_pars_dir(t_asm_token **token,
-	t_asm_bin_data *bin_data, t_asm_pars_prms *prms);
+int				asm_pars_dir(t_asm_token **token, t_asm_bin_data *bin_data,
+	t_asm_pars_prms *prms, char arg_index);
 /*
 ** asm_pars_ind.c
 */
