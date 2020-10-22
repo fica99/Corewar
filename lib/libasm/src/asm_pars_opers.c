@@ -6,7 +6,7 @@
 /*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 19:12:00 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/10/22 21:47:48 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/10/22 22:31:40 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int		asm_pars_arg(t_asm_token **token,
 	else if (asm_pars_is_dir(token, prms, arg_index))
 		return (asm_pars_dir(token, bin_data, prms, arg_index));
 	else if (asm_pars_is_ind(token, prms, arg_index))
-		return (asm_pars_ind(token, bin_data, prms));
+		return (asm_pars_ind(token, bin_data, prms, arg_index));
 	else
 	{
 		while (asm_skip_token(token, TT_SEP))

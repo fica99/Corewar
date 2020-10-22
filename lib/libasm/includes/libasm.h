@@ -6,7 +6,7 @@
 /*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/22 21:56:16 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/10/22 22:30:56 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -362,5 +362,5 @@ int				asm_pars_dir(t_asm_token **token, t_asm_bin_data *bin_data,
 int				asm_pars_is_ind(t_asm_token **token,
 	t_asm_pars_prms *prms, char arg_index);
 int				asm_pars_ind(t_asm_token **token,
-	t_asm_bin_data *bin_data, t_asm_pars_prms *prms);
+	t_asm_bin_data *bin_data, t_asm_pars_prms *prms, char arg_index);
 #endif

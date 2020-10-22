@@ -6,7 +6,7 @@
 /*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 21:16:50 by olegmulko         #+#    #+#             */
-/*   Updated: 2020/10/22 21:17:48 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/10/22 22:31:10 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,48 @@ int		asm_pars_is_ind(t_asm_token **token,
 	return (0);
 }
 
-int		asm_pars_ind(t_asm_token **token,
-	t_asm_bin_data *bin_data, t_asm_pars_prms *prms)
+static int	asm_pars_ind_int(t_asm_token **token, t_asm_bin_data *bin_data,
+	t_asm_pars_prms *prms, char arg_index)
 {
-	(void)bin_data;
-	(void)prms;
+	int				*data;
+	t_asm_labels	*labels;
+
+	data = (int *)(*token)->data;
+	bin_data->add(bin_data, *data, 2 * DIR_SIZE);
+	prms->exec_code_size += DIR_SIZE;
+	labels = prms->labels;
+	labels->inc(labels, DIR_SIZE);
 	(*token) = (*token)->next;
-	return (1);
+	return (asm_pars_arg(token, bin_data, prms, ++arg_index));
+}
+
+static int	asm_pars_ind_str(t_asm_token **token, t_asm_bin_data *bin_data,
+	t_asm_pars_prms *prms, char arg_index)
+{
+	char			*data;
+	t_asm_labels	*labels;
+	int				num;
+
+	data = (char *)(*token)->data;
+	labels = prms->labels;
+	if (!(num = labels->is_contain(labels, data)))
+		return (asm_parser_error(*token, (*token)->type, prms, 0));
+	num = asm_direct_code_additional(num);
+	bin_data->add(bin_data, num, 2 * DIR_SIZE);
+	prms->exec_code_size += DIR_SIZE;
+	labels = prms->labels;
+	labels->inc(labels, DIR_SIZE);
+	(*token) = (*token)->next;
+	return (asm_pars_arg(token, bin_data, prms, ++arg_index));
+}
+
+int			asm_pars_ind(t_asm_token **token, t_asm_bin_data *bin_data,
+	t_asm_pars_prms *prms, char arg_index)
+{
+	if ((*token)->type_conv == TC_SIZE_T)
+		return (asm_pars_ind_int(token, bin_data, prms, arg_index));
+	else if ((*token)->type_conv == TC_STR)
+		return (asm_pars_ind_str(token, bin_data, prms, arg_index));
+	else
+		return (asm_parser_error(*token, (*token)->type, prms, 0));
 }
