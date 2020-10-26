@@ -1,39 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   send.c                                             :+:      :+:    :+:   */
+/*   receive.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/17 23:16:58 by aashara           #+#    #+#             */
-/*   Updated: 2020/10/26 20:03:36 by aashara-         ###   ########.fr       */
+/*   Created: 2020/10/26 19:48:56 by aashara-          #+#    #+#             */
+/*   Updated: 2020/10/26 20:07:18 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tcp_socket.h"
 
-void			error_message(const char *msg)
+int				receive_arena(t_vis_arena *arena, int socket_fd)
 {
-	perror(msg);
-	exit(EXIT_FAILURE);
-}
-
-void			send_data(const t_vis_arena *arena, int socket_fd)
-{
+	size_t			i;
 	unsigned char	buffer[sizeof(t_vis_arena)];
-	size_t			total;
-	int				n;
+	int				res;
 	size_t			arena_size;
+	size_t			total;
 
-	arena_size = sizeof(t_vis_arena);
-	ft_bzero((void*)buffer, arena_size);
-	serialize_arena(buffer, arena);
 	total = 0;
+	arena_size = sizeof(t_vis_arena);
 	while (total < arena_size)
 	{
-		n = send(socket_fd, buffer + total, arena_size - total, 0);
-		if (n == -1)
-			error_message("Error - send() failed");
-		total += (size_t)n;
+		res = recv(socket_fd, buffer + total, arena_size - total, 0);
+		if (res == -1)
+			error_message("Error - recv() failed");
+		total += (size_t)res;
 	}
+	i = 0;
+	*arena = deserialize_arena(buffer, &i);
+	if (i != arena_size)
+		error_message("Error - incorrect deserialization");
+	return (0);
 }

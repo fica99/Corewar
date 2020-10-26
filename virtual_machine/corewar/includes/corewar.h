@@ -6,13 +6,13 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 21:25:59 by aashara-          #+#    #+#             */
-/*   Updated: 2020/06/27 15:56:12 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/10/26 19:25:57 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COREWAR_H
 # define COREWAR_H
 
-# include "libsocket.h"
+#include "tcp_socket.h"
 
 #endif

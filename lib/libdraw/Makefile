@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aashara <aashara@student.42.fr>            +#+  +:+       +#+         #
+#    By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/20 13:57:06 by aashara-          #+#    #+#              #
-#    Updated: 2020/10/18 19:12:48 by aashara          ###   ########.fr        #
+#    Updated: 2020/10/26 20:10:05 by aashara-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,9 +20,12 @@ LIB_DIR =		..
 
 
 # ------------  SOURCE FILES  ------------------------------------------------ #
-SRC_FLS	=		tpl.c\
-				connect.c\
+SRC_FLS	=		connect.c\
 				send.c\
+				serialize.c\
+				receive.c\
+				deserialize.c\
+				create_server.c
 
 
 # ------------  FILEPATHS  --------------------------------------------------- #
@@ -42,8 +45,8 @@ LOP_HS_DIR	=	$(LOP_DIR)/includes
 # ------------  FLAGS  ------------------------------------------------------- #
 CC		=		gcc
 RM		=		rm -rf
-CFLGS	=
-LFLGS	=
+CFLGS	=		-Wall -Wextra -Werror
+LFLGS	=		-L $(LFT_DIR) -lft
 IFLGS	=		-I $(HDR_DIR) -I $(LHS_DIR) -I $(LOP_HS_DIR)
 DFLGS	=		-MMD -MP
 OFLGS	=		-O3
@@ -54,6 +57,9 @@ OFLGS	=		-O3
 
 all: $(NAME)
 
+$(LFT_DIR)/$(LFT):
+	$(MAKE) -C $(LFT_DIR)
+
 -include $(DEPS)
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	$(CC) $(CFLGS) $(DFLGS) $(OFLGS) -c -o $@ $< $(IFLGS)
@@ -61,14 +67,16 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
-$(NAME): $(OBJS)
+$(NAME): $(LFT_DIR)/$(LFT) $(OBJS)
 	ar rc $(NAME) $(OBJS)
 	ranlib $(NAME)
 
 clean:
+	$(MAKE) clean -C $(LFT_DIR)
 	$(RM) $(OBJ_DIR)
 
 fclean:
+	$(MAKE) fclean -C $(LFT_DIR)
 	$(RM) $(OBJ_DIR)
 	$(RM) $(NAME)
 
