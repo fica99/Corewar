@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   receive.c                                          :+:      :+:    :+:   */
+/*   receive_arena.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/26 19:48:56 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/26 20:07:18 by aashara-         ###   ########.fr       */
+/*   Created: 2020/10/27 19:48:51 by aashara-          #+#    #+#             */
+/*   Updated: 2020/10/27 21:06:09 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tcp_socket.h"
+#include "server.h"
 
-int				receive_arena(t_vis_arena *arena, int socket_fd)
+t_bool				receive_arena(t_vis_arena *arena, int connfd)
 {
-	size_t			i;
-	unsigned char	buffer[sizeof(t_vis_arena)];
+	unsigned char	buffer[sizeof(t_vis_arena) + 1];
 	int				res;
 	size_t			arena_size;
 	size_t			total;
@@ -24,14 +23,12 @@ int				receive_arena(t_vis_arena *arena, int socket_fd)
 	arena_size = sizeof(t_vis_arena);
 	while (total < arena_size)
 	{
-		res = recv(socket_fd, buffer + total, arena_size - total, 0);
-		if (res == -1)
+		if ((res = recv(connfd, buffer + total, arena_size - total, 0)) < 0)
 			error_message("Error - recv() failed");
+		if (!res)
+			return (False);
 		total += (size_t)res;
 	}
-	i = 0;
-	*arena = deserialize_arena(buffer, &i);
-	if (i != arena_size)
-		error_message("Error - incorrect deserialization");
-	return (0);
+	*arena = deserialize_arena(buffer);
+	return (True);
 }

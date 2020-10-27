@@ -6,12 +6,12 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/27 18:38:18 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/10/27 21:05:51 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SOCKET_H
-# define SOCKET_H
+#ifndef SERVER_H
+# define SERVER_H
 
 # include <sys/types.h>
 # include <sys/socket.h>
@@ -60,10 +60,10 @@ int					get_socket_fd(struct addrinfo *serv_info, struct addrinfo **info);
 int					connect_server(const char *host_name);
 void				disconnect_server(int socket_fd);
 /*
-**					send.c
+**					send_arena.c
 */
 void				error_message(const char *msg);
-void				send_data(const t_vis_arena *arena, int socket_fd);
+void				send_arena(const t_vis_arena *arena, int socket_fd);
 /*
 **					serialize.c
 */
@@ -72,11 +72,11 @@ unsigned char		*serialize_arena(unsigned char *buffer,
 /*
 **					deserialize.c
 */
-t_vis_arena			deserialize_arena(unsigned char *buffer, size_t *i);
+t_vis_arena			deserialize_arena(unsigned char *buffer);
 /*
-**					receive.c
+**					receive_arena.c
 */
-int					receive_arena(t_vis_arena *arena, int socket_fd);
+t_bool				receive_arena(t_vis_arena *arena, int socket_fd);
 /*
 **					create_server.c
 */

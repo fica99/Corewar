@@ -6,7 +6,7 @@
 #    By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/14 12:47:29 by aashara           #+#    #+#              #
-#    Updated: 2020/10/27 18:57:23 by aashara-         ###   ########.fr        #
+#    Updated: 2020/10/27 21:15:17 by aashara-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ LHS_DIR	=		$(LFT_DIR)/includes
 
 # ------------  SOURCE FILES  ------------------------------------------------ #
 SRC_FLS	=		main.cpp\
+				drawer.cpp
 
 # ------------  FILEPATHS  --------------------------------------------------- #
 SRCS	=		$(addprefix $(SRC_DIR)/, $(SRC_FLS))
@@ -49,7 +50,7 @@ CFLGS	=		-Wall -Werror -Wextra -std=c++1z
 LFLGS	=		-L $(LFT_DIR) -lft -L $(LSERVER_DIR) -lserver -lncurses
 IFLGS	=		-I $(LOP_HS_DIR) -I $(LHS_DIR) -I $(LSERVER_HS_DIR) -I $(HDR_DIR)
 DFLGS	=		-MMD -MP
-OFLGS	=		-O3
+OFLGS	=		-O0 -g
 
 # ------------  RULES  ------------------------------------------------------- #
 .PHONY: all clean fclean re

@@ -6,11 +6,11 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/26 20:09:52 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/27 18:44:51 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/10/27 21:06:00 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tcp_socket.h"
+#include "server.h"
 
 int	create_server(void)
 {

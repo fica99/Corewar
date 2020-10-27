@@ -6,7 +6,7 @@
 #    By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/20 13:57:06 by aashara-          #+#    #+#              #
-#    Updated: 2020/10/27 18:51:46 by aashara-         ###   ########.fr        #
+#    Updated: 2020/10/27 20:38:41 by aashara-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,11 +21,11 @@ LIB_DIR =		..
 
 # ------------  SOURCE FILES  ------------------------------------------------ #
 SRC_FLS	=		connect.c\
-				send.c\
+				send_arena.c\
 				serialize.c\
-				receive.c\
 				deserialize.c\
-				create_server.c
+				create_server.c\
+				receive_arena.c
 
 
 # ------------  FILEPATHS  --------------------------------------------------- #
@@ -49,7 +49,7 @@ CFLGS	=		-Wall -Wextra -Werror
 LFLGS	=		-L $(LFT_DIR) -lft
 IFLGS	=		-I $(HDR_DIR) -I $(LHS_DIR) -I $(LOP_HS_DIR)
 DFLGS	=		-MMD -MP
-OFLGS	=		-O3
+OFLGS	=		-O0 -g
 
 
 # ------------  RULES  ------------------------------------------------------- #

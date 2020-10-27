@@ -6,37 +6,57 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/26 19:11:30 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/26 20:01:34 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/10/27 21:06:17 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tcp_socket.h"
+#include "server.h"
 
 static unsigned char	*serialize_int(unsigned char *buffer, int value)
 {
-	buffer[0] = value >> 24;
-	buffer[1] = value >> 16;
-	buffer[2] = value >> 8;
-	buffer[3] = value;
-	return (buffer + 4);
+	size_t	i;
+	size_t	size_int;
+
+	i = 0;
+	buffer[i++] = value >> 24;
+	buffer[i++] = value >> 16;
+	buffer[i++] = value >> 8;
+	buffer[i++] = value;
+	size_int = sizeof(int);
+	while (i < size_int)
+		buffer[i++] = '\0';
+	return (buffer + i);
 }
 
 static unsigned char	*serialize_char(unsigned char *buffer, char value)
 {
-	buffer[0] = value;
-	return (buffer + 1);
+	size_t	i;
+	size_t	size_char;
+
+	i = 0;
+	buffer[i++] = value;
+	size_char = sizeof(char);
+	while (i < size_char)
+		buffer[i++] = '\0';
+	return (buffer + i);
 }
 
 static unsigned char	*serialize_cell(unsigned char *buffer,
 													const t_vis_cell *value)
 {
 	unsigned char	*start;
+	size_t			i;
+	size_t			size_cell;
 
 	start = buffer;
 	buffer = serialize_int(buffer, (int)value->is_carriage);
 	buffer = serialize_char(buffer, (char)value->code);
 	buffer = serialize_char(buffer, (char)value->player_id);
-	return (start + sizeof(t_vis_cell));
+	i = buffer - start;
+	size_cell = sizeof(t_vis_cell);
+	while (i < size_cell)
+		buffer[i++] = '\0';
+	return (start + i);
 }
 
 static unsigned char	*serialize_player(unsigned char *buffer,
@@ -44,6 +64,7 @@ static unsigned char	*serialize_player(unsigned char *buffer,
 {
 	size_t			i;
 	unsigned char	*start;
+	size_t			size_player;
 
 	start = buffer;
 	buffer = serialize_int(buffer, value->last_live);
@@ -55,7 +76,11 @@ static unsigned char	*serialize_player(unsigned char *buffer,
 		++i;
 	}
 	buffer = serialize_char(buffer, (char)value->id);
-	return (start + sizeof(t_vis_player));
+	size_player = sizeof(t_vis_player);
+	i = buffer - start;
+	while (i < size_player)
+		buffer[i++] = '\0';
+	return (start + i);
 }
 
 unsigned char			*serialize_arena(unsigned char *buffer,
@@ -63,6 +88,7 @@ unsigned char			*serialize_arena(unsigned char *buffer,
 {
 	size_t			i;
 	unsigned char	*start;
+	size_t			arena_size;
 
 	start = buffer;
 	i = 0;
@@ -73,15 +99,16 @@ unsigned char			*serialize_arena(unsigned char *buffer,
 	}
 	i = 0;
 	while (i < MEM_SIZE)
-	{
-		buffer = serialize_cell(buffer, &value->arena[i]);
-		++i;
-	}
+		buffer = serialize_cell(buffer, &value->arena[i++]);
 	buffer = serialize_int(buffer, value->cycle);
 	buffer = serialize_int(buffer, value->cycle_to_die);
 	buffer = serialize_int(buffer, value->cycle_delta);
 	buffer = serialize_int(buffer, value->nbr_live);
 	buffer = serialize_int(buffer, value->max_checks);
 	buffer = serialize_char(buffer, (char)value->winner_id);
-	return (start + sizeof(t_vis_arena));
+	i = buffer - start;
+	arena_size = sizeof(t_vis_arena);
+	while (i < arena_size)
+		buffer[i++] = '\0';
+	return (start + i);
 }

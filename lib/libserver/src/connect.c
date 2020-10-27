@@ -6,11 +6,11 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/16 22:31:54 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/27 18:37:49 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/10/27 21:05:57 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tcp_socket.h"
+#include "server.h"
 
 int			get_socket_fd(struct addrinfo *serv_info, struct addrinfo **info)
 {
