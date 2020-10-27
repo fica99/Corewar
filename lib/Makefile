@@ -3,33 +3,33 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aashara <aashara@student.42.fr>            +#+  +:+       +#+         #
+#    By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/03 11:46:19 by olegmulko         #+#    #+#              #
-#    Updated: 2020/10/18 18:57:44 by aashara          ###   ########.fr        #
+#    Updated: 2020/10/27 18:51:31 by aashara-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 libft := libft
 
-libdraw := libdraw
+libdraw := libserver
 
-.PHONY: all clean fclean $(libft) $(libdraw)
+.PHONY: all clean fclean $(libft) $(libserver)
 
-all: $(libft) $(libop) $(libsocket) $(libdraw)
+all: $(libft) $(libop) $(libsocket) $(libserver)
 
 $(libft):
 	@$(MAKE) --no-print-directory -C $(libft)
 
-$(libdraw):
-	@$(MAKE) --no-print-directory -C $(libdraw)
+$(libserver):
+	@$(MAKE) --no-print-directory -C $(libserver)
 
 clean:
 	@$(MAKE) clean --no-print-directory -C  $(libft)
-	@$(MAKE) clean --no-print-directory -C  $(libdraw)
+	@$(MAKE) clean --no-print-directory -C  $(libserver)
 
 fclean:
 	@$(MAKE) fclean --no-print-directory -C  $(libft)
-	@$(MAKE) fclean --no-print-directory -C  $(libdraw)
+	@$(MAKE) fclean --no-print-directory -C  $(libserver)
 
 re: fclean all
