@@ -6,7 +6,7 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/26 21:11:23 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/10/27 18:38:18 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct		s_vis_arena
 /*
 **					connect.c
 */
+int					get_socket_fd(struct addrinfo *serv_info, struct addrinfo **info);
 int					connect_server(const char *host_name);
 void				disconnect_server(int socket_fd);
 /*
@@ -79,4 +80,5 @@ int					receive_arena(t_vis_arena *arena, int socket_fd);
 /*
 **					create_server.c
 */
+int					create_server(void);
 #endif

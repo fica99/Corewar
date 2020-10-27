@@ -6,13 +6,16 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/28 16:25:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/26 17:03:02 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/10/27 18:39:03 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "visualizer.h"
 
 int	main(void) {
+	int	socketfd;
 
+	socketfd = create_server();
+	sleep(10);
 	return (0);
 }
