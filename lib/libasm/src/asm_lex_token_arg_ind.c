@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm_lex_token_arg_ind.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sschmele <sschmele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 22:02:57 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/09/29 22:06:26 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/10/28 22:36:48 by sschmele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int				asm_lex_is_arg_ind(t_asm_string *asm_str)
 {
 	if (asm_lex_is_number(asm_str, asm_str->index)
-		|| asm_lex_is_label(asm_str->str, asm_str->index, -1))
+			|| asm_lex_is_label(asm_str->str, asm_str->index, -1))
 		return (1);
 	return (0);
 }

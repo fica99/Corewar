@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm_pars_ind.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 21:16:50 by olegmulko         #+#    #+#             */
-/*   Updated: 2020/10/22 22:31:10 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/10/28 21:40:47 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,12 @@ int		asm_pars_is_ind(t_asm_token **token,
 	t_asm_pars_prms *prms, char arg_index)
 {
 	if (arg_index % 2 != 0
-		&& ((prms->args_mask >> prms->mask_offset++) & ARF_1_IND)
+		&& ((prms->args_mask >> prms->mask_offset) & ARG_1_IND)
 		&& (*token)->type == TT_ARG_IND)
+	{
+		prms->mask_offset++;
 		return (1);
+	}
 	return (0);
 }
 
@@ -26,13 +29,10 @@ static int	asm_pars_ind_int(t_asm_token **token, t_asm_bin_data *bin_data,
 	t_asm_pars_prms *prms, char arg_index)
 {
 	int				*data;
-	t_asm_labels	*labels;
 
 	data = (int *)(*token)->data;
 	bin_data->add(bin_data, *data, 2 * DIR_SIZE);
 	prms->exec_code_size += DIR_SIZE;
-	labels = prms->labels;
-	labels->inc(labels, DIR_SIZE);
 	(*token) = (*token)->next;
 	return (asm_pars_arg(token, bin_data, prms, ++arg_index));
 }
@@ -51,7 +51,6 @@ static int	asm_pars_ind_str(t_asm_token **token, t_asm_bin_data *bin_data,
 	num = asm_direct_code_additional(num);
 	bin_data->add(bin_data, num, 2 * DIR_SIZE);
 	prms->exec_code_size += DIR_SIZE;
-	labels = prms->labels;
 	labels->inc(labels, DIR_SIZE);
 	(*token) = (*token)->next;
 	return (asm_pars_arg(token, bin_data, prms, ++arg_index));

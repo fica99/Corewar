@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm_lex_token_arg_reg.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sschmele <sschmele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 21:57:39 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/10/21 21:24:00 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/10/28 22:33:56 by sschmele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,11 @@ int				asm_lex_is_number(t_asm_string *asm_str, size_t i)
 {
 	int			n_width;
 
-	if (!ft_isdigit(asm_str->str[i++]))
+	if (!(asm_str->str[i] == '-' || ft_isdigit(asm_str->str[i++])))
 		return (0);
 	n_width = 1;
+	if (asm_str->str[i++] == '-')
+		n_width++;
 	while (ft_isdigit(asm_str->str[i++]))
 		n_width++;
 	return (n_width);

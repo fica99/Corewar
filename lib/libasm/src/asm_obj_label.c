@@ -6,7 +6,7 @@
 /*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 20:36:27 by olegmulko         #+#    #+#             */
-/*   Updated: 2020/10/22 21:56:18 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/10/23 11:26:32 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,31 +52,33 @@ t_asm_labels	*asm_init_labels(size_t size)
 int				asm_labels_is_contain(t_asm_labels *labels, char *name)
 {
 	size_t		i;
-	t_asm_label	obj_label;
+	t_asm_label	*obj_label;
 
 	i = 0;
 	if (!labels->size)
-		return (0);
+		return (-1);
 	while (i < labels->size)
 	{
-		obj_label = labels->labels[i];
-		if (!ft_strcmp(obj_label.name, name))
-			return ((int)obj_label.count);
+		obj_label = &labels->labels[i];
+		if (!ft_strcmp(obj_label->name, name))
+			return (obj_label->count);
 		i++;
 	}
-	return (0);
+	return (-1);
 }
 
-int				asm_labels_add(t_asm_labels *labels, char *name)
+int				asm_labels_add(t_asm_labels *labels, char *name, int count)
 {
-	t_asm_label	obj_label;
+	t_asm_label	*obj_label;
 
-	(void)obj_label;
 	asm_labels_check_size(labels);
-	if (labels->is_contain(labels, name))
+	if (labels->is_contain(labels, name) != -1)
 		return (0);
-	obj_label = labels->labels[labels->size];
-	obj_label.name = name;
+	obj_label = &labels->labels[labels->size];
+	if (!(obj_label->name = ft_strdup(name)))
+		return (-1);
+	obj_label->count = count;
+	labels->size++;
 	return (1);
 }
 

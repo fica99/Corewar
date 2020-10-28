@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm_pars_opers.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 19:12:00 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/10/22 22:31:40 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/10/28 21:33:09 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,11 @@ int		asm_direct_code_additional(int code)
 int		asm_pars_opers(t_asm_token **token,
 	t_asm_bin_data *bin_data, t_asm_pars_prms *prms)
 {
-	static t_asm_labels	*labels;
-
-	if (labels == NULL)
-		labels = asm_init_labels(LABELS_SIZE);
-	prms->labels = labels;
 	while (1)
 	{
 		if (asm_skip_token(token, TT_SEP)
 			|| asm_skip_token(token, TT_NEWLINE))
 			continue ;
-		else if ((*token)->type == TT_LABEL)
-			return (asm_pars_label(token, bin_data, prms));
 		else if ((*token)->type == TT_OPER)
 			return (asm_pars_oper(token, bin_data, prms));
 		else if ((*token)->type == TT_EOF)
@@ -48,13 +41,10 @@ int		asm_pars_oper(t_asm_token **token,
 	t_asm_bin_data *bin_data, t_asm_pars_prms *prms)
 {
 	t_asm_oper		*oper;
-	t_asm_labels	*labels;
 
 	oper = (t_asm_oper *)(*token)->data;
 	bin_data->add(bin_data, (int)oper->code, 2);
 	prms->exec_code_size += 1;
-	labels = prms->labels;
-	labels->inc(labels, 1);
 	prms->args_mask = oper->args_mask;
 	prms->mask_offset = 0;
 	(*token) = (*token)->next;
@@ -64,7 +54,7 @@ int		asm_pars_oper(t_asm_token **token,
 int		asm_pars_arg(t_asm_token **token,
 	t_asm_bin_data *bin_data, t_asm_pars_prms *prms, char arg_index)
 {
-	if (arg_index <= 0)
+	if (arg_index <= 0 || arg_index > ARGS_SIZE * 2 - 1)
 		return (asm_parser_error(*token, (*token)->type, prms, 0));
 	while (asm_skip_token(token, TT_SEP))
 		;
@@ -79,7 +69,7 @@ int		asm_pars_arg(t_asm_token **token,
 	else
 	{
 		while (asm_skip_token(token, TT_SEP))
-		;
+			;
 		if (!asm_check_nl(token, prms))
 			return (asm_parser_error(*token, TT_NEWLINE, prms, 0));
 		return (1);
