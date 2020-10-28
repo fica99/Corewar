@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 21:53:01 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/09/29 21:54:49 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/10/28 23:19:40 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ t_asm_token			*asm_lex_token_champ_comment(t_asm_string *asm_str)
 	if (!size)
 		size = ft_strlen(COMMENT_CMD_STRING);
 	token = asm_lex_new_token(TT_CHAMP_COMMENT);
+	asm_pos_to_token(asm_str, token);
 	asm_str->index += size;
 	asm_str->char_num += size;
 	return (token);

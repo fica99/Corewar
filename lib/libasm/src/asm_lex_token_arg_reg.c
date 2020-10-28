@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm_lex_token_arg_reg.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sschmele <sschmele@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 21:57:39 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/10/28 22:33:56 by sschmele         ###   ########.fr       */
+/*   Updated: 2020/10/28 23:29:15 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,10 @@ t_asm_token		*asm_lex_token_arg_reg(t_asm_string *asm_str)
 {
 	t_asm_token	*token;
 
+	token = asm_lex_new_token(TT_ARG_REG);
+	asm_pos_to_token(asm_str, token);
 	asm_str->index++;
 	asm_str->char_num++;
-	token = asm_lex_new_token(TT_ARG_REG);
 	token->data = (void*)asm_lex_get_number(asm_str);
 	return (token);
 }
