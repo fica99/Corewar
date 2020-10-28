@@ -6,7 +6,7 @@
 #    By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/14 12:47:29 by aashara           #+#    #+#              #
-#    Updated: 2020/10/28 21:17:06 by aashara-         ###   ########.fr        #
+#    Updated: 2020/10/28 23:03:44 by aashara-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,8 +70,6 @@ $(OBJ_DIR):
 
 $(NAME): $(LFT_PRINTF_DIR)/$(LFT_PRINTF) $(LSERVER_DIR)/$(LSERVER) $(OBJS)
 	$(CC) -o $(NAME) $(OBJS) $(LFLGS)
-
-$(NAME): $(OBJS)
 
 clean:
 	$(MAKE) -C $(LFT_PRINTF_DIR) clean
