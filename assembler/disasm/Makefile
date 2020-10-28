@@ -6,7 +6,7 @@
 #    By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/14 12:47:29 by aashara           #+#    #+#              #
-#    Updated: 2020/07/23 17:26:56 by aashara-         ###   ########.fr        #
+#    Updated: 2020/10/15 16:45:00 by aashara-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,13 +28,18 @@ LHS_DIR	=		$(LFT_DIR)/includes
 LOP_DIR	=		$(LIB_DIR)/libop
 LOP_HS_DIR	=	$(LOP_DIR)/includes
 
-# ------------  LIBDISASM ------------------------------------------------------- #
-LDISASM		=		libdisasm.a
-LDISASM_DIR	=		$(LIB_DIR)/libdisasm
-LDISASM_HS_DIR	=		$(LDISASM_DIR)/includes
 
 # ------------  SOURCE FILES  ------------------------------------------------ #
-SRC_FLS	=		main.c print_op.c
+SRC_FLS	=		main.c \
+				print_op.c \
+				parse.c \
+				err.c \
+				convert_bytes.c \
+				free_func.c \
+				parse_champ.c \
+				util.c \
+				op_push_back.c \
+				fill_op.c
 
 # ------------  FILEPATHS  --------------------------------------------------- #
 SRCS	=		$(addprefix $(SRC_DIR)/, $(SRC_FLS))
@@ -45,8 +50,8 @@ DEPS	=		$(OBJS:.o=.d)
 CC		=		gcc
 RM		=		rm -rf
 CFLGS	=		-Wall -Werror -Wextra
-LFLGS	=		-L $(LDISASM_DIR) -ldisasm -L $(LFT_DIR) -lft
-IFLGS	=		-I $(HDR_DIR) -I $(LHS_DIR) -I $(LOP_HS_DIR) -I $(LDISASM_HS_DIR)
+LFLGS	=		-L $(LFT_DIR) -lft
+IFLGS	=		-I $(HDR_DIR) -I $(LHS_DIR) -I $(LOP_HS_DIR)
 DFLGS	=		-MMD -MP
 OFLGS	=		-O3
 
@@ -75,12 +80,10 @@ $(NAME): $(OBJS)
 
 clean:
 	$(MAKE) -C $(LFT_DIR) clean
-	$(MAKE) -C $(LDISASM_DIR) clean
 	$(RM) $(OBJ_DIR)
 
 fclean:
 	$(MAKE) -C $(LFT_DIR) fclean
-	$(MAKE) -C $(LDISASM_DIR) fclean
 	$(RM) $(OBJ_DIR)
 	$(RM) $(NAME)
 

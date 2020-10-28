@@ -1,79 +1,84 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libsocket.h                                        :+:      :+:    :+:   */
+/*   tcp_socket.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/07/29 13:12:39 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/10/27 21:05:51 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBSOCKET_H
-# define LIBSOCKET_H
+#ifndef SERVER_H
+# define SERVER_H
 
-# include <stdint.h>
-# include <stdio.h>
-# include <stdlib.h>
 # include <sys/types.h>
 # include <sys/socket.h>
-# include <sys/un.h>
-# include <errno.h>
+# include <netdb.h>
+# include <stdio.h>
+# include <strings.h>
 # include <unistd.h>
-# include "op.h"
+# include <stdlib.h>
+# include <arpa/inet.h>
 # include "libft.h"
+# include "op.h"
+# define PORT "3490"
 
-# define SERVER_PATH "/tmp/server.soc"
 
-typedef enum		e_bool
-{
-	False = 0,
-	True = 1,
-}					t_bool;
-
-typedef struct		s_cell
+typedef struct		s_vis_cell
 {
 	t_bool			is_carriage;
 	uint8_t			code;
 	uint8_t			player_id;
-}					t_cell;
+}					t_vis_cell;
 
-typedef struct		s_player
+typedef struct		s_vis_player
 {
 	int				last_live;
 	int				lives_in_cur_period;
 	char			name[PROG_NAME_LENGTH];
 	uint8_t			id;
-}					t_player;
+}					t_vis_player;
 
-typedef struct		s_arena
+typedef struct		s_vis_arena
 {
-	t_player		players[MAX_PLAYERS];
-	t_cell			arena[MEM_SIZE];
+	t_vis_player	players[MAX_PLAYERS];
+	t_vis_cell		arena[MEM_SIZE];
 	int				cycle;
 	int				cycle_to_die;
 	int				cycle_delta;
 	int				nbr_live;
 	int				max_checks;
 	uint8_t			winner_id;
-}					t_arena;
+}					t_vis_arena;
 
 /*
-**	serialize.c
+**					connect.c
 */
-unsigned char		*serialize_arena(unsigned char *buffer,
-												const t_arena *value);
+int					get_socket_fd(struct addrinfo *serv_info, struct addrinfo **info);
+int					connect_server(const char *host_name);
+void				disconnect_server(int socket_fd);
 /*
-**	deserialize.c
-*/
-t_arena				deserialize_arena(unsigned char *buffer, size_t *i);
-/*
-**	sendData.c
+**					send_arena.c
 */
 void				error_message(const char *msg);
-int					connect_to_server(void);
-void				disconnect_from_server(int listenfd);
-void				send_arena(const t_arena *arena, int listenfd);
-int					receive_arena(t_arena *arena, int connfd);
+void				send_arena(const t_vis_arena *arena, int socket_fd);
+/*
+**					serialize.c
+*/
+unsigned char		*serialize_arena(unsigned char *buffer,
+											const t_vis_arena *value);
+/*
+**					deserialize.c
+*/
+t_vis_arena			deserialize_arena(unsigned char *buffer);
+/*
+**					receive_arena.c
+*/
+t_bool				receive_arena(t_vis_arena *arena, int socket_fd);
+/*
+**					create_server.c
+*/
+int					create_server(void);
 #endif

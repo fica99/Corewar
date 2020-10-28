@@ -1,14 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   visualizer.h                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/27 21:09:23 by aashara-          #+#    #+#             */
+/*   Updated: 2020/10/27 21:12:56 by aashara-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #pragma once
 
-# include <sys/types.h>
-# include <sys/socket.h>
-# include <sys/un.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <iostream>
-# include <string>
-# include "libdraw.h"
+#include "drawer.h"
 extern "C" {
-# include "libsocket.h"
+# include "server.h"
 }
 
+# define BACKLOG 5

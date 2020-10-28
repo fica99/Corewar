@@ -6,7 +6,7 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 21:41:56 by aashara-          #+#    #+#             */
-/*   Updated: 2020/07/29 14:18:19 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/10/28 12:51:33 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 
 int	main(void)
 {
-	t_arena	arena;
+	t_vis_arena	arena;
 	int		listenfd;
 	int		i;
 
-	listenfd = connect_to_server();
+
+	listenfd = connect_server("192.168.28.63");
 	i = 0;
-	ft_bzero((void*)&arena, sizeof(t_arena));
+	ft_bzero((void*)&arena, sizeof(t_vis_arena));
 	arena.cycle_delta = rand() % 1000;
 	arena.cycle_to_die = rand() % 10000;
 	arena.max_checks = rand() % 1000;
@@ -68,6 +69,6 @@ int	main(void)
 		send_arena(&arena, listenfd);
 		++i;
 	}
-	disconnect_from_server(listenfd);
+	disconnect_server(listenfd);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 15:42:59 by aashara-          #+#    #+#             */
-/*   Updated: 2020/07/11 15:16:05 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/10/15 22:25:59 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,25 @@
 # define FT_LLONG_MAX 9223372036854775807
 # define FT_ULLONG_MAX 18446744073709551615ULL
 
-typedef struct	s_list
+typedef struct		s_list
 {
 	void			*content;
 	size_t			content_size;
 	struct s_list	*next;
-}				t_list;
+}					t_list;
 
-typedef struct	s_string
+typedef struct		s_string
 {
-	char	*str;
-	size_t	size;
-	size_t	m_size;
-}				t_string;
+	char			*str;
+	size_t			size;
+	size_t			m_size;
+}					t_string;
+
+typedef enum
+{
+	False = 0,
+	True = 1
+}					t_bool;
 
 void			*ft_realloc(void *buf, size_t old, size_t new_size);
 size_t			ft_strlen(const char *str);
