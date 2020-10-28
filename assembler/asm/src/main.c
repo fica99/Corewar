@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sschmele <sschmele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/27 01:00:23 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/20 20:16:45 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/10/28 20:24:02 by sschmele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int ac, char **av)
 	asm_str = asm_file_to_str(av[1]);
 	opers_hash = asm_get_opers_hash();
 	tokens = asm_lex_get_chain_tokens(asm_str, opers_hash);
-	if (tokens->next == TT_EOF)
+	if (tokens->type == TT_EOF)
 		asm_prog_error("the file is empty");
 	tokens = asm_lex_del_all_com_tokens(tokens);
 	bin_data = asm_init_bin_data(BIN_DATA_SIZE);

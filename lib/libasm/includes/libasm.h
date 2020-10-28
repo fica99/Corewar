@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libasm.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
+/*   By: sschmele <sschmele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/22 23:20:06 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/10/28 20:33:01 by sschmele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,23 +34,31 @@
 # define BIN_DATA_MASK 0b00001111
 # define ALT_COMMENT_CHAR ';'
 # define LABELS_SIZE 10
+
+/*
+** Operations arguments according to the operations table
+** The renewed one in 3.Assembler:
+** https://github.com/fica99/Corewar/wiki
+*/
+
 # define ARG_1_ALL 0b1000000111
 # define ARG_1_REG 0b1000000100
 # define ARG_1_DIR 0b1000000010
-# define ARF_1_IND 0b1000000001
+# define ARG_1_IND 0b1000000001
 # define ARG_2_ALL 0b1000111000
 # define ARG_2_REG 0b1000100000
 # define ARG_2_DIR 0b1000010000
-# define ARF_2_IND 0b1000001000
+# define ARG_2_IND 0b1000001000
 # define ARG_3_ALL 0b1111000000
 # define ARG_3_REG 0b1100000000
 # define ARG_3_DIR 0b1010000000
-# define ARF_3_IND 0b1001000000
+# define ARG_3_IND 0b1001000000
 # define ARG_TYPE 0b1000000000
+
 # define ERR_INPUT_PARAMS_FIRST "Error: the program accepts only one "
 # define ERR_INPUT_PARAMS_SEC "parameter as input (the full path to the file)"
 # define ERR_INPUT_PARAMS ERR_INPUT_PARAMS_FIRST ERR_INPUT_PARAMS_SEC
-# define ERR_FILE_EXT "Error: the file must have the extension .c"
+# define ERR_FILE_EXT "Error: the file must have the extension .s"
 # define ERR_TMP "line ?: position ?, Error: ?"
 # define ERR_LEX "lexical analysis"
 # define ERR_STR_CLOSE "the line is not closed"
@@ -107,6 +115,12 @@ typedef struct	s_asm_token
 	size_t				char_num;
 	struct s_asm_token	*next;
 }				t_asm_token;
+
+/*
+** Operations according to the operations table
+** The renewed one in 3.Assembler:
+** https://github.com/fica99/Corewar/wiki
+*/
 
 typedef struct	s_asm_oper
 {
@@ -166,79 +180,100 @@ typedef struct	s_asm_pars_prms
 /*
 ** asm_error.c
 */
+
 void			asm_sys_error(void);
 void			asm_prog_error(char *msg);
 void			asm_lex_error(t_asm_string *asm_str, char *msg);
 void			asm_pars_error(t_asm_pars_prms	*prms);
+
 /*
 ** asm_new_str.c
 */
+
 t_asm_string	*asm_new_str(size_t m_size);
+
 /*
 ** asm_strs_realoc.c
 */
+
 void			asm_str_realoc(t_asm_string *asm_str);
+
 /*
 ** asm_lex_token.c
 */
+
 t_asm_token		*asm_lex_new_token(t_asm_tkn_type type);
 void			asm_lex_del_token(t_asm_token **token);
+
 /*
 ** asm_filetostr.c
 */
+
 t_asm_string	*asm_file_to_str(char *file_path);
+
 /*
 ** asm_lex_get_token.c
 */
+
 t_asm_token		*asm_lex_get_token(t_asm_string *asm_str,
 									t_hash **opers_hash);
 /*
 ** asm_lex_token_comment.c
 */
+
 t_asm_token		*asm_lex_token_comment(t_asm_string *asm_str);
 t_asm_token		*asm_lex_del_com_token(t_asm_token *token);
 t_asm_token		*asm_lex_del_all_com_tokens(t_asm_token *token);
 /*
 ** asm_ltoa.c
 */
+
 char			*asm_ltoa(long long num);
 /*
 ** asm_lex_get_chain_tokens.c
 */
+
 t_asm_token		*asm_lex_get_chain_tokens(t_asm_string *asm_str,
 										t_hash **opers_hash);
 /*
 ** asm_lex_token_nl.c
 */
+
 t_asm_token		*asm_lex_token_nl(t_asm_string *asm_str);
 /*
 ** asm_lex_token_str.c
 */
+
 t_asm_token		*asm_lex_token_str(t_asm_string *asm_str);
 /*
 ** asm_lex_token_chn.c
 */
+
 int				asm_lex_is_champ_name(t_asm_string *asm_str);
 t_asm_token		*asm_lex_token_champ_name(t_asm_string *asm_str);
 /*
 ** asm_lex_token_chcom.c
 */
+
 int				asm_lex_is_champ_comment(t_asm_string *asm_str);
 t_asm_token		*asm_lex_token_champ_comment (t_asm_string *asm_str);
 /*
 ** asm_lex_token_sep.c
 */
+
 int				asm_lex_is_sep(t_asm_string *asm_str);
 t_asm_token		*asm_lex_token_sep (t_asm_string *asm_str);
 /*
 ** asm_lex_token_label.c
 */
+
 int				asm_lex_is_label(char *str, size_t i, int mod);
 char			*asm_lex_get_label_str(t_asm_string *asm_str, char mod);
 t_asm_token		*asm_lex_token_label(t_asm_string *asm_str);
 /*
 ** asm_lex_token_arg_reg.c
 */
+
 int				asm_lex_is_number(t_asm_string *asm_str, size_t i);
 int				asm_lex_is_arg_reg(t_asm_string *asm_str);
 size_t			*asm_lex_get_number(t_asm_string *asm_str);
@@ -246,20 +281,24 @@ t_asm_token		*asm_lex_token_arg_reg(t_asm_string *asm_str);
 /*
 ** asm_lex_token_arg_dir.c
 */
+
 int				asm_lex_is_arg_dir(t_asm_string *asm_str);
 t_asm_token		*asm_lex_token_arg_dir(t_asm_string *asm_str);
 /*
 ** asm_lex_token_arg_ind.c
 */
+
 int				asm_lex_is_arg_ind(t_asm_string *asm_str);
 t_asm_token		*asm_lex_token_arg_ind(t_asm_string *asm_str);
 /*
 ** asm_opers_hash.c
 */
+
 t_hash			**asm_get_opers_hash();
 /*
 ** asm_lex_opers.c
 */
+
 int				asm_is_oper(t_asm_string *asm_str,
 									t_hash **opers_hash);
 t_asm_token		*asm_token_oper(t_asm_string *asm_str,
@@ -267,19 +306,26 @@ t_asm_token		*asm_token_oper(t_asm_string *asm_str,
 /*
 ** asm_lex_arg_sep.c
 */
+
 int				asm_lex_check_arg_sep(t_asm_string *asm_str);
 t_asm_token		*asm_lex_token_arg_sep(t_asm_string *asm_str);
+
 /*
 ** asm_bin_data.c
 */
+
 t_asm_bin_data	*asm_init_bin_data(size_t size);
+
 /*
 ** asm_file.c
 */
+
 t_asm_file		*asm_file_init(char *name);
+
 /*
 ** asm_parser.c
 */
+
 t_asm_pars_prms	*asm_init_pars_prms(void);
 void			asm_fill_prms_from_token(t_asm_token *token,
 	t_asm_pars_prms *prms, char *error);
@@ -287,39 +333,53 @@ int				asm_skip_token(t_asm_token **token,
 	t_asm_tkn_type type);
 int				asm_parser(t_asm_token *token,
 	t_asm_bin_data *bin_data, t_asm_pars_prms *prms);
+
 /*
 ** asm_pars_ch_name.c
 */
+
 int				asm_pars_champ_name(t_asm_token **token,
 	t_asm_bin_data *bin_data, t_asm_pars_prms *prms);
+
 /*
 ** asm_pars_sep.c
 */
+
 int				asm_check_nl(t_asm_token **token,
 	t_asm_pars_prms *prms);
+
 /*
 ** asm_pars_exec_code.c
 */
+
 int				asm_exec_code(t_asm_token **token,
 	t_asm_bin_data *bin_data, t_asm_pars_prms *prms);
+
 /*
 ** asm_pars.ch_com.c
 */
+
 int				asm_pars_champ_comment(t_asm_token **token,
 	t_asm_bin_data *bin_data, t_asm_pars_prms *prms);
+
 /*
 ** asm_support_func.c
 */
+
 void			asm_add_null_in_bd(t_asm_bin_data *bin_data,
 	int bytes);
+void			asm_print_str_filetostr(char *str);
+	
 /*
 ** asm_pars_error.c
 */
+
 int				asm_parser_error(t_asm_token *token,
 	t_asm_tkn_type type, t_asm_pars_prms *prms, size_t num_error);
 /*
 ** asm_pars_opers.c
 */
+
 int				asm_pars_opers(t_asm_token **token,
 	t_asm_bin_data *bin_data, t_asm_pars_prms *prms);
 int				asm_direct_code_additional(int code);
@@ -329,36 +389,46 @@ int 			asm_pars_arg(t_asm_token **token,
 	t_asm_bin_data *bin_data, t_asm_pars_prms *prms, char arg_index);
 int				asm_pars_args_sep(t_asm_token **token,
 	t_asm_bin_data *bin_data, t_asm_pars_prms *prms, char arg_index);
+
 /*
 ** asm_pars_labels.c
 */
+
 void		asm_pars_label(t_asm_token **token,
 	t_asm_pars_prms *prms);
+
 /*
 ** asm_obj_label.c
 */
+
 t_asm_labels	*asm_init_labels(size_t size);
 int				asm_labels_is_contain(t_asm_labels *labels, char *name);
 int				asm_labels_add(t_asm_labels *labels, char *name, int count);
 void			asm_labels_clear(t_asm_labels *labels);
 void			asm_labels_count_inc(t_asm_labels *labels, size_t inc);
+
 /*
 ** asm_pars_reg.c
 */
+
 int				asm_pars_is_reg(t_asm_token **token,
 	t_asm_pars_prms *prms, char arg_index);
 int				asm_pars_reg(t_asm_token **token, t_asm_bin_data *bin_data,
 	t_asm_pars_prms *prms, char arg_index);
+
 /*
 ** asm_pars_dir.c
 */
+
 int				asm_pars_is_dir(t_asm_token **token,
 	t_asm_pars_prms *prms, char arg_index);
 int				asm_pars_dir(t_asm_token **token, t_asm_bin_data *bin_data,
 	t_asm_pars_prms *prms, char arg_index);
+
 /*
 ** asm_pars_ind.c
 */
+
 int				asm_pars_is_ind(t_asm_token **token,
 	t_asm_pars_prms *prms, char arg_index);
 int				asm_pars_ind(t_asm_token **token,
