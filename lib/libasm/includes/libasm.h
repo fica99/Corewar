@@ -6,7 +6,7 @@
 /*   By: sschmele <sschmele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/28 22:39:53 by sschmele         ###   ########.fr       */
+/*   Updated: 2020/10/28 22:55:59 by sschmele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 # define BIN_DATA_MASK 0b00001111
 # define ALT_COMMENT_CHAR ';'
 # define LABELS_SIZE 10
+# define ARGS_SIZE 3
 
 /*
 ** Operations arguments according to the operations table
@@ -373,7 +374,8 @@ int						asm_pars_champ_comment(t_asm_token **token,
 
 void					asm_add_null_in_bd(t_asm_bin_data *bin_data,
 							int bytes);
-	
+void					asm_print_str_filetostr(char *str);
+
 /*
 ** asm_pars_error.c
 */

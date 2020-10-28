@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm_pars_reg.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 22:46:40 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/10/23 11:28:46 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/10/28 21:40:58 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,12 @@ int		asm_pars_is_reg(t_asm_token **token,
 	t_asm_pars_prms *prms, char arg_index)
 {
 	if (arg_index % 2 != 0
-		&& ((prms->args_mask >> prms->mask_offset++) & ARG_1_REG)
+		&& ((prms->args_mask >> prms->mask_offset) & ARG_1_REG)
 		&& (*token)->type == TT_ARG_REG)
+	{
+		prms->mask_offset++;
 		return (1);
+	}
 	return (0);
 }
 

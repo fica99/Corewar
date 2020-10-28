@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm_pars_opers.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 19:12:00 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/10/23 11:28:19 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/10/28 21:33:09 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int		asm_pars_oper(t_asm_token **token,
 int		asm_pars_arg(t_asm_token **token,
 	t_asm_bin_data *bin_data, t_asm_pars_prms *prms, char arg_index)
 {
-	if (arg_index <= 0)
+	if (arg_index <= 0 || arg_index > ARGS_SIZE * 2 - 1)
 		return (asm_parser_error(*token, (*token)->type, prms, 0));
 	while (asm_skip_token(token, TT_SEP))
 		;
@@ -69,7 +69,7 @@ int		asm_pars_arg(t_asm_token **token,
 	else
 	{
 		while (asm_skip_token(token, TT_SEP))
-		;
+			;
 		if (!asm_check_nl(token, prms))
 			return (asm_parser_error(*token, TT_NEWLINE, prms, 0));
 		return (1);

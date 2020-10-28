@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm_pars_ind.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sschmele <sschmele@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 21:16:50 by olegmulko         #+#    #+#             */
-/*   Updated: 2020/10/28 20:17:25 by sschmele         ###   ########.fr       */
+/*   Updated: 2020/10/28 21:40:47 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,12 @@ int		asm_pars_is_ind(t_asm_token **token,
 	t_asm_pars_prms *prms, char arg_index)
 {
 	if (arg_index % 2 != 0
-		&& ((prms->args_mask >> prms->mask_offset++) & ARG_1_IND)
+		&& ((prms->args_mask >> prms->mask_offset) & ARG_1_IND)
 		&& (*token)->type == TT_ARG_IND)
+	{
+		prms->mask_offset++;
 		return (1);
+	}
 	return (0);
 }
 
