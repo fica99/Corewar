@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 20:57:47 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/09/29 20:58:17 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/10/28 23:21:46 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ t_asm_token		*asm_token_oper(t_asm_string *asm_str, t_hash **opers_hash)
 	if (!(name = ft_strsub(asm_str->str, asm_str->index, size)))
 		asm_sys_error();
 	token->data = (void *)get_hash_data(opers_hash, name, OPERS_SIZE);
+	asm_pos_to_token(asm_str, token);
 	ft_memdel((void **)&name);
 	asm_str->index += size;
 	asm_str->char_num += size;

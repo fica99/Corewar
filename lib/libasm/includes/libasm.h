@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libasm.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sschmele <sschmele@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/28 22:55:59 by sschmele         ###   ########.fr       */
+/*   Updated: 2020/10/28 23:15:57 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -375,6 +375,8 @@ int						asm_pars_champ_comment(t_asm_token **token,
 void					asm_add_null_in_bd(t_asm_bin_data *bin_data,
 							int bytes);
 void					asm_print_str_filetostr(char *str);
+void					asm_pos_to_token(t_asm_string *asm_str,
+	t_asm_token *token);
 
 /*
 ** asm_pars_error.c

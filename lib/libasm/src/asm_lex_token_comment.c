@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 21:47:47 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/10/10 17:58:58 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/10/28 23:24:53 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,9 @@ t_asm_token		*asm_lex_token_comment(t_asm_string *asm_str)
 	char		*comment;
 	t_asm_token	*token;
 
-	comment = asm_lex_comment_to_str(asm_str);
 	token = asm_lex_new_token(TT_COMMENT);
+	asm_pos_to_token(asm_str, token);
+	comment = asm_lex_comment_to_str(asm_str);
 	token->data = (void*)comment;
 	return (token);
 }
