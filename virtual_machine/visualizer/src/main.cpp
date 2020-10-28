@@ -6,11 +6,12 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/28 16:25:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/28 18:41:20 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/10/28 21:36:52 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "visualizer.h"
+# define BACKLOG 5
+# include "drawer.h"
 
 using namespace	std;
 

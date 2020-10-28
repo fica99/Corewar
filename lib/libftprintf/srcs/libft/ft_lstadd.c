@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   visualizer.h                                       :+:      :+:    :+:   */
+/*   ft_lstadd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/27 21:09:23 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/27 21:12:56 by aashara-         ###   ########.fr       */
+/*   Created: 2018/12/01 22:32:34 by aashara-          #+#    #+#             */
+/*   Updated: 2020/10/28 21:41:24 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+#include "libft.h"
 
-#include "drawer.h"
-extern "C" {
-# include "server.h"
+void	ft_lstadd(t_list **alst, t_list *new_p)
+{
+	new_p->next = *alst;
+	*alst = new_p;
 }
-
-# define BACKLOG 5

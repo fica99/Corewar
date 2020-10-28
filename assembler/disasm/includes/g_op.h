@@ -6,14 +6,14 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 18:11:55 by mmarti            #+#    #+#             */
-/*   Updated: 2020/10/15 22:26:56 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/10/28 21:58:04 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef G_OP_H
 # define G_OP_H
 
-#include "disasm.h"
+# include "disasm.h"
 
 static t_op		g_op[OP_COUNT] =
 {

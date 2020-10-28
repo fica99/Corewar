@@ -6,7 +6,7 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:58:53 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/15 16:44:41 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/10/28 21:58:15 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,4 @@ void				print_op(t_op *op, int fd);
 **					util.c
 */
 void				*xmalloc(size_t size);
-
-
-
 #endif

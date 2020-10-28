@@ -1,32 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_newstrs.c                                       :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/08 21:17:01 by olegmulko         #+#    #+#             */
-/*   Updated: 2020/07/08 22:57:46 by olegmulko        ###   ########.fr       */
+/*   Created: 2018/11/27 17:49:10 by aashara-          #+#    #+#             */
+/*   Updated: 2020/08/14 09:24:15 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_string	*ft_newstrs(size_t m_size)
+void	ft_putchar(char c)
 {
-	t_string	*new_string;
-	char		*str;
+	int	res;
 
-	if (!(new_string = (t_string*)malloc(sizeof(t_string))))
-		return (NULL);
-	if (!(str = (char *)malloc(sizeof(char) * (m_size + 1))))
-	{
-		free(new_string);
-		return (NULL);
-	}
-	*str = '\0';
-	new_string->str = str;
-	new_string->m_size = m_size;
-	new_string->size = 0;
-	return (new_string);
+	res = write(1, &c, 1);
+	if (res == -1)
+		return ;
 }

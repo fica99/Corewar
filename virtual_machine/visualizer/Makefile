@@ -6,7 +6,7 @@
 #    By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/14 12:47:29 by aashara           #+#    #+#              #
-#    Updated: 2020/10/27 21:15:17 by aashara-         ###   ########.fr        #
+#    Updated: 2020/10/28 21:39:20 by aashara-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,15 +28,16 @@ LSERVER		=	libserver.a
 LSERVER_DIR	=	$(LIB_DIR)/libserver
 LSERVER_HS_DIR	=	$(LSERVER_DIR)/includes
 
-# ------------  LIBFT  ------------------------------------------------------- #
-LFT		=		libft.a
-LFT_DIR	=		$(LIB_DIR)/libft
-LHS_DIR	=		$(LFT_DIR)/includes
+# ------------  LIBFTPRINTF  ------------------------------------------------- #
+LFT_PRINTF		=		libftprintf.a
+LFT_PRINTF_DIR	=		$(LIB_DIR)/libftprintf
+LHS_PRINTF_DIR	=		$(LFT_PRINTF_DIR)/includes
 
 
 # ------------  SOURCE FILES  ------------------------------------------------ #
-SRC_FLS	=		main.cpp\
-				drawer.cpp
+SRC_FLS	=	drawer.cpp \
+			main.cpp
+
 
 # ------------  FILEPATHS  --------------------------------------------------- #
 SRCS	=		$(addprefix $(SRC_DIR)/, $(SRC_FLS))
@@ -47,8 +48,8 @@ DEPS	=		$(OBJS:.o=.d)
 CC		=		g++
 RM		=		rm -rf
 CFLGS	=		-Wall -Werror -Wextra -std=c++1z
-LFLGS	=		-L $(LFT_DIR) -lft -L $(LSERVER_DIR) -lserver -lncurses
-IFLGS	=		-I $(LOP_HS_DIR) -I $(LHS_DIR) -I $(LSERVER_HS_DIR) -I $(HDR_DIR)
+LFLGS	=		-L $(LFT_PRINTF_DIR) -lftprintf -L $(LSERVER_DIR) -lserver -lncurses
+IFLGS	=		-I $(HDR_DIR) -I $(LSERVER_HS_DIR) -I $(LOP_HS_DIR) -I $(LHS_PRINTF_DIR)
 DFLGS	=		-MMD -MP
 OFLGS	=		-O0 -g
 
@@ -57,8 +58,8 @@ OFLGS	=		-O0 -g
 
 all: $(NAME)
 
-$(LFT_DIR)/$(LFT):
-	$(MAKE) -C $(LFT_DIR)
+$(LFT_PRINTF_DIR)/$(LFT_PRINTF):
+	$(MAKE) -C $(LFT_PRINTF_DIR)
 
 $(LSERVER_DIR)/$(LSERVER):
 	$(MAKE) -C $(LSERVER_DIR)
@@ -70,18 +71,18 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | $(OBJ_DIR)
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
-$(NAME): $(LFT_DIR)/$(LFT) $(LSERVER_DIR)/$(LSERVER) $(OBJS)
+$(NAME): $(LFT_PRINTF_DIR)/$(LFT_PRINTF) $(LSERVER_DIR)/$(LSERVER) $(OBJS)
 	$(CC) -o $(NAME) $(OBJS) $(LFLGS)
 
 $(NAME): $(OBJS)
 
 clean:
-	$(MAKE) -C $(LFT_DIR) clean
+	$(MAKE) -C $(LFT_PRINTF_DIR) clean
 	$(MAKE) -C $(LSERVER_DIR) clean
 	$(RM) $(OBJ_DIR)
 
 fclean:
-	$(MAKE) -C $(LFT_DIR) fclean
+	$(MAKE) -C $(LFT_PRINTF_DIR) fclean
 	$(MAKE) -C $(LSERVER_DIR) fclean
 	$(RM) $(OBJ_DIR)
 	$(RM) $(NAME)

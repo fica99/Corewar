@@ -1,20 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isupper.c                                       :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/16 13:26:23 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/06/25 20:48:25 by aashara-         ###   ########.fr       */
+/*   Created: 2020/02/17 22:11:50 by aashara-          #+#    #+#             */
+/*   Updated: 2020/10/28 21:56:48 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-int	ft_isupper(char c)
+int				ft_printf(const char *format, ...)
 {
-	if (c >= 'A' && c <= 'Z')
-		return (1);
-	return (0);
+	t_printf		pf;
+	size_t			res;
+
+	if (!format)
+		return (0);
+	pf_init_start(&pf);
+	va_start(pf.argptr, format);
+	while (format[pf.i])
+		pf_parse_string(format, &pf);
+	res = write(1, pf.buff, pf.buff_len);
+	va_end(pf.argptr);
+	ft_strdel(&pf.buff);
+	return (res);
 }

@@ -6,13 +6,13 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/26 19:42:40 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/27 21:06:05 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/10/28 21:43:55 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "server.h"
 
-static int			deserialize_int(unsigned char *buffer, size_t *i)
+static int				deserialize_int(unsigned char *buffer, size_t *i)
 {
 	int				value;
 

@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdel.c                                        :+:      :+:    :+:   */
+/*   ft_abs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aashara- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/01 22:06:43 by aashara-          #+#    #+#             */
-/*   Updated: 2018/12/03 22:24:05 by aashara-         ###   ########.fr       */
+/*   Created: 2020/08/05 18:19:52 by aashara-          #+#    #+#             */
+/*   Updated: 2020/08/05 18:20:38 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstdel(t_list **alst, void (*del)(void *, size_t))
+int	ft_abs(int num)
 {
-	if (alst && del)
-	{
-		if ((*alst)->next)
-			ft_lstdelone((&(*alst)->next), del);
-		ft_lstdelone(alst, del);
-	}
+	if (num >= 0)
+		return (num);
+	return (-1 * num);
 }

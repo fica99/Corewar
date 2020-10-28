@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tcp_socket.h                                       :+:      :+:    :+:   */
+/*   server.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/27 21:05:51 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/10/28 21:47:55 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@
 # include <stdlib.h>
 # include <arpa/inet.h>
 # include "libft.h"
+# include "ft_printf.h"
 # include "op.h"
 # define PORT "3490"
-
 
 typedef struct		s_vis_cell
 {
@@ -56,7 +56,8 @@ typedef struct		s_vis_arena
 /*
 **					connect.c
 */
-int					get_socket_fd(struct addrinfo *serv_info, struct addrinfo **info);
+int					get_socket_fd(struct addrinfo *serv_info,
+											struct addrinfo **info);
 int					connect_server(const char *host_name);
 void				disconnect_server(int socket_fd);
 /*

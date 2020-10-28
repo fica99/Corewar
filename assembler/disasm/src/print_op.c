@@ -6,7 +6,7 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:58:58 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/15 22:27:52 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/10/28 21:58:22 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static char	op_sym(uint8_t op_type)
 	return (0);
 }
 
-void	print_op(t_op *op, int fd)
+void		print_op(t_op *op, int fd)
 {
 	int		i;
 	t_bool	first;
