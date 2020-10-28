@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libasm.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sschmele <sschmele@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/28 20:33:01 by sschmele         ###   ########.fr       */
+/*   Updated: 2020/10/28 21:53:11 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 # define BIN_DATA_MASK 0b00001111
 # define ALT_COMMENT_CHAR ';'
 # define LABELS_SIZE 10
+# define ARGS_SIZE 3
 
 /*
 ** Operations arguments according to the operations table
@@ -41,18 +42,18 @@
 ** https://github.com/fica99/Corewar/wiki
 */
 
-# define ARG_1_ALL 0b1000000111
-# define ARG_1_REG 0b1000000100
-# define ARG_1_DIR 0b1000000010
-# define ARG_1_IND 0b1000000001
-# define ARG_2_ALL 0b1000111000
-# define ARG_2_REG 0b1000100000
-# define ARG_2_DIR 0b1000010000
-# define ARG_2_IND 0b1000001000
-# define ARG_3_ALL 0b1111000000
-# define ARG_3_REG 0b1100000000
-# define ARG_3_DIR 0b1010000000
-# define ARG_3_IND 0b1001000000
+# define ARG_1_ALL 0b0000000111
+# define ARG_1_REG 0b0000000100
+# define ARG_1_DIR 0b0000000010
+# define ARG_1_IND 0b0000000001
+# define ARG_2_ALL 0b0000111000
+# define ARG_2_REG 0b0000100000
+# define ARG_2_DIR 0b0000010000
+# define ARG_2_IND 0b0000001000
+# define ARG_3_ALL 0b0111000000
+# define ARG_3_REG 0b0100000000
+# define ARG_3_DIR 0b0010000000
+# define ARG_3_IND 0b0001000000
 # define ARG_TYPE 0b1000000000
 
 # define ERR_INPUT_PARAMS_FIRST "Error: the program accepts only one "
@@ -369,7 +370,7 @@ int				asm_pars_champ_comment(t_asm_token **token,
 void			asm_add_null_in_bd(t_asm_bin_data *bin_data,
 	int bytes);
 void			asm_print_str_filetostr(char *str);
-	
+
 /*
 ** asm_pars_error.c
 */
