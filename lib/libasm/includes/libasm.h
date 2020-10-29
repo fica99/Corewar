@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libasm.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
+/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/28 23:15:57 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/10/30 00:10:53 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,10 @@
 # define ARG_3_DIR 0b0010000000
 # define ARG_3_IND 0b0001000000
 # define ARG_TYPE 0b1000000000
+
+# define ARG_TYPE_REG 0b01000000
+# define ARG_TYPE_DIR 0b10000000
+# define ARG_TYPE_IND 0b11000000
 
 # define ERR_INPUT_PARAMS_FIRST "Error: the program accepts only one "
 # define ERR_INPUT_PARAMS_SEC "parameter as input (the full path to the file)"
@@ -172,6 +176,7 @@ typedef struct			s_asm_pars_prms
 	t_hash				**opers_hash;
 	int					exec_code_size;
 	int					args_mask;
+	char				byte_args_type;
 	char				mask_offset;
 	char				*error;
 	t_asm_labels		*labels;
@@ -467,5 +472,12 @@ void					asm_print_opershash_data3(t_asm_oper *data);
 */
 
 void					asm_print_tokens(t_asm_token *tokens);
+
+/*
+** asm_pars_type_args.c
+*/
+
+void					asm_pars_type_args(t_asm_token *token,
+							t_asm_bin_data *bin_data, t_asm_pars_prms *prms);
 
 #endif
