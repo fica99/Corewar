@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm_pars_labels.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
+/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 20:30:18 by olegmulko         #+#    #+#             */
-/*   Updated: 2020/10/28 22:38:24 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/10/30 00:19:59 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,17 @@ static void	asm_pars_check_size(t_asm_token **token,
 	(*token) = (*token)->next;
 }
 
+static void	asm_pars_check_oper(t_asm_token **token,
+	t_asm_pars_prms *prms, t_asm_token **previous)
+{
+	(void)previous;
+	prms->exec_code_size++;
+	if (prms->args_mask & ARG_TYPE)
+		prms->exec_code_size++;
+	(*previous) = (*token);
+	(*token) = (*token)->next;
+}
+
 static int 	asm_pars_labels_skip(t_asm_token **token,
 	t_asm_token **previous)
 {
@@ -83,7 +94,7 @@ void		asm_pars_label(t_asm_token **token,
 		else if ((*token)->type == TT_LABEL)
 			asm_pars_check_label(token, prms, labels);
 		else if ((*token)->type == TT_OPER)
-			asm_pars_check_size(token, prms, &previous, 2);
+			asm_pars_check_oper(token, prms, &previous);
 		else if ((*token)->type == TT_ARG_REG)
 			asm_pars_check_size(token, prms, &previous, REG_SIZE);
 		else if ((*token)->type == TT_ARG_DIR)

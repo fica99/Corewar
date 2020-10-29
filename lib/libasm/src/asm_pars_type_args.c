@@ -6,7 +6,7 @@
 /*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 23:07:36 by olegmulko         #+#    #+#             */
-/*   Updated: 2020/10/30 00:13:38 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/10/30 00:27:41 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void		asm_pars_type_args(t_asm_token *token,
 		else if (token->type == TT_ARG_IND)
 			asm_write_type(&byte, ARG_TYPE_IND, &offset);
 		else if (offset == ((ARGS_SIZE - 1) * 2)
-			| token->type == TT_NEWLINE
-			| token->type == TT_EOF)
+			|| token->type == TT_NEWLINE
+			|| token->type == TT_EOF)
 			break ;
 		else
 			token = token->next;
