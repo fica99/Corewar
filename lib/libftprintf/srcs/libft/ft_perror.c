@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_perror.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aashara <aashara@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/27 17:50:29 by aashara-          #+#    #+#             */
-/*   Updated: 2020/06/13 18:25:33 by aashara          ###   ########.fr       */
+/*   Created: 2020/08/24 16:19:38 by aashara-          #+#    #+#             */
+/*   Updated: 2020/08/24 16:19:41 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr(char const *s)
+void	ft_perror(const char *msg, int is_exit)
 {
-	size_t	i;
-
-	if (s)
-	{
-		i = ft_strlen(s);
-		i = write(1, s, i);
-	}
+	ft_putendl_fd(msg, STDERR_FILENO);
+	if (is_exit)
+		exit(EXIT_FAILURE);
 }

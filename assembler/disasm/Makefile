@@ -6,7 +6,7 @@
 #    By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/14 12:47:29 by aashara           #+#    #+#              #
-#    Updated: 2020/10/15 16:45:00 by aashara-         ###   ########.fr        #
+#    Updated: 2020/10/28 23:18:02 by aashara-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,10 +19,10 @@ HDR_DIR	=		includes
 OBJ_DIR	=		obj
 LIB_DIR =		../../lib
 
-# ------------  LIBFT  ------------------------------------------------------- #
-LFT		=		libft.a
-LFT_DIR	=		$(LIB_DIR)/libft
-LHS_DIR	=		$(LFT_DIR)/includes
+# ------------  LIBFTPRINTF  ------------------------------------------------- #
+LFT_PRINTF		=		libftprintf.a
+LFT_PRINTF_DIR	=		$(LIB_DIR)/libftprintf
+LHS_PRINTF_DIR	=		$(LFT_PRINTF_DIR)/includes
 
 # ------------  LIBOP  ------------------------------------------------------- #
 LOP_DIR	=		$(LIB_DIR)/libop
@@ -50,21 +50,18 @@ DEPS	=		$(OBJS:.o=.d)
 CC		=		gcc
 RM		=		rm -rf
 CFLGS	=		-Wall -Werror -Wextra
-LFLGS	=		-L $(LFT_DIR) -lft
-IFLGS	=		-I $(HDR_DIR) -I $(LHS_DIR) -I $(LOP_HS_DIR)
+LFLGS	=		-L $(LFT_PRINTF_DIR) -lftprintf
+IFLGS	=		-I $(HDR_DIR) -I $(LHS_PRINTF_DIR) -I $(LOP_HS_DIR)
 DFLGS	=		-MMD -MP
-OFLGS	=		-O3
+OFLGS	=		-O0 -g
 
 # ------------  RULES  ------------------------------------------------------- #
 .PHONY: all clean fclean re
 
 all: $(NAME)
 
-$(LFT_DIR)/$(LFT):
-	$(MAKE) -C $(LFT_DIR)
-
-$(LDISASM_DIR)/$(LDISASM):
-	$(MAKE) -C $(LDISASM_DIR)
+$(LFT_PRINTF_DIR)/$(LFT_PRINTF):
+	$(MAKE) -C $(LFT_PRINTF_DIR)
 
 -include $(DEPS)
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
@@ -73,17 +70,15 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
-$(NAME): $(LFT_DIR)/$(LFT) $(LDISASM_DIR)/$(LDISASM) $(OBJS)
+$(NAME): $(LFT_PRINTF_DIR)/$(LFT_PRINTF) $(OBJS)
 	$(CC) -o $(NAME) $(OBJS) $(LFLGS)
 
-$(NAME): $(OBJS)
-
 clean:
-	$(MAKE) -C $(LFT_DIR) clean
+	$(MAKE) -C $(LFT_PRINTF_DIR) clean
 	$(RM) $(OBJ_DIR)
 
 fclean:
-	$(MAKE) -C $(LFT_DIR) fclean
+	$(MAKE) -C $(LFT_PRINTF_DIR) fclean
 	$(RM) $(OBJ_DIR)
 	$(RM) $(NAME)
 

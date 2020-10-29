@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar.c                                       :+:      :+:    :+:   */
+/*   ft_abs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aashara <aashara@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/27 17:49:10 by aashara-          #+#    #+#             */
-/*   Updated: 2020/06/13 18:25:08 by aashara          ###   ########.fr       */
+/*   Created: 2020/08/05 18:19:52 by aashara-          #+#    #+#             */
+/*   Updated: 2020/10/28 23:17:53 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putchar(char c)
+int	ft_abs(int num)
 {
-	size_t i;
-
-	i = 1;
-	i = write(1, &c, i);
+	if (num >= 0)
+		return (num);
+	return (-1 * num);
 }
