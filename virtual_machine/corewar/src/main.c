@@ -6,7 +6,7 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 21:41:56 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/28 20:51:22 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/10/29 21:50:42 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(void)
 	int		i;
 
 
-	listenfd = connect_server("192.168.28.63");
+	listenfd = connect_server("192.168.28.16");
 	i = 0;
 	ft_bzero((void*)&arena, sizeof(t_vis_arena));
 	arena.cycle_delta = rand() % 1000;

@@ -6,7 +6,7 @@
 #    By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/14 12:47:29 by aashara           #+#    #+#              #
-#    Updated: 2020/10/28 23:03:17 by aashara-         ###   ########.fr        #
+#    Updated: 2020/10/29 21:48:11 by aashara-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME	=		../../asm
 # ------------  DIRECTORIES  ------------------------------------------------- #
 SRC_DIR	=		src
 HDR_DIR	=		includes
-OBJ_DIR	=		obj
+OBJ_DIR	=		objs
 LIB_DIR =		../../lib
 
 # ------------  LIBFTPRINTF  ------------------------------------------------- #
@@ -44,7 +44,10 @@ OFLGS	=		-O0 -g
 # ------------  RULES  ------------------------------------------------------- #
 .PHONY: all clean fclean re
 
-all: $(NAME)
+all: lib $(NAME)
+
+lib:
+	$(MAKE) -C $(LFT_PRINTF_DIR)
 
 $(LFT_PRINTF_DIR)/$(LFT_PRINTF):
 	$(MAKE) -C $(LFT_PRINTF_DIR)
