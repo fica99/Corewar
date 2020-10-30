@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm_pars_opers.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
+/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 19:12:00 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/10/28 21:33:09 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/10/30 00:12:33 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int		asm_pars_oper(t_asm_token **token,
 	prms->exec_code_size += 1;
 	prms->args_mask = oper->args_mask;
 	prms->mask_offset = 0;
+	asm_pars_type_args(*token, bin_data, prms);
 	(*token) = (*token)->next;
 	return (asm_pars_arg(token, bin_data, prms, 1));
 }
