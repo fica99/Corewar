@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/31 14:58:22 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/10/31 17:27:12 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@
 # define ARG_TYPE 0b1000000000
 
 # define ARG_TYPE_REG 0b01000000
-# define ARG_TYPE_DIR 0b10000000 // 0b00100000
+# define ARG_TYPE_DIR 0b10000000
 # define ARG_TYPE_IND 0b11000000
 
 # define ERR_INPUT_PARAMS_FIRST "Error: the program accepts only one "

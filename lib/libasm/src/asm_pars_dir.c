@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 22:52:51 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/10/28 21:40:26 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/10/31 18:00:53 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,11 @@ int			asm_pars_is_dir(t_asm_token **token,
 	t_asm_pars_prms *prms, char arg_index)
 {
 	if (arg_index % 2 != 0
+		&& arg_index < ARGS_SIZE * 2
 		&& ((prms->args_mask >> prms->mask_offset) & ARG_1_DIR)
 		&& (*token)->type == TT_ARG_DIR)
 	{
-		prms->mask_offset++;
+		prms->mask_offset += 3;
 		return (1);
 	}
 	return (0);
