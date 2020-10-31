@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm_opers_hash.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sschmele <sschmele@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 19:49:56 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/10/28 21:54:44 by sschmele         ###   ########.fr       */
+/*   Updated: 2020/10/31 14:30:30 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,11 @@ static t_hash		**asm_get_opers_hash_next(t_hash **opers_hash)
 	t_asm_oper		*oper;
 
 	oper = NULL;
-	oper = asm_init_oper("ldi", 0x0a, ARG_1_ALL | (ARG_2_ALL & ~ARG_2_IND) | ARG_3_REG);
+	oper = asm_init_oper("ldi", 0x0a, ARG_1_ALL | (ARG_2_ALL & ~ARG_2_IND)
+		| ARG_3_REG | ARG_TYPE);
 	push_hash(opers_hash, "ldi", (void *)oper, OPERS_SIZE);
-	oper = asm_init_oper("sti", 0x0b, ARG_1_REG | ARG_2_ALL | (ARG_3_ALL & ~ARG_3_IND));
+	oper = asm_init_oper("sti", 0x0b, ARG_1_REG | ARG_2_ALL
+		| (ARG_3_ALL & ~ARG_3_IND) | ARG_TYPE);
 	push_hash(opers_hash, "sti", (void *)oper, OPERS_SIZE);
 	oper = asm_init_oper("fork", 0x0c, ARG_1_DIR);
 	push_hash(opers_hash, "fork", (void *)oper, OPERS_SIZE);
@@ -43,7 +45,7 @@ static t_hash		**asm_get_opers_hash_next(t_hash **opers_hash)
 	push_hash(opers_hash, "lldi", (void *)oper, OPERS_SIZE);
 	oper = asm_init_oper("lfork", 0x0f, ARG_1_DIR);
 	push_hash(opers_hash, "lfork", (void *)oper, OPERS_SIZE);
-	oper = asm_init_oper("aff", 0x10, ARG_1_REG);
+	oper = asm_init_oper("aff", 0x10, ARG_1_REG | ARG_TYPE);
 	push_hash(opers_hash, "aff", (void *)oper, OPERS_SIZE);
 	return (opers_hash);
 }
@@ -60,7 +62,7 @@ t_hash				**asm_get_opers_hash(void)
 	push_hash(opers_hash, "live", (void *)oper, OPERS_SIZE);
 	oper = asm_init_oper("ld", 0x02, ARG_1_DIR | ARG_1_IND | ARG_2_REG | ARG_TYPE);
 	push_hash(opers_hash, "ld", (void *)oper, OPERS_SIZE);
-	oper = asm_init_oper("st", 0x03, ARG_1_REG | ARG_2_REG | ARG_2_IND);
+	oper = asm_init_oper("st", 0x03, ARG_1_REG | ARG_2_REG | ARG_2_IND | ARG_TYPE);
 	push_hash(opers_hash, "st", (void *)oper, OPERS_SIZE);
 	oper = asm_init_oper("add", 0x04, ARG_1_REG | ARG_2_REG | ARG_3_REG | ARG_TYPE);
 	push_hash(opers_hash, "add", (void *)oper, OPERS_SIZE);
