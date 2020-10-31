@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 19:12:00 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/10/31 17:46:10 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/11/01 17:36:22 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int		asm_pars_oper(t_asm_token **token,
 	bin_data->add(bin_data, (int)oper->code, 2);
 	prms->exec_code_size += 1;
 	prms->args_mask = oper->args_mask;
+	prms->dir_size = oper->dir_size;
 	prms->mask_offset = 0;
 	asm_pars_type_args(*token, bin_data, prms);
 	(*token) = (*token)->next;

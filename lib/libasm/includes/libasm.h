@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/31 17:27:12 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/10/31 18:40:49 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ typedef struct			s_asm_oper
 {
 	char				*name;
 	char				code;
+	char				dir_size;
 	int					args_mask;
 }						t_asm_oper;
 
@@ -177,6 +178,7 @@ typedef struct			s_asm_pars_prms
 	int					args_mask;
 	char				byte_args_type;
 	char				mask_offset;
+	char				dir_size;
 	char				*error;
 	t_asm_labels		*labels;
 	size_t				line_num;

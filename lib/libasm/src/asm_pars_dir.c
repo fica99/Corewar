@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 22:52:51 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/10/31 18:00:53 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/11/01 18:03:05 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ static int	asm_pars_dir_int(t_asm_token **token, t_asm_bin_data *bin_data,
 	int				*data;
 
 	data = (int *)(*token)->data;
-	bin_data->add(bin_data, *data, 2 * DIR_SIZE);
-	prms->exec_code_size += DIR_SIZE;
+	bin_data->add(bin_data, *data, 2 * prms->dir_size);
+	prms->exec_code_size += prms->dir_size;
 	(*token) = (*token)->next;
 	return (asm_pars_arg(token, bin_data, prms, ++arg_index));
 }
@@ -50,8 +50,9 @@ static int	asm_pars_dir_str(t_asm_token **token, t_asm_bin_data *bin_data,
 	if ((num = labels->is_contain(labels, data)) == -1)
 		return (asm_parser_error(*token, (*token)->type, prms, 0));
 	num = num - prms->exec_code_size;
-	bin_data->add(bin_data, num, 2 * DIR_SIZE);
-	prms->exec_code_size += DIR_SIZE;
+	num += (num > 0) ? prms->dir_size - 1 : -1 * prms->dir_size;
+	bin_data->add(bin_data, num, 2 * prms->dir_size);
+	prms->exec_code_size += prms->dir_size;
 	(*token) = (*token)->next;
 	return (asm_pars_arg(token, bin_data, prms, ++arg_index));
 }

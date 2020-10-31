@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 21:16:50 by olegmulko         #+#    #+#             */
-/*   Updated: 2020/10/31 18:08:47 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/11/01 18:08:21 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ static int	asm_pars_ind_int(t_asm_token **token, t_asm_bin_data *bin_data,
 	int				*data;
 
 	data = (int *)(*token)->data;
-	bin_data->add(bin_data, *data, 2 * DIR_SIZE);
-	prms->exec_code_size += DIR_SIZE;
+	bin_data->add(bin_data, *data, 2 * IND_SIZE);
+	prms->exec_code_size += IND_SIZE;
 	(*token) = (*token)->next;
 	return (asm_pars_arg(token, bin_data, prms, ++arg_index));
 }
@@ -47,12 +47,12 @@ static int	asm_pars_ind_str(t_asm_token **token, t_asm_bin_data *bin_data,
 
 	data = (char *)(*token)->data;
 	labels = prms->labels;
-	if (!(num = labels->is_contain(labels, data)))
+	if ((num = labels->is_contain(labels, data)) == -1)
 		return (asm_parser_error(*token, (*token)->type, prms, 0));
-	num = asm_direct_code_additional(num);
-	bin_data->add(bin_data, num, 2 * DIR_SIZE);
-	prms->exec_code_size += DIR_SIZE;
-	labels->inc(labels, DIR_SIZE);
+	num = num - prms->exec_code_size;
+	num += (num > 0) ? IND_SIZE - 1 : -1 * IND_SIZE;
+	bin_data->add(bin_data, num, 2 * IND_SIZE);
+	prms->exec_code_size += IND_SIZE;
 	(*token) = (*token)->next;
 	return (asm_pars_arg(token, bin_data, prms, ++arg_index));
 }
