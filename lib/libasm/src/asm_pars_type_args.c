@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 23:07:36 by olegmulko         #+#    #+#             */
-/*   Updated: 2020/10/31 15:20:48 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/10/31 16:15:36 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ void		asm_pars_type_args(t_asm_token *token,
 	int		byte;
 
 	if ((prms->args_mask & ARG_TYPE) == 0)
+	{
+		bin_data->add(bin_data, 0, 2);
 		return ;
+	}
 	offset = 0;
 	byte = 0;
 	while (1)
