@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 13:03:06 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/10/11 15:58:34 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/11/01 20:20:52 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int			asm_pars_champ_comment(t_asm_token **token,
 	if ((size = ft_strlen(comment)) > COMMENT_LENGTH)
 		return (asm_parser_error(*token, TT_CHAMP_COMMENT, prms, 2));
 	asm_add_chc_to_bd(bin_data, comment);
+	asm_add_null_in_bd(bin_data, 4);
 	(*token) = (*token)->next;
 	while (asm_skip_token(token, TT_SEP))
 		;

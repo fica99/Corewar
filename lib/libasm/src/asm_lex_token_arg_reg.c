@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 21:57:39 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/10/28 23:29:15 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/11/01 19:43:48 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,19 @@ int				asm_lex_is_number(t_asm_string *asm_str, size_t i)
 {
 	int			n_width;
 
-	if (!(asm_str->str[i] == '-' || ft_isdigit(asm_str->str[i++])))
+	if (!(asm_str->str[i] == '-' || ft_isdigit(asm_str->str[i])))
 		return (0);
-	n_width = 1;
-	if (asm_str->str[i++] == '-')
+	n_width = 0;
+	if (asm_str->str[i] == '-')
+	{
 		n_width++;
-	while (ft_isdigit(asm_str->str[i++]))
+		i++;
+	}
+	while (ft_isdigit(asm_str->str[i]))
+	{
 		n_width++;
+		i++;
+	}
 	return (n_width);
 }
 
