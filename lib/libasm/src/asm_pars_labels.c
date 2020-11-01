@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm_pars_labels.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 20:30:18 by olegmulko         #+#    #+#             */
-/*   Updated: 2020/10/30 00:19:59 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/11/01 17:54:11 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,23 @@ static void	asm_pars_check_size(t_asm_token **token,
 static void	asm_pars_check_oper(t_asm_token **token,
 	t_asm_pars_prms *prms, t_asm_token **previous)
 {
+	t_asm_oper	*oper;
+
 	(void)previous;
+	oper = (t_asm_oper *)(*token)->data;
 	prms->exec_code_size++;
-	if (prms->args_mask & ARG_TYPE)
+	prms->dir_size = oper->dir_size;
+	if ((oper->args_mask & ARG_TYPE))
 		prms->exec_code_size++;
+	(*previous) = (*token);
+	(*token) = (*token)->next;
+}
+
+static void	asm_pars_check_dir(t_asm_token **token,
+	t_asm_pars_prms *prms, t_asm_token **previous)
+{
+	(void)previous;
+	prms->exec_code_size += prms->dir_size;
 	(*previous) = (*token);
 	(*token) = (*token)->next;
 }
@@ -96,9 +109,9 @@ void		asm_pars_label(t_asm_token **token,
 		else if ((*token)->type == TT_OPER)
 			asm_pars_check_oper(token, prms, &previous);
 		else if ((*token)->type == TT_ARG_REG)
-			asm_pars_check_size(token, prms, &previous, REG_SIZE);
+			asm_pars_check_size(token, prms, &previous, 1);
 		else if ((*token)->type == TT_ARG_DIR)
-			asm_pars_check_size(token, prms, &previous, DIR_SIZE);
+			asm_pars_check_dir(token, prms, &previous);
 		else if ((*token)->type == TT_ARG_IND)
 			asm_pars_check_size(token, prms, &previous, IND_SIZE);
 		else if ((*token)->type == TT_EOF)

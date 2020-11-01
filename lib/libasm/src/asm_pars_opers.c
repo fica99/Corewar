@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm_pars_opers.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 19:12:00 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/10/30 00:12:33 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/11/01 17:36:22 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ int		asm_pars_opers(t_asm_token **token,
 			|| asm_skip_token(token, TT_NEWLINE))
 			continue ;
 		else if ((*token)->type == TT_OPER)
-			return (asm_pars_oper(token, bin_data, prms));
+		{
+			if (asm_pars_oper(token, bin_data, prms) == -1)
+				return (-1);
+		}
 		else if ((*token)->type == TT_EOF)
 			break ;
 		else
@@ -46,6 +49,7 @@ int		asm_pars_oper(t_asm_token **token,
 	bin_data->add(bin_data, (int)oper->code, 2);
 	prms->exec_code_size += 1;
 	prms->args_mask = oper->args_mask;
+	prms->dir_size = oper->dir_size;
 	prms->mask_offset = 0;
 	asm_pars_type_args(*token, bin_data, prms);
 	(*token) = (*token)->next;
@@ -55,7 +59,7 @@ int		asm_pars_oper(t_asm_token **token,
 int		asm_pars_arg(t_asm_token **token,
 	t_asm_bin_data *bin_data, t_asm_pars_prms *prms, char arg_index)
 {
-	if (arg_index <= 0 || arg_index > ARGS_SIZE * 2 - 1)
+	if (arg_index <= 0)
 		return (asm_parser_error(*token, (*token)->type, prms, 0));
 	while (asm_skip_token(token, TT_SEP))
 		;

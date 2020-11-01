@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sschmele <sschmele@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/27 01:00:23 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/28 22:52:18 by sschmele         ###   ########.fr       */
+/*   Updated: 2020/10/31 14:00:05 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	main(int ac, char **av)
 	tokens = asm_lex_del_all_com_tokens(tokens);
 	bin_data = asm_init_bin_data(BIN_DATA_SIZE);
 	prms = asm_init_pars_prms();
-	prms->opers_hash = opers_hash;
 	if (asm_parser(tokens, bin_data, prms) == -1)
 		asm_pars_error(prms);
 	file = asm_file_init("./result.cor");
