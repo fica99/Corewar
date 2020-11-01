@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm_pars_reg.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
+/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 22:46:40 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/10/31 18:00:43 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/11/02 14:19:26 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		asm_pars_reg(t_asm_token **token, t_asm_bin_data *bin_data,
 	int	*data;
 
 	data = (int *)(*token)->data;
-	if ((*data) > REG_NUMBER)
+	if ((*data) < 0 || (*data) > REG_NUMBER)
 		return (asm_parser_error(*token, (*token)->type, prms, 0));
 	bin_data->add(bin_data, *data, 2);
 	prms->exec_code_size += 1;
