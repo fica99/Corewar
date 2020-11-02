@@ -6,7 +6,7 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/28 16:25:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/28 21:36:52 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/11/02 21:40:16 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ static int		draw_arena(const int connfd)
 		key = draw.getKey();
 		if (key == KEY_ESC || key == '\n')
 			break ;
-		if (key != ' ')
-			continue ;
+		if (key == ' ')
+			draw.changeState();
 		receive_arena(&arena, connfd);
 		draw.drawArena(arena);
 	}

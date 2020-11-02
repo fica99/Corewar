@@ -6,7 +6,7 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/27 21:12:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/28 17:48:48 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/11/02 21:38:25 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,10 @@ public:
 	Drawer(const Drawer &drawer) = delete;
 	~Drawer();
 	int				getKey(void) const;
+	void			changeState(void);
 	void			drawArena(t_vis_arena &arena);
 private:
+	bool			_isRunning = true;
 	const uint16_t	ARENA_WIDTH = 64 * 3 + 1;
 	const uint16_t	ARENA_HEIGHT = 64 * 1 + 2;
 	const uint16_t	INFO_WIDTH = 47;

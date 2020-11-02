@@ -56,7 +56,6 @@ void		exec(t_vm *vm)
 
 	if (vm->vs)
 	{
-		ft_printf("DRAW\n");
 		ft_bzero(&vs_arena, sizeof(vs_arena));
 		add_struct_for_vs(vm, &vs_arena);
 		send_arena(&vs_arena, vm->listenfd);

@@ -6,7 +6,7 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/27 21:14:52 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/28 18:42:34 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/11/02 21:45:27 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,16 @@ Drawer::Drawer(void) {
 	initColor();
 	initWindows();
 	drawHelp();
+}
+
+void	Drawer::changeState(void) {
+	if (_isRunning == true) {
+		nodelay(stdscr, false);
+		_isRunning = false;
+	} else {
+		nodelay(stdscr, TRUE);
+		_isRunning = true;
+	}
 }
 
 Drawer::~Drawer(void) {
@@ -169,7 +179,7 @@ void	Drawer::drawParams(t_vis_arena &arena) {
 void	Drawer::drawHelp(void) {
 	mvwprintw(_help, 2, HELP_WIDTH / 2 - 2, "HELP");
 	mvwprintw(_help, 4, 4, "Key ESC - close server");
-	mvwprintw(_help, 6, 4, "Key SPACE - draw next step");
+	mvwprintw(_help, 6, 4, "Key SPACE - pause/resume");
 	mvwprintw(_help, 8, 4, "Key ENTER - draw next client");
 	wrefresh(_help);
 }
