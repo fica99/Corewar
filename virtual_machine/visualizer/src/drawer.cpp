@@ -6,7 +6,7 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/27 21:14:52 by aashara-          #+#    #+#             */
-/*   Updated: 2020/11/03 00:35:04 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/11/03 00:58:59 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,7 +187,7 @@ void	Drawer::drawInfo(t_vis_arena &arena) {
 	while (i < MAX_PLAYERS) {
 		if (arena.players[i].id) {
 			wattrset(_info, COLOR_PAIR(arena.players[i].id));
-			mvwprintw(_info, i * 5 + 8, 4, "Player - %3d : %s", arena.players[i].id, arena.players[i].name);
+			mvwprintw(_info, i * 5 + 8, 4, "Player - %d : %.26s", arena.players[i].id, arena.players[i].name);
 			mvwprintw(_info, i * 5 + 9, 6, "Last live - %20d", arena.players[i].last_live);
 			mvwprintw(_info, i * 5 + 10, 6, "Lives in current period - %6d", arena.players[i].lives_in_cur_period);
 			drawProgressBar(arena, i);
