@@ -6,18 +6,11 @@
 /*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 19:12:00 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/11/02 13:50:59 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/11/03 23:05:27 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libasm.h"
-
-int		asm_direct_code_additional(int code)
-{
-	code = ~code;
-	code += 1;
-	return (code);
-}
 
 int		asm_pars_opers(t_asm_token **token,
 	t_asm_bin_data *bin_data, t_asm_pars_prms *prms)
@@ -35,7 +28,7 @@ int		asm_pars_opers(t_asm_token **token,
 		else if ((*token)->type == TT_EOF)
 			break ;
 		else
-			return (asm_parser_error(*token, (*token)->type, prms, 0));
+			return (asm_parser_error(*token, prms, ASM_ERR_MIS_OPER));
 	}
 	return (1);
 }
@@ -57,11 +50,29 @@ int		asm_pars_oper(t_asm_token **token,
 	return (asm_pars_arg(token, bin_data, prms, 1));
 }
 
+static int asm_check_args_errors(t_asm_token **token,
+	t_asm_pars_prms *prms, char arg_index)
+{
+	while (asm_skip_token(token, TT_SEP))
+			;
+	if (arg_index % 2 == 0 && (*token)->type != TT_ARG_SEP)
+		return (asm_parser_error(*token, prms, ASM_MIS_ARG_SEP));
+	else if (arg_index < (ARGS_SIZE * 2)
+		&& ((*token)->type == TT_ARG_REG
+		|| (*token)->type == TT_ARG_DIR
+		|| (*token)->type == TT_ARG_IND))
+		return (asm_parser_error(*token, prms, ASM_ERR_INVALID_ARG));
+	else if (!asm_check_nl(token, prms))
+		return (asm_parser_error(*token, prms, ASM_ERR_MIS_NL));
+	else
+		return (1);
+}
+
 int		asm_pars_arg(t_asm_token **token,
 	t_asm_bin_data *bin_data, t_asm_pars_prms *prms, char arg_index)
 {
 	if (arg_index <= 0)
-		return (asm_parser_error(*token, (*token)->type, prms, 0));
+		return (asm_parser_error(*token, prms, ASM_ERR_FUNC_PRMS));
 	while (asm_skip_token(token, TT_SEP))
 		;
 	if (arg_index % 2 == 0 && (*token)->type == TT_ARG_SEP)
@@ -73,13 +84,7 @@ int		asm_pars_arg(t_asm_token **token,
 	else if (asm_pars_is_ind(token, prms, arg_index))
 		return (asm_pars_ind(token, bin_data, prms, arg_index));
 	else
-	{
-		while (asm_skip_token(token, TT_SEP))
-			;
-		if (!asm_check_nl(token, prms))
-			return (asm_parser_error(*token, TT_NEWLINE, prms, 0));
-		return (1);
-	}
+		return (asm_check_args_errors(token, prms, arg_index));
 }
 
 int		asm_pars_args_sep(t_asm_token **token,
@@ -91,6 +96,6 @@ int		asm_pars_args_sep(t_asm_token **token,
 	if ((*token)->type != TT_ARG_REG
 		&& (*token)->type != TT_ARG_DIR
 		&& (*token)->type != TT_ARG_IND)
-		return (asm_parser_error(*token, (*token)->type, prms, 0));
+		return (asm_parser_error(*token, prms, ASM_ERR_MIS_ARG));
 	return (asm_pars_arg(token, bin_data, prms, ++arg_index));
 }

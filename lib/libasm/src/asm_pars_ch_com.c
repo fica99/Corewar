@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm_pars_ch_com.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
+/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 13:03:06 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/11/01 20:20:52 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/11/03 15:46:43 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,16 @@ int			asm_pars_champ_comment(t_asm_token **token,
 	while (asm_skip_token(token, TT_SEP))
 		;
 	if ((*token)->type != TT_STRING)
-		return (asm_parser_error(*token, 0, prms, 0));
+		return (asm_parser_error(*token, prms, ASM_ERR_MIS_STR));
 	comment = (char *)(*token)->data;
 	if ((size = ft_strlen(comment)) > COMMENT_LENGTH)
-		return (asm_parser_error(*token, TT_CHAMP_COMMENT, prms, 2));
+		return (asm_parser_error(*token, prms, ASM_ERR_CHAMP_COMMENT_LEN));
 	asm_add_chc_to_bd(bin_data, comment);
 	asm_add_null_in_bd(bin_data, 4);
 	(*token) = (*token)->next;
 	while (asm_skip_token(token, TT_SEP))
 		;
 	if (!asm_check_nl(token, prms))
-		return (asm_parser_error(*token, TT_NEWLINE, prms, 0));
+		return (asm_parser_error(*token, prms, ASM_ERR_MIS_NL));
 	return (1);
 }

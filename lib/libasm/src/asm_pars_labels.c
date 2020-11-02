@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm_pars_labels.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 20:30:18 by olegmulko         #+#    #+#             */
-/*   Updated: 2020/11/02 14:12:42 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/11/03 19:40:07 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,8 @@ void		asm_pars_label(t_asm_token **token,
 			asm_pars_check_size(token, prms, &previous, IND_SIZE);
 		else if ((*token)->type == TT_EOF)
 			break ;
+		else
+			asm_pars_check_size(token, prms, &previous, 0);
 		if ((*token)->type == TT_LABEL)
 			asm_pars_del_lebel(token, head, previous);
 	}

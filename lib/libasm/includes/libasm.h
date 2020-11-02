@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libasm.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
+/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/11/01 20:54:07 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/11/03 22:56:22 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,48 @@
 # define ERR_STR_CLOSE "the line is not closed"
 # define ERR_BIN_DATA_ADD_SIZE "number of bytes to write cannot exceed 4"
 # define ERR_FILE_NAME_NULL "the file name specified in the constructor is NULL"
-# define ERR_CHAMP_NAME_LEN "the champion name too big"
-# define ERR_CHAMP_COMMENT_LEN "the champion comment too big"
-# define ERR_NULL_POINTER "NULL pointer passed"
-# define ERR_REP_CHAMP_NAME "the repeated name of the champion is used"
-# define ERR_REP_CHAMP_COMMENT "the champion's repeated comment is used"
+# define ERR_FUNC_PRMS "invalid function parameters"
+# define ERR_NULL_POINTER "NULL pointer in parameters"
+
+/*
+** Parser errors
+*/
+
 # define ERR_PARSER "incorrect parsing order"
-# define ERR_NL "missing line break"
+# define ERR_CHAMP_NAME "missing champion name token"
+# define ERR_MIS_STR "missing string token"
+# define ERR_CHAMP_NAME_LEN "the champion name too big"
+# define ERR_CHAMP_COMMENT "missing champion comment token"
+# define ERR_CHAMP_COMMENT_LEN "the champion comment too big"
+# define ERR_MIS_OPER "missing operation token"
+# define ERR_MIS_ARG_SEP "missing argument separator"
+# define ERR_NOT_ARG "token is not an argument"
+# define ERR_INVALID_ARG "invalid argument for the operation or position"
+# define ERR_MIS_ARG "missing argument token"
+# define ERR_MIS_NL "missing line break"
+# define ERR_REG_SIZE "the register number is greater than the allowed value"
+# define ERR_LABEL "reference to non-existent label"
+# define ERR_CAST_TYPE "cast the data type of the token"
+
+typedef enum			e_asm_errors
+{
+	ASM_ERR_GENERAL,
+	ASM_ERR_CHAMP_NAME,
+	ASM_ERR_MIS_STR,
+	ASM_ERR_CHAMP_NAME_LEN,
+	ASM_ERR_CHAMP_COMMENT,
+	ASM_ERR_CHAMP_COMMENT_LEN,
+	ASM_ERR_FUNC_PRMS,
+	ASM_ERR_MIS_OPER,
+	ASM_MIS_ARG_SEP,
+	ASM_ERR_NOT_ARG,
+	ASM_ERR_INVALID_ARG,
+	ASM_ERR_MIS_ARG,
+	ASM_ERR_MIS_NL,
+	ASM_ERR_REG_SIZE,
+	ASM_ERR_LABEL,
+	ASM_ERR_CAST_TYPE,
+}						t_asm_errors;
 
 typedef struct			s_asm_string
 {
@@ -390,9 +425,8 @@ void					asm_pos_to_token(t_asm_string *asm_str,
 */
 
 int						asm_parser_error(t_asm_token *token,
-							t_asm_tkn_type type,
 							t_asm_pars_prms *prms,
-							size_t num_error);
+							t_asm_errors error);
 /*
 ** asm_pars_opers.c
 */
@@ -400,7 +434,6 @@ int						asm_parser_error(t_asm_token *token,
 int						asm_pars_opers(t_asm_token **token,
 							t_asm_bin_data *bin_data,
 							t_asm_pars_prms *prms);
-int						asm_direct_code_additional(int code);
 int						asm_pars_oper(t_asm_token **token,
 							t_asm_bin_data *bin_data,
 							t_asm_pars_prms *prms);
