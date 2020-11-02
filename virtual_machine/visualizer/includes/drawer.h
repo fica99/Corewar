@@ -6,7 +6,7 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/27 21:12:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/11/02 21:38:25 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/11/02 22:35:37 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ extern "C" {
 # define BLUE_CARRIAGE 7
 # define GREEN_CARRIAGE 8
 # define YELLOW_CARRIAGE 9
+# define FT_KEY_ENTER '\n'
+# define FT_KEY_SPACE ' '
 
 
 class Drawer {
@@ -42,6 +44,7 @@ public:
 	~Drawer();
 	int				getKey(void) const;
 	void			changeState(void);
+	bool			isRunning(void) const;
 	void			drawArena(t_vis_arena &arena);
 private:
 	bool			_isRunning = true;

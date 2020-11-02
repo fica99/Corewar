@@ -6,7 +6,7 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/28 16:25:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/11/02 21:40:16 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/11/02 22:36:43 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # include "drawer.h"
 
 using namespace	std;
+
+
 
 static int		draw_arena(const int connfd)
 {
@@ -24,10 +26,14 @@ static int		draw_arena(const int connfd)
 	flushinp();
 	while (true) {
 		key = draw.getKey();
-		if (key == KEY_ESC || key == '\n')
+		if (key == KEY_ESC || key == FT_KEY_ENTER)
 			break ;
-		if (key == ' ')
+		else if (key == FT_KEY_SPACE)
 			draw.changeState();
+		if (!draw.isRunning()) {
+			if (key != KEY_RIGHT)
+				continue ;
+		}
 		receive_arena(&arena, connfd);
 		draw.drawArena(arena);
 	}
