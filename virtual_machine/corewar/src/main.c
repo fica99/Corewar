@@ -6,69 +6,71 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 21:41:56 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/29 21:50:42 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/07/29 14:18:19 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-int	main(void)
+void	add_cursor(t_cursor **list, t_cursor *new)
 {
-	t_vis_arena	arena;
-	int		listenfd;
-	int		i;
+	if (new)
+		new->next = *list;
+	*list = new;
+}
 
+void	set_cursors(t_vm *vm)
+{
+	int32_t		i;
+	uint32_t	pc;
 
-	listenfd = connect_server("192.168.28.16");
 	i = 0;
-	ft_bzero((void*)&arena, sizeof(t_vis_arena));
-	arena.cycle_delta = rand() % 1000;
-	arena.cycle_to_die = rand() % 10000;
-	arena.max_checks = rand() % 1000;
-	arena.nbr_live = rand() % 100;
-	arena.players[0].id = 1;
-	arena.players[1].id = 2;
-	arena.players[2].id = 3;
-	arena.players[3].id = 4;
-	while (i < 100) {
-		arena.cycle = i;
-		arena.players[0].last_live = rand()  % 100000;
-		arena.players[0].lives_in_cur_period = rand() % 1000;
-		ft_strcpy(arena.players[0].name, "Batman");
-		arena.players[1].last_live = rand() % 100000;
-		arena.players[1].lives_in_cur_period = rand() % 1000;
-		ft_strcpy(arena.players[1].name, "Robin");
-		arena.players[2].last_live = rand() % 100000;
-		arena.players[2].lives_in_cur_period = rand() % 1000;
-		ft_strcpy(arena.players[2].name, "Superman");
-		arena.players[3].last_live = rand() % 100000;
-		arena.players[3].lives_in_cur_period = rand() % 500;
-		ft_strcpy(arena.players[3].name, "Zorg");
-		for (size_t j = 0; j < MEM_SIZE / 8; ++j) {
-			arena.arena[j].is_carriage = (t_bool)(rand() % 2);
-			arena.arena[j].code = rand() % 256;
-			arena.arena[j].player_id = 1;
-		}
-		for (size_t j = MEM_SIZE / 4; j < 3 * MEM_SIZE / 8; ++j) {
-			arena.arena[j].is_carriage = (t_bool)(rand() % 2);
-			arena.arena[j].code = rand() % 256;
-			arena.arena[j].player_id = 2;
-		}
-		for (size_t j = MEM_SIZE / 2; j < 5 * MEM_SIZE / 8; ++j) {
-			arena.arena[j].is_carriage = (t_bool)(rand() % 2);
-			arena.arena[j].code = rand() % 256;
-			arena.arena[j].player_id = 3;
-		}
-		for (size_t j = 6 * MEM_SIZE / 8; j < 7 * MEM_SIZE / 8; ++j) {
-			arena.arena[j].is_carriage = (t_bool)(rand() % 2);
-			arena.arena[j].code = rand() % 256;
-			arena.arena[j].player_id = 4;
-		}
-		if (i == 99)
-			arena.winner_id = rand() % 4 + 1;
-		send_arena(&arena, listenfd);
-		++i;
+	pc = 0;
+	while (i < vm->num_players)
+	{
+		add_cursor(&(vm->cursor), init_cursor(vm->players[i], pc));
+		vm->num_cursor++;
+		pc += MEM_SIZE / vm->num_players;
+		i++;
 	}
-	disconnect_server(listenfd);
+}
+
+void	player_introduction(t_vm *vm)
+{
+	int id;
+
+	id = 1;
+	ft_printf("Introducing contestants...\n");
+	while (id <= vm->num_players)
+	{
+		ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n",
+				  id, vm->players[id - 1]->code_size,
+				  vm->players[id - 1]->name, vm->players[id - 1]->comment);
+		id++;
+	}
+}
+
+int		main(int argc, char **argv)
+{
+	t_vm *vm;
+
+	vm = init_vm();
+	init_vm_players(vm);
+	argv++;
+	argc--;
+	if (argc >= 1)
+    {
+		vm->num_players = check_count_cor_files(argv);
+	    parse_args(argv, argc, vm);
+	    init_arena(vm);
+	    set_cursors(vm);
+	    player_introduction(vm);
+	    run_vm(vm);
+		ft_printf("Contestant %d, \"%s\", has won !\n",
+				  vm->last_alive->id, vm->last_alive->name);
+//		free_vm(vm);
+    }
+	else
+		help();
 	return (0);
 }

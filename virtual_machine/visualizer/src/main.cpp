@@ -6,7 +6,7 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/28 16:25:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/28 21:36:52 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/11/03 00:32:06 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,36 +15,67 @@
 
 using namespace	std;
 
-static int		draw_arena(const int connfd)
-{
+static KeyHandle	check_key(Drawer& draw) {
+	int	key;
+
+	key = draw.getKey();
+	if (key == KEY_ESC)
+		return KeyHandle::STOP;
+	else if (key == FT_KEY_ENTER)
+		return KeyHandle::BREAK;
+	else if (key == FT_KEY_SPACE) {
+		draw.changeState();
+		return KeyHandle::DRAW;
+	}
+	if (draw.isRunning()) {
+		if (key == KEY_UP) {
+			draw.changeDelay(100ms);
+			return KeyHandle::DRAW;
+		} else if (key == KEY_DOWN) {
+			draw.changeDelay(-100ms);
+			return KeyHandle::DRAW;
+		}
+		if (draw.delay())
+			return KeyHandle::CONTINUE;
+	} else
+		if (key != KEY_RIGHT)
+			return KeyHandle::CONTINUE;
+	return KeyHandle::RECEIVE_DRAW;
+}
+
+static KeyHandle	draw_arena(const int connfd) {
 	Drawer			draw;
-	int				key;
+	KeyHandle		status;
 	t_vis_arena		arena;
 
 	flushinp();
 	while (true) {
-		key = draw.getKey();
-		if (key == KEY_ESC || key == '\n')
-			break ;
-		if (key != ' ')
+		status = check_key(draw);
+		if (status == KeyHandle::CONTINUE)
 			continue ;
-		receive_arena(&arena, connfd);
-		draw.drawArena(arena);
+		else if (status == KeyHandle::DRAW)
+			draw.drawArena(arena);
+		else if (status == KeyHandle::RECEIVE_DRAW) {
+			receive_arena(&arena, connfd);
+			draw.drawArena(arena);
+		}
+		else if (status == KeyHandle::STOP || status == KeyHandle::BREAK)
+			break ;
 	}
-	return (key);
+	return (status);
 }
 
 static void		server_loop(int listenfd) {
-	int				key;
+	KeyHandle		status;
 	int				connfd;
 
 	while (true) {
 		if ((connfd = accept(listenfd, NULL, NULL)) < 0)
 			error_message("Accept() failed");
-		key = draw_arena(connfd);
+		status = draw_arena(connfd);
 		if (close(connfd) < 0)
 			error_message("Close() failed");
-		if (key == KEY_ESC)
+		if (status == KeyHandle::STOP)
 			break ;
 	}
 }

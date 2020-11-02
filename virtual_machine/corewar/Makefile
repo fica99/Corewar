@@ -34,7 +34,11 @@ LOP_DIR		=		$(LIB_DIR)/libop
 LOP_HS_DIR	=		$(LOP_DIR)/includes
 
 # ------------  SOURCE FILES  ------------------------------------------------ #
-SRC_FLS	=		main.c
+SRC_FLS	=		additional.c check.c check_count_cor_files.c init.c main.c \
+                op_add.c op_aff.c op_and.c op_fork.c op_ld.c op_ldi.c \
+                op_lfork.c op_live.c op_lld.c op_lldi.c op_or.c op_st.c \
+                op_sti.c op_sub.c op_xor.c op_zjmp.c parse_args.c \
+                parse_champion.c run_vm.c validate.c calculate.c output.c fill_arena.c
 
 # ------------  FILEPATHS  --------------------------------------------------- #
 SRCS	=		$(addprefix $(SRC_DIR)/, $(SRC_FLS))
