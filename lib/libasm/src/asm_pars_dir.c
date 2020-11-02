@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm_pars_dir.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
+/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 22:52:51 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/11/01 18:03:05 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/11/02 13:46:24 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,14 @@ static int	asm_pars_dir_str(t_asm_token **token, t_asm_bin_data *bin_data,
 {
 	char			*data;
 	t_asm_labels	*labels;
-	int				num;
+	int				lebel_index;
 
 	data = (char *)(*token)->data;
 	labels = prms->labels;
-	if ((num = labels->is_contain(labels, data)) == -1)
+	if ((lebel_index = labels->is_contain(labels, data)) == -1)
 		return (asm_parser_error(*token, (*token)->type, prms, 0));
-	num = num - prms->exec_code_size;
-	num += (num > 0) ? prms->dir_size - 1 : -1 * prms->dir_size;
-	bin_data->add(bin_data, num, 2 * prms->dir_size);
+	lebel_index = lebel_index - prms->oper_byte_index;
+	bin_data->add(bin_data, lebel_index, 2 * prms->dir_size);
 	prms->exec_code_size += prms->dir_size;
 	(*token) = (*token)->next;
 	return (asm_pars_arg(token, bin_data, prms, ++arg_index));

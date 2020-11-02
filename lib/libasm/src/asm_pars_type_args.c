@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm_pars_type_args.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
+/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 23:07:36 by olegmulko         #+#    #+#             */
-/*   Updated: 2020/10/31 18:25:34 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/11/02 14:23:05 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,5 @@ void		asm_pars_type_args(t_asm_token *token,
 			token = token->next;
 	}
 	bin_data->add(bin_data, byte, 2);
+	prms->exec_code_size++;
 }

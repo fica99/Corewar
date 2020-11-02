@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/11/01 18:48:42 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/11/01 20:54:07 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,6 +179,7 @@ typedef struct			s_asm_pars_prms
 	char				byte_args_type;
 	char				mask_offset;
 	char				dir_size;
+	int					oper_byte_index;
 	char				*error;
 	t_asm_labels		*labels;
 	size_t				line_num;
