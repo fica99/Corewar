@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
+/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 22:15:14 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/11/01 20:53:02 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/11/03 22:51:33 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,11 @@ static int		asm_header_error(t_asm_token *token, t_asm_pars_prms *prms,
 	int parsed_name, int parsed_comment)
 {
 	if (parsed_name == 1)
-		return (asm_parser_error(token, TT_CHAMP_NAME, prms, 1));
+		return (asm_parser_error(token, prms, ASM_ERR_CHAMP_NAME));
 	else if (parsed_comment == 1)
-		return (asm_parser_error(token, TT_CHAMP_COMMENT, prms, 1));
+		return (asm_parser_error(token, prms, ASM_ERR_CHAMP_COMMENT));
 	else
-		return (asm_parser_error(token, 0, prms, 0));
+		return (asm_parser_error(token, prms, ASM_ERR_GENERAL));
 }
 
 int				asm_parser(t_asm_token *token,

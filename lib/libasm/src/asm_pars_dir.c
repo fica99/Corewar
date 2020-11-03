@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm_pars_dir.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 22:52:51 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/11/02 13:46:24 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/11/03 19:29:02 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	asm_pars_dir_str(t_asm_token **token, t_asm_bin_data *bin_data,
 	data = (char *)(*token)->data;
 	labels = prms->labels;
 	if ((lebel_index = labels->is_contain(labels, data)) == -1)
-		return (asm_parser_error(*token, (*token)->type, prms, 0));
+		return (asm_parser_error(*token, prms, ASM_ERR_LABEL));
 	lebel_index = lebel_index - prms->oper_byte_index;
 	bin_data->add(bin_data, lebel_index, 2 * prms->dir_size);
 	prms->exec_code_size += prms->dir_size;
@@ -64,5 +64,5 @@ int			asm_pars_dir(t_asm_token **token, t_asm_bin_data *bin_data,
 	else if ((*token)->type_conv == TC_STR)
 		return (asm_pars_dir_str(token, bin_data, prms, arg_index));
 	else
-		return (asm_parser_error(*token, (*token)->type, prms, 0));
+		return (asm_parser_error(*token, prms, ASM_ERR_CAST_TYPE));
 }
