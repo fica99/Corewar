@@ -6,7 +6,7 @@
 #    By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/20 13:57:06 by aashara-          #+#    #+#              #
-#    Updated: 2020/10/29 20:28:16 by aashara-         ###   ########.fr        #
+#    Updated: 2020/11/02 22:11:10 by aashara-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,7 +96,11 @@ LIBFT_FLS = 	$(LIBFT_DIR)/ft_strlen.c\
 				$(LIBFT_DIR)/ft_pow.c\
 				$(LIBFT_DIR)/ft_abs.c\
 				$(LIBFT_DIR)/ft_perror.c\
-				$(LIBFT_DIR)/ft_isnum.c
+				$(LIBFT_DIR)/ft_isnum.c\
+				$(LIBFT_DIR)/ft_newstrs.c\
+				$(LIBFT_DIR)/ft_strmulsub.c\
+				$(LIBFT_DIR)/ft_delstrs.c\
+				$(LIBFT_DIR)/ft_rlstrs.c
 
 FT_PRINTF_FLS = $(FT_PRINTF_DIR)/ft_printf.c\
 				$(FT_PRINTF_DIR)/pf_tables.c\
