@@ -6,7 +6,7 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/27 21:12:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/11/03 00:49:35 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/11/03 18:14:47 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ private:
 	const uint16_t				PARAMS_WIDTH = INFO_WIDTH;
 	const uint16_t				PARAMS_HEIGHT = 13;
 	const uint16_t				HELP_WIDTH = INFO_WIDTH;
-	const uint16_t				LEN_OF_PROGRESS_BAR = 32;
+	const uint16_t				LEN_OF_PROGRESS_BAR = 34;
 	const uint16_t				LEN_PER_SPACE = 10;
 	const uint16_t				HELP_HEIGHT = ARENA_HEIGHT - INFO_HEIGHT - PARAMS_HEIGHT;
 	WINDOW						*_map;
