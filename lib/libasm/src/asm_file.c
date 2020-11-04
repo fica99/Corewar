@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm_file.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
+/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 21:08:44 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/10/06 21:47:10 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/11/04 21:39:09 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,28 @@
 
 static void	asm_open_file(t_asm_file *file, int mod, int adv_mod)
 {
+	size_t	name_len;
+	size_t	exp_len;
+	size_t	len;
+	char	*full_path;
 	int		fd;
 
-	fd = open(file->name, mod, adv_mod);
+	name_len = ft_strlen(file->name);
+	exp_len = ft_strlen(file->exp);
+	len = 0;
+	len += name_len + (exp_len) ? exp_len + 1 : 0;
+	if (!(full_path = ft_strnew(len)))
+		asm_sys_error();
+	ft_memcpy(full_path, file->name, name_len);
+	if (exp_len)
+	{
+		ft_memcpy(full_path + name_len, ".", 1);
+		ft_memcpy(full_path + name_len + 1, file->exp, exp_len);
+	}
+	fd = open(full_path, mod, adv_mod);
 	if (fd == -1)
 		asm_sys_error();
+	free(full_path);
 	file->fd = fd;
 }
 
@@ -32,7 +49,7 @@ static void	asm_write_bin_data_to_file(t_asm_file *file,
 		asm_sys_error();
 }
 
-t_asm_file	*asm_file_init(char *name)
+t_asm_file	*asm_file_init(char *name, char *exp)
 {
 	t_asm_file	*file;
 
@@ -40,8 +57,33 @@ t_asm_file	*asm_file_init(char *name)
 		asm_sys_error();
 	if (name == NULL)
 		asm_prog_error(ERR_FILE_NAME_NULL);
-	file->name = name;
+	if (!(file->name = ft_strdup(name)))
+		asm_sys_error();
+	if (!(file->exp = ft_strdup(exp)))
+		asm_sys_error();
 	file->open = &asm_open_file;
 	file->write_bin_data = &asm_write_bin_data_to_file;
 	return (file);
+}
+
+char		*asm_del_exp(char *filename)
+{
+	char	*name;
+	char	*sep;
+	char	tmp_ch;
+
+	if (!filename)
+		return (NULL);
+	tmp_ch = '\0';
+	sep = ft_strrchr(filename, '.');
+	if (sep)
+	{
+		tmp_ch = *sep;
+		*sep = '\0';
+	}
+	if (!(name = ft_strdup(filename)))
+		asm_sys_error();
+	if (tmp_ch)
+		*sep = tmp_ch;
+	return (name);
 }
