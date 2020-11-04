@@ -6,7 +6,7 @@
 /*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/11/03 22:56:22 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/11/04 21:34:30 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,6 +184,7 @@ typedef struct			s_asm_bin_data
 typedef struct			s_asm_file
 {
 	char				*name;
+	char				*exp;
 	int					fd;
 	void				(*open)(struct s_asm_file *, int, int);
 	void				(*write_bin_data)(struct s_asm_file *,
@@ -364,7 +365,8 @@ t_asm_bin_data			*asm_init_bin_data(size_t size);
 ** asm_file.c
 */
 
-t_asm_file				*asm_file_init(char *name);
+t_asm_file				*asm_file_init(char *name, char *exp);
+char					*asm_del_exp(char *filename);
 
 /*
 ** asm_parser.c

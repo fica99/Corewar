@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
+/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/27 01:00:23 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/31 14:00:05 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/11/04 21:35:01 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	main(int ac, char **av)
 	prms = asm_init_pars_prms();
 	if (asm_parser(tokens, bin_data, prms) == -1)
 		asm_pars_error(prms);
-	file = asm_file_init("./result.cor");
+	file = asm_file_init(asm_del_exp(av[1]), "cor");
 	file->open(file, O_CREAT | O_TRUNC | O_WRONLY, S_IREAD | S_IWRITE);
 	file->write_bin_data(file, bin_data);
 	return (0);
