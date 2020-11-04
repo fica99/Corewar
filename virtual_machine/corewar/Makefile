@@ -6,7 +6,7 @@
 #    By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/14 12:47:29 by aashara           #+#    #+#              #
-#    Updated: 2020/10/29 21:48:32 by aashara-         ###   ########.fr        #
+#    Updated: 2020/11/05 02:29:24 by kdeloise         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,8 @@ SRC_FLS	=		additional.c check.c check_count_cor_files.c init.c main.c \
                 op_add.c op_aff.c op_and.c op_fork.c op_ld.c op_ldi.c \
                 op_lfork.c op_live.c op_lld.c op_lldi.c op_or.c op_st.c \
                 op_sti.c op_sub.c op_xor.c op_zjmp.c parse_args.c \
-                parse_champion.c run_vm.c validate.c calculate.c output.c fill_arena.c
+                parse_champion.c run_vm.c validate.c calculate.c output.c fill_arena.c \
+                vs_ip.c parse_cor_file.c is_int.c
 
 # ------------  FILEPATHS  --------------------------------------------------- #
 SRCS	=		$(addprefix $(SRC_DIR)/, $(SRC_FLS))

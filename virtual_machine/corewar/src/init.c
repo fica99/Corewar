@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kdeloise <kdeloise@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/05 01:32:33 by kdeloise          #+#    #+#             */
+/*   Updated: 2020/11/05 01:54:02 by kdeloise         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "corewar.h"
 
-t_cursor *init_cursor(t_player *player, int32_t pc)
+t_cursor	*init_cursor(t_player *player, int32_t pc)
 {
 	t_cursor		*cursor;
 	static uint32_t id;
@@ -19,7 +31,7 @@ t_cursor *init_cursor(t_player *player, int32_t pc)
 	return (cursor);
 }
 
-void	init_arena(t_vm *vm)
+void		init_arena(t_vm *vm)
 {
 	int i;
 	int prog_count;
@@ -29,20 +41,23 @@ void	init_arena(t_vm *vm)
 	while (i < vm->num_players)
 	{
 		ft_memcpy(&(vm->arena[prog_count]), vm->players[i]->code,
-			 vm->players[i]->code_size);
+			vm->players[i]->code_size);
 		prog_count += MEM_SIZE / vm->num_players;
 		i++;
 	}
 }
 
-void	init_vm_players(t_vm *vm)
+void		init_vm_players(t_vm *vm)
 {
 	int i;
 
 	i = 0;
-	while(i < MAX_PLAYERS)
+	if (vm->num_players > MAX_PLAYERS)
+		help();
+	while (i < vm->num_players)
 	{
-		if (!(vm->players[i] = (t_player *)malloc(sizeof(t_player))))
+		vm->players[i] = NULL;
+		if (!(vm->players[i] = (t_player *)ft_memalloc(sizeof(t_player))))
 			ft_exit("Error malloc");
 		i++;
 	}

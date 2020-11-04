@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   op_or.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kdeloise <kdeloise@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/05 01:35:08 by kdeloise          #+#    #+#             */
+/*   Updated: 2020/11/05 01:35:08 by kdeloise         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "corewar.h"
 
 void	op_or(t_vm *vm, t_cursor *cursor)
 {
 	int32_t		value1;
-	int32_t 	value2;
-	int32_t 	reg;
-	int32_t 	result;
+	int32_t		value2;
+	int32_t		reg;
+	int32_t		result;
 
 	cursor->step += (ARGS_CODE_LEN + OP_CODE_LEN);
 	value1 = get_op_arg(vm, cursor, 1, True);

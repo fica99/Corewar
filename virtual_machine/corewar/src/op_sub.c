@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   op_sub.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kdeloise <kdeloise@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/05 01:35:22 by kdeloise          #+#    #+#             */
+/*   Updated: 2020/11/05 01:35:22 by kdeloise         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "corewar.h"
 
 void	op_sub(t_vm *vm, t_cursor *cursor)
@@ -14,7 +26,7 @@ void	op_sub(t_vm *vm, t_cursor *cursor)
 	cursor->step += REG_LEN;
 	reg3 = get_byte(vm, cursor->pc, cursor->step);
 	cursor->step += REG_LEN;
-	value = cursor->reg[reg1 - 1] + cursor->reg[reg2 - 1];
+	value = cursor->reg[reg1 - 1] - cursor->reg[reg2 - 1];
 	cursor->carry = (t_bool)(!value);
 	cursor->reg[reg3 - 1] = value;
 	if (vm->logs)

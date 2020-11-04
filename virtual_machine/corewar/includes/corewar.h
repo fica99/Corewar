@@ -6,7 +6,7 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 21:25:59 by aashara-          #+#    #+#             */
-/*   Updated: 2020/06/27 15:56:12 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/11/05 02:24:36 by kdeloise         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct		s_vm
 	t_bool			vs;
 	char			*vs_ip;
 	int				listenfd;
+	t_vis_arena		vs_arena;
 }					t_vm;
 
 typedef struct	s_op
@@ -86,7 +87,8 @@ typedef struct	s_op
 
 /*fill_arena.c*/
 
-void		add_struct_for_vs(t_vm *vm, t_vis_arena *vs_arena);
+void		add_code_of_players(t_vm *vm);
+void		add_struct_for_vs(t_vm *vm);
 
 /*main.c*/
 
@@ -128,7 +130,7 @@ void		parse_args(char **argv, int argc, t_vm *vm);
 
 /*parse_champion.c*/
 
-int32_t	u_int8_to_u_int32(const u_int8_t *bytecode, int size);
+int32_t		u_int8_to_u_int32(const u_int8_t *bytecode, int size);
 int32_t 	check_reg_size(int fd);
 char		*parse_str(int fd, int len);
 uint8_t		*parse_code(int fd, int code_size);
@@ -144,7 +146,10 @@ t_vm		*init_vm(void);
 
 /*run_vm.c*/
 
+void		output_arena(unsigned char *arena, int print_mode);
+void		print_log(t_vm *vm, t_cursor *cursor);
 void		dump_output(t_vm *vm);
+
 int32_t		calc_addr(int32_t addr);
 uint32_t	step_size(uint8_t arg_type, t_op *op);
 void		move_cursor(t_vm *vm, t_cursor *cursor);
@@ -153,11 +158,15 @@ int8_t		get_byte(t_vm *vm, int32_t pc, int32_t step);
 void		parse_types_args(t_vm *vm, t_op *op, t_cursor *cursor);
 t_bool		is_register(t_vm *vm, int32_t pc, int32_t step);
 t_bool		validate_args(t_vm *vm, t_cursor *cursor, t_op *op);
-t_bool		validate_args_types(t_cursor *cursor, t_op *op);
+t_bool		val_args_types(t_cursor *cursor, t_op *op);
 void		set_cycle_to_exec(t_vm *vm, t_cursor *cursor);
 void		op_code_for_cursor(t_vm *vm, t_cursor *cursor);
 void		exec(t_vm *vm);
 void		run_vm(t_vm *vm);
+
+/*vs_ip.c*/
+
+void		parse_vs_flag(int *argc, char ***argv, t_vm *vm);
 
 t_cursor	*copy_cursor(t_cursor *cursor, int32_t addr);
 

@@ -6,7 +6,7 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/26 19:11:30 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/27 21:06:17 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/11/03 18:19:57 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,12 @@ static unsigned char	*serialize_int(unsigned char *buffer, int value)
 	size_t	size_int;
 
 	i = 0;
-	buffer[i++] = value >> 24;
-	buffer[i++] = value >> 16;
-	buffer[i++] = value >> 8;
-	buffer[i++] = value;
 	size_int = sizeof(int);
 	while (i < size_int)
-		buffer[i++] = '\0';
+	{
+		buffer[i] = value >> ((size_int - i - 1) * 8);
+		++i;
+	}
 	return (buffer + i);
 }
 
@@ -55,7 +54,7 @@ static unsigned char	*serialize_cell(unsigned char *buffer,
 	i = buffer - start;
 	size_cell = sizeof(t_vis_cell);
 	while (i < size_cell)
-		buffer[i++] = '\0';
+		start[i++] = '\0';
 	return (start + i);
 }
 
@@ -79,7 +78,7 @@ static unsigned char	*serialize_player(unsigned char *buffer,
 	size_player = sizeof(t_vis_player);
 	i = buffer - start;
 	while (i < size_player)
-		buffer[i++] = '\0';
+		start[i++] = '\0';
 	return (start + i);
 }
 
@@ -109,6 +108,6 @@ unsigned char			*serialize_arena(unsigned char *buffer,
 	i = buffer - start;
 	arena_size = sizeof(t_vis_arena);
 	while (i < arena_size)
-		buffer[i++] = '\0';
+		start[i++] = '\0';
 	return (start + i);
 }

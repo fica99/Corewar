@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   op_zjmp.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kdeloise <kdeloise@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/05 01:35:31 by kdeloise          #+#    #+#             */
+/*   Updated: 2020/11/05 01:35:31 by kdeloise         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "corewar.h"
 
 void	op_zjmp(t_vm *vm, t_cursor *cursor)
@@ -13,7 +25,7 @@ void	op_zjmp(t_vm *vm, t_cursor *cursor)
 	}
 	if (vm->logs)
 		ft_printf("P %4d | zjmp %d %s\n",
-				  cursor->id,
-				  addr,
-				  (cursor->carry) ? "OK" : "FAILED");
+					cursor->id,
+					addr,
+					(cursor->carry) ? "OK" : "FAILED");
 }
