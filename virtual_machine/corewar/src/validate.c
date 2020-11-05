@@ -6,7 +6,7 @@
 /*   By: kdeloise <kdeloise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 01:35:44 by kdeloise          #+#    #+#             */
-/*   Updated: 2020/11/05 02:45:43 by kdeloise         ###   ########.fr       */
+/*   Updated: 2020/11/05 16:20:33 by kdeloise         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void		parse_types_args(t_vm *vm, t_op *op, t_cursor *cursor)
 		}
 		if (op->args_num >= 3)
 			cursor->args_types[2] = (int8_t)((args_types_byte & 0xC) >> 2);
+		if (cursor->args_types[2] + 1 == T_IND)
+			cursor->args_types[2] = T_IND;
 	}
 	else
 		cursor->args_types[0] = op->args_types[0];

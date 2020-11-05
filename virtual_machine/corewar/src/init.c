@@ -59,6 +59,7 @@ void		init_vm_players(t_vm *vm)
 		vm->players[i] = NULL;
 		if (!(vm->players[i] = (t_player *)ft_memalloc(sizeof(t_player))))
 			ft_exit("Error malloc");
+		vm->tmp_players[i] = vm->players[i];
 		i++;
 	}
 }

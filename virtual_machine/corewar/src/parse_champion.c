@@ -6,7 +6,7 @@
 /*   By: kdeloise <kdeloise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 01:33:01 by kdeloise          #+#    #+#             */
-/*   Updated: 2020/11/05 02:17:47 by kdeloise         ###   ########.fr       */
+/*   Updated: 2020/11/05 16:56:17 by kdeloise         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,6 @@ t_player	*parse_champion(char *cor_file, t_vm *vm, int id)
 {
 	t_player	*player;
 	int			fd;
-	char		*name_champion;
-	char		*comment_champion;
 
 	vm = NULL;
 	player = init_player(id);
@@ -85,17 +83,13 @@ t_player	*parse_champion(char *cor_file, t_vm *vm, int id)
 		ft_exit("Can't open .cor file\n");
 	if (check_reg_size(fd) != COREWAR_EXEC_MAGIC)
 		ft_exit("Invalid magic header\n");
-	name_champion = parse_str(fd, PROG_NAME_LENGTH);
-	ft_strcpy(player->name, name_champion);
-	free(name_champion);
+	copy_name(player, fd);
 	if (check_reg_size(fd) != 0)
 		ft_exit("Reg is not MULL\n");
 	if ((player->code_size = check_reg_size(fd)) < 0 ||
 		player->code_size > CHAMP_MAX_SIZE)
 		ft_exit("Size of champion error\n");
-	comment_champion = parse_str(fd, COMMENT_LENGTH);
-	ft_strcpy(player->comment, comment_champion);
-	free(comment_champion);
+	copy_comment(player, fd);
 	if (check_reg_size(fd) != 0)
 		ft_exit("\n");
 	player->code = parse_code(fd, player->code_size);

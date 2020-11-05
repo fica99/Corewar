@@ -6,7 +6,7 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 21:41:56 by aashara-          #+#    #+#             */
-/*   Updated: 2020/11/05 01:57:04 by kdeloise         ###   ########.fr       */
+/*   Updated: 2020/11/05 16:39:16 by kdeloise         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ void	free_vm(t_vm *vm)
 	while (i < vm->num_players)
 	{
 		free(vm->players[i]->code);
-		free(*(&vm->players[i]));
+		free(vm->players[i]);
+		free(vm->tmp_players[i]);
 		i++;
 	}
 	free(vm);
