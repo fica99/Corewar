@@ -31,7 +31,7 @@ static const uint8_t	*get_arg_val(t_op *op, const uint8_t *bytes)
 			op->args_val[i] = (int32_t)(*bytes);
 			bytes++;
 		}
-		else if (op->args_types[i] == T_IND ||
+		else if (op->args_types[i] == T_IND_CODE ||
 		(op->args_types[i] == T_DIR && op->t_dir_size == 2))
 		{
 			op->args_val[i] = convert16(*(uint16_t *)bytes);

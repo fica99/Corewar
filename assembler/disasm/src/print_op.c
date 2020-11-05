@@ -25,6 +25,7 @@ void		print_op(t_op *op, int fd)
 {
 	int		i;
 	t_bool	first;
+	char    tmp;
 
 	first = True;
 	i = 0;
@@ -35,7 +36,8 @@ void		print_op(t_op *op, int fd)
 		if (!first)
 			ft_putstr_fd(", ", fd);
 		first = False;
-		ft_putchar_fd(op_sym(op->args_types[i]), fd);
+		if ((tmp = op_sym(op->args_types[i])))
+		    ft_putchar_fd(tmp, fd);
 		ft_putnbr_fd((int)op->args_val[i], fd);
 		i++;
 	}

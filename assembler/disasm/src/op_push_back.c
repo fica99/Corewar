@@ -17,6 +17,8 @@ static t_op	*op_list_new(uint8_t byte)
 {
 	t_op *new;
 
+	if (byte <= 0 || byte > 17)
+	    fatal_error("wrong operation");
 	new = xmalloc(sizeof(t_op));
 	*new = g_op[byte - 1];
 	return (new);

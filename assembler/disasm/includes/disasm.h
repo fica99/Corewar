@@ -27,6 +27,7 @@
 # define MAGIC_HEADER_SIZE_BYTES 4
 # define TWO_LAST_BITS (uint8_t)3
 # define OP_COUNT 16
+# define T_IND_CODE 3
 
 typedef struct		s_buf
 {
