@@ -3,23 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   asm_pars_labels.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
+/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 20:30:18 by olegmulko         #+#    #+#             */
-/*   Updated: 2020/11/03 19:40:07 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/11/05 23:03:34 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libasm.h"
 
-static void	asm_pars_check_label(t_asm_token **token,
+static int	asm_pars_check_label(t_asm_token **token,
 	t_asm_pars_prms *prms, t_asm_labels *labels)
 {
 	char		*label;
 
 	label = (char *)(*token)->data;
-	if (labels->add(labels, label, prms->exec_code_size + 1) == -1)
-		asm_sys_error();
+	if (!(labels->add(labels, label, prms->exec_code_size + 1)))
+		return (asm_parser_error(*token, prms, ASM_ERR_DUBL_LABEL));
+	return (1);
 }
 
 static void	asm_pars_del_lebel(t_asm_token **token,
@@ -90,7 +91,7 @@ static int 	asm_pars_labels_skip(t_asm_token **token,
 	return (0);
 }
 
-void		asm_pars_label(t_asm_token **token,
+int			asm_pars_label(t_asm_token **token,
 	t_asm_pars_prms *prms)
 {
 	t_asm_labels	*labels;
@@ -105,7 +106,10 @@ void		asm_pars_label(t_asm_token **token,
 		if (asm_pars_labels_skip(token, &previous))
 			continue ;
 		else if ((*token)->type == TT_LABEL)
-			asm_pars_check_label(token, prms, labels);
+		{
+			if (asm_pars_check_label(token, prms, labels) == -1)
+				return (-1);
+		}
 		else if ((*token)->type == TT_OPER)
 			asm_pars_check_oper(token, prms, &previous);
 		else if ((*token)->type == TT_ARG_REG)
@@ -122,4 +126,5 @@ void		asm_pars_label(t_asm_token **token,
 			asm_pars_del_lebel(token, head, previous);
 	}
 	(*token) = head;
+	return (1);
 }
