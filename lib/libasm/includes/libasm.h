@@ -6,7 +6,7 @@
 /*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/11/04 21:34:30 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/11/05 22:40:04 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # define ALT_COMMENT_CHAR ';'
 # define LABELS_SIZE 10
 # define ARGS_SIZE 3
+# define REG_WIDTH 2
 
 /*
 ** Operations arguments according to the operations table
@@ -212,7 +213,6 @@ typedef struct			s_asm_pars_prms
 {
 	int					exec_code_size;
 	int					args_mask;
-	char				byte_args_type;
 	char				mask_offset;
 	char				dir_size;
 	int					oper_byte_index;
@@ -321,7 +321,7 @@ t_asm_token				*asm_lex_token_label(t_asm_string *asm_str);
 
 int						asm_lex_is_number(t_asm_string *asm_str, size_t i);
 int						asm_lex_is_arg_reg(t_asm_string *asm_str);
-size_t					*asm_lex_get_number(t_asm_string *asm_str);
+int						*asm_lex_get_number(t_asm_string *asm_str);
 t_asm_token				*asm_lex_token_arg_reg(t_asm_string *asm_str);
 /*
 ** asm_lex_token_arg_dir.c
