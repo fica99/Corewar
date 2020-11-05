@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm_lex_token_arg_reg.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
+/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 21:57:39 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/11/01 19:43:48 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/11/05 22:31:50 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,24 +35,31 @@ int				asm_lex_is_number(t_asm_string *asm_str, size_t i)
 int				asm_lex_is_arg_reg(t_asm_string *asm_str)
 {
 	size_t		i;
+	size_t		size;
 
 	i = asm_str->index;
+	size = 0;
 	if (asm_str->str[i++] != 'r')
 		return (0);
 	while (ft_isdigit(asm_str->str[i]))
+	{
 		i++;
+		size++;
+	}
+	if (!size || size > REG_WIDTH)
+		return (0);
 	return (1);
 }
 
-size_t			*asm_lex_get_number(t_asm_string *asm_str)
+int				*asm_lex_get_number(t_asm_string *asm_str)
 {
-	size_t		*number;
+	int			*number;
 	int			n_width;
 
 	n_width = asm_lex_is_number(asm_str, asm_str->index);
-	if (!(number = (size_t *)malloc(sizeof(size_t))))
+	if (!(number = (int *)malloc(sizeof(int))))
 		asm_sys_error();
-	*number = (size_t)ft_atoi(asm_str->str + asm_str->index);
+	*number = ft_atoi(asm_str->str + asm_str->index);
 	asm_str->index += (size_t)n_width;
 	asm_str->char_num += (size_t)n_width;
 	return (number);
