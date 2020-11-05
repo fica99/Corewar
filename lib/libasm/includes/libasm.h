@@ -6,7 +6,7 @@
 /*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/11/05 22:40:04 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/11/05 22:57:23 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@
 # define ERR_CHAMP_NAME_LEN "the champion name too big"
 # define ERR_CHAMP_COMMENT "missing champion comment token"
 # define ERR_CHAMP_COMMENT_LEN "the champion comment too big"
+# define ERR_DUBL_LABEL "duplicate label"
 # define ERR_MIS_OPER "missing operation token"
 # define ERR_MIS_ARG_SEP "missing argument separator"
 # define ERR_NOT_ARG "token is not an argument"
@@ -102,6 +103,7 @@ typedef enum			e_asm_errors
 	ASM_ERR_CHAMP_COMMENT,
 	ASM_ERR_CHAMP_COMMENT_LEN,
 	ASM_ERR_FUNC_PRMS,
+	ASM_ERR_DUBL_LABEL,
 	ASM_ERR_MIS_OPER,
 	ASM_MIS_ARG_SEP,
 	ASM_ERR_NOT_ARG,
@@ -205,8 +207,6 @@ typedef struct			s_asm_labels
 	size_t				m_size;
 	int					(*is_contain)(struct s_asm_labels *, char *);
 	int					(*add)(struct s_asm_labels *, char *, int);
-	void				(*clear)(struct s_asm_labels *);
-	void				(*inc)(struct s_asm_labels *, size_t);
 }						t_asm_labels;
 
 typedef struct			s_asm_pars_prms
@@ -450,7 +450,7 @@ int						asm_pars_args_sep(t_asm_token **token,
 ** asm_pars_labels.c
 */
 
-void					asm_pars_label(t_asm_token **token,
+int						asm_pars_label(t_asm_token **token,
 							t_asm_pars_prms *prms);
 
 /*

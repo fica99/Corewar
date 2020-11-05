@@ -6,7 +6,7 @@
 /*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 20:36:27 by olegmulko         #+#    #+#             */
-/*   Updated: 2020/10/23 11:26:32 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/11/05 22:52:22 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ t_asm_labels	*asm_init_labels(size_t size)
 	labels->m_size = size;
 	labels->is_contain = &asm_labels_is_contain;
 	labels->add = &asm_labels_add;
-	labels->clear = &asm_labels_clear;
-	labels->inc = &asm_labels_count_inc;
 	return (labels);
 }
 
@@ -76,45 +74,8 @@ int				asm_labels_add(t_asm_labels *labels, char *name, int count)
 		return (0);
 	obj_label = &labels->labels[labels->size];
 	if (!(obj_label->name = ft_strdup(name)))
-		return (-1);
+		asm_sys_error();
 	obj_label->count = count;
 	labels->size++;
 	return (1);
-}
-
-void			asm_labels_clear(t_asm_labels *labels)
-{
-	size_t		i;
-	size_t		size;
-	t_asm_label	obj_label;
-
-	(void)obj_label;
-	i = 0;
-	size = labels->size;
-
-	while (i < size)
-	{
-		obj_label = labels->labels[i];
-		obj_label.name = NULL;
-		obj_label.count = 0;
-		i++;
-	}
-}
-
-void			asm_labels_count_inc(t_asm_labels *labels, size_t inc)
-{
-	size_t		i;
-	size_t		size;
-	t_asm_label	obj_label;
-
-	(void)obj_label;
-	i = 0;
-	size = labels->size;
-
-	while (i < size)
-	{
-		obj_label = labels->labels[i];
-		obj_label.count += inc;
-		i++;
-	}
 }
