@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   op_fork.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kdeloise <kdeloise@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/05 01:34:32 by kdeloise          #+#    #+#             */
+/*   Updated: 2020/11/05 02:23:18 by kdeloise         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "corewar.h"
 
 t_cursor	*copy_cursor(t_cursor *cursor, int32_t addr)
@@ -30,7 +42,7 @@ void		op_fork(t_vm *vm, t_cursor *cursor)
 	vm->num_cursor++;
 	if (vm->logs)
 		ft_printf("P %4d | fork %d (%d)\n",
-				  cursor->id,
-				  addr,
-				  cursor->pc + addr % IDX_MOD);
+				cursor->id,
+				addr,
+				cursor->pc + addr % IDX_MOD);
 }

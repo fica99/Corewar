@@ -6,7 +6,7 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 21:41:56 by aashara-          #+#    #+#             */
-/*   Updated: 2020/07/29 14:18:19 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/11/05 16:39:16 by kdeloise         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,25 @@ void	player_introduction(t_vm *vm)
 	while (id <= vm->num_players)
 	{
 		ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n",
-				  id, vm->players[id - 1]->code_size,
-				  vm->players[id - 1]->name, vm->players[id - 1]->comment);
+				id, vm->players[id - 1]->code_size,
+				vm->players[id - 1]->name, vm->players[id - 1]->comment);
 		id++;
 	}
+}
+
+void	free_vm(t_vm *vm)
+{
+	int	i;
+
+	i = 0;
+	while (i < vm->num_players)
+	{
+		free(vm->players[i]->code);
+		free(vm->players[i]);
+		free(vm->tmp_players[i]);
+		i++;
+	}
+	free(vm);
 }
 
 int		main(int argc, char **argv)
@@ -55,22 +70,22 @@ int		main(int argc, char **argv)
 	t_vm *vm;
 
 	vm = init_vm();
-	init_vm_players(vm);
 	argv++;
 	argc--;
 	if (argc >= 1)
-    {
+	{
 		vm->num_players = check_count_cor_files(argv);
-	    parse_args(argv, argc, vm);
-	    init_arena(vm);
-	    set_cursors(vm);
-	    player_introduction(vm);
-	    run_vm(vm);
+		init_vm_players(vm);
+		parse_args(argv, argc, vm);
+		init_arena(vm);
+		set_cursors(vm);
+		player_introduction(vm);
+		run_vm(vm);
 		ft_printf("Contestant %d, \"%s\", has won !\n",
-				  vm->last_alive->id, vm->last_alive->name);
-//		free_vm(vm);
-    }
+					vm->last_alive->id, vm->last_alive->name);
+	}
 	else
 		help();
+	free_vm(vm);
 	return (0);
 }
