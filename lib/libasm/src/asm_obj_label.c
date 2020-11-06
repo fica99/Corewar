@@ -6,7 +6,7 @@
 /*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 20:36:27 by olegmulko         #+#    #+#             */
-/*   Updated: 2020/11/05 22:52:22 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/11/06 19:25:16 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void		asm_labels_check_size(t_asm_labels *labels)
 		if (!(new_objs_label = (t_asm_label *)malloc(sizeof(t_asm_label)
 			* new_size)))
 			asm_sys_error();
-		ft_memcpy(new_objs_label, labels->labels, labels->size);
+		ft_memcpy(new_objs_label, labels->labels, labels->size * sizeof(t_asm_label));
 		free(labels->labels);
 		labels->labels = new_objs_label;
 		labels->m_size = new_size;
