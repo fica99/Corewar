@@ -6,7 +6,7 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/28 16:25:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/11/03 00:48:32 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/11/06 18:22:17 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ static KeyHandle	check_key(Drawer& draw) {
 	}
 	if (draw.isRunning()) {
 		if (key == KEY_UP) {
-			draw.changeDelay(100ms);
+			draw.changeDelay(10ms);
 			return KeyHandle::DRAW;
 		} else if (key == KEY_DOWN) {
-			draw.changeDelay(-100ms);
+			draw.changeDelay(-10ms);
 			return KeyHandle::DRAW;
 		}
 		if (draw.delay())

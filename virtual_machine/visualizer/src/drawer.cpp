@@ -6,7 +6,7 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/27 21:14:52 by aashara-          #+#    #+#             */
-/*   Updated: 2020/11/03 18:16:41 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/11/06 18:22:49 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ Drawer::Drawer(void) {
 	initColor();
 	initWindows();
 	drawHelp();
-	_delay = 1s;
+	_delay = 100ms;
 }
 
 void	Drawer::changeDelay(std::chrono::milliseconds t) {

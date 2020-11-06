@@ -6,7 +6,7 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:53:47 by aashara-          #+#    #+#             */
-/*   Updated: 2020/10/15 16:32:50 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/11/06 18:42:08 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static t_op	*op_list_new(uint8_t byte)
 	t_op *new;
 
 	if (byte <= 0 || byte > 17)
-	    fatal_error("wrong operation");
+		fatal_error("wrong operation");
 	new = xmalloc(sizeof(t_op));
 	*new = g_op[byte - 1];
 	return (new);
