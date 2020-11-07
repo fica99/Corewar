@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm.h                                              :+:      :+:    :+:   */
+/*   asm_pars_sep.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/06 09:37:42 by aashara-          #+#    #+#             */
-/*   Updated: 2020/11/07 16:32:31 by aashara-         ###   ########.fr       */
+/*   Created: 2020/10/06 23:11:52 by ggrimes           #+#    #+#             */
+/*   Updated: 2020/10/10 21:23:10 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ASM_H
-# define ASM_H
+#include "libasm.h"
 
-# include "libasm.h"
-
-void	check_inprms(int ac, char **av);
-
-#endif
+int	asm_check_nl(t_asm_token **token,
+	t_asm_pars_prms *prms)
+{
+	(void)prms;
+	if ((*token)->type != TT_NEWLINE)
+		return (0);
+	(*token) = (*token)->next;
+	return (1);
+}

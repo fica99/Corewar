@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_rlstrs.c                                        :+:      :+:    :+:   */
+/*   check_inprms.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/13 16:41:48 by olegmulko         #+#    #+#             */
-/*   Updated: 2020/07/13 16:44:09 by olegmulko        ###   ########.fr       */
+/*   Created: 2020/07/12 10:47:02 by olegmulko         #+#    #+#             */
+/*   Updated: 2020/07/13 21:45:06 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "asm.h"
 
-int			ft_strs_realoc(t_string *s_str)
+static int	check_ext_file(char *file_name)
 {
-	char	*newstr;
+	char	*pos;
 
-	if (!(newstr = (char*)malloc(sizeof(char) * (s_str->m_size * 2 + 1))))
-	{
-		ft_delstrs(&s_str);
+	if (!(pos = ft_strrchr(file_name, '.')))
 		return (0);
-	}
-	ft_memcpy(newstr, s_str->str, s_str->size + 1);
-	free(s_str->str);
-	s_str->str = newstr;
-	s_str->m_size *= 2;
+	if (ft_strcmp(pos + 1, "s") != 0)
+		return (0);
 	return (1);
+}
+
+void		check_inprms(int ac, char **av)
+{
+	if (ac != 2)
+		asm_prog_error(ERR_INPUT_PARAMS);
+	if (!check_ext_file(av[1]))
+		asm_prog_error(ERR_FILE_EXT);
 }

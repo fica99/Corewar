@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_rlstrs.c                                        :+:      :+:    :+:   */
+/*   asm_lex_chain_tokens.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/13 16:41:48 by olegmulko         #+#    #+#             */
-/*   Updated: 2020/07/13 16:44:09 by olegmulko        ###   ########.fr       */
+/*   Created: 2020/09/29 21:41:05 by ggrimes           #+#    #+#             */
+/*   Updated: 2020/10/15 20:22:32 by olegmulko        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libasm.h"
 
-int			ft_strs_realoc(t_string *s_str)
+t_asm_token		*asm_lex_get_chain_tokens(t_asm_string *asm_str,
+											t_hash **opers_hash)
 {
-	char	*newstr;
+	t_asm_token	*head;
+	t_asm_token	*next;
 
-	if (!(newstr = (char*)malloc(sizeof(char) * (s_str->m_size * 2 + 1))))
+	head = asm_lex_get_token(asm_str, opers_hash);
+	if (head->type == TT_EOF)
+		return (head);
+	next = head;
+	while (next->type != TT_EOF)
 	{
-		ft_delstrs(&s_str);
-		return (0);
+		next->next = asm_lex_get_token(asm_str, opers_hash);
+		next = next->next;
 	}
-	ft_memcpy(newstr, s_str->str, s_str->size + 1);
-	free(s_str->str);
-	s_str->str = newstr;
-	s_str->m_size *= 2;
-	return (1);
+	return (head);
 }
