@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 21:08:44 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/11/07 15:55:09 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/11/07 16:07:41 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ t_asm_file	*asm_file_init(char *name, char *exp)
 		asm_sys_error();
 	if (name == NULL)
 		asm_prog_error(ERR_FILE_NAME_NULL);
-	if (!(file->name = ft_strdup(name)))
+	if (!(file->name = asm_del_exp(name)))
 		asm_sys_error();
 	if (!(file->exp = ft_strdup(exp)))
 		asm_sys_error();
