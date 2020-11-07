@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/27 01:00:23 by aashara-          #+#    #+#             */
-/*   Updated: 2020/11/04 21:35:01 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/11/07 13:44:13 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,10 @@ int	main(int ac, char **av)
 
 	check_inprms(ac, av);
 	asm_str = asm_file_to_str(av[1]);
-	// asm_print_str_filetostr(asm_str->str);
 	opers_hash = asm_get_opers_hash();
-	// asm_print_opershash(opers_hash);
 	tokens = asm_lex_get_chain_tokens(asm_str, opers_hash);
 	if (tokens->type == TT_EOF)
 		asm_prog_error("the file is empty");
-	// asm_print_tokens(tokens);
 	tokens = asm_lex_del_all_com_tokens(tokens);
 	bin_data = asm_init_bin_data(BIN_DATA_SIZE);
 	prms = asm_init_pars_prms();
@@ -38,5 +35,5 @@ int	main(int ac, char **av)
 	file = asm_file_init(asm_del_exp(av[1]), "cor");
 	file->open(file, O_CREAT | O_TRUNC | O_WRONLY, S_IREAD | S_IWRITE);
 	file->write_bin_data(file, bin_data);
-	return (0);
+	exit(0);
 }

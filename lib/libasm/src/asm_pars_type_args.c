@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   asm_pars_type_args.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 23:07:36 by olegmulko         #+#    #+#             */
-/*   Updated: 2020/11/02 14:23:05 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/11/07 15:08:49 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "libasm.h"
+#include "libasm.h"
 
 static t_asm_token	*asm_write_type(t_asm_token *token,
 	int *byte, int type, int *offset)
@@ -20,7 +20,7 @@ static t_asm_token	*asm_write_type(t_asm_token *token,
 	return (token->next);
 }
 
-void		asm_pars_type_args(t_asm_token *token,
+void				asm_pars_type_args(t_asm_token *token,
 	t_asm_bin_data *bin_data, t_asm_pars_prms *prms)
 {
 	int		offset;

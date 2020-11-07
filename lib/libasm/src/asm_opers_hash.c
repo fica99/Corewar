@@ -6,13 +6,14 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 19:49:56 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/10/31 18:42:53 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/11/07 14:25:21 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libasm.h"
 
-static t_asm_oper	*asm_init_oper(char *name, char code, int mask, int dir_size)
+static t_asm_oper	*asm_init_oper(char *name,
+	char code, int mask, int dir_size)
 {
 	t_asm_oper		*oper;
 
@@ -26,11 +27,33 @@ static t_asm_oper	*asm_init_oper(char *name, char code, int mask, int dir_size)
 	return (oper);
 }
 
+static t_hash		**asm_get_opers_hash_next2(t_hash **opers_hash)
+{
+	t_asm_oper		*oper;
+
+	oper = asm_init_oper("lldi", 0x0e, ARG_1_ALL | (ARG_2_ALL & ~ARG_2_IND)
+		| ARG_3_REG | ARG_TYPE, 2);
+	push_hash(opers_hash, "lldi", (void *)oper, OPERS_SIZE);
+	oper = asm_init_oper("lfork", 0x0f, ARG_1_DIR, 2);
+	push_hash(opers_hash, "lfork", (void *)oper, OPERS_SIZE);
+	oper = asm_init_oper("aff", 0x10, ARG_1_REG | ARG_TYPE, DIR_SIZE);
+	push_hash(opers_hash, "aff", (void *)oper, OPERS_SIZE);
+	return (opers_hash);
+}
+
 static t_hash		**asm_get_opers_hash_next(t_hash **opers_hash)
 {
 	t_asm_oper		*oper;
 
 	oper = NULL;
+	oper = asm_init_oper("or", 0x07, ARG_1_ALL | ARG_2_ALL
+		| ARG_3_REG | ARG_TYPE, DIR_SIZE);
+	push_hash(opers_hash, "or", (void *)oper, OPERS_SIZE);
+	oper = asm_init_oper("xor", 0x08, ARG_1_ALL | ARG_2_ALL
+		| ARG_3_REG | ARG_TYPE, DIR_SIZE);
+	push_hash(opers_hash, "xor", (void *)oper, OPERS_SIZE);
+	oper = asm_init_oper("zjmp", 0x09, ARG_1_DIR, 2);
+	push_hash(opers_hash, "zjmp", (void *)oper, OPERS_SIZE);
 	oper = asm_init_oper("ldi", 0x0a, ARG_1_ALL | (ARG_2_ALL & ~ARG_2_IND)
 		| ARG_3_REG | ARG_TYPE, 2);
 	push_hash(opers_hash, "ldi", (void *)oper, OPERS_SIZE);
@@ -42,14 +65,7 @@ static t_hash		**asm_get_opers_hash_next(t_hash **opers_hash)
 	oper = asm_init_oper("lld", 0x0d, (ARG_1_ALL & ~ARG_1_REG)
 		| ARG_2_REG | ARG_TYPE, DIR_SIZE);
 	push_hash(opers_hash, "lld", (void *)oper, OPERS_SIZE);
-	oper = asm_init_oper("lldi", 0x0e, ARG_1_ALL | (ARG_2_ALL & ~ARG_2_IND)
-		| ARG_3_REG | ARG_TYPE, 2);
-	push_hash(opers_hash, "lldi", (void *)oper, OPERS_SIZE);
-	oper = asm_init_oper("lfork", 0x0f, ARG_1_DIR, 2);
-	push_hash(opers_hash, "lfork", (void *)oper, OPERS_SIZE);
-	oper = asm_init_oper("aff", 0x10, ARG_1_REG | ARG_TYPE, DIR_SIZE);
-	push_hash(opers_hash, "aff", (void *)oper, OPERS_SIZE);
-	return (opers_hash);
+	return (asm_get_opers_hash_next2(opers_hash));
 }
 
 t_hash				**asm_get_opers_hash(void)
@@ -77,13 +93,5 @@ t_hash				**asm_get_opers_hash(void)
 	oper = asm_init_oper("and", 0x06, ARG_1_ALL | ARG_2_ALL
 		| ARG_3_REG | ARG_TYPE, DIR_SIZE);
 	push_hash(opers_hash, "and", (void *)oper, OPERS_SIZE);
-	oper = asm_init_oper("or", 0x07, ARG_1_ALL | ARG_2_ALL
-		| ARG_3_REG | ARG_TYPE, DIR_SIZE);
-	push_hash(opers_hash, "or", (void *)oper, OPERS_SIZE);
-	oper = asm_init_oper("xor", 0x08, ARG_1_ALL | ARG_2_ALL
-		| ARG_3_REG | ARG_TYPE, DIR_SIZE);
-	push_hash(opers_hash, "xor", (void *)oper, OPERS_SIZE);
-	oper = asm_init_oper("zjmp", 0x09, ARG_1_DIR, 2);
-		push_hash(opers_hash, "zjmp", (void *)oper, OPERS_SIZE);
 	return (asm_get_opers_hash_next(opers_hash));
 }

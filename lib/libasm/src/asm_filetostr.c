@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm_filetostr.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 11:34:50 by olegmulko         #+#    #+#             */
-/*   Updated: 2020/07/20 16:03:35 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/11/07 15:01:32 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ static t_asm_string	*asm_read_file(int fd, char *buf)
 			asm_sys_error();
 		asm_copy_buf_to_str(asm_str, buf, (size_t)(rb));
 	}
+	asm_str->str[asm_str->size] = '\0';
+	asm_str->size++;
 	return (asm_str);
 }
 
