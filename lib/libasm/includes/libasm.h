@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libasm.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/11/05 22:57:23 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/11/07 13:27:23 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include "libft.h"
 # include "libhash.h"
 
-# define READ_BUF_SIZE 5
+# define READ_BUF_SIZE 1
 # define STR_MALOC_SIZE 1
 # define OPERS_SIZE 16
 # define DEFAULT_BIN_DATA_SIZE 4096
