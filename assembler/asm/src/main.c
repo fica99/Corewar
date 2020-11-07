@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/27 01:00:23 by aashara-          #+#    #+#             */
-/*   Updated: 2020/11/07 13:44:13 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/11/07 16:07:42 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	main(int ac, char **av)
 	prms = asm_init_pars_prms();
 	if (asm_parser(tokens, bin_data, prms) == -1)
 		asm_pars_error(prms);
-	file = asm_file_init(asm_del_exp(av[1]), "cor");
+	file = asm_file_init(av[1], "cor");
 	file->open(file, O_CREAT | O_TRUNC | O_WRONLY, S_IREAD | S_IWRITE);
 	file->write_bin_data(file, bin_data);
 	exit(0);
