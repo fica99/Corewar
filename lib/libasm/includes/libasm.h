@@ -6,7 +6,7 @@
 /*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 20:22:41 by aashara-          #+#    #+#             */
-/*   Updated: 2020/11/07 13:27:23 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/11/07 14:51:56 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -439,7 +439,7 @@ int						asm_pars_opers(t_asm_token **token,
 int						asm_pars_oper(t_asm_token **token,
 							t_asm_bin_data *bin_data,
 							t_asm_pars_prms *prms);
-int 					asm_pars_arg(t_asm_token **token,
+int						asm_pars_arg(t_asm_token **token,
 							t_asm_bin_data *bin_data,
 							t_asm_pars_prms *prms, char arg_index);
 int						asm_pars_args_sep(t_asm_token **token,
@@ -495,26 +495,29 @@ int						asm_pars_ind(t_asm_token **token,
 							t_asm_pars_prms *prms, char arg_index);
 
 /*
-** asm_print_str_opers.c
-*/
-
-void					asm_print_str_filetostr(char *str);
-void					asm_print_opershash(t_hash **opers_hash);
-void					asm_print_opershash_data1(t_asm_oper *data);
-void					asm_print_opershash_data2(t_asm_oper *data);
-void					asm_print_opershash_data3(t_asm_oper *data);
-
-/*
-** asm_print_tokens.c
-*/
-
-void					asm_print_tokens(t_asm_token *tokens);
-
-/*
 ** asm_pars_type_args.c
 */
 
 void					asm_pars_type_args(t_asm_token *token,
 							t_asm_bin_data *bin_data, t_asm_pars_prms *prms);
 
+/*
+** asm_pars_check_label.c
+*/
+
+int						asm_pars_check_label(t_asm_token **token,
+							t_asm_pars_prms *prms, t_asm_labels *labels);
+void					asm_pars_del_lebel(t_asm_token **token,
+							t_asm_token *head, t_asm_token *previous);
+
+/*
+** asm_pars_labels_oper_args.c
+*/
+
+int						asm_is_oper_or_args(t_asm_token *token);
+void					asm_pars_check_oper_and_args(t_asm_token **token,
+							t_asm_pars_prms *prms, t_asm_token **previous);
+void					asm_pars_check_size(t_asm_token **token,
+							t_asm_pars_prms *prms,
+							t_asm_token **previous, int size);
 #endif

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+         #
+#    By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/12 10:32:40 by olegmulko         #+#    #+#              #
-#    Updated: 2020/10/30 00:26:20 by olegmulko        ###   ########.fr        #
+#    Updated: 2020/11/07 14:39:25 by ggrimes          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,9 +70,9 @@ SRC_FLS	=		asm_error.c\
 				asm_pars_reg.c\
 				asm_pars_dir.c\
 				asm_pars_ind.c\
-				asm_print_str_opers.c\
-				asm_print_tokens.c\
 				asm_pars_type_args.c\
+				asm_pars_check_label.c\
+				asm_pars_labels_oper_args.c\
 
 # ------------  FILEPATHS  --------------------------------------------------- #
 SRCS	=		$(addprefix $(SRC_DIR)/, $(SRC_FLS))

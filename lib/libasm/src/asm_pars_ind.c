@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   asm_pars_ind.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 21:16:50 by olegmulko         #+#    #+#             */
-/*   Updated: 2020/11/06 21:16:29 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/11/07 14:12:14 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libasm.h"
 
-int		asm_pars_is_ind(t_asm_token **token,
+int			asm_pars_is_ind(t_asm_token **token,
 	t_asm_pars_prms *prms, char arg_index)
 {
 	if (arg_index % 2 != 0
