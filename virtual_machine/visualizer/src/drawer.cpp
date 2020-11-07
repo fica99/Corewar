@@ -6,7 +6,7 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/27 21:14:52 by aashara-          #+#    #+#             */
-/*   Updated: 2020/11/06 18:22:49 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/11/07 20:00:08 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,8 +218,8 @@ void	Drawer::drawHelp(void) {
 	mvwprintw(_help, 2, HELP_WIDTH / 2 - 2, "HELP");
 	mvwprintw(_help, 4, 4, "Key SPACE - pause/resume");
 	mvwprintw(_help, 6, 4, "Key RIGHT - next step");
-	mvwprintw(_help, 8, 4, "Key UP    - add 100 ms to delay");
-	mvwprintw(_help, 10, 4, "Key DOWN  - delete 100 ms from delay");
+	mvwprintw(_help, 8, 4, "Key UP    - add 10 ms to delay");
+	mvwprintw(_help, 10, 4, "Key DOWN  - delete 10 ms from delay");
 	mvwprintw(_help, 12, 4, "Key ENTER - draw next client");
 	mvwprintw(_help, 14, 4, "Key ESC   - close server");
 	wrefresh(_help);
