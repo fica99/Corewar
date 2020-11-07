@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   asm_file.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olegmulko <olegmulko@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 21:08:44 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/11/04 21:39:09 by olegmulko        ###   ########.fr       */
+/*   Updated: 2020/11/07 15:55:09 by ggrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libasm.h"
+
+static size_t	asm_get_filename_len(size_t name_len, size_t exp_len)
+{
+	size_t		len;
+
+	len = name_len;
+	if (exp_len)
+		len += exp_len + 1;
+	return (len);
+}
 
 static void	asm_open_file(t_asm_file *file, int mod, int adv_mod)
 {
@@ -22,8 +32,7 @@ static void	asm_open_file(t_asm_file *file, int mod, int adv_mod)
 
 	name_len = ft_strlen(file->name);
 	exp_len = ft_strlen(file->exp);
-	len = 0;
-	len += name_len + (exp_len) ? exp_len + 1 : 0;
+	len = asm_get_filename_len(name_len, exp_len);
 	if (!(full_path = ft_strnew(len)))
 		asm_sys_error();
 	ft_memcpy(full_path, file->name, name_len);
