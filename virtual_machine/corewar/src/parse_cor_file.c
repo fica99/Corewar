@@ -6,7 +6,7 @@
 /*   By: kdeloise <kdeloise@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 02:14:23 by kdeloise          #+#    #+#             */
-/*   Updated: 2020/11/05 16:56:40 by kdeloise         ###   ########.fr       */
+/*   Updated: 2020/11/07 14:49:34 by kdeloise         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,27 @@ void		add_player(t_vm *vm, t_player *player)
 	while (ft_strcmp(vm->players[i]->name, "\0") && i < MAX_PLAYERS)
 		i++;
 	vm->players[i] = player;
+}
+
+void		sort_id_player(t_vm *vm)
+{
+	int			i;
+	int			id;
+	t_player	*player[vm->num_players];
+
+	i = 0;
+	id = 1;
+	while (i < vm->num_players)
+	{
+		player[i] = find_player(vm, id++);
+		i++;
+	}
+	i = 0;
+	while (i < vm->num_players)
+	{
+		vm->players[i] = player[i];
+		i++;
+	}
 }
 
 void		update_players_id(t_vm *vm)
@@ -39,6 +60,7 @@ void		update_players_id(t_vm *vm)
 		}
 		i++;
 	}
+	sort_id_player(vm);
 }
 
 void		check_double_ids(t_vm *vm)

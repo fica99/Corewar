@@ -168,6 +168,7 @@ t_player			*parse_champion(char *cor_file, t_vm *vm, int id);
 **					parse_cor_file.c
 */
 void				add_player(t_vm *vm, t_player *player);
+void				sort_id_player(t_vm *vm);
 void				update_players_id(t_vm *vm);
 void				check_double_ids(t_vm *vm);
 void				parse_cor_file(int *argc, char ***argv, t_vm *vm);
