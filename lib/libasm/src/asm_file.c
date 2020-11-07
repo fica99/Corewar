@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm_file.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 21:08:44 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/11/07 16:07:41 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/11/07 17:35:02 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ static size_t	asm_get_filename_len(size_t name_len, size_t exp_len)
 	return (len);
 }
 
-static void	asm_open_file(t_asm_file *file, int mod, int adv_mod)
+static void		asm_open_file(t_asm_file *file, int mod, int adv_mod)
 {
-	size_t	name_len;
-	size_t	exp_len;
-	size_t	len;
-	char	*full_path;
-	int		fd;
+	size_t		name_len;
+	size_t		exp_len;
+	size_t		len;
+	char		*full_path;
+	int			fd;
 
 	name_len = ft_strlen(file->name);
 	exp_len = ft_strlen(file->exp);
@@ -48,17 +48,17 @@ static void	asm_open_file(t_asm_file *file, int mod, int adv_mod)
 	file->fd = fd;
 }
 
-static void	asm_write_bin_data_to_file(t_asm_file *file,
+static void		asm_write_bin_data_to_file(t_asm_file *file,
 	t_asm_bin_data *bin_data)
 {
-	int		wb;
+	int			wb;
 
 	wb = write(file->fd, bin_data->data, bin_data->size);
 	if (wb == -1)
 		asm_sys_error();
 }
 
-t_asm_file	*asm_file_init(char *name, char *exp)
+t_asm_file		*asm_file_init(char *name, char *exp)
 {
 	t_asm_file	*file;
 
@@ -75,11 +75,11 @@ t_asm_file	*asm_file_init(char *name, char *exp)
 	return (file);
 }
 
-char		*asm_del_exp(char *filename)
+char			*asm_del_exp(char *filename)
 {
-	char	*name;
-	char	*sep;
-	char	tmp_ch;
+	char		*name;
+	char		*sep;
+	char		tmp_ch;
 
 	if (!filename)
 		return (NULL);

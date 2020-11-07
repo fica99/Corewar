@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sschmele <sschmele@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/27 01:00:23 by aashara-          #+#    #+#             */
-/*   Updated: 2020/11/07 17:24:37 by sschmele         ###   ########.fr       */
+/*   Updated: 2020/11/07 17:48:27 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int			file_forming(char *av,
 	return (0);
 }
 
-int	main(int ac, char **av)
+int					main(int ac, char **av)
 {
 	t_asm_string	*asm_str;
 	t_hash			**opers_hash;

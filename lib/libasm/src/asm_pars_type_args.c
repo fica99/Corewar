@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   asm_pars_type_args.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggrimes <ggrimes@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 23:07:36 by olegmulko         #+#    #+#             */
-/*   Updated: 2020/11/07 15:08:49 by ggrimes          ###   ########.fr       */
+/*   Updated: 2020/11/07 17:46:13 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libasm.h"
 
 static t_asm_token	*asm_write_type(t_asm_token *token,
-	int *byte, int type, int *offset)
+						int *byte, int type, int *offset)
 {
 	(*byte) |= type >> (*offset);
 	(*offset) += 2;
@@ -21,7 +21,7 @@ static t_asm_token	*asm_write_type(t_asm_token *token,
 }
 
 void				asm_pars_type_args(t_asm_token *token,
-	t_asm_bin_data *bin_data, t_asm_pars_prms *prms)
+						t_asm_bin_data *bin_data, t_asm_pars_prms *prms)
 {
 	int		offset;
 	int		byte;
@@ -38,9 +38,8 @@ void				asm_pars_type_args(t_asm_token *token,
 			token = asm_write_type(token, &byte, ARG_TYPE_DIR, &offset);
 		else if (token->type == TT_ARG_IND)
 			token = asm_write_type(token, &byte, ARG_TYPE_IND, &offset);
-		else if (offset >= (ARGS_SIZE * 2)
-			|| token->type == TT_NEWLINE
-			|| token->type == TT_EOF)
+		else if (offset >= ARGS_SIZE * 2 || token->type == TT_NEWLINE ||
+			token->type == TT_EOF)
 			break ;
 		else
 			token = token->next;
