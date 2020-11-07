@@ -6,13 +6,13 @@
 /*   By: aashara- <aashara-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 19:12:00 by ggrimes           #+#    #+#             */
-/*   Updated: 2020/11/07 17:48:04 by aashara-         ###   ########.fr       */
+/*   Updated: 2020/11/07 17:58:50 by aashara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libasm.h"
 
-int			qasm_pars_opers(t_asm_token **token,
+int			asm_pars_opers(t_asm_token **token,
 	t_asm_bin_data *bin_data, t_asm_pars_prms *prms)
 {
 	while (1)
