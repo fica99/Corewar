@@ -31,9 +31,8 @@ uint32_t	step_size(uint8_t arg_type, t_op *op)
 	return (0);
 }
 
-void		move_cursor(t_vm *vm, t_cursor *cursor)
+void		move_cursor(t_cursor *cursor)
 {
-	vm = NULL;
 	cursor->pc += cursor->step;
 	cursor->pc = calc_addr(cursor->pc);
 	cursor->step = 0;

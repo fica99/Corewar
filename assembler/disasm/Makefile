@@ -50,7 +50,7 @@ DEPS	=		$(OBJS:.o=.d)
 CC		=		gcc
 RM		=		rm -rf
 CFLGS	=		-Wall -Werror -Wextra
-LFLGS	=		-L $(LFT_PRINTF_DIR) -lftprintf
+LFLGS	=		-L $(LFT_PRINTF_DIR) -lftprintf -lm
 IFLGS	=		-I $(HDR_DIR) -I $(LHS_PRINTF_DIR) -I $(LOP_HS_DIR)
 DFLGS	=		-MMD -MP
 OFLGS	=		-O0 -g

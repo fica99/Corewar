@@ -48,7 +48,7 @@ DEPS	=		$(OBJS:.o=.d)
 CC		=		g++
 RM		=		rm -rf
 CFLGS	=		-Wall -Werror -Wextra -std=c++1z
-LFLGS	=		-L $(LFT_PRINTF_DIR) -lftprintf -L $(LSERVER_DIR) -lserver -lncurses
+LFLGS	=		-L $(LSERVER_DIR) -lserver -L $(LFT_PRINTF_DIR) -lftprintf -lm -lncurses
 IFLGS	=		-I $(HDR_DIR) -I $(LSERVER_HS_DIR) -I $(LOP_HS_DIR) -I $(LHS_PRINTF_DIR)
 DFLGS	=		-MMD -MP
 OFLGS	=		-O0 -g

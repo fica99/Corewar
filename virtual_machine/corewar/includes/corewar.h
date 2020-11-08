@@ -101,7 +101,7 @@ int32_t				get_op_arg(t_vm *vm, t_cursor *cursor, int index,
 */
 int32_t				calc_addr(int32_t addr);
 uint32_t			step_size(uint8_t arg_type, t_op *op);
-void				move_cursor(t_vm *vm, t_cursor *cursor);
+void				move_cursor(t_cursor *cursor);
 uint32_t			calc_step(t_cursor *cursor, t_op *op);
 int8_t				get_byte(t_vm *vm, int32_t pc, int32_t step);
 /*
@@ -163,7 +163,7 @@ int32_t				u_int8_to_u_int32(const u_int8_t *bytecode, int size);
 int32_t				check_reg_size(int fd);
 char				*parse_str(int fd, int len);
 uint8_t				*parse_code(int fd, int code_size);
-t_player			*parse_champion(char *cor_file, t_vm *vm, int id);
+t_player			*parse_champion(char *cor_file, int id);
 /*
 **					parse_cor_file.c
 */
@@ -236,6 +236,7 @@ void				op_lldi(t_vm *vm, t_cursor *cursor);
 void				op_lfork(t_vm *vm, t_cursor *cursor);
 
 void				op_aff(t_vm *vm, t_cursor *cursor);
+
 
 static t_op			g_op[16] =
 {

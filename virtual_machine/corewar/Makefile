@@ -49,8 +49,8 @@ DEPS	=		$(OBJS:.o=.d)
 # ------------  FLAGS  ------------------------------------------------------- #
 CC		=		gcc
 RM		=		rm -rf
-CFLGS	=		-Wall -Werror -Wextra
-LFLGS	=		-L $(LFT_PRINTF_DIR) -lftprintf -L $(LSERVER_DIR) -lserver
+CFLGS	=		-Wall -Wextra
+LFLGS	=		-L $(LFT_PRINTF_DIR) -lftprintf -L $(LSERVER_DIR) -lserver -lm
 IFLGS	=		-I $(HDR_DIR) -I $(LHS_PRINTF_DIR) -I $(LOP_HS_DIR) -I $(LSERVER_HS_DIR)
 DFLGS	=		-MMD -MP
 OFLGS	=		-O0 -g

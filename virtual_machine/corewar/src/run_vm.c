@@ -44,7 +44,7 @@ void		op_code_for_cursor(t_vm *vm, t_cursor *cursor)
 		}
 		else
 			cursor->step = ARGS_CODE_LEN;
-		move_cursor(vm, cursor);
+		move_cursor(cursor);
 	}
 }
 

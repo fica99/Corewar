@@ -71,12 +71,11 @@ uint8_t		*parse_code(int fd, int code_size)
 	return (buf);
 }
 
-t_player	*parse_champion(char *cor_file, t_vm *vm, int id)
+t_player	*parse_champion(char *cor_file, int id)
 {
 	t_player	*player;
 	int			fd;
 
-	vm = NULL;
 	player = init_player(id);
 	fd = open(cor_file, O_RDONLY);
 	if (fd < 0)

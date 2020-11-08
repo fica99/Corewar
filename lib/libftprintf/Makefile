@@ -137,7 +137,7 @@ DEPS	=		$(OBJS:.o=.d)
 CC		=		gcc
 RM		=		rm -rf
 CFLGS	=		-Wall -Werror -Wextra
-IFLGS	=		-I $(HDR_DIR)
+IFLGS	=		-I $(HDR_DIR) -lm
 DFLGS	=		-MMD -MP -O0 -g
 
 # ------------  RULES  ------------------------------------------------------- #

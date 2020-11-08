@@ -97,13 +97,13 @@ void		parse_cor_file(int *argc, char ***argv, t_vm *vm)
 			|| find_player(vm, id)
 			|| !is_cor_file(*(*argv + 2)))
 			help();
-		add_player(vm, parse_champion(*(*argv + 2), vm, id));
+		add_player(vm, parse_champion(*(*argv + 2), id));
 		(*argc) -= 3;
 		(*argv) += 3;
 	}
 	else if (is_cor_file(**argv))
 	{
-		add_player(vm, parse_champion(**argv, vm, id));
+		add_player(vm, parse_champion(**argv, id));
 		(*argc)--;
 		(*argv)++;
 	}

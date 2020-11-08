@@ -52,7 +52,7 @@ DEPS	=		$(OBJS:.o=.d)
 CC		=		gcc
 RM		=		rm -rf
 CFLGS	=		-Wall -Werror -Wextra
-LFLGS	=		-L $(LASM_DIR) -lasm -L $(LFT_PRINTF_DIR) -lftprintf -L $(LHASH_DIR) -lhash
+LFLGS	=		-L $(LASM_DIR) -lasm -L $(LFT_PRINTF_DIR) -lftprintf -L $(LHASH_DIR) -lhash -lm
 IFLGS	=		-I $(HDR_DIR) -I $(LHS_PRINTF_DIR) -I $(LOP_HS_DIR) -I $(LASM_HS_DIR) -I $(LHASH_HS_DIR)
 DFLGS	=		-MMD -MP
 OFLGS	=		-O0 -g
