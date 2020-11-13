@@ -1,5 +1,6 @@
 # Corewar
-School 42 project. Implementation of programming game “Core War”
+School 42 project. Implementation of programming game “Core War”.
+Look at the [subject](https://cdn.intra.42.fr/pdf/pdf/1851/corewar.en.pdf)
 
 Core War was inspired by a malicious virus written in the 80’s. To deal with the self-replicating virus, a white hat hacker invented Reaper. It was a virus designed to spread and eliminate the malware. He fought fire with fire.
 
